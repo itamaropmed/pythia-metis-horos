@@ -1,0 +1,9 @@
+{"dataset": "D05_boilerplate", "rep": 0, "true_dI": 0.08020221297311414, "svd_dI_L": 0.0, "learned_dI_L": 0.002149417746883683, "portfolio_dI_L": 0.002149417746883683}
+{"dataset": "D05_boilerplate", "rep": 1, "true_dI": 0.07864248181715572, "svd_dI_L": 0.0, "learned_dI_L": 0.0005976891283021495, "portfolio_dI_L": 0.0005976891283021495}
+{"dataset": "D05_boilerplate", "rep": 2, "true_dI": 0.0781497766376324, "svd_dI_L": 0.0, "learned_dI_L": 0.005452259125584121, "portfolio_dI_L": 0.005452259125584121}
+{"dataset": "D05_boilerplate", "rep": 3, "true_dI": 0.07946022683515003, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}
+{"dataset": "D05_boilerplate", "rep": 4, "true_dI": 0.07928073980585837, "svd_dI_L": 0.0, "learned_dI_L": 0.009282566233717914, "portfolio_dI_L": 0.009282566233717914}
+{"dataset": "D04_synergy", "rep": 0, "true_dI": 0.09271440249415752, "svd_dI_L": 0.011886128550859772, "learned_dI_L": 0.0, "portfolio_dI_L": 0.011886128550859772}
+{"dataset": "D04_synergy", "rep": 1, "true_dI": 0.09083557957810634, "svd_dI_L": 0.02839475980368243, "learned_dI_L": 0.0, "portfolio_dI_L": 0.02839475980368243}
+{"dataset": "D04_synergy", "rep": 2, "true_dI": 0.09350406422427998, "svd_dI_L": 0.034376197135235716, "learned_dI_L": 0.0, "portfolio_dI_L": 0.034376197135235716}
+{"dataset": "D04_synergy", "rep": 3, "true_dI": 0.0935870135434066, "svd_dI_L": 0.020007755306216117, "learned_dI_L": 0.0, "portfolio_dI_L": 0.020007755306216117}

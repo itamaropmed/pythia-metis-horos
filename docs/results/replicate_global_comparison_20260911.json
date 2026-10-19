@@ -1,0 +1,35 @@
+{
+  "status": "exploratory_validation",
+  "peras_trained_models": false,
+  "seed": 20260916,
+  "n_runs": 1500,
+  "designs": ["linear_uniform", "nonlinear_sine", "heteroskedastic", "asymmetric_mixture", "high_dimensional"],
+  "losses": ["mae", "mse"],
+  "entity_counts": [1000, 4000, 10000],
+  "global_conditional_empirical_bernstein": {
+    "valid": 1500,
+    "total": 1500,
+    "wilson_lower_95": 0.9974455692798185,
+    "median_usable_tightness": 0.6242723510046824,
+    "median_tightness_mae": 0.5967669584125052,
+    "median_tightness_mse": 0.7205989120758441,
+    "median_tightness_n_10000": 0.7523854395297891
+  },
+  "blocked_conditional_empirical_bernstein": {
+    "valid": 1500,
+    "total": 1500,
+    "wilson_lower_95": 0.9974455692798185,
+    "median_usable_tightness": 0.2499496416785222
+  },
+  "global_vs_blocked": {
+    "strict_wins": 1356,
+    "total": 1500,
+    "median_bound_gain": 0.04387619841925987,
+    "median_distance_ratio": 0.006506260758035096
+  },
+  "negative_controls": {
+    "half_lipschitz_coverage": 0.932,
+    "uncorrected_coverage": 0.7706666666666667
+  },
+  "estimand_warning": "Conditional results target average Bayes risk over the exact audited covariates, not sampling-population Bayes risk."
+}

@@ -1,0 +1,97 @@
+{
+  "alpha_family": 0.05,
+  "alpha_per_node": 0.01,
+  "effective_cluster_count": 7835.626200024304,
+  "limitations": [
+    "cluster independence and temporal stability are not attested",
+    "[0,900] is a working cap rather than an independently audited population support",
+    "row-IID values are labeled invalid negative controls and are not certificates",
+    "hashed text profiles are fixed diagnostics rather than trained NLP models",
+    "support-free block routes are a separate five-node family and cannot be max-selected with support-based routes without a joint alpha ledger",
+    "no patient, case, note, label, or row-level result is written"
+  ],
+  "maximum_cases_per_patient": 6,
+  "metamorphic_checks": {
+    "raw_target_coded_x_reason": "missing required attestation: independent clusters, outcome-blind labels",
+    "raw_target_coded_x_status": "refused",
+    "target_coded_x_removed_exact_invariance": true,
+    "token_shuffle_bag_profile_exact_invariance": true
+  },
+  "n_cases": 11356,
+  "n_patients": 9300,
+  "n_repeated_cases": 2056,
+  "nodes": {
+    "family": {
+      "claim_tier": "exploratory",
+      "cluster_lower": 46.34863255477315,
+      "cluster_width": 15.428137434659755,
+      "empirical_saa_score": 61.7767699894329,
+      "invalid_row_iid_lower_negative_control": 48.961207817193916,
+      "invalid_row_iid_width_negative_control": 12.815562172238986,
+      "n_cells": 8,
+      "singleton_fraction": 0.0,
+      "support_free_alpha_per_candidate": 0.0003333333333333333,
+      "support_free_block_lower": 51.76537568930676,
+      "support_free_selected_route": "clusters_per_block=64",
+      "support_free_selected_score_cap": 160.0
+    },
+    "global": {
+      "claim_tier": "exploratory",
+      "cluster_lower": 68.00537788763683,
+      "cluster_width": 15.428137434659755,
+      "empirical_saa_score": 83.43351532229659,
+      "invalid_row_iid_lower_negative_control": 70.6179531500576,
+      "invalid_row_iid_width_negative_control": 12.815562172238986,
+      "n_cells": 1,
+      "singleton_fraction": 0.0,
+      "support_free_alpha_per_candidate": 0.0003333333333333333,
+      "support_free_block_lower": 77.39837764194844,
+      "support_free_selected_route": "clusters_per_block=32",
+      "support_free_selected_score_cap": 160.0
+    },
+    "procedure": {
+      "claim_tier": "exploratory",
+      "cluster_lower": 30.009868905600904,
+      "cluster_width": 15.428137434659755,
+      "empirical_saa_score": 45.43800634026066,
+      "invalid_row_iid_lower_negative_control": 32.62244416802167,
+      "invalid_row_iid_width_negative_control": 12.815562172238986,
+      "n_cells": 153,
+      "singleton_fraction": 0.21568627450980393,
+      "support_free_alpha_per_candidate": 0.0003333333333333333,
+      "support_free_block_lower": 30.09413177878682,
+      "support_free_selected_route": "clusters_per_block=128",
+      "support_free_selected_score_cap": 80.0
+    },
+    "procedure_hashed_bag": {
+      "claim_tier": "exploratory",
+      "cluster_lower": 28.402965066220837,
+      "cluster_width": 15.428137434659755,
+      "empirical_saa_score": 43.83110250088059,
+      "invalid_row_iid_lower_negative_control": 31.015540328641606,
+      "invalid_row_iid_width_negative_control": 12.815562172238986,
+      "n_cells": 545,
+      "singleton_fraction": 0.3412844036697248,
+      "support_free_alpha_per_candidate": 0.0003333333333333333,
+      "support_free_block_lower": 23.875679799614762,
+      "support_free_selected_route": "clusters_per_block=256",
+      "support_free_selected_score_cap": 40.0
+    },
+    "procedure_note_metadata": {
+      "claim_tier": "exploratory",
+      "cluster_lower": 29.103475809440283,
+      "cluster_width": 15.428137434659755,
+      "empirical_saa_score": 44.531613244100036,
+      "invalid_row_iid_lower_negative_control": 31.716051071861052,
+      "invalid_row_iid_width_negative_control": 12.815562172238986,
+      "n_cells": 341,
+      "singleton_fraction": 0.2434017595307918,
+      "support_free_alpha_per_candidate": 0.0003333333333333333,
+      "support_free_block_lower": 25.397526654899767,
+      "support_free_selected_route": "clusters_per_block=128",
+      "support_free_selected_score_cap": 40.0
+    }
+  },
+  "status": "complete",
+  "study_tier": "exploratory"
+}

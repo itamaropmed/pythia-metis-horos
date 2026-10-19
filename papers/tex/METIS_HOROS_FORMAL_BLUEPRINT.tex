@@ -1,0 +1,611 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,longtable}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage{titlesec}
+\definecolor{ink}{HTML}{15303F}
+\definecolor{accent}{HTML}{007C87}
+\titleformat{\section}{\large\bfseries\color{ink}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{axiom}[theorem]{Axiom}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\risk}{R^{\star}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\code}[1]{\texttt{\small#1}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\Zcal}{\mathcal{Z}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\tier}[1]{\textsf{#1}}
+
+\title{\bfseries Pythia, Horos, and Metis\\[4pt]
+\large A Formal Architecture for Certified Decision-Risk Floors\\ and Gated Automated Search}
+\author{Itamar Zernitsky and collaborators\\
+\small Department of Mathematics, Bar-Ilan University \quad$\cdot$\quad Opmed.ai}
+\date{September 2026 \\[2pt] \small System design document --- companion to \emph{Certified Floors on Decision Risk}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This document specifies the formal architecture of a three-layer system for reasoning about the limits of prediction. \textbf{Pythia} certifies lower bounds on the Bayes risk attainable from a declared information set under a declared loss. \textbf{Horos} is the dataset-agnostic study layer that produces admissible representations, cross-fitted audit predictions and provenance. \textbf{Metis} is a gated agent that searches over representations, geometries and experiments. The companion research paper develops the estimator-side mathematics; this document develops the \emph{system}-side mathematics, which we argue is a distinct contribution and is where the project's principal risk lives.
+
+We formalise four objects that are usually left informal. First, the \emph{layer separation} (\S\ref{sec:sep}) as a measurability condition: every quantity Pythia consumes must be $\sigma(z_{1:n})$-measurable or a hash-pinned frozen artifact, and we prove that this condition alone is what makes the certificate's conditioning argument valid (Theorem~\ref{thm:sep}). Second, the \emph{$\alpha$-ledger} (\S\ref{sec:ledger}) as a supermartingale-style budget process, with a proof that any admissible interleaving of exploratory and certifying actions preserves the family-wise level (Theorem~\ref{thm:ledger}). Third, the \emph{claim lattice} (\S\ref{sec:tiers}) as a partial order equipped with a transition system whose promotion edges are guarded by machine-checkable evidence predicates, so that tier is computed rather than asserted. Fourth, and centrally, the \emph{gate} (\S\ref{sec:gate}): we define the admissible action algebra of an automated searcher and prove a \textbf{no-invalidation theorem} (Theorem~\ref{thm:noinval}) --- under the stated gate rules, no sequence of agent actions, however adversarial, can cause a published certificate to fail its nominal coverage. We further show (Proposition~\ref{prop:rewardhack}) that the standard reward-hacking failure mode is excluded by construction, because admissible actions act on the witness registry while the estimand is a function of the sealed task card alone.
+
+We give the evidence graph as a typed DAG with staleness as a reachability property (\S\ref{sec:graph}), a negative-control registry with formal expected-response predicates (\S\ref{sec:negctrl}), a budget-allocation problem for the searcher (\S\ref{sec:alloc}), and the refusal semantics that make the system fail closed (\S\ref{sec:refusal}). Throughout we mark which components are implemented, which are specified but unbuilt, and which are open problems. Metis is not implemented; its gate is specified here precisely so that it can be built without being trusted.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction: three layers, one invariant}
+
+A duration model misses an operation by forty minutes. That number does not say whether to improve the model, collect an earlier note, change scheduling policy, or accept irreducible uncertainty. Separating \emph{achieved} risk from \emph{attainable} risk is the system's purpose.
+
+For an information set $Z$ available at a declared decision cutoff, outcome $Y$, decision $a$ and operational loss $\ell$:
+\begin{equation}
+\risk_\ell(Z)=\E\Big[\inf_a \E\{\ell(Y,a)\mid Z\}\Big],
+\qquad
+H_\ell(f,Z)=R_\ell(f,Z)-\risk_\ell(Z).
+\label{eq:floorhead}
+\end{equation}
+The first is the floor; the second is the headroom of a particular predictor $f$. Neither is a fixed ``noise level'' of a dataset: both are indexed by the loss, the cutoff and the representation.
+
+The system has three layers with sharply different authority:
+
+\begin{center}
+\begin{tabular}{@{}lp{0.44\linewidth}p{0.3\linewidth}@{}}
+\toprule
+Layer & Authority & Status \\
+\midrule
+\textbf{Pythia} & May certify. Computes bounds and refusals. Trains nothing. & Implemented (core) \\
+\textbf{Horos} & May train, prepare, represent, report. Certifies nothing. & Partially implemented \\
+\textbf{Metis} & May propose and experiment. Certifies nothing, trains nothing directly. & \textbf{Not implemented} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The entire document exists to defend one invariant.
+
+\begin{axiom}[System invariant]\label{ax:inv}
+For every published certificate $C$ with nominal level $1-\alpha$ and estimand $\theta(C)$,
+\[
+\Prob\big\{\,B(C)\le\theta(C)\;\big|\;\text{sealed design of }C\,\big\}\ \ge\ 1-\alpha,
+\]
+\emph{regardless of the number, order or adversariality of the actions taken by any agent or analyst before $C$ was emitted.}
+\end{axiom}
+
+Axiom~\ref{ax:inv} is not a modelling assumption; it is the specification. Sections~\ref{sec:sep}--\ref{sec:gate} construct the conditions under which it is a theorem rather than a hope.
+
+\subsection{What a user receives}
+
+The product is not a number. A complete Horos report contains: (i) a task card with unit, population, cutoff, loss, action and endpoint; (ii) a representation ladder with source and timing provenance; (iii) achieved held-out or honest out-of-fold performance; (iv) a Pythia bound curve or an explicit refusal; (v) a separately typed point estimate, if produced outside the certifier; (vi) uncertainty split into sampling and structural components; (vii) slice results only where multiplicity and minimum-size policies are met; (viii) falsification tests and negative controls; and (ix) a decision translation in operational units. Monetary conversion is a configurable assumption, never a mathematical output.
+
+\section{The formal contract}\label{sec:contract}
+
+\subsection{Information sets}
+
+\begin{definition}[Information set]\label{def:infoset}
+An information set is a tuple $I=(P,t_c,S,g)$ where $P$ is a population predicate, $t_c$ a decision cutoff, $S$ an admissible source set, and $g$ a deterministic representation rule mapping admissible records to $Z=g(\text{records}\!\restriction_{S,\,t<t_c})$. Write $Z_I$ for the induced representation.
+\end{definition}
+
+A claim about $Z$ without its tuple is not a claim. Two representations with identical column names but different cutoffs are different objects and must hash differently.
+
+\begin{definition}[Information order]\label{def:order}
+$I_0\preceq I_1$ iff $P_0=P_1$, $t_{c,0}=t_{c,1}$, and $\sigma(Z_{I_0})\subseteq\sigma(Z_{I_1})$ almost surely.
+\end{definition}
+
+\begin{proposition}[Floor monotonicity and bound non-monotonicity]\label{prop:mono}
+If $I_0\preceq I_1$ then $\risk_\ell(Z_{I_1})\le\risk_\ell(Z_{I_0})$ for every loss $\ell$, so the decision value
+$I_\ell(I_1;Y\mid I_0)=\risk_\ell(Z_{I_0})-\risk_\ell(Z_{I_1})\ge0$.
+However, no such monotonicity holds for the \emph{bounds}: $B_\ell(I_1)$ may exceed $B_\ell(I_0)$.
+\end{proposition}
+
+\begin{proof}
+Monotonicity of the floor is immediate: any $\sigma(Z_{I_0})$-measurable rule is $\sigma(Z_{I_1})$-measurable, so the infimum over the larger class is no larger. This is the comparison-of-experiments statement specialised to a loss. For the second claim, note that $B_\ell$ is a function of the witness registry, which depends on the metric $d$, the realised pairwise distances and the Lipschitz cap --- none of which is monotone in $\sigma(Z)$. Adding a coordinate can inflate all pairwise distances, so $L\,d_{ij}$ absorbs more of the observed spread and every witness shrinks. \end{proof}
+
+\begin{remark}[An operational corollary that is routinely misread]
+A bound that \emph{rises} after information is added is evidence that the geometry changed, not that information harmed the ideal decision. The system must therefore never emit ``$B$ increased, so the added channel has negative value.'' We encode this as a lint rule on report generation.
+\end{remark}
+
+\subsection{Estimands}
+
+\begin{definition}[Finite-design and population estimands]
+Conditional on audited covariates $z_{1:n}$,
+\[
+\risk_{\ell,n}=\frac1n\sum_{i=1}^n \inf_a\E\{\ell(Y_i,a)\mid Z_i=z_i\},
+\]
+which is distinct from the population $\risk_\ell(Z)$ of \eqref{eq:floorhead}. A certificate must name which it targets.
+\end{definition}
+
+Five objects must never be conflated, and the type system enforces it: a lower \emph{bound} $B$; a point \emph{estimate} $\widehat{\risk}$; an \emph{achieved} score $R(f)$; a \emph{guard}, which is an extra structural or simulation-calibrated assumption; and a \emph{falsification check}, which can invalidate premises but never establish them from the same outcomes.
+
+\section{Layer separation as a measurability condition}\label{sec:sep}
+
+The informal rule ``Pythia does not train'' is doing real mathematical work, and it is worth stating exactly what work.
+
+\begin{definition}[Admissible input to the certifier]\label{def:admissible}
+Let $\Fcal_z=\sigma(z_{1:n})$ be the $\sigma$-field generated by audited covariates, and let $\Fcal_{\rm ext}$ be the $\sigma$-field generated by artifacts produced outside the current evaluation --- development-fold model fits, externally learned metrics, guard calibrations --- each identified by a content hash fixed before evaluation. An input $W$ to Pythia is \emph{admissible} if $W$ is $\Fcal_z\vee\Fcal_{\rm ext}$-measurable.
+\end{definition}
+
+\begin{theorem}[Separation soundness]\label{thm:sep}
+Suppose every element of the witness registry $\Hcal$ --- pair and group partitions, metric $d$, Lipschitz cap $L$, clipping levels, concentration methods and their budgets --- is admissible in the sense of Definition~\ref{def:admissible}. Then conditional on $\Fcal_z\vee\Fcal_{\rm ext}$, the witness scores are functions of the outcomes alone with deterministic coefficients, the independence of Assumption~\ref{as:indep2} is preserved, and the one-sided confidence statements underlying Theorem~\ref{thm:certrestate} hold at their nominal levels.
+
+Conversely, if any registry element is $\sigma(Y_{1:n})$-measurable and not $\Fcal_z\vee\Fcal_{\rm ext}$-measurable, then the conditioning argument fails and no level is claimed.
+\end{theorem}
+
+\begin{proof}
+Condition on $\Fcal_z\vee\Fcal_{\rm ext}$. Each registry element is then a constant, so each witness $h$ is a fixed measurable function of $(Y_i)_{i\in\mathrm{supp}(h)}$. Disjointness of pairs and groups plus Assumption~\ref{as:indep2} makes the scores independent under the conditional law, which is exactly the hypothesis required by Hoeffding, Maurer--Pontil and Bentkus. The converse is immediate: if a registry element depends on $Y_{1:n}$, the score is no longer a fixed function of independent variables under the conditioning, the selection event and the deviation event are dependent, and the union bound in Theorem~\ref{thm:certrestate} no longer applies to the realised selection.
+\end{proof}
+
+\begin{assumption}[Conditional independence]\label{as:indep2}
+Distinct sampling entities have conditionally independent outcomes given $z_{1:n}$. When repeated encounters occur, the entity is the patient, not the case row.
+\end{assumption}
+
+Theorem~\ref{thm:sep} is the precise content of the layer boundary. Horos may fit anything it likes on development folds; its outputs enter Pythia only as hash-pinned constants, which lands them in $\Fcal_{\rm ext}$. The failure the boundary prevents is not ``using a model'' --- it is using a quantity whose value depended on the evaluation outcomes.
+
+\begin{proposition}[The boundary is not closed under composition with the agent]\label{prop:agentbound}
+If an agent selects among candidate registries $\Hcal^{(1)},\dots,\Hcal^{(m)}$ using any statistic of $Y_{1:n}$ on the evaluation set, the composite procedure violates Definition~\ref{def:admissible} even though each individual $\Hcal^{(k)}$ is admissible.
+\end{proposition}
+
+This is why a gate is needed at all: admissibility is not preserved by selection, and an unconstrained searcher selects.
+
+\section{The $\alpha$-ledger}\label{sec:ledger}
+
+Adaptive search consumes statistical error budget. We make the consumption explicit and provable.
+
+\begin{definition}[Ledger]\label{def:ledger}
+A \emph{ledger} is a finite sequence of entries $e_1,\dots,e_T$, each $e_t=(\kappa_t,\Hcal_t,\alpha_t,\mathrm{seal}_t)$ where $\kappa_t\in\{\code{explore},\code{certify}\}$ is the entry kind, $\Hcal_t$ the registry used, $\alpha_t\ge0$ the budget debited and $\mathrm{seal}_t$ the identifier of the evaluation seal touched. Define the remaining budget process
+\[
+A_0=\alpha,\qquad A_t = A_{t-1}-\alpha_t\,\ind\{\kappa_t=\code{certify}\}.
+\]
+A ledger is \emph{admissible} if $A_t\ge0$ for all $t$, every \code{explore} entry touches only development seals, and every \code{certify} entry uses a registry admissible in the sense of Definition~\ref{def:admissible}.
+\end{definition}
+
+\begin{theorem}[Ledger preserves the family-wise level]\label{thm:ledger}
+Let $e_1,\dots,e_T$ be an admissible ledger and let $\mathcal{C}$ be the set of certificates emitted by its \code{certify} entries on a common evaluation seal. Then
+\[
+\Prob\Big\{\exists\,C\in\mathcal{C}:\ B(C)>\theta(C)\ \Big|\ \Fcal_z\vee\Fcal_{\rm ext}\Big\}\ \le\ \alpha .
+\]
+The bound holds for any interleaving of \code{explore} and \code{certify} entries, and for any adaptive rule choosing $\kappa_t$ and $\Hcal_t$ that is measurable with respect to development artifacts and past \code{certify} outputs.
+\end{theorem}
+
+\begin{proof}
+Let $V_t=\ind\{\text{entry }t\text{ is \code{certify} and its bound exceeds its estimand}\}$. For each \code{certify} entry, conditional on the design and on the past, the registry is admissible, so by Theorem~\ref{thm:sep} the one-sided confidence construction applies and $\Prob\{V_t=1\mid\Fcal_{t-1}\}\le\alpha_t$. \code{explore} entries touch only development seals, whose outcomes are independent of the evaluation seal's outcomes by construction of the fold manifest, so they contribute no mass to the event and do not change the conditional law on the evaluation seal. Then
+\[
+\Prob\Big\{\textstyle\sum_t V_t\ge1\Big\}\ \le\ \textstyle\sum_t\E\big[\Prob\{V_t=1\mid\Fcal_{t-1}\}\big]\ \le\ \textstyle\sum_t\alpha_t\ \le\ \alpha,
+\]
+the last inequality because admissibility forces $A_T\ge0$. \end{proof}
+
+\begin{remark}[What the ledger does not buy]
+Theorem~\ref{thm:ledger} controls the error rate over emitted certificates. It does not make exploration free: an analyst who inspects an evaluation seal during an \code{explore} entry has violated admissibility, and no accounting repairs it. The system's only defence is that seal access is mediated, logged and enforced --- not that the ledger arithmetic is correct.
+\end{remark}
+
+\begin{proposition}[Exploration is unbounded, certification is not]
+An admissible ledger permits arbitrarily many \code{explore} entries at zero budget cost, and at most $\lfloor\alpha/\min_t\alpha_t\rfloor$ \code{certify} entries. Consequently the design objective for Metis is to maximise the information gained per unit of $\alpha$, not per unit of compute.
+\end{proposition}
+
+This reframes the agent's problem (\S\ref{sec:alloc}): $\alpha$ is the scarce resource, and compute is nearly free by comparison.
+
+\section{The claim lattice}\label{sec:tiers}
+
+Tier is a computed field, not prose selected after seeing a favourable figure.
+
+\begin{definition}[Claim lattice]\label{def:lattice}
+Let $\mathcal{T}=\{\tier{refused}\prec\tier{exploratory}\prec\tier{calibrated}\prec\tier{conditional}\prec\tier{proved}\}$ be a total order under $\prec$. A certificate carries a tier $t(C)\in\mathcal{T}$. Only $t(C)\succeq\tier{conditional}$ may use the word \emph{certified}, and $\tier{conditional}$ must print its premises adjacent to the number.
+\end{definition}
+
+Promotion is guarded by evidence predicates evaluated on artifacts, never on natural language:
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.5\linewidth}@{}}
+\toprule
+Edge & Guard predicate & Machine-checkable evidence \\
+\midrule
+\tier{refused}$\to$\tier{exploratory} & \code{inputs\_valid} & schema, cutoff, entity uniqueness, no post-cutoff source \\
+\tier{exploratory}$\to$\tier{calibrated} & \code{coverage\_study} & frozen generator registry, untouched seed, per-design Wilson intervals, stated guard domain \\
+\tier{calibrated}$\to$\tier{conditional} & \code{premises\_audited} & external $L$ audit artifact, range audit, independence unit manifest, admissible registry hash \\
+\tier{conditional}$\to$\tier{proved} & \code{premises\_supplied} & every premise is part of the supplied mathematical object; no external audit required \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{proposition}[Demotion is monotone and automatic]\label{prop:demote}
+Let $C$ be a certificate and let $\mathrm{anc}(C)$ be its ancestors in the evidence graph (\S\ref{sec:graph}). If any $v\in\mathrm{anc}(C)$ changes hash, then $t(C)$ is set to $\min\{t(C),\tier{exploratory}\}$ until the guard predicates are re-evaluated. No agent action can raise a tier; only guard predicates can.
+\end{proposition}
+
+\begin{remark}
+The asymmetry is deliberate and is the tier system's entire content. Promotion requires evidence; demotion requires only a changed hash. A system in which an agent can argue its way upward has no tiers.
+\end{remark}
+
+\section{The gate and the no-invalidation theorem}\label{sec:gate}
+
+We now specify Metis precisely enough that it can be built without being trusted.
+
+\subsection{Agent state and action algebra}
+
+\begin{definition}[Agent state]\label{def:state}
+$\Sigma=(\tau,\mathcal{R},\Hcal,\mathcal{L},\mathcal{E},\beta)$ where $\tau$ is a sealed task card (population, cutoff, loss, action, endpoint, entity definition), $\mathcal{R}$ the registered representation ladder, $\Hcal$ the current witness registry, $\mathcal{L}$ the ledger, $\mathcal{E}$ the evidence graph, and $\beta$ the remaining compute/cost budget.
+\end{definition}
+
+\begin{definition}[Admissible action algebra]\label{def:actions}
+The admissible actions $\Acal$ are exactly:
+\begin{align*}
+a_1&:\ \text{register a new information set } I \text{ with provenance} &&(\mathcal{R}\mapsto\mathcal{R}\cup\{I\})\\
+a_2&:\ \text{propose an outcome-blind metric or partition} &&(\Hcal\mapsto\Hcal\cup\{h\})\\
+a_3&:\ \text{request a Horos cross-fit on development folds} &&(\Fcal_{\rm ext}\text{ grows})\\
+a_4&:\ \text{request an external audit artifact (e.g. an } L\text{ audit)} &&(\Fcal_{\rm ext}\text{ grows})\\
+a_5&:\ \text{generate a synthetic falsification test} &&(\mathcal{E}\mapsto\mathcal{E}\cup\{v\})\\
+a_6&:\ \text{emit a \code{certify} entry against the sealed registry} &&(\mathcal{L}\mapsto\mathcal{L}\cdot e)\\
+a_7&:\ \text{read a refusal reason or a past negative result} &&(\text{no state change})
+\end{align*}
+Every action records inputs, artifacts, seed, cost, and whether it touched evaluation outcomes.
+\end{definition}
+
+\begin{definition}[Gate]\label{def:gate}
+The gate $\Gamma:\Acal\times\Sigma\to\{\code{accept},\code{refuse}\}$ is a deterministic, non-generative predicate that accepts $a$ in state $\Sigma$ iff all of:
+\begin{enumerate}\itemsep0pt
+\item[(G1)] \textbf{Seal integrity.} $a$ does not modify $\tau$, the cohort, the fold manifest, or any object behind an evaluation seal.
+\item[(G2)] \textbf{Admissibility.} Every registry element $a$ introduces is $\Fcal_z\vee\Fcal_{\rm ext}$-measurable, verified against source timestamps and hashes rather than against the agent's description of them.
+\item[(G3)] \textbf{Budget.} If $a=a_6$, the ledger remains admissible (Definition~\ref{def:ledger}); if $a$ consumes compute, $\beta$ suffices.
+\item[(G4)] \textbf{Provenance.} Every artifact $a$ consumes has a resolvable content hash, and every claimed pre-cutoff source has machine-checkable timestamps.
+\item[(G5)] \textbf{Tier monotonicity.} $a$ does not raise $t(C)$ for any $C$; tier changes only via the guard predicates of \S\ref{sec:tiers}.
+\end{enumerate}
+\end{definition}
+
+\subsection{The central theorem}
+
+\begin{theorem}[No-invalidation]\label{thm:noinval}
+Let $\Sigma_0$ be an initial state with a sealed task card and an admissible ledger with budget $\alpha$, and let $a_{(1)},\dots,a_{(T)}$ be \emph{any} sequence of actions, adversarially chosen, each accepted by the gate $\Gamma$. Let $\mathcal{C}$ be the set of certificates emitted. Then Axiom~\ref{ax:inv} holds:
+\[
+\Prob\Big\{\exists\,C\in\mathcal{C}:\ B(C)>\theta(C)\ \Big|\ \Fcal_z\vee\Fcal_{\rm ext}\Big\}\ \le\ \alpha .
+\]
+In particular, an agent may fail to improve any bound, but cannot invalidate one.
+\end{theorem}
+
+\begin{proof}
+We verify the hypotheses of Theorem~\ref{thm:ledger}.
+
+\emph{The estimand is invariant.} By (G1) the task card $\tau$ is never modified, and $\theta(C)$ is by construction a function of $\tau$ alone --- the loss, population, cutoff and entity definition determine $\risk_{\ell,n}$ given the cohort. Hence every certificate in $\mathcal{C}$ targets the same estimand, and no action redefines the question.
+
+\emph{Every certifying registry is admissible.} By (G2) each registry element introduced by any accepted action is $\Fcal_z\vee\Fcal_{\rm ext}$-measurable; admissibility is verified against artifacts, not against agent-supplied descriptions, so a false attestation is rejected rather than believed. By (G4) the artifacts backing $\Fcal_{\rm ext}$ are hash-resolvable and therefore fixed before evaluation.
+
+\emph{The ledger remains admissible.} By (G3) each $a_6$ preserves $A_t\ge0$, and actions $a_1$--$a_5$, $a_7$ touch only development seals or introduce registry candidates without certifying them, hence are \code{explore} entries.
+
+\emph{Selection is accounted.} Proposition~\ref{prop:agentbound} shows selection among admissible registries need not be admissible. The gate forecloses this: a registry is sealed before an $a_6$ entry, and the union bound in Theorem~\ref{thm:ledger} runs over \emph{all} registry elements with allocated budget, whether or not the maximum is attained at the element the agent favours. Consequently the realised selection is inside the union, not outside it.
+
+Applying Theorem~\ref{thm:ledger} to the resulting admissible ledger gives the claim. Adversariality of the action sequence is immaterial because every hypothesis used is enforced by $\Gamma$ pointwise, not by the agent's intent. \end{proof}
+
+\begin{proposition}[Reward hacking is excluded by construction]\label{prop:rewardhack}
+Consider an agent maximising the published bound $B$. Any action that would increase $B$ by changing the estimand --- tuning the metric on evaluation outcomes, excluding inconvenient cases, admitting a post-cutoff feature, or redefining the outcome --- is refused by $\Gamma$ via (G1), (G2) or (G4). Hence $\sup_{a\in\Acal:\Gamma(a,\Sigma)=\code{accept}} B$ is a supremum over procedures targeting the \emph{same} $\theta$, and increasing it is a genuine tightening.
+\end{proposition}
+
+\begin{proof}
+Partition the ways $B$ can increase: (i) a tighter witness on the same registry and estimand; (ii) a larger registry with the same estimand, which is accounted by the union bound and therefore paid for in $\alpha$; (iii) a change of estimand. Case (iii) requires modifying $\tau$, the cohort, or the admissible source set, each forbidden by (G1)/(G4); or introducing an outcome-dependent registry element, forbidden by (G2). Cases (i) and (ii) leave $\theta$ fixed. \end{proof}
+
+\begin{remark}[What the theorem does \emph{not} say]
+Theorem~\ref{thm:noinval} is conditional on $\Fcal_z\vee\Fcal_{\rm ext}$ and on the structural premises of the underlying witness theorem --- in particular the externally audited Lipschitz cap. It says the \emph{agent} cannot break the certificate. It does not say the certificate is true if its premises are false. A gate cannot make a wrong $L$ right, and this is the project's dominant residual risk.
+\end{remark}
+
+\subsection{Search loop}
+
+\begin{algorithm}[H]
+\caption{Metis gated search (specified, not implemented)}\label{alg:metis}
+\begin{algorithmic}[1]
+\State \textbf{seal} task card $\tau$, cohort, fold manifest, evaluation set
+\While{$\beta>0$ and $A_t>0$}
+  \State read most recent refusal or slack diagnostic $\Gamma_{\rm gap}=\widehat{\risk}-B$
+  \State form a falsifiable hypothesis $h$ with a predeclared analysis
+  \State propose action $a\in\Acal$; \textbf{if} $\Gamma(a,\Sigma)=\code{refuse}$ \textbf{then} log reason; \textbf{continue}
+  \State execute $a$ on development or synthetic artifacts only
+  \State run safety and validity checks; update evidence graph $\mathcal{E}$
+  \If{hypothesis survives and warrants certification}
+     \State seal registry; emit \code{certify} entry (debits $\alpha_t$)
+  \EndIf
+\EndWhile
+\State \Return evidence graph, ledger, certificates, refusals, negative results
+\end{algorithmic}
+\end{algorithm}
+
+The loop's objective is not $\max B$. A bound can increase when a metric is tuned on evaluation outcomes, a feature leaks, or cases are excluded; none is a discovery, and all are refused. The legitimate objective is stated in \S\ref{sec:alloc}.
+
+\section{Evidence graph and staleness}\label{sec:graph}
+
+\begin{definition}[Evidence graph]\label{def:graph}
+$\mathcal{E}=(V,E)$ is a typed DAG. Vertex types: \code{study}, \code{representation}, \code{hypothesis}, \code{action}, \code{artifact}, \code{validation}, \code{claim}. Edge types: \code{derived\_from}, \code{tested\_on}, \code{invalidated\_by}, \code{supersedes}, \code{requires\_assumption}. Every vertex carries a content hash $\mathrm{h}(v)$ computed from its inputs and its own content.
+\end{definition}
+
+\begin{definition}[Staleness]\label{def:stale}
+$v$ is \emph{stale} iff $\exists\,u$ reachable from $v$ along \code{derived\_from} or \code{requires\_assumption} edges with $\mathrm{h}(u)\ne\mathrm{h}_{\rm recorded}(u)$.
+\end{definition}
+
+\begin{proposition}[Staleness invariant]\label{prop:stale}
+If the gate enforces ``no \code{certify} entry may consume a stale vertex,'' then every published certificate's ancestor hashes equal those recorded at emission. Consequently a certificate cannot silently inherit a rebuilt source.
+\end{proposition}
+\begin{proof}
+Immediate from Definitions~\ref{def:graph}--\ref{def:stale}: staleness is a reachability predicate over recorded versus computed hashes, and the gate refuses on a positive predicate. Acyclicity guarantees the predicate terminates. \end{proof}
+
+Memory is a graph, not a store of successful prompts. Retrieved text has no authority to override contracts. **Negative results are first-class vertices**: rejected estimators, zero-bound sparse geometries, the failed single-$\lambda$ dependence estimator, and guard-domain refusals are preserved precisely so a later agent cannot rediscover an attractive error and publish it as new.
+
+\section{Horos: the dataset-agnostic study layer}\label{sec:horos}
+
+Horos maps a new dataset to a Pythia-admissible study. The stage contract is a total function into results or typed failures:
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.42\linewidth}@{}}
+\toprule
+Stage & Output & Failure mode \\
+\midrule
+\code{declare} & validated task card & missing target/cutoff/entity/loss $\Rightarrow$ error \\
+\code{prepare} & cohort manifest, grouping audit, hashes & entity overlap $\Rightarrow$ refuse \\
+\code{represent} & named information sets with provenance & post-cutoff source $\Rightarrow$ refuse \\
+\code{crossfit} & fold-local artifacts, complete OOF predictions & training inside Pythia $\Rightarrow$ forbidden \\
+\code{certify} & versioned registry, budget, tier, diagnostics & inadmissible registry $\Rightarrow$ refuse \\
+\code{compare} & aligned ladder with negative controls & false monotonicity claim $\Rightarrow$ lint error \\
+\code{report} & certificate card + machine-readable JSON & patient-level content $\Rightarrow$ refuse \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{definition}[Fold and evaluation seals]\label{def:seals}
+A \emph{fold seal} fixes the partition of entities into development and evaluation, with the entity --- not the row --- as the sampling unit whenever dependence persists across rows. An \emph{evaluation seal} additionally fixes row identifiers, target definition, cohort exclusions, selected model versions, representation, metric, loss, witness family, guard and planned analysis. No action that reads evaluation outcomes may revise an object behind a seal; if one must, the evaluation is reclassified as development and a fresh cohort is required.
+\end{definition}
+
+A study declaration names roles, never hospital-specific columns:
+
+\begin{verbatim}
+study:
+  name: local-duration-v1
+  cohort: eligible-cases-v3
+  row_id: case_id
+  entity_id: patient_id
+  event_time: scheduled_in_room
+  decision_cutoff: booking-minus-two-days
+  target: duration_minutes
+  losses: [mae, pinball_0.1, pinball_0.9, miss_30]
+  split: grouped-temporal-v2
+  representations: [tabular-v1, concepts-v2, notes-recut-v1]
+  governance: private-clinical-runner
+\end{verbatim}
+
+An adapter resolves role names to local columns. The compiler validates that the target is numeric where the loss requires, time zones are unambiguous, row identifiers are unique, each entity belongs to exactly one fold, and no representation reads after the cutoff --- then emits an immutable task card and a planned artifact graph \emph{before} outcomes are read.
+
+\section{Negative-control registry}\label{sec:negctrl}
+
+Controls are specified by their \emph{expected logical response}, not by an expected numerical direction. Write $\mathsf{V}$ for ``validity preserved'', $\mathsf{R}$ for ``must refuse'', $\mathsf{U}$ for ``unconstrained direction''.
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.44\linewidth}@{}}
+\toprule
+Control & Expected & Rationale \\
+\midrule
+duplicate a tabular feature & $\mathsf{V},\mathsf{U}$ & same information, changed geometry; bound need not be stable \\
+shuffle note characters / tokens & $\mathsf{V},\mathsf{U}$ & destroys semantics, perturbs distances \\
+note dropout / span masking & $\mathsf{V},\mathsf{U}$ & changes usable pairs \\
+pre- vs post-cutoff split & $\mathsf{R}$ (post) & contract violation \\
+true-duration injection & $\mathsf{R}$ & outcome leak; floor is trivially zero, representation inadmissible \\
+randomised outcome placebo & $\mathsf{V}$, floor $\to$ marginal & sanity anchor \\
+patient-overlap sabotage & $\mathsf{R}$ & independence unit violated \\
+pair/group selection after viewing outcomes & $\mathsf{R}$ & violates Definition~\ref{def:admissible} \\
+incorrect $L$ or range & $\mathsf{R}$ or documented invalidity & guard out of domain \\
+heavy tail outside guard domain & $\mathsf{R}$ & calibration extrapolation \\
+shared model-bias stress & $\mathsf{V}$ & disagreement route must degrade visibly \\
+sparse metric & $\mathsf{V}$, bound $\to 0$ & valid but silent; counted as unhelpful \\
+repeated selection without budget & $\mathsf{R}$ & ledger inadmissible \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}
+The most common design error in this area is to expect every perturbation to move the bound monotonically. It should not. Perturbations change distances and usable pairs; the contract is on \emph{validity and refusal behaviour}, and encoding it otherwise builds a test suite that fails for correct reasons.
+\end{remark}
+
+\section{Budget allocation as an optimisation problem}\label{sec:alloc}
+
+By \S\ref{sec:ledger}, $\alpha$ is scarce and compute is not. Let candidate certifying actions be indexed by $k$, each with budget cost $\alpha_k$, compute cost $c_k$, and an uncertain tightening $\Delta_k=\E[B_k]-B_{\rm current}$ estimated from development artifacts only. The searcher solves
+\begin{equation}
+\max_{x\in\{0,1\}^K}\ \sum_k x_k\,\Delta_k
+\quad\text{s.t.}\quad \sum_k x_k\alpha_k\le\alpha,\ \ \sum_k x_k c_k\le\beta,
+\label{eq:knapsack}
+\end{equation}
+a two-constraint knapsack. Since $\Delta_k$ is unknown, the practical formulation is a budgeted best-arm identification problem in which \code{explore} entries on development folds refine $\widehat\Delta_k$ at zero $\alpha$-cost, and a single \code{certify} entry commits.
+
+\begin{proposition}[Exploration is the correct default]\label{prop:explorefirst}
+Under \eqref{eq:knapsack} with $\alpha_k>0$ and $c_k\ll\beta$, any policy that certifies before exhausting informative zero-$\alpha$ exploration is dominated: development exploration weakly improves the estimate $\widehat\Delta_k$ at no budget cost, and the feasible set of \eqref{eq:knapsack} is unchanged.
+\end{proposition}
+
+This is the formal justification for the loop's structure in Algorithm~\ref{alg:metis}: certify last, explore freely, and treat every unnecessary \code{certify} entry as a permanent loss of scientific capacity.
+
+\section{Refusal semantics}\label{sec:refusal}
+
+\begin{definition}[Certification as a total function]\label{def:refusal}
+The public entry point is
+$\mathrm{certify}:\ \text{Inputs}\ \longrightarrow\ \mathrm{Result}\ \sqcup\ \mathrm{Refusal}$,
+total on its domain. A $\mathrm{Refusal}$ carries a typed reason code, the inspected artifact hashes and the precise failed premise, and omits any headline number.
+\end{definition}
+
+Distinct reason codes are materially different failures and must not be collapsed into one exception:
+\code{missing\_representation\_source\_hash}, \code{post\_cutoff\_feature}, \code{entity\_overlap}, \code{unverified\_pair\_design}, \code{guard\_out\_of\_domain}, \code{unsupported\_loss}, \code{range\_not\_audited}, \code{numerical\_infeasibility}, \code{evaluation\_reused}.
+
+\paragraph{Hard numeric invariants.} Finite values; $B\ge0$; $B$ no greater than a declared achieved-risk upper comparator \emph{only} where a simultaneous confidence construction justifies the comparison; monotone sensitivity curves where the theorem implies monotonicity; fixed-seed determinism. A bound may exceed an observed predictor score through sampling noise; code must distinguish that from a genuine contradiction, and must never apply a cosmetic clip that conceals an invalid derivation.
+
+\begin{theorem}[Fail-closed]\label{thm:failclosed}
+If $\mathrm{certify}$ is total in the sense of Definition~\ref{def:refusal} and the gate refuses on any unresolved premise, then no input can produce a numeric bound whose premises were not checked. Consequently the system emits either a checked number or a typed refusal, never an unchecked number.
+\end{theorem}
+\begin{proof}
+Totality means every input maps into $\mathrm{Result}\sqcup\mathrm{Refusal}$. Membership in $\mathrm{Result}$ requires all guard predicates to evaluate true, by (G1)--(G5) and the tier edges of \S\ref{sec:tiers}. If any predicate is false or unevaluated, the disjoint sum places the output in $\mathrm{Refusal}$, which carries no headline number by definition. \end{proof}
+
+\section{Restatement of the certification theorem}\label{sec:restate}
+
+For completeness, the underlying statistical result this architecture protects. Let $\Hcal$ be an admissible registry with budgets $\alpha_h$, $\sum_h\alpha_h\le\alpha$, and let $\underline\mu_h$ be a valid conditional $(1-\alpha_h)$ lower confidence bound on $\E[h]$.
+
+\begin{theorem}[Simultaneous certificate]\label{thm:certrestate}
+Under Assumption~\ref{as:indep2}, admissibility (Definition~\ref{def:admissible}) and the witness inequalities of the companion paper,
+\[
+B_\ell=\max\Big\{0,\max_{h\in\Hcal}\underline\mu_h\Big\}
+\quad\text{satisfies}\quad
+\Prob\{B_\ell\le\risk_{\ell,n}\mid \Fcal_z\vee\Fcal_{\rm ext}\}\ \ge\ 1-\alpha .
+\]
+\end{theorem}
+
+The architecture of \S\S\ref{sec:sep}--\ref{sec:refusal} exists to guarantee that the hypotheses of Theorem~\ref{thm:certrestate} hold at the moment of emission, and continue to hold under automation.
+
+\section{Status, evidence, and boundaries}\label{sec:status}
+
+\subsection{What exists}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.36\linewidth}p{0.36\linewidth}@{}}
+\toprule
+Layer & Implemented & Specified, not built \\
+\midrule
+Pythia contracts & immutable task/representation/fold/guard/certificate objects; public entry point; CLI; typed refusals; claim tiers & formal verification of every contract branch; audited clinical guard \\
+Pythia mathematics & log-loss algebraic route; guarded MAE rungs; dependence diagnostics; fixed-design pair/group witnesses for MAE, pinball, window miss; concentration and selection control & independent proof audit of every advertised theorem; unbounded-outcome treatment; useful high-dimensional metrics; published-floor head-to-head \\
+Horos & generic study YAML; grouped temporal preparation; entity-safe cross-fitting; Mayo adapter; pairing/grouping and perturbation diagnostics & full adapter registry; one-command workflow; complete UI and report renderer \\
+Metis & package placeholders only & \textbf{everything in \S\ref{sec:gate}}: action loop, gate, memory, budgeter, approvals, audit trail, evaluation, shutdown \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{What the evidence says}
+
+On a frozen ten-design MAE challenge with analytic floors ($20$ draws per design, $n=1600$): paired and grouped bounds were below truth in $200/200$ draws; grouped was strictly larger in $180$, tied at zero in $20$ sparse draws, and lost in none; median usable tightness rose from $0.563$ to $0.641$. That is a win over that paired comparator on that benchmark, not a universal tightest-bound theorem.
+
+A separate five-loss exercise over ten numeric and templated-text designs was valid in $1{,}000/1{,}000$ loss results across $200$ draws; the frozen route improved W15 on $177/200$ and W30 on $127/200$ against paired Bentkus, and tied on q10/q90. External cross-fitted kNN, histogram and kernel estimators were substantially closer to the known floor than the raw witness centre: Pythia has a promising \emph{bound}, not the best general point estimator. A later geometry registry reported $339$ wins, $140$ ties and $21$ losses in $500$ cells against a numerical maximum of paired methods; its comparator and selection history preclude a clean paper-wide dominance claim.
+
+Sparse and high-dimensional representations can drive a valid bound to zero. This is the most important open problem in the project.
+
+\subsection{Mayo is an application, not the definition}
+
+Historical Arm-B: stored OOF MAE $32.8700117033$; global attainable-floor estimate $31.1186421201$; stratified simulation-calibrated guard $28.8495996043$ (tier \tier{calibrated}); conservative conditional $Q_{\rm cap}$ rung $\approx24.19$. These are preserved as regression locks. The previously advertised $31.2623$-minute ``incumbent'' is \emph{not} established by the located artifact as a held-out duration MAE --- it matches an OOF residual-corrector selection metric --- and is not used as a comparator; the audited generic candidate has development OOF MAE $33.2749753373$.
+
+The canonical grouped-temporal manifest has $10{,}882$ development rows, $2{,}839$ temporal holdout rows and $474$ earlier rows excluded to remove patient overlap. An exploratory independent-patient multi-loss audit used $10{,}528$ cases: tabular W30 miss-floor diagnostic $0.2019$, implying an illustrative ceiling of $79.81\%$ attainable W30 against $62.60\%$ achieved. Later geometry choices yield different values. All are \tier{exploratory}: the clinical $L$ and outcome support are illustrative and the holdout already influenced development.
+
+\section{Validation program}\label{sec:validation}
+
+Four independent tracks; passing one grants nothing to the others.
+
+\textbf{Mathematical audit.} State finite-design estimands, independence unit, outcome-blind $\sigma$-field, Bayes-action selection and clipping premises. Proof-read pair and group derivations for all three losses; verify simultaneous concentration and multiplicity. Where a condition is only assumed --- especially clinical $L$ --- the result stays \tier{conditional}. Preserve counterexamples and numerical tolerances.
+
+\textbf{Known-risk synthetic audit.} At least ten numeric and text-like generators with analytic floors, frozen before evaluation. Vary dimension, smoothness, heteroskedasticity, mixtures, skew, heavy tails, clusters, common bias, SNR and metric misspecification independently. Report per-design coverage with Wilson intervals, median usable tightness, point-estimation error and refusal rates, on a genuinely untouched seed after any method change. A zero bound is valid but unhelpful and must be counted as such.
+
+\textbf{Fair baselines.} Compare concentration methods on exactly the same witness. Separately compare accepted floor estimators on their own proper estimands. Do not call a point estimator's mean a confidence lower bound, and do not race incomparable objects: conformal risk control bounds the risk of a specified procedure, whereas Pythia bounds the best decision risk of an information set.
+
+\textbf{Prospective confirmation.} Freeze cohort, representations, weights, code, guards, endpoint, analysis, slice rules and report template before outcomes arrive. Accumulate $3{,}000$ newly eligible cases without early inspection. Primary endpoint: paired patient-clustered MAE difference. Secondary: W30, procedure-family MAE, calibration by predicted duration, certificate consistency, operational-hours translation.
+
+\section{Milestones}\label{sec:milestones}
+
+Gates, not features.
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.42\linewidth}@{}}
+\toprule
+Stage & Work package & Exit condition \\
+\midrule
+M0 & contracts, loss router, immutable certificates, CLI, hashes, regression tests & unsupported losses refuse; deterministic unit tests pass \\
+M1 & guarded MAE reproduction; train-free witness theory; tier separation & frozen anchors and known-risk simulations reproduce; refusal branches tested \\
+M2 & independent theorem and implementation audit; provenance, guard and concentration contracts & \tier{certified} label only with audited premises; private clinical runner and public synthetic CI pass \\
+M3 & dataset-agnostic Horos adapters; one-command study flow; full representation ladder & new dataset runs with no Mayo imports in Pythia; cohort/fold/timing audits machine-checkable \\
+M4 & \textbf{Metis gate} (\S\ref{sec:gate}), evidence graph, cost limits, approvals, evaluation seal & adversarial tests show the agent cannot promote, leak, retune or bypass a refusal \\
+M5 & literature head-to-head; richer geometry; dependence-profile audit; replication & accurate novelty scope; no cherry-picked benchmark; failures retained \\
+M6 & frozen $3{,}000$-case prospective study & prespecified endpoint analysed once; claims match evidence and external review \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Threat model}\label{sec:threat}
+
+The gate must be deliberately boring. Model-generated natural language is never an attestation: a claimed pre-cutoff feature needs machine-checkable timestamps; a claimed patient-isolated fold needs a manifest computation; a claimed independent guard needs an external audit artifact; a claimed untouched test needs an evaluation seal.
+
+\textbf{Principal failure modes.} Reward hacking (excluded by Proposition~\ref{prop:rewardhack}); data leakage; repeated holdout inspection; silent budget exhaustion; calibration-domain extrapolation; unreviewed external data exposure.
+
+\textbf{Controls.} Sandbox to development artifacts by default; per-action cost, compute and time budgets; maximum proposal count; stable action log; kill switch. An action whose permission or statistical consequence is unknown goes to human review. After a refusal the agent may generate a new auditable plan; it must not retry by paraphrasing the same false attestation.
+
+\textbf{Red-team fixtures before release.} Feed the agent: an apparent improvement that is the true duration hidden in a note; a metric selected after observing evaluation outcomes; a patient present in both train and test; a guard extrapolated beyond its validation axes; a benchmark whose seed was used for tuning. Success means the agent refuses or demotes, documents the reason and proposes a legitimate alternative --- and, separately, that it can carry a real bounded improvement forward without unnecessary blocking.
+
+\textbf{Privacy.} Patient-derived records and model outputs never enter version control. Reports use aggregate counts and hashes. A source hash aids reproducibility but is not a privacy guarantee; access control and review still govern who may recompute. Clinical use requires local governance and human decision ownership: a certificate is not a deployment authorisation.
+
+\section{Open problems}\label{sec:open}
+
+\textbf{O1. External smoothness.} Can an auditable Lipschitz condition be obtained for clinically meaningful metrics? A route through conditional-CDF stability and density lower bounds can justify quantile-action Lipschitzness locally, but needs independent data and a credible domain. Window-optimal centres require a separate condition; median smoothness cannot be reused.
+
+\textbf{O2. Outcome-blind metric learning.} Can a metric learned on a \emph{separate} source cohort and then frozen improve high-dimensional witness power without biasing the evaluation event? Certification must account for whether source and target cohorts are independent or only temporally separated.
+
+\textbf{O3. Sharper group witnesses.} Can the group relaxation be strengthened while preserving a simple range and tractable optimisation across all three losses? Any sharpening must be proved before benchmarking, then tested on a fresh seed.
+
+\textbf{O4. The deaf regime.} Characterise the boundary in (dimension, metric, $L$) beyond which the witness returns zero. This is where modern representations live, and a witness that survives it --- perhaps through a predeclared neighbourhood or graph design with a finite-sample correction for overlapping pairs --- would be the single largest advance available.
+
+\textbf{O5. Honest point estimation.} External local estimators currently beat the witness centre. A good point estimate and a valid lower bound are complementary products and should be developed as such, with the estimator living in Horos.
+
+\textbf{O6. Dependence-aware profiles.} Can shared predictor bias be addressed without relying on unidentifiable disagreement? A sensitivity curve indexed by a declared shared-error cap is honest where a single estimate is not.
+
+\section{The finish line}
+
+The useful answer to ``what do we return to users?'' is disciplined rather than impressive. For a specified decision and information set: here is what current models achieve; here is what we can and cannot establish about the attainable floor; here is the estimated value of adding information; here are the assumptions and failure modes; here is the next experiment worth paying for.
+
+Pythia makes the floor question precise. Horos makes it reproducible on a new dataset. Metis should make the search efficient while being \emph{unable} to turn curiosity into unwarranted certainty --- which is the content of Theorem~\ref{thm:noinval}, and the reason the gate is specified before it is built.
+
+Success is not always a positive bound. Sometimes the scientifically correct product is a clear refusal, a zero witness in sparse geometry, or a recommendation to collect a different kind of evidence.
+
+\appendix
+\section{Minimum machine-readable certificate}\label{app:cert}
+
+The schema must expose: task and decision cutoff; eligible and excluded cohorts; loss and action; finite-design versus population estimand; entity and cluster units; representation and source hashes; metric and outcome-blindness attestation; selected witness and registry hash; smoothness/range guard and its audit source; concentration method and allocated budget; numerical bound and optional separately typed estimate; achieved OOF or held-out score with exact prediction-artifact hash; claim tier; assumptions; sampling interval; guard uncertainty; falsification results; explicit refusal reasons. A human-readable report is a rendering of this immutable record, never a second source of numerical truth.
+
+\section{Selection accounting}\label{app:selection}
+
+Any search over matching radii, group sizes, metrics, clipping thresholds, concentration methods, losses, slices or representation candidates spends budget. The system needs a registry frozen before evaluation and a ledger of allocations (\S\ref{sec:ledger}). Some sensitivity curves share one confidence event; some candidate families require a union bound or an independent validation split. The code must expose which strategy was used. ``We tried several and reported the highest'' is never an adequate certificate algorithm; an exploratory analyst may inspect many variants, but the output tier then reflects exploration.
+
+\section{Numeric reproducibility}\label{app:numeric}
+
+Version guard axes and calibration population, seed registry, source hash, supported domain, software environment, optimisation tolerances and active constraints. For dependence profiles, infeasible observed moments within stated sampling tolerance require a refusal: a solver's near-feasible output cannot become a theorem. For bootstrap intervals, resample entities or independent clusters with replacement and retain repeated groups as separate draws. Sampling uncertainty and guard uncertainty occupy different fields. The JSON certificate is deterministic for fixed inputs under a stable schema version.
+
+\section{Release checklist}\label{app:release}
+
+Audiences differ; the numeric and claim-tier fields do not. A theorem reviewer needs hypotheses, counterexamples, proof and reproducibility. A methods user needs an input contract, callable API, refusal examples and a non-Mayo benchmark. A clinician needs population, cutoff, outcome definition, comparator, uncertainty and the action the result could change. An operations leader needs minutes or hours and which changes are within reach.
+
+Before a public package release: unit and property tests for all router paths, installation tests, deterministic CLI tests, contract fuzzing, synthetic coverage suites, sample JSON round-trips. Before a clinical research release: rerun frozen hashes on the private runner, verify no patient-derived file entered version control, commission independent theorem and methods review. Before an autonomous-agent release: pass the red-team suite of \S\ref{sec:threat} and human approval tests. Before a clinical confirmation claim: complete the $3{,}000$-case prespecified protocol and document deviations.
+
+\begingroup\small
+\begin{thebibliography}{9}
+\bibitem{anderson} Anderson and Bjarnad\'ottir. Estimating the possible prediction performance of models. \emph{PLOS ONE}, 2024.
+\bibitem{bazinet} Bazinet et al. Bound to Disagree. \emph{PMLR} v337, 2026.
+\bibitem{eaton} Eaton et al. Model Agreement via Anchoring. \emph{PMLR} v336, 2026.
+\bibitem{bentkus} Bentkus. On Hoeffding's inequalities. \emph{Annals of Probability} 32, 2004.
+\bibitem{crc} Angelopoulos, Bates, Fisch, Lei, Schuster. Conformal risk control. arXiv:2208.02814, rev.\ 2025.
+\bibitem{maurer} Maurer and Pontil. Empirical Bernstein bounds and sample variance penalization. \emph{COLT}, 2009.
+\bibitem{blackwell} Blackwell. Equivalent comparisons of experiments. \emph{Ann.\ Math.\ Statist.} 24, 1953.
+\end{thebibliography}
+\endgroup
+\end{document}

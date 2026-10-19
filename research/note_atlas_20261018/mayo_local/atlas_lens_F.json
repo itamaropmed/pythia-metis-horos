@@ -1,0 +1,60 @@
+{
+ "n_cases": 12993,
+ "n_patients": 10532,
+ "B_global": {
+  "I": 64.48924930476505,
+  "R2": 0.025272881402140533,
+  "dMAE": -0.5148886330051212,
+  "I_ci95": [
+   49.42949846761993,
+   80.98818740879624
+  ],
+  "residual_var": 2551.717324139503,
+  "residual_mae": 33.432689497416355,
+  "permutation_null_I": []
+ },
+ "F_melting": {
+  "p": [
+   0,
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9,
+   0.97
+  ],
+  "retained_fraction": [
+   1.0,
+   1.0097161989931944,
+   0.9749904573904232,
+   0.9261826797753113,
+   0.8399546074010557,
+   0.7411387189926022,
+   0.665779293478485
+  ],
+  "heat_capacity": [
+   -0.09716198993194425,
+   0.23150494401847466,
+   0.1952311104604476,
+   0.3449122894970227,
+   0.6587725893896896,
+   1.076563221630247
+  ],
+  "half_melting_p": null
+ },
+ "reportable_terms_count": 4193,
+ "sections_analysed": [
+  "ATRIA",
+  "RIGHT VENTRICLE",
+  "CARDIAC VALVES",
+  "OTHER ECHO FINDINGS",
+  "COMPARISON",
+  "LEFT VENTRICLE",
+  "ADDITIONAL FINDINGS",
+  "FINDINGS",
+  "OTHER CARDIAC FINDINGS",
+  "SUMMARY",
+  "DEVICE RN",
+  "FOLLOW UP LOCATION STATUS"
+ ]
+}

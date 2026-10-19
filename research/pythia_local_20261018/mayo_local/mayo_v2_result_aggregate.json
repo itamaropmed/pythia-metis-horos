@@ -1,0 +1,1306 @@
+{
+ "estimand": "case-weighted W30-miss probability of the FROZEN deployed model in each routed region",
+ "primary": {
+  "alpha_per_tail": 0.0002777777777777778,
+  "basic_xgboost": {
+   "cells": [
+    {
+     "dev_interval": [
+      0.3123347174648941,
+      0.6796345316342747
+     ],
+     "later_observed_w30": 0.43902439024390244,
+     "later_rows": 82,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.3430384258173743,
+      0.6460552343886956
+     ],
+     "later_observed_w30": 0.39166666666666666,
+     "later_rows": 120,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.4487216723627132,
+      0.7542829980447995
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.5581395348837209,
+     "later_rows": 129,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.318608672906929
+    },
+    {
+     "dev_interval": [
+      0.0007128382659590031,
+      0.14540246983733718
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.015873015873015872,
+     "later_rows": 63,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 3.112683099151552
+    },
+    {
+     "dev_interval": [
+      0.14958048393221196,
+      0.36164894012637183
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.23417721518987342,
+     "later_rows": 158,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.062217333024588
+    },
+    {
+     "dev_interval": [
+      0.19798236042953196,
+      0.461281003765344
+     ],
+     "later_observed_w30": 0.18620689655172415,
+     "later_rows": 145,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": false,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.2075228168639597,
+      0.5296855024295648
+     ],
+     "later_observed_w30": 0.39080459770114945,
+     "later_rows": 87,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.0205506343308425,
+      0.20949761731360572
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.07936507936507936,
+     "later_rows": 63,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.9983389492391102
+    },
+    {
+     "dev_interval": [
+      0.5210533224531761,
+      0.8250750032616073
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6689655172413793,
+     "later_rows": 145,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.743042164171027
+    },
+    {
+     "dev_interval": [
+      0.1697477575457188,
+      0.39418616043804844
+     ],
+     "later_observed_w30": 0.3270440251572327,
+     "later_rows": 159,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.40305203440034026,
+      0.7463723563214472
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.5930232558139535,
+     "later_rows": 86,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.0941487506216536
+    },
+    {
+     "dev_interval": [
+      0.02276926330472222,
+      0.2516207408901995
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.1595744680851064,
+     "later_rows": 94,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.5881751664010217
+    },
+    {
+     "dev_interval": [
+      0.26125847258586127,
+      0.5623898668024659
+     ],
+     "later_observed_w30": 0.35714285714285715,
+     "later_rows": 126,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.3576839130460243,
+      0.6790261850091719
+     ],
+     "later_observed_w30": 0.46,
+     "later_rows": 100,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.5657133527739173,
+      0.8659806626747204
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6435643564356436,
+     "later_rows": 101,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 2.0747292088304423
+    },
+    {
+     "dev_interval": [
+      0.04734902672877491,
+      0.3227569161658298
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.0,
+     "later_rows": 52,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": false,
+     "observed_inside_L1.25": false,
+     "observed_inside_L1.5": false,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.1808274782483037
+    },
+    {
+     "dev_interval": [
+      0.11541266298232887,
+      0.43615245207707254
+     ],
+     "later_observed_w30": 0.3522727272727273,
+     "later_rows": 88,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.04660262461925775,
+      0.21947682176760752
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.10344827586206896,
+     "later_rows": 174,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.9443543054796242
+    },
+    {
+     "dev_interval": [
+      0.1916280643521293,
+      0.49397777246154406
+     ],
+     "later_observed_w30": 0.26515151515151514,
+     "later_rows": 132,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.2662767118502088,
+      0.5559823349345592
+     ],
+     "later_observed_w30": 0.5,
+     "later_rows": 142,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.4381891830846187,
+      0.665528224880445
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6099585062240664,
+     "later_rows": 241,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.2631672836218617
+    },
+    {
+     "dev_interval": [
+      0.4828355257459488,
+      0.786302456854908
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.5982142857142857,
+     "later_rows": 112,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.5027070214240223
+    }
+   ],
+   "cells_with_50plus_later_rows": 22,
+   "certified_cells": 12,
+   "certified_cells_direction_agrees_later": 12,
+   "later_mae": 33.24822775021384,
+   "later_w30": 0.3843786071565987,
+   "median_interval_width": 0.3002673099008031,
+   "median_tipping_lambda": 1.545441093912522,
+   "monitor_alarms": 0,
+   "observed_inside_L1.0_50plus": 20,
+   "observed_inside_L1.25_50plus": 21,
+   "observed_inside_L1.5_50plus": 21,
+   "relation_counts": {
+    "certified_higher_than_global": 814,
+    "certified_lower_than_global": 604,
+    "local_shift_unresolved": 1181
+   }
+  },
+  "charged_tests": 45,
+  "min_entities": 100,
+  "regions": 22,
+  "xgboost_plus_11_llm": {
+   "cells": [
+    {
+     "dev_interval": [
+      0.3123347174648941,
+      0.6796345316342747
+     ],
+     "later_observed_w30": 0.4268292682926829,
+     "later_rows": 82,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.27410385731093634,
+      0.5732063092259252
+     ],
+     "later_observed_w30": 0.4,
+     "later_rows": 120,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.4240391560646486,
+      0.7325634896691686
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.5968992248062015,
+     "later_rows": 129,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.2770596201239643
+    },
+    {
+     "dev_interval": [
+      0.0019370458090623354,
+      0.16253263534095608
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.015873015873015872,
+     "later_rows": 63,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 2.539914526501115
+    },
+    {
+     "dev_interval": [
+      0.14958048393221196,
+      0.36164894012637183
+     ],
+     "later_observed_w30": 0.22784810126582278,
+     "later_rows": 158,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.1771847244563155,
+      0.4347501723279692
+     ],
+     "later_observed_w30": 0.16551724137931034,
+     "later_rows": 145,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": false,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.2075228168639597,
+      0.5296855024295648
+     ],
+     "later_observed_w30": 0.3333333333333333,
+     "later_rows": 87,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.017350298731468233,
+      0.19956567831298677
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.09523809523809523,
+     "later_rows": 63,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.9771136612004123
+    },
+    {
+     "dev_interval": [
+      0.47362326490641016,
+      0.7874861919431337
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6275862068965518,
+     "later_rows": 145,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.5508234668822878
+    },
+    {
+     "dev_interval": [
+      0.16007119505476938,
+      0.38149869210986087
+     ],
+     "later_observed_w30": 0.31446540880503143,
+     "later_rows": 159,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.3732064554355751,
+      0.719293638274477
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6162790697674418,
+     "later_rows": 86,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.0311560166783345
+    },
+    {
+     "dev_interval": [
+      0.030575953216287772,
+      0.27118418189036686
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.13829787234042554,
+     "later_rows": 94,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.361332821526254
+    },
+    {
+     "dev_interval": [
+      0.25609246581875916,
+      0.5565336660958398
+     ],
+     "later_observed_w30": 0.35714285714285715,
+     "later_rows": 126,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.33920730325339166,
+      0.6607926967466082
+     ],
+     "later_observed_w30": 0.47,
+     "later_rows": 100,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.49668177283512055,
+      0.815449739055184
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6138613861386139,
+     "later_rows": 101,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.703135573991616
+    },
+    {
+     "dev_interval": [
+      0.05266422181467901,
+      0.3345081569764189
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.019230769230769232,
+     "later_rows": 52,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": false,
+     "observed_inside_L1.25": false,
+     "observed_inside_L1.5": false,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.0523984745805726
+    },
+    {
+     "dev_interval": [
+      0.1334099159570426,
+      0.4630028545603616
+     ],
+     "later_observed_w30": 0.3522727272727273,
+     "later_rows": 88,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.04144928266714901,
+      0.20980532042351618
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.08620689655172414,
+     "later_rows": 174,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_lower_than_global",
+     "tipping_lambda": 1.8982738152027663
+    },
+    {
+     "dev_interval": [
+      0.20214945010376817,
+      0.5071858133953414
+     ],
+     "later_observed_w30": 0.24242424242424243,
+     "later_rows": 132,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.22753615921141257,
+      0.5110769950689518
+     ],
+     "later_observed_w30": 0.4295774647887324,
+     "later_rows": 142,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "local_shift_unresolved"
+    },
+    {
+     "dev_interval": [
+      0.42213843464919115,
+      0.6501494196065316
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.6182572614107884,
+     "later_rows": 241,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.2661383284175176
+    },
+    {
+     "dev_interval": [
+      0.45172972423411806,
+      0.7601431053346974
+     ],
+     "direction_agrees_later": true,
+     "later_observed_w30": 0.5535714285714286,
+     "later_rows": 112,
+     "monitor_alarm_at_patient": null,
+     "observed_inside_L1.0": true,
+     "observed_inside_L1.25": true,
+     "observed_inside_L1.5": true,
+     "relation": "certified_higher_than_global",
+     "tipping_lambda": 1.4219873063560955
+    }
+   ],
+   "cells_with_50plus_later_rows": 22,
+   "certified_cells": 11,
+   "certified_cells_direction_agrees_later": 11,
+   "later_mae": 32.45064155061963,
+   "later_w30": 0.3724509426702578,
+   "median_interval_width": 0.29910245191498885,
+   "median_tipping_lambda": 1.4219873063560955,
+   "monitor_alarms": 0,
+   "observed_inside_L1.0_50plus": 20,
+   "observed_inside_L1.25_50plus": 21,
+   "observed_inside_L1.5_50plus": 21,
+   "relation_counts": {
+    "certified_higher_than_global": 814,
+    "certified_lower_than_global": 446,
+    "local_shift_unresolved": 1339
+   }
+  }
+ },
+ "pythia_trains_models": false,
+ "sensitivity_predeclared": {
+  "200": {
+   "alpha_per_tail": 0.000462962962962963,
+   "basic_xgboost": {
+    "cells": [
+     {
+      "dev_interval": [
+       0.1522248014422119,
+       0.35773906476955586
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.23417721518987342,
+      "later_rows": 158,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.080323463803879
+     },
+     {
+      "dev_interval": [
+       0.172619596713152,
+       0.39013954658189975
+      ],
+      "later_observed_w30": 0.3270440251572327,
+      "later_rows": 159,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.3862246807625482,
+       0.5921822310804248
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.4268774703557312,
+      "later_rows": 253,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.0251788144137188
+     },
+     {
+      "dev_interval": [
+       0.48097712987427527,
+       0.7053709700720168
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5720930232558139,
+      "later_rows": 215,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.5054285494477062
+     },
+     {
+      "dev_interval": [
+       0.01504560795783963,
+       0.14615114016175457
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.03875968992248062,
+      "later_rows": 129,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 3.109480792929535
+     },
+     {
+      "dev_interval": [
+       0.2301648005415206,
+       0.4564084687213201
+      ],
+      "later_observed_w30": 0.19444444444444445,
+      "later_rows": 180,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": false,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.27933915782805335,
+       0.4970869958850924
+      ],
+      "later_observed_w30": 0.37089201877934275,
+      "later_rows": 213,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.05017291785841592,
+       0.2068756734122943
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.043478260869565216,
+      "later_rows": 115,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": false,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 2.1131974672110085
+     },
+     {
+      "dev_interval": [
+       0.5260158444810865,
+       0.7830867938749894
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6205128205128205,
+      "later_rows": 195,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.7909393366716284
+     },
+     {
+      "dev_interval": [
+       0.05504618551819409,
+       0.210049246807001
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.14356435643564355,
+      "later_rows": 202,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 2.0764850073655388
+     },
+     {
+      "dev_interval": [
+       0.15901415128088353,
+       0.4010913885416293
+      ],
+      "later_observed_w30": 0.31351351351351353,
+      "later_rows": 185,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.4569220097584457,
+       0.6546272826548227
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5793103448275863,
+      "later_rows": 290,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.3651184164420824
+     },
+     {
+      "dev_interval": [
+       0.5811003910781772,
+       0.817685870145133
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6625766871165644,
+      "later_rows": 163,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 2.2265125827844496
+     }
+    ],
+    "cells_with_50plus_later_rows": 13,
+    "certified_cells": 9,
+    "certified_cells_direction_agrees_later": 9,
+    "later_mae": 33.24822775021384,
+    "later_w30": 0.3843786071565987,
+    "median_interval_width": 0.21751994986874776,
+    "median_tipping_lambda": 1.7909393366716284,
+    "monitor_alarms": 0,
+    "observed_inside_L1.0_50plus": 11,
+    "observed_inside_L1.25_50plus": 13,
+    "observed_inside_L1.5_50plus": 13,
+    "relation_counts": {
+     "certified_higher_than_global": 1116,
+     "certified_lower_than_global": 604,
+     "global_only": 142,
+     "local_shift_unresolved": 737
+    }
+   },
+   "charged_tests": 27,
+   "regions": 13,
+   "xgboost_plus_11_llm": {
+    "cells": [
+     {
+      "dev_interval": [
+       0.1522248014422119,
+       0.35773906476955586
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.22784810126582278,
+      "later_rows": 158,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.006625981156484
+     },
+     {
+      "dev_interval": [
+       0.16286820294278082,
+       0.3774668657272645
+      ],
+      "later_observed_w30": 0.31446540880503143,
+      "later_rows": 159,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.34627806849967685,
+       0.5511547097446456
+      ],
+      "later_observed_w30": 0.4308300395256917,
+      "later_rows": 253,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.45331656201097686,
+       0.6797890230577095
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6046511627906976,
+      "later_rows": 215,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.4423324979236667
+     },
+     {
+      "dev_interval": [
+       0.01504560795783963,
+       0.14615114016175457
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.03875968992248062,
+      "later_rows": 129,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 2.8944173667932707
+     },
+     {
+      "dev_interval": [
+       0.21375387015765182,
+       0.4367923435852268
+      ],
+      "later_observed_w30": 0.16111111111111112,
+      "later_rows": 180,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": false,
+      "observed_inside_L1.25": false,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.2763618052668065,
+       0.49376644341319065
+      ],
+      "later_observed_w30": 0.3474178403755869,
+      "later_rows": 213,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.05017291785841592,
+       0.2068756734122943
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.06086956521739131,
+      "later_rows": 115,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.964747560623438
+     },
+     {
+      "dev_interval": [
+       0.48941857503093905,
+       0.7519347970480429
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5897435897435898,
+      "later_rows": 195,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.659745980379561
+     },
+     {
+      "dev_interval": [
+       0.05746342316864213,
+       0.21419430061245714
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.1188118811881188,
+      "later_rows": 202,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.8894496322636434
+     },
+     {
+      "dev_interval": [
+       0.17848350909909347,
+       0.4265108063824281
+      ],
+      "later_observed_w30": 0.31351351351351353,
+      "later_rows": 185,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.4414057839106243,
+       0.6397209513320352
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5862068965517241,
+      "later_rows": 290,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.3723141992414598
+     },
+     {
+      "dev_interval": [
+       0.5216178675424515,
+       0.7691606496649473
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6134969325153374,
+      "later_rows": 163,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.885942513567207
+     }
+    ],
+    "cells_with_50plus_later_rows": 13,
+    "certified_cells": 8,
+    "certified_cells_direction_agrees_later": 8,
+    "later_mae": 32.45064155061963,
+    "later_w30": 0.3724509426702578,
+    "median_interval_width": 0.2145986627844837,
+    "median_tipping_lambda": 1.772844246973384,
+    "monitor_alarms": 0,
+    "observed_inside_L1.0_50plus": 12,
+    "observed_inside_L1.25_50plus": 12,
+    "observed_inside_L1.5_50plus": 13,
+    "relation_counts": {
+     "certified_higher_than_global": 863,
+     "certified_lower_than_global": 604,
+     "global_only": 142,
+     "local_shift_unresolved": 990
+    }
+   }
+  },
+  "400": {
+   "alpha_per_tail": 0.0011363636363636365,
+   "basic_xgboost": {
+    "cells": [
+     {
+      "dev_interval": [
+       0.22204358044906577,
+       0.36776522831268776
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.21301775147928995,
+      "later_rows": 338,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": false,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.0541121523692087
+     },
+     {
+      "dev_interval": [
+       0.062325348798582855,
+       0.14902933527060624
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.08744394618834081,
+      "later_rows": 446,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 3.2928042338026966
+     },
+     {
+      "dev_interval": [
+       0.28700156069833777,
+       0.4183011472275482
+      ],
+      "later_observed_w30": 0.39299610894941633,
+      "later_rows": 514,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.456336897217553,
+       0.5914615273446747
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5082872928176796,
+      "later_rows": 543,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.3729439635305671
+     },
+     {
+      "dev_interval": [
+       0.5827229502159724,
+       0.7155090394944269
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6143106457242583,
+      "later_rows": 573,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 2.297019575000082
+     }
+    ],
+    "cells_with_50plus_later_rows": 5,
+    "certified_cells": 4,
+    "certified_cells_direction_agrees_later": 4,
+    "later_mae": 33.24822775021384,
+    "later_w30": 0.3843786071565987,
+    "median_interval_width": 0.13278608927845448,
+    "median_tipping_lambda": 1.8349817692653245,
+    "monitor_alarms": 0,
+    "observed_inside_L1.0_50plus": 4,
+    "observed_inside_L1.25_50plus": 5,
+    "observed_inside_L1.5_50plus": 5,
+    "relation_counts": {
+     "certified_higher_than_global": 1116,
+     "certified_lower_than_global": 784,
+     "global_only": 185,
+     "local_shift_unresolved": 514
+    }
+   },
+   "charged_tests": 11,
+   "regions": 5,
+   "xgboost_plus_11_llm": {
+    "cells": [
+     {
+      "dev_interval": [
+       0.21350347414078114,
+       0.35782808176323544
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.19230769230769232,
+      "later_rows": 338,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": false,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 1.02340238517865
+     },
+     {
+      "dev_interval": [
+       0.06342060586380562,
+       0.15058493849763377
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.08071748878923767,
+      "later_rows": 446,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_lower_than_global",
+      "tipping_lambda": 3.0281805518326697
+     },
+     {
+      "dev_interval": [
+       0.27178698359685505,
+       0.401656499342227
+      ],
+      "later_observed_w30": 0.35992217898832685,
+      "later_rows": 514,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "local_shift_unresolved"
+     },
+     {
+      "dev_interval": [
+       0.42837826359932896,
+       0.5636553324725592
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.5138121546961326,
+      "later_rows": 543,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 1.3119029319018356
+     },
+     {
+      "dev_interval": [
+       0.5428621046062133,
+       0.678492242982589
+      ],
+      "direction_agrees_later": true,
+      "later_observed_w30": 0.6020942408376964,
+      "later_rows": 573,
+      "monitor_alarm_at_patient": null,
+      "observed_inside_L1.0": true,
+      "observed_inside_L1.25": true,
+      "observed_inside_L1.5": true,
+      "relation": "certified_higher_than_global",
+      "tipping_lambda": 2.0895273401985044
+     }
+    ],
+    "cells_with_50plus_later_rows": 5,
+    "certified_cells": 4,
+    "certified_cells_direction_agrees_later": 4,
+    "later_mae": 32.45064155061963,
+    "later_w30": 0.3724509426702578,
+    "median_interval_width": 0.1352770688732302,
+    "median_tipping_lambda": 1.70071513605017,
+    "monitor_alarms": 0,
+    "observed_inside_L1.0_50plus": 4,
+    "observed_inside_L1.25_50plus": 5,
+    "observed_inside_L1.5_50plus": 5,
+    "relation_counts": {
+     "certified_higher_than_global": 1116,
+     "certified_lower_than_global": 784,
+     "global_only": 185,
+     "local_shift_unresolved": 514
+    }
+   }
+  }
+ },
+ "split": {
+  "calibration_patients": 3292,
+  "calibration_rows": 3722,
+  "cutoff": "2025-08-25 14:28:00+00:00",
+  "fit_patients": 4939,
+  "fit_rows": 6244,
+  "later_patients": 2301,
+  "later_rows": 2599,
+  "overlap_dev_later": 0,
+  "overlap_fit_cal": 0
+ },
+ "status": "retrospective temporal audit of the v2 route; not prospective confirmation",
+ "v1_original_route": {
+  "basic_xgboost": {
+   "certified_higher_than_global": 556,
+   "certified_lower_than_global": 603,
+   "local_shift_unresolved": 1440
+  },
+  "xgboost_plus_11_llm": {
+   "certified_higher_than_global": 556,
+   "certified_lower_than_global": 603,
+   "local_shift_unresolved": 1440
+  }
+ }
+}

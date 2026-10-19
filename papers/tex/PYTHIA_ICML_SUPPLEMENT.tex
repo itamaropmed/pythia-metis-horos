@@ -1,0 +1,127 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,booktabs,array,longtable}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\emergencystretch=2em
+\renewcommand{\thetable}{S\arabic{table}}
+\title{Supplement to ``Certified Floors on Decision Risk''\\
+\large Proof Scope, Known-Risk Wins, Negative Controls, and Reproduction}
+\author{Pythia research working supplement}
+\date{14 September 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Status.} This is an editable research supplement to the revised reader draft, not an anonymized or template-compliant ICML submission. All Mayo quantities below are retrospective and exploratory. Synthetic values have analytic Bayes-risk targets. ``Best'' always means best among the named methods on the named frozen benchmark, never best among all published methods.
+
+\section{The exact scope of the certificate}
+Fix covariates $z_{1:n}$, disjoint outcome-blind groups, conditionally independent entity outcomes, a metric that extends to any virtual group centre, and a selected loss-specific Bayes action $a^*(z)$ satisfying $|a^*(z)-a^*(z')|\le Ld(z,z')$ on the audited design. The pair and group statistics are pointwise no larger than the loss of these Bayes actions. Their conditional expected scores therefore lie below $n^{-1}\sum_i r_\ell(z_i)$. One-sided concentration plus a union bound over the predeclared candidate registry yields a conditional finite-design lower confidence bound. It is not automatically a future-population or clinical guarantee.
+
+\paragraph{What an external $L$ audit would require.} For median and pinball, suppose conditional cdfs obey $\sup_t|F_z(t)-F_{z'}(t)|\le Kd(z,z')$ and densities are at least $m>0$ between their unique $\tau$-quantiles. Then $|q_\tau(z)-q_\tau(z')|\le (K/m)d(z,z')$ by cdf inversion. An independent scientific or held-out-reference audit of $K$ and $m$ could justify $L=K/m$; choosing $L$ after reading the evaluation outcomes cannot. No such bounds exist yet for Mayo. The max-mass centre for a window loss may jump discontinuously at a mode switch, so the quantile argument does \emph{not} transfer to W30. Until an external window-action cap is available, its Mayo bound is only a numerical sensitivity diagnostic.
+
+\paragraph{Implemented pinball score.} The implemented radial group relaxation is asymmetric:
+\[
+\tilde\ell_\tau(y,a;\rho)=\tau[y-a-\rho]_+ +(1-\tau)[a-y-\rho]_+.
+\]
+If $|a^\dagger-a^*(z_i)|\le\rho_i$, each of the two positive parts is bounded by the corresponding positive part of the true residual. Thus the relaxed pinball score is at most true pinball loss pointwise. The previous main-text formula $\min(\tau,1-\tau)[|y-a|-\rho]_+$ described a valid but weaker statistic and did not match code; the revised manuscript corrects it.
+
+\paragraph{Fixed-group range.} For outcomes in a population-valid support interval of span $R$ and group size $k$, the exact worst-case \emph{unrelaxed} empirical pinball optimum is
+\[
+C_{k,\tau}=R\max_{m=0,\ldots,k}\min\left\{\frac{\tau(k-m)}{k},\frac{(1-\tau)m}{k}\right\}.
+\]
+The relaxed score is no larger. The empirical optimum is a convex function of the outcome vector, so its maximum over the support cube occurs at an endpoint vector; $m$ counts lower endpoints. Coincident group features and $L=0$ attain the constant. For $\tau=0.1$, $C_{2,\tau}/R=0.05$, $C_{4,\tau}/R=0.075$, and $C_{10,\tau}/R=0.09$. The simpler $\tau(1-\tau)R$ is a valid universal cap and sharp as group size varies, but it is not necessarily attained by a \emph{fixed} finite group. The earlier judge's sharpness approval applied to the two-atom population law, not to every empirical group size.
+
+\paragraph{Shared-error correction.} Subadditivity of an error dispersion such as MAD does not, by itself, imply a lower bound on Bayes risk. Identical zero predictors have the same zero disagreement when $Y=0$ almost surely (Bayes MAE $0$) and when $Y$ is equally likely to be $-M$ or $M$ (Bayes MAE $M$). The revised paper replaces the unsupported shared-bias-to-Bayes-risk proposition with this non-identifiability counterexample.
+
+\section{Known-risk MAE benchmark: every design, not just the headline}
+The frozen seed is 20260928; ten analytic-noise designs, 20 independent draws each, 1,600 entities per draw. Each entry in Table~S1 is a median over that design's 20 draws. The gold column is the median \emph{analytic conditional Bayes MAE at the sampled covariates}; the method columns are median one-sided nominal-95\% bounds. Group and pair use their own Bonferroni-controlled clip/method registries. The final column counts strict group wins out of 20. Bold identifies the larger bound within each row; the gold is a target, not a competitor. All 200 grouped and paired bounds were below analytic truth in their draws; the draw-level 95\% Wilson lower limit for 200/200 is 0.9812. This empirical count does not prove uniform coverage.
+
+\begin{table}[h]
+\centering\small
+\caption{Analytic gold and two train-free MAE bounds (medians; larger valid bound is tighter).}
+\begin{tabular}{lrrrr}
+\toprule
+Design & Gold $R^*$ & Paired & Grouped & Group wins \\
+\midrule
+Beta--Gaussian & \textbf{0.2394} & 0.1413 & \textbf{0.1605} & 20/20 \\
+Separated Laplace & \textbf{0.2000} & 0.1210 & \textbf{0.1360} & 20/20 \\
+Oscillatory centre & \textbf{0.2000} & 0.1002 & \textbf{0.1162} & 20/20 \\
+V-shaped centre & \textbf{0.1995} & 0.1205 & \textbf{0.1365} & 20/20 \\
+Radial 2D & \textbf{0.1500} & 0.0807 & \textbf{0.0855} & 20/20 \\
+3D maximum & \textbf{0.2500} & 0.0969 & \textbf{0.1053} & 20/20 \\
+Sparse 20D & \textbf{0.2394} & \textbf{0.0000} & \textbf{0.0000} & 0/20 \\
+Heteroskedastic Gaussian & \textbf{0.3192} & 0.1818 & \textbf{0.2084} & 20/20 \\
+Heteroskedastic Laplace & \textbf{0.2996} & 0.1743 & \textbf{0.1903} & 20/20 \\
+Shifted exponential & \textbf{0.1386} & 0.0767 & \textbf{0.0917} & 20/20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Pooled median usable tightness $B/R^*$ is 0.5634 paired and 0.6405 grouped; 180 group wins, zero pair wins and 20 ties at zero. Medians in Table~S1 are not themselves valid confidence bounds and should not be divided to reconstruct the pooled ratio. A second seed, 20260925 with ten draws per family, gave 90 group wins, zero pair wins and ten sparse ties. The companion point-estimation negative control is important: leave-one-out external kNN had median absolute floor error 0.0050 versus 0.0079 for the train-free local jackknife and 0.0502 for the raw grouped centre. Pythia wins this \emph{bound} comparison, not the point-estimator comparison.
+
+\section{Multi-loss results and the changed route}
+The disjoint five-loss registry comprises q10/q90 pinball and W15/W30/W60 miss risk on ten duration-like designs (five numeric, five deterministic pre-outcome note templates). For the earlier frozen loss-only route, seed 20261006 supplied 20 draws/design at 512 entities/draw. The route used paired Bentkus for quantiles and grouped Bentkus for windows, allocating $\alpha=0.01$ to each of the five losses per draw. All five losses were below truth jointly in 200/200 draws. On quantiles the route \emph{ties} paired Bentkus by construction, whereas it improves W15 and W30 in 177/200 and 127/200 draws respectively. W60 has zero Bayes miss floor throughout this registry and contributes uninformative ties.
+
+\begin{table}[h]
+\centering\small
+\caption{Later geometry route on a fresh synthetic seed; comparison is numerical, not a jointly adjusted comparator certificate.}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Seed; registered cells & 20261015; 10 designs $\times$ 10 draws $\times$ 5 losses = 500 \\
+Cells below analytic truth & 500/500 \\
+Route vs paired-classic maximum & 339 wins / 140 ties / 21 losses \\
+Median tightness, 400 positive-floor cells & 0.2195 route / 0.1791 paired maximum \\
+Design-level medians & 9 strict route wins / 1 sparse-4D tie \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~S2 is an archived aggregate in \texttt{docs/MULTILOSS\_VALIDATION\_20260913.md}, not an independently rerun per-cell release artifact. Its paired comparator is a numerical maximum of three individually valid methods at the same alpha, \emph{not} itself a multiplicity-adjusted 95\% certificate. The route's window threshold was changed after inspecting Mayo retrospective results; the fresh synthetic seed provides a new synthetic check but cannot turn the reused Mayo cohort into confirmation. Exact-LP pinball outputs remain exploratory pending independent numerical verification.
+
+\section{Retrospective Mayo is an application, not the win claim}
+All entries use the same 10,528 earliest-per-patient cases in four chronological panels, with illustrative $L=300$ and a claimed population support span of 900 minutes that has not been externally established. The main manuscript's W30 table is the \emph{legacy radial/adaptive} calculation, not the later geometry route. The frozen OOF comparator is MAE-selected retrospectively and is not established as a deployed scheduling model.
+
+\begin{table}[h]
+\centering\small
+\caption{Exploratory Mayo sensitivity (not a clinical certificate).}
+\begin{tabular}{llrr}
+\toprule
+Route & Representation & q90 pinball lower & W30 miss lower \\
+\midrule
+Legacy radial/adaptive & Tabular & 4.5177 & 0.2019 \\
+Legacy radial/adaptive & Tabular + note values & -- & 0.1882 \\
+Later geometry route & Tabular & 5.2664 & 0.2678 \\
+Later geometry route & Tabular + note values & 4.9176 & 0.2626 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+If all assumptions held, the legacy tabular W30 value would cap finite-design within-30-minute accuracy at 79.81\%, compared with 62.60\% for the frozen OOF comparator; the later geometry value would imply 73.22\%. Neither is confirmed. The richer representation's smaller numeric bound does not imply that notes reduce Bayes information. A train-free 256-patient note corruption diagnostic also \emph{failed} monotonicity: full note dropout lowered the W30 bound from 0.2574 to 0.2261 but raised q90 from 1.6756 to 1.7813, because the hashed-text metric and grouping changed. A separate actual-duration injection produced zero oracle error and a public certification refusal. No patient text or row-level outcome is reproduced here.
+
+\section{Reproduction and release ledger}
+The source, synthetic DGPs, comparator and tests are in the canonical project. From its root:
+\begin{verbatim}
+.venv/bin/python -m pytest -q -p no:cacheprovider
+.venv/bin/python -c 'from horos.benchmark.ood_mae_comparison import \
+run_ood_mae_comparison; print(run_ood_mae_comparison(\
+seed=20260928,repetitions=20,n_entities=1600)["by_design"])'
+.venv/bin/python scripts/run_mayo_text_augmentation.py --n-entities 256
+\end{verbatim}
+The MAE benchmark reports \texttt{median\_analytic\_bayes\_mae}, each method's \texttt{median\_bound}, validity counts and paired wins. Mayo files are private and excluded from Git. The table values are aggregate-only. For the five-loss comparison and later geometry route, see \texttt{docs/MULTILOSS\_VALIDATION\_20260913.md}; a per-cell frozen artifact and independent external reproduction remain needed before a paper-level ``best method'' claim.
+
+\begin{center}
+\begin{tabular}{p{0.24\linewidth}p{0.62\linewidth}}
+\toprule
+Claim tier & Current support \\
+\midrule
+Conditional theorem & Finite-design witness and registry concentration, if smoothness, independence, support/clipping and outcome-blindness hold. \\
+Known-risk simulation & MAE group wins 180/200 against the named paired baseline; newer geometry route wins 339/500 cells against a named numerical paired maximum. \\
+Exploratory Mayo & All multi-loss clinical figures; $L$, window-action smoothness, support and temporal reuse unaudited. \\
+Unsupported & Universal tightest bound, best point estimator, prospective clinical ceiling, exact-LP numerical proof, autonomous Metis. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

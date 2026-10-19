@@ -1,0 +1,15 @@
+name: mayo-duration-retrospective
+loss: mae
+
+dataset:
+  path: data/raw/mayo/mayo_hrs_tabular_features_and_durations.parquet
+  row_id: case_durable_id
+  target: case_actual_duration_time
+  group: patient_durable_id
+  time: scheduled_in_room
+
+split:
+  kind: grouped_temporal_holdout
+  test_fraction: 0.20
+  inner_folds: 5
+  manifest: data/derived/mayo/canonical_folds.parquet

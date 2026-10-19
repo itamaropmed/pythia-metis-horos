@@ -1,0 +1,11 @@
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 4370.87it/s]
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (666 > 512). Running this sequence through the model will result in indexing errors
+0
+300
+600
+900
+1200
+1500
+1800
+2100
+done 2357

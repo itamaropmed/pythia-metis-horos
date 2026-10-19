@@ -1,0 +1,31 @@
+{
+  "version": "mayo-working-set-v1",
+  "hash_algorithm": "sha256",
+  "files": {
+    "data/raw/mayo/mayo_hrs_llm_features_top11.parquet": "00330a4ebaa1e9e37c2848fbe84991e82d518226e5ee511653cf1160e15093c3",
+    "data/raw/mayo/mayo_hrs_tabular_features_and_durations.parquet": "475a4ac03240e843bdb70d4418d6665481868a4f6c0b4dac489c7d86e9b69ae0",
+    "data/raw/mayo/mayo_hrs_tabular_features_with_lags_and_durations.parquet": "c9216a25f852f7a129164588999ddd8f405153d8117ba4d0ca330ebbfd5c3815",
+    "data/raw/mayo/note_bundles.parquet": "3aa191e4969d4eb6d69ccda224287951cec4c2f5cf1e34cb9acb21c3df0e82cf",
+    "data/derived/mayo/df.parquet": "47430cfe3a78348084a08cb82e2b16892bf48785edf20c58d4e8a230d80eaed7",
+    "data/derived/mayo/XA.parquet": "d433d4a631b358894ec525714f601642e6eedfa8bc26dcfe64aca6d4e5cc0369",
+    "data/derived/mayo/XB.parquet": "f6ac2be17c555a5d34e93e3fb02c5ba66550e6e6c6ed98595ebc29396519db96",
+    "data/derived/mayo/XC.parquet": "d03e6d500ad12bf5bbc3faa20b09c36ad4c2077873757045bb2228c161c4751a",
+    "data/derived/mayo/PA.npy": "6221d9a29d449cae74823a97adc563fbae58834f9d8223a4af155828a482694c",
+    "data/derived/mayo/PB.npy": "9168f9a673a2a66a76377ee8928e96d8466a5796e5717f99198fc8bcee65c93b",
+    "data/derived/mayo/PC.npy": "3b4d82fc20fa6c32817c446cdc6258d6add36dd8977f11b17138e3c341daa299",
+    "data/derived/mayo/env2.npy": "6154a2b14f7cf00ce20725ee340eafd2749e6ed61dfff63cb1245f802cf8b776",
+    "data/derived/mayo/med2.npy": "e8ad8d0fd576344fbda922ce871c0b4349f92d081e1789e25739637d03af4e4f",
+    "data/derived/mayo/env2_axes.npy": "82c1aa31ed6c4aba65211f7b461d87ab071cfbb844499772823c7eb684d8d6e2",
+    "data/derived/mayo/lib2.json": "644868947c34a3405a42e27967bd327caa01dba8d08bc9c18a0545387b8b5fa3",
+    "data/derived/mayo/note_bundles_recut.parquet": "26bf4c6124d948d713a245cf8152ec7d285e249958626d40cb229db88d38d69f"
+  },
+  "shapes": {
+    "df": [12993, 86],
+    "XA": [12993, 296],
+    "XB": [12993, 307],
+    "XC": [12993, 409],
+    "PA": [6, 12993],
+    "PB": [6, 12993],
+    "PC": [6, 12993]
+  }
+}

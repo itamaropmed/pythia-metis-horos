@@ -1,0 +1,61 @@
+{
+  "status": "exploratory_known_truth_stress_test",
+  "registry": "horos/benchmark/ood_mae_designs_second.py",
+  "design_count": 10,
+  "design_names": ["rare_wide_outliers", "two_scale_laplace", "central_atom", "symmetric_bimodal", "skew_scale_shift", "sparse12_uniform", "correlated4_laplace", "corner_beta", "hetero_atom", "nonlinear_cusp"],
+  "large_design": {
+    "seed": 20260930,
+    "entities_per_draw": 512,
+    "draws_per_design": 20,
+    "combined_95_valid": 200,
+    "draws": 200,
+    "wilson_lower_95": 0.9811546736227333,
+    "median_bound_over_true_risk": {
+      "paired_95": 0.4181077546414051,
+      "grouped_95": 0.49543549152565963,
+      "selection_safe_combined_95": 0.48620303343615323
+    },
+    "median_absolute_estimation_error": {
+      "grouped_center": 0.05832913248285141,
+      "train_free_group_jackknife": 0.023444592696622468,
+      "external_knn_oof": 0.011019024813622144
+    },
+    "selection_safe_combined_vs_paired_at_equal_95_confidence": {
+      "combined_strict_wins": 175,
+      "paired_strict_wins": 5,
+      "ties": 20,
+      "median_combined_minus_paired_bound": 0.011306120085323789,
+      "within_suite_one_sided_sign_p": 9.997526590741827e-46
+    },
+    "sparse12_combined_bound_positive_draws": 0
+  },
+  "small_design": {
+    "seed": 20261002,
+    "entities_per_draw": 192,
+    "draws_per_design": 20,
+    "combined_95_valid": 200,
+    "draws": 200,
+    "wilson_lower_95": 0.9811546736227333,
+    "median_bound_over_true_risk": {
+      "paired_95": 0.30626652202032767,
+      "grouped_95": 0.35105743375375154,
+      "selection_safe_combined_95": 0.3394325046269982
+    },
+    "median_absolute_estimation_error": {
+      "train_free_lp_jackknife": 0.015658941513186295,
+      "external_knn_oof": 0.022170439362365263,
+      "train_free_group_jackknife": 0.046052788569574246
+    },
+    "lp_jackknife_draw_wins_over_knn": 99,
+    "knn_draw_wins_over_lp_jackknife": 101,
+    "sparse12_combined_bound_positive_draws": 0
+  },
+  "matched_projection_diagnostic": {
+    "seed": 20260930,
+    "sparse12_draws": 20,
+    "full_metric_positive_draws": 0,
+    "oracle_declared_one_coordinate_positive_draws": 20,
+    "oracle_declared_one_coordinate_median_bound_over_true_risk": 0.5636810815500717,
+    "qualification": "The one-coordinate projection uses known generator structure, not a data-derived deployable metric; it is conditional evidence only."
+  }
+}

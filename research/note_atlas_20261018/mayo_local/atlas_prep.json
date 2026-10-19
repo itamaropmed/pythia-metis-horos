@@ -1,0 +1,10 @@
+{
+ "cases": 12993,
+ "patients": 10532,
+ "notes_joined": 0.9661356114831063,
+ "nonempty_after_rule": 0.8252905410605711,
+ "timing_violations_blanked": 0,
+ "table_oof_mae_A": 33.432689497416355,
+ "table_oof_mae_B": 33.023968632370035,
+ "sec": 32.10541915893555
+}

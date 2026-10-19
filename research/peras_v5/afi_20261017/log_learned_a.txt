@@ -1,0 +1,5 @@
+{"dataset": "D01_echo_table_only", "rep": 0, "true_dI": 0.0, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}
+{"dataset": "D01_echo_table_only", "rep": 1, "true_dI": 0.0, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}
+{"dataset": "D01_echo_table_only", "rep": 2, "true_dI": 0.0, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}
+{"dataset": "D01_echo_table_only", "rep": 3, "true_dI": 0.0, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}
+{"dataset": "D01_echo_table_only", "rep": 4, "true_dI": 0.0, "svd_dI_L": 0.0, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0}

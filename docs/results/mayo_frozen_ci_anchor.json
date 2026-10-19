@@ -1,0 +1,18 @@
+{
+  "version": "mayo-arm-b-guarded-v1",
+  "privacy": "aggregate values and SHA256 hashes only; no patient rows or notes",
+  "claim_tier": "calibrated",
+  "expected": {
+    "best_oof_mae": 32.87001170332562,
+    "global_attainable_floor_estimate": 31.118642120070444,
+    "stratified_calibrated_bound": 28.84959960434628,
+    "stratified_qcap_conditional_bound": 24.186725940850426
+  },
+  "source_sha256": {
+    "pythia/core/guarded.py": "b6663d1453206994a831a7bf535a05146a47867c0959671f43780dc9c31a3c2b",
+    "data/derived/mayo/df.parquet": "47430cfe3a78348084a08cb82e2b16892bf48785edf20c58d4e8a230d80eaed7",
+    "data/derived/mayo/PB.npy": "9168f9a673a2a66a76377ee8928e96d8466a5796e5717f99198fc8bcee65c93b",
+    "data/derived/mayo/lib2.json": "644868947c34a3405a42e27967bd327caa01dba8d08bc9c18a0545387b8b5fa3",
+    "data/derived/mayo/note_bundles_recut.parquet": "26bf4c6124d948d713a245cf8152ec7d285e249958626d40cb229db88d38d69f"
+  }
+}

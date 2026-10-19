@@ -1,0 +1,111 @@
+| Family | Level | true NLI | n runs | NLI-proj-perm | NLI-proj-cf | NLI-proj-cert>0 | NLI-combo | NLI-cert>0 | Boot-dBrier | LocalPerm-dBrier | CODEC-perm | WGCM-normal |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| MTSamples_T1_note_type | 0 | 0.0000 | 25 | 0.08 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.04 | 0.04 | 0.08 |
+| MTSamples_T1_note_type | 1 | 0.0156 | 25 | 0.60 | 0.52 | 0.04 | 0.00 | 0.00 | 0.00 | 0.56 | 0.04 | 0.60 |
+| MTSamples_T1_note_type | 2 | 0.0358 | 25 | 0.96 | 0.96 | 0.60 | 0.08 | 0.00 | 0.24 | 1.00 | 0.12 | 0.96 |
+| MTSamples_T2_type_age_sex | 0 | 0.0000 | 25 | 0.00 | 0.08 | 0.00 | 0.00 | 0.00 | 0.00 | 0.08 | 0.08 | 0.00 |
+| MTSamples_T2_type_age_sex | 1 | 0.0140 | 25 | 0.44 | 0.36 | 0.00 | 0.04 | 0.00 | 0.00 | 0.44 | 0.16 | 0.56 |
+| MTSamples_T2_type_age_sex | 2 | 0.0331 | 25 | 1.00 | 1.00 | 0.24 | 0.12 | 0.00 | 0.12 | 0.92 | 0.12 | 1.00 |
+
+## Size (level 0, all families pooled)
+- NLI-proj-perm: 2/50 = 0.040  [0.011, 0.135]
+- NLI-proj-cf: 2/50 = 0.040  [0.011, 0.135]
+- NLI-proj-cert>0: 0/50 = 0.000  [0.000, 0.071]
+- NLI-combo: 0/50 = 0.000  [0.000, 0.071]
+- NLI-cert>0: 0/50 = 0.000  [0.000, 0.071]
+- Boot-dBrier: 0/50 = 0.000  [0.000, 0.071]
+- LocalPerm-dBrier: 3/50 = 0.060  [0.021, 0.162]
+- CODEC-perm: 3/50 = 0.060  [0.021, 0.162]
+- WGCM-normal: 2/50 = 0.040  [0.011, 0.135]
+
+## Power (levels 1-2 pooled) and paired exact McNemar of NLI-combo vs each baseline
+
+### level 1 (n = 50)
+- power NLI-proj-perm: 0.520 [0.385, 0.652]
+- power NLI-proj-cf: 0.440 [0.312, 0.577]
+- power NLI-proj-cert>0: 0.020 [0.004, 0.105]
+- power NLI-combo: 0.020 [0.004, 0.105]
+- power NLI-cert>0: 0.000 [0.000, 0.071]
+- power Boot-dBrier: 0.000 [0.000, 0.071]
+- power LocalPerm-dBrier: 0.500 [0.366, 0.634]
+- power CODEC-perm: 0.100 [0.043, 0.214]
+- power WGCM-normal: 0.580 [0.442, 0.706]
+- NLI-proj-perm vs Boot-dBrier: ours-only 26, base-only 0, exact McNemar p = 3e-08
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 5, base-only 4, exact McNemar p = 1
+- NLI-proj-perm vs CODEC-perm: ours-only 22, base-only 1, exact McNemar p = 5.7e-06
+- NLI-proj-perm vs WGCM-normal: ours-only 1, base-only 4, exact McNemar p = 0.38
+- NLI-proj-cf vs Boot-dBrier: ours-only 22, base-only 0, exact McNemar p = 4.8e-07
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 1, base-only 4, exact McNemar p = 0.38
+- NLI-proj-cf vs CODEC-perm: ours-only 18, base-only 1, exact McNemar p = 7.6e-05
+- NLI-proj-cf vs WGCM-normal: ours-only 0, base-only 7, exact McNemar p = 0.016
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 1, base-only 0, exact McNemar p = 1
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 24, exact McNemar p = 1.2e-07
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 1, base-only 5, exact McNemar p = 0.22
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 28, exact McNemar p = 7.5e-09
+- NLI-combo vs Boot-dBrier: ours-only 1, base-only 0, exact McNemar p = 1
+- NLI-combo vs LocalPerm-dBrier: ours-only 0, base-only 24, exact McNemar p = 1.2e-07
+- NLI-combo vs CODEC-perm: ours-only 1, base-only 5, exact McNemar p = 0.22
+- NLI-combo vs WGCM-normal: ours-only 0, base-only 28, exact McNemar p = 7.5e-09
+
+### level 2 (n = 50)
+- power NLI-proj-perm: 0.980 [0.895, 0.996]
+- power NLI-proj-cf: 0.980 [0.895, 0.996]
+- power NLI-proj-cert>0: 0.420 [0.294, 0.558]
+- power NLI-combo: 0.100 [0.043, 0.214]
+- power NLI-cert>0: 0.000 [0.000, 0.071]
+- power Boot-dBrier: 0.180 [0.098, 0.308]
+- power LocalPerm-dBrier: 0.960 [0.865, 0.989]
+- power CODEC-perm: 0.120 [0.056, 0.238]
+- power WGCM-normal: 0.980 [0.895, 0.996]
+- NLI-proj-perm vs Boot-dBrier: ours-only 40, base-only 0, exact McNemar p = 1.8e-12
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 2, base-only 1, exact McNemar p = 1
+- NLI-proj-perm vs CODEC-perm: ours-only 43, base-only 0, exact McNemar p = 2.3e-13
+- NLI-proj-perm vs WGCM-normal: ours-only 0, base-only 0, exact McNemar p = 1
+- NLI-proj-cf vs Boot-dBrier: ours-only 40, base-only 0, exact McNemar p = 1.8e-12
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 2, base-only 1, exact McNemar p = 1
+- NLI-proj-cf vs CODEC-perm: ours-only 43, base-only 0, exact McNemar p = 2.3e-13
+- NLI-proj-cf vs WGCM-normal: ours-only 0, base-only 0, exact McNemar p = 1
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 13, base-only 1, exact McNemar p = 0.0018
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 27, exact McNemar p = 1.5e-08
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 17, base-only 2, exact McNemar p = 0.00073
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 28, exact McNemar p = 7.5e-09
+- NLI-combo vs Boot-dBrier: ours-only 4, base-only 8, exact McNemar p = 0.39
+- NLI-combo vs LocalPerm-dBrier: ours-only 0, base-only 43, exact McNemar p = 2.3e-13
+- NLI-combo vs CODEC-perm: ours-only 4, base-only 5, exact McNemar p = 1
+- NLI-combo vs WGCM-normal: ours-only 0, base-only 44, exact McNemar p = 1.1e-13
+
+### levels 1+2 (n = 100)
+- power NLI-proj-perm: 0.750 [0.657, 0.825]
+- power NLI-proj-cf: 0.710 [0.615, 0.790]
+- power NLI-proj-cert>0: 0.220 [0.150, 0.311]
+- power NLI-combo: 0.060 [0.028, 0.125]
+- power NLI-cert>0: 0.000 [0.000, 0.037]
+- power Boot-dBrier: 0.090 [0.048, 0.162]
+- power LocalPerm-dBrier: 0.730 [0.636, 0.807]
+- power CODEC-perm: 0.110 [0.063, 0.186]
+- power WGCM-normal: 0.780 [0.689, 0.850]
+- NLI-proj-perm vs Boot-dBrier: ours-only 66, base-only 0, exact McNemar p = 2.7e-20
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 7, base-only 5, exact McNemar p = 0.77
+- NLI-proj-perm vs CODEC-perm: ours-only 65, base-only 1, exact McNemar p = 1.8e-18
+- NLI-proj-perm vs WGCM-normal: ours-only 1, base-only 4, exact McNemar p = 0.38
+- NLI-proj-cf vs Boot-dBrier: ours-only 62, base-only 0, exact McNemar p = 4.3e-19
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 3, base-only 5, exact McNemar p = 0.73
+- NLI-proj-cf vs CODEC-perm: ours-only 61, base-only 1, exact McNemar p = 2.7e-17
+- NLI-proj-cf vs WGCM-normal: ours-only 0, base-only 7, exact McNemar p = 0.016
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 14, base-only 1, exact McNemar p = 0.00098
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 51, exact McNemar p = 8.9e-16
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 18, base-only 7, exact McNemar p = 0.043
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 56, exact McNemar p = 2.8e-17
+- NLI-combo vs Boot-dBrier: ours-only 5, base-only 8, exact McNemar p = 0.58
+- NLI-combo vs LocalPerm-dBrier: ours-only 0, base-only 67, exact McNemar p = 1.4e-20
+- NLI-combo vs CODEC-perm: ours-only 5, base-only 10, exact McNemar p = 0.3
+- NLI-combo vs WGCM-normal: ours-only 0, base-only 72, exact McNemar p = 4.2e-22
+
+## Per-family McNemar, NLI-proj-perm vs best VALID baseline (levels 1+2)
+- MTSamples_T1_note_type: NLI-proj-perm 0.78 vs LocalPerm-dBrier 0.78; ours-only 1, base-only 1, p = 1
+- MTSamples_T2_type_age_sex: NLI-proj-perm 0.72 vs LocalPerm-dBrier 0.68; ours-only 6, base-only 4, p = 0.75
+
+## Certificate validity and estimation
+- pair certificate above truth: 0/150; projection certificate above truth: 0/150; bootstrap dBrier lower CI above truth: 0/150
+- level 1: mean true 0.0148, mean certified 0.0000, mean projection cert 0.0000 (ratio to truth 0.00), mean model dBrier -0.0054, mean boot lower -0.0117, share model dBrier < 0: 0.94
+- level 2: mean true 0.0345, mean certified 0.0000, mean projection cert 0.0000 (ratio to truth 0.00), mean model dBrier 0.0027, mean boot lower -0.0041, share model dBrier < 0: 0.30

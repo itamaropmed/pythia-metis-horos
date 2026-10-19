@@ -1,0 +1,47 @@
+{
+  "by_patient_count": {
+    "10000": {
+      "catoni_oracle": {"coverage": 1.0, "median_usable_tightness": 0.9313955309589869, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "empirical_bernstein_gain": {"median_gain": 0.02385084722485878, "strict_wins": 600},
+      "legacy": {"coverage": 0.6666666666666666, "median_usable_tightness": 0.8577829662608016, "total": 600, "valid": 400, "wilson_lower_95": 0.6279920835233803},
+      "patient_eb_conservative": {"coverage": 1.0, "median_usable_tightness": 0.9466431415715157, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_eb_sharp": {"coverage": 1.0, "median_usable_tightness": 0.949802005943345, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_hoeffding": {"coverage": 1.0, "median_usable_tightness": 0.8046550771714491, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "sharp_geometry_gain": {"median_gain": 0.0007124350052178791, "strict_wins": 400}
+    },
+    "2000": {
+      "catoni_oracle": {"coverage": 1.0, "median_usable_tightness": 0.8485600913173501, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "empirical_bernstein_gain": {"median_gain": 0.04644684491582228, "strict_wins": 600},
+      "legacy": {"coverage": 0.6666666666666666, "median_usable_tightness": 0.8573899323515921, "total": 600, "valid": 400, "wilson_lower_95": 0.6279920835233803},
+      "patient_eb_conservative": {"coverage": 1.0, "median_usable_tightness": 0.8430781198451234, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_eb_sharp": {"coverage": 1.0, "median_usable_tightness": 0.8460633090453111, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_hoeffding": {"coverage": 1.0, "median_usable_tightness": 0.5609331062685394, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "sharp_geometry_gain": {"median_gain": 0.0005282429550275761, "strict_wins": 400}
+    },
+    "500": {
+      "catoni_oracle": {"coverage": 1.0, "median_usable_tightness": 0.7022658147674221, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "empirical_bernstein_gain": {"median_gain": 0.04055250753115089, "strict_wins": 597},
+      "legacy": {"coverage": 0.6566666666666666, "median_usable_tightness": 0.8566266884543166, "total": 600, "valid": 394, "wilson_lower_95": 0.6177849875650621},
+      "patient_eb_conservative": {"coverage": 1.0, "median_usable_tightness": 0.5407157246813935, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_eb_sharp": {"coverage": 1.0, "median_usable_tightness": 0.543552696418961, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "patient_hoeffding": {"coverage": 1.0, "median_usable_tightness": 0.12681155390807214, "total": 600, "valid": 600, "wilson_lower_95": 0.9936382989862994},
+      "sharp_geometry_gain": {"median_gain": 0.00021242880772519984, "strict_wins": 397}
+    }
+  },
+  "claim": "bounded iid-patient simulation with variable case counts and known caps",
+  "known_bayes_risk": 0.1633333333333333,
+  "n_runs": 1800,
+  "peras_trained_models": false,
+  "repetitions_per_cell": 200,
+  "seed": 20260914,
+  "status": "exploratory_validation",
+  "summary": {
+    "catoni_oracle": {"coverage": 1.0, "median_usable_tightness": 0.8469666275247942, "total": 1800, "valid": 1800, "wilson_lower_95": 0.997870401081032},
+    "empirical_bernstein_gain": {"median_gain": 0.04055250753115089, "strict_wins": 1797},
+    "legacy": {"coverage": 0.6633333333333333, "median_usable_tightness": 0.8574227320766432, "total": 1800, "valid": 1194, "wilson_lower_95": 0.6411747732281057},
+    "patient_eb_conservative": {"coverage": 1.0, "median_usable_tightness": 0.8430781198451234, "total": 1800, "valid": 1800, "wilson_lower_95": 0.997870401081032},
+    "patient_eb_sharp": {"coverage": 1.0, "median_usable_tightness": 0.8460633090453111, "total": 1800, "valid": 1800, "wilson_lower_95": 0.997870401081032},
+    "patient_hoeffding": {"coverage": 1.0, "median_usable_tightness": 0.5609331062685394, "total": 1800, "valid": 1800, "wilson_lower_95": 0.997870401081032},
+    "sharp_geometry_gain": {"median_gain": 0.0004713984931280918, "strict_wins": 1197}
+  }
+}

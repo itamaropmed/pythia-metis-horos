@@ -1,0 +1,40 @@
+{
+  "heldout_rows": 2839,
+  "limitations": [
+    "the temporal holdout has been viewed during retrospective development",
+    "iid sampling and temporal stability are not attested",
+    "[0,900] is a working cap rather than an independently audited population support",
+    "the endpoint concerns value beyond procedure/family, not notes alone",
+    "zero lower value does not prove that the refined representation has zero value"
+  ],
+  "maximum_observed_absolute_loss": 350.2220634490347,
+  "metadata_sha256": "1bebddb50be8657eb7a8722a5e58367cffaa29a440ea4c54e7c95f1ec57b66b3",
+  "patient_overlap_with_training": 0,
+  "predictions_sha256": "330fba1969af2923c601a219d91ea46b3ac183365e1c0f31f143d6bea38e2df7",
+  "results": {
+    "procedure": {
+      "claim_tier": "exploratory",
+      "coarse_risk_lower": 17.685292326511497,
+      "coarse_saa_score": 40.625220147939416,
+      "n_cells": 112,
+      "policy_mae": 31.556418073067334,
+      "policy_risk_upper": 33.85330596813617,
+      "raw_value_endpoint": -16.168013641624672,
+      "value_lower_bound": 0.0
+    },
+    "procedure_family": {
+      "claim_tier": "exploratory",
+      "coarse_risk_lower": 30.226327902418507,
+      "coarse_saa_score": 53.166255723846426,
+      "n_cells": 10,
+      "policy_mae": 31.556418073067334,
+      "policy_risk_upper": 33.85330596813617,
+      "raw_value_endpoint": -3.626978065717662,
+      "value_lower_bound": 0.0
+    }
+  },
+  "selected_variant": "topref_pair__pairblend_proc__risk_abs_et3_x_family_cap_gamma__risk_hgb4_m0.00__signed_resid_hgb8_x_family_cap_gamma__delta_hgb4_proc6_none_n80_m0.02",
+  "status": "complete",
+  "study_tier": "exploratory",
+  "verified_heldout_mae": 31.556418073067334
+}

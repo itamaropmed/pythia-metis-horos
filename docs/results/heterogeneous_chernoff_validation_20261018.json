@@ -1,0 +1,16 @@
+{
+  "status": "fresh_validation_passed",
+  "date": "2026-10-18",
+  "method": "heterogeneous_support_chernoff",
+  "alpha": 0.05,
+  "designs": 10,
+  "draws_per_design": 1000,
+  "total_draws": 10000,
+  "coverage": 0.9971,
+  "coverage_wilson_lower_95": 0.9958382254534344,
+  "violations": 29,
+  "strict_wins_vs_heterogeneous_hoeffding": 9979,
+  "command": "python3 research/peras_v5/unified_20261018/validate_heterogeneous_chernoff.py 1000",
+  "seed_registry": [990001, 1090004, 1190007, 1290010, 1390013, 1490016, 1590019, 1690022, 1790025, 1890028],
+  "claim_note": "This validates the bounded-mean concentration component, not the complete Pythia Bayes-floor pipeline."
+}

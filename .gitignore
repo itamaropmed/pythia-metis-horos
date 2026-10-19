@@ -1,0 +1,34 @@
+# --- data: never commit PHI or derived data
+data/
+*.parquet
+*.feather
+*.pkl
+*.npz
+mayo_work/
+**/row_cards*.jsonl
+pythia_out/
+# --- secrets
+.env
+*.token
+*credentials*
+# --- python / tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+*.egg-info/
+build/
+dist/
+.idea/
+.venv/
+.DS_Store
+*.py[cod]
+_m0.tgz
+_to_delete/
+data/raw/
+data/derived/
+outputs/
+papers/pdf/*.aux
+papers/pdf/*.log
+/tmp/pdfs/
+*.npy

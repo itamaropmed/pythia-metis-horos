@@ -1,0 +1,264 @@
+% System research and development blueprint. No patient-level information.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,booktabs,array,longtable}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\setlength{\parskip}{0.48em}
+\setlength{\parindent}{0pt}
+\emergencystretch=2em
+\definecolor{ink}{HTML}{193749}
+\definecolor{teal}{HTML}{087E81}
+\newcommand{\Rstar}{R^{\star}}
+\newcommand{\tier}[1]{\textsf{#1}}
+\newcommand{\status}[1]{\textit{#1}}
+\title{\vspace{-1em}\textcolor{ink}{\bfseries Where prediction ends, and what comes next}\\[0.45em]
+\large A research, product, and validation blueprint for Pythia, Metis, and Horos}
+\author{Itamar Zernitsky and collaborators\\\small Research and implementation working document}
+\date{14 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Every prediction error contains two different kinds of failure: information absent from the decision-time record, and information present but not extracted by the current model. Pythia asks where the attainable floor lies for a declared information set and loss. Horos is the dataset-agnostic study and reporting layer that prepares admissible inputs, cross-fits audit predictors where needed, and carries provenance. Metis is a proposed gated agent that searches for better representations, tests, and certificates without being allowed to rewrite the meaning of a certificate. This document gives the entire intended system: estimands, current mathematics, completed implementation, empirical evidence and failures, clinical application, automation contracts, governance, milestones, and prospective validation. It is a blueprint, not a claim that all components exist or that a retrospective Mayo number is clinically certified. The accompanying Pythia research paper and supplement present the narrower mathematical contribution in detail.
+\end{abstract}
+\tableofcontents
+\clearpage
+
+\section{The decision behind the prediction}
+Suppose a duration model misses an operation by forty minutes. That observation alone does not tell us whether to improve the model, collect an earlier note, change scheduling policy, or accept irreducible uncertainty. A useful system must separate \emph{achieved risk} from \emph{attainable risk}. If $Z$ is everything legitimately available at a specific decision cutoff, $Y$ is the outcome, $a$ is a decision, and $\ell$ is the operational loss, define
+\begin{equation}
+\Rstar_{\ell}(Z)=\mathbb E\left[\inf_a\mathbb E\{\ell(Y,a)\mid Z\}\right],\qquad
+H_{\ell}(f,Z)=R_{\ell}(f,Z)-\Rstar_{\ell}(Z).
+\end{equation}
+The first is the Bayes floor for a declared information set and decision; the second is the headroom of a particular predictor $f$. Neither is one fixed ``noise level'' for a dataset. The floor can differ for absolute error, a high quantile, and a within-30-minute target. It can differ between booking time and day-of-surgery time. It can differ between a deployable note bundle and a post-outcome transcript.
+
+The project has three layers. \textbf{Pythia} produces auditable bounds or calibrated diagnostics for the floor without training a prediction model. \textbf{Horos} prepares studies, representations, independent validation predictions, and human-facing analysis. \textbf{Metis}, when built, will search the space of safe questions and proposed improvements, but its actions are subordinate to frozen protocols and a claim gate. The intended product is not a single number. It is a structured answer: what information was permitted, which decision loss was asked about, the attainable-floor evidence, what current models achieve, how much operational headroom may remain, what assumptions were needed, what failed, and what must be done next.
+
+\subsection{What a user should receive}
+A future Horos report should contain: (i) a task card with unit, population, cutoff, loss, action, and endpoint; (ii) a representation ladder with source and timing provenance; (iii) achieved held-out or honest out-of-fold performance; (iv) a Pythia bound curve or an explicit refusal; (v) a separately labelled point estimate, if one is produced outside the certifier; (vi) uncertainty split into sampling and structural/guard components; (vii) slice results only when multiplicity and minimum-size policies are met; (viii) falsification tests and negative controls; and (ix) a decision translation, such as minutes per case and operating-room hours. Monetary conversions are configurable assumptions, not facts emitted by the mathematical core.
+
+\section{A map of what exists and what does not}
+The canonical repository is \texttt{pythia}; the older \texttt{Clinical\_notes} tree is a migration source rather than a second maintained theory. A reader should not infer production readiness from the presence of an import path. The snapshot below distinguishes implemented software from retrospective evidence and proposed work.
+
+\begin{longtable}{p{0.19\linewidth}p{0.38\linewidth}p{0.34\linewidth}}
+\toprule
+Layer & Present in repository & Still needed / status boundary\\
+\midrule
+\endhead
+Pythia contracts & Immutable task, representation, fold, guard, and certificate objects; public certification entry point; CLI; structured refusals and claim tiers. & Broader formal verification of all contract branches; externally audited clinical guard assumptions.\\
+Pythia mathematics & Log-loss algebraic route; guarded MAE rungs; dependence diagnostics; fixed-design pair/group near-replicate witnesses for MAE, pinball, and window miss; concentration and selection control. & Independent proof audit for every advertised theorem, robust treatment of unbounded outcomes, useful high-dimensional metrics, and published-floor-method head-to-head.\\
+Horos study tools & Generic study YAML, grouped temporal preparation, entity-safe cross-fitting, Mayo adapter, representation pairing/grouping and perturbation diagnostics. & Full adapter registry, end-to-end one-command workflow, RM-22 and full-corpus arms, complete UI and report renderer.\\
+Metis & Package placeholders and a proposed architecture. & Action loop, gate, memory, budgeter, approvals, audit trail, evaluation and shutdown behavior are \emph{not implemented}.\\
+Mayo & Historical Arm-B guard values, audited fold manifests, exploratory replicate and multi-loss calculations, retrospective note perturbation studies. & Reproduced final operational incumbent, independently supported smoothness and range contracts, clean prospective confirmation on 3,000 eligible future cases.\\
+\bottomrule
+\end{longtable}
+
+\section{The formal contract: information, actions, and risk}
+An information set is not a column list alone. It is a tuple $\mathcal I=(\mathcal P,t_c,\mathcal S,g)$: a population $\mathcal P$, decision cutoff $t_c$, admissible source set $\mathcal S$, and a deterministic representation rule $g$ that maps admissible records to $Z$. A claim about $Z$ must record the tuple. If $Z_1$ extends $Z_0$ without removing information, a loss-specific decision value is
+\begin{equation}
+I_{\ell}(Z_1;Y\mid Z_0)=\Rstar_{\ell}(Z_0)-\Rstar_{\ell}(Z_0,Z_1)\geq 0.
+\end{equation}
+This nonnegativity is an established decision-theoretic fact: the richer decision rule may ignore the extra input. It is not a newly discovered entropy law. It does \emph{not} imply that two empirical lower bounds must be numerically monotone. A feature change can alter the metric, matching, sample attrition, or confidence penalty. Reporting a bound that rises after information is added is not proof that information harmed the ideal decision.
+
+For the present near-replicate route, Pythia targets a narrower finite-design estimand. Conditional on audited covariates $z_{1:n}$,
+\begin{equation}
+\Rstar_{\ell,n}=\frac1n\sum_{i=1}^{n}\inf_a\mathbb E\{\ell(Y_i,a)\mid Z_i=z_i\}.
+\end{equation}
+The difference between $\Rstar_{\ell,n}$ and population $\Rstar_{\ell}(Z)$ is explicit. Population or future-hospital transfer requires a separate sampling argument. A certificate for the former must not be silently sold as a guarantee for the latter.
+
+There are several distinct objects that the system must never conflate. A \emph{lower bound} $B$ is a one-sided statement about the floor. A \emph{point estimate} $\widehat R^{\star}$ tries to approximate that floor and may be biased in either direction. An \emph{achieved score} $R(f)$ measures a fixed predictor. A \emph{guard} makes an extra structural or simulation-calibrated assumption. A \emph{falsification check} can invalidate premises but cannot prove them from the same outcomes. This separation is both mathematical and operational.
+
+\subsection{Decision losses, not a single scalar of quality}
+For MAE the Bayes action is a conditional median. For pinball loss $\ell_\tau(y,a)=\tau(y-a)_++(1-\tau)(a-y)_+$ it is a conditional $\tau$-quantile. For within-window miss $\ell_w(y,a)=\mathbf 1\{|y-a|>w\}$ it is a center maximizing conditional mass in a width-$2w$ interval, generally not the median. W30 attainment is $1-\mathbb E\ell_{30}$. A positive lower bound on miss risk is therefore an \emph{upper} bound on attainable W30 percentage. No unsupported cross-loss transfer of a smoothness constant is permitted.
+
+\section{Pythia: the certifier and its theoretical branches}
+The present research paper develops a train-free route from outcome-blind near-replicates. If one can select Bayes actions satisfying $|a^{\star}(z)-a^{\star}(z')|\leq Ld(z,z')$, two sufficiently close cases with very different outcomes must incur decision loss. For disjoint pair $(i,j)$, $D=|Y_i-Y_j|$ and $d_{ij}=d(z_i,z_j)$, simple witnesses for average pair risk are
+\begin{align}
+h_{\rm MAE}&=\tfrac12[D-Ld_{ij}]_+,\\
+h_{\tau}&=\tfrac12\min(\tau,1-\tau)[D-Ld_{ij}]_+,\\
+h_w&=\tfrac12\mathbf 1\{D>2w+Ld_{ij}\}.
+\end{align}
+The inequalities come from triangle and interval geometry. The fact that a witness is algebraically valid under a stated assumption does not establish that the assumption holds for a clinical metric. In particular, $L$ must be justified externally, not tuned on the same outcomes and then called proved. Distinct entities must be conditionally independent or the concentration unit must be an independently audited cluster. Pairing, grouping, metric choice, loss menu and concentration choices must be fixed without reading evaluation outcomes.
+
+Disjoint outcome-blind groups may yield stronger witnesses. The group construction imagines one virtual action and relaxes each individual Bayes action by its distance from that virtual center; a minimization over the common action yields a pointwise lower score. It uses no predictor training. Its finite-group pinball range is tighter than a naive range; the universal cap is $\tau(1-\tau)R$ for bounded outcomes of span $R$, with fixed-group refinements. An entire predeclared candidate family is protected by allocating error budgets $\sum_h\alpha_h\leq\alpha$ and taking the maximum of valid one-sided candidate bounds. Outcome-adaptive family choice without a selection penalty is not covered.
+
+The library also retains historically important but separate branches. Log loss has clean Bregman algebra, but not every empirical fold assumption previously attached to it has been verified. The legacy guarded MAE track returns unguarded exploratory, simulation-calibrated two-dimensional, conditional $Q_{\rm cap}$ and worst-case $\sqrt{2}$ rungs together; it is not interchangeable with the fixed-design witness theorem. Squared-loss disagreement/dependence calculations expose sensitivity to shared model bias and remain theorem candidates or diagnostics until their assumptions and numerical optimization have independent review. MSE reasoning is never automatically transferred to MAE. Unsupported losses and impossible input contracts produce a structured refusal rather than a plausible-looking number.
+
+\subsection{Claim tiers and fail-closed semantics}
+\begin{center}\begin{tabular}{p{0.17\linewidth}p{0.72\linewidth}}\toprule
+Tier & Contract\\\midrule
+\tier{proved} & A mathematical statement with fully supplied and established premises.\\
+\tier{conditional} & A certificate valid if named, independently audited structural and sampling premises hold.\\
+\tier{calibrated} & A simulation-based guard with a stated population, coverage study and domain, not a theorem.\\
+\tier{exploratory} & A useful retrospective or sensitivity diagnostic whose certification premises are unverified.\\
+\tier{refused} & Inputs, provenance, domain, or validation do not support a numerical claim.\\
+\bottomrule\end{tabular}\end{center}
+Only the first two may use the word \emph{certified}, and the second must print its conditions beside the number. Claim tier is a field in a certificate, not prose chosen after seeing a favourable figure.
+
+\subsection{The meaning of ``no training in Pythia''}
+Pythia may compute distances, match groups, evaluate algebraic witnesses, solve guarded sensitivity problems, bootstrap independent units where justified, and serialize certificates. It must not fit an outcome predictor to make its bound look better. Horos may train audit and operational predictors on honest development folds to measure achieved risk, provide OOF artifacts, and compare external point estimators. Those predictions cross into Pythia only through versioned, aligned, hash-pinned contracts. A future Metis search may ask Horos to build a new representation or model, but it cannot alter frozen evaluation outcomes or smuggle a fitted selection step across the certifier boundary.
+
+\section{What the evidence currently says}
+The strongest synthetic result in the current paper concerns a frozen ten-design MAE challenge with known analytic floors. Across 20 draws per design ($n=1{,}600$), both paired and grouped bounds stayed below truth in all 200 draws. Grouped bounds were strictly larger in 180, tied at zero in 20 sparse-design draws, and lost in none in that registry. Median usable tightness rose from 0.563 for paired to 0.641 for grouped. That is a win \emph{over that paired comparator on that benchmark}, not a universal tightest-bound theorem.
+
+The separate five-loss synthetic exercise used ten numeric and templated pre-outcome text designs with analytic quantile and W30 Bayes risks. Its frozen loss-only route was valid in 1,000 of 1,000 loss results on 200 independent draws; the five losses share draws, so 1,000 is not the number of independent experiments. It improved W15 on 177/200 draws and W30 on 127/200 against paired Bentkus; for q10/q90 it tied that comparator. External cross-fitted kNN, histogram, and kernel point estimators were substantially closer to the known floor than the raw witness center. Thus Pythia has a promising \emph{bound} construction, not the best general point estimator. A later geometry registry, evaluated after Mayo exploration, reported 339 wins, 140 ties, and 21 losses in 500 cells against a numerical maximum of paired methods; its comparator and selection history preclude a clean paper-wide dominance claim. Sparse and high-dimensional representations can drive a valid bound to zero.
+
+These comparisons include Hoeffding, independent empirical Bernstein, and Bentkus concentration on comparable witnesses. They do not implement every accepted Bayes-risk estimator on the same estimand and design. Conformal risk control bounds the risk of a specified procedure, whereas Pythia bounds the \emph{best} decision risk of an information set; a numerical race between these incomparable objects would be misleading. Published floor estimators and constraints need a more direct, replicated head-to-head study before broad superiority language is justified.
+
+\subsection{Mayo is an application, not the definition of the method}
+The historical Arm-B cohort used tabular data plus eleven extracted note concepts. Stored OOF MAE was 32.8700 minutes; its global attainable-floor estimate was 31.1186; the stratified simulation-calibrated guard bound was 28.8496; a more conservative conditional $Q_{\rm cap}$ rung was about 24.19. Preserve their exact reproduction as regression locks, but label the 28.85 figure \tier{calibrated}. The previously advertised 31.2623-minute ``incumbent'' is not established by the located artifact as a held-out duration MAE: it matches an OOF residual-corrector selection metric. The audited generic XGBoost candidate has development OOF MAE 33.2749753373. No silent substitution is allowed.
+
+The canonical grouped-temporal manifest has 10,882 development rows, 2,839 temporal holdout rows and 474 earlier rows excluded to eliminate patient overlap with holdout. An exploratory independent-patient retrospective multi-loss audit used 10,528 cases. In an earlier geometry configuration, tabular W30 miss-floor diagnostics were 0.2019, implying an illustrative upper ceiling of 79.81\% attainable W30; the compared OOF predictor achieved 62.60\%. Later geometry choices yielded different values. These are exploratory because the clinical $L$ and outcome support were illustrative and the holdouts already influenced development. Neither the numerical direction of a note-bound change nor a nonmonotone character-shuffle response is evidence that text has negative information value.
+
+Leakage interventions are essential negative controls. Injecting the true duration into notes or tabular inputs after the fact yields an oracle predictive score on injected rows; it does \emph{not} license a deployable preoperative representation. The public route should refuse the contaminated provenance. Random dropout, text shuffle, span masks, token changes, and duplication probe the geometry; they need not order bound values monotonically because they change distances and usable pairs. Real outcome leakage, patient overlap, or a post-cutoff note is a contract violation, not an augmentation win.
+
+\section{Horos: the dataset-agnostic study system}
+Horos is the bridge from a new dataset to Pythia. The eventual ordinary user should be able to declare a study configuration rather than rewrite clinical scripts. The minimal task schema names target and unit, entity ID, event time, decision cutoff, eligible population, excluded populations, loss/action, prediction column or model recipe, fold policy, and representation sources. Dataset-specific column names stop at this configuration and optional adapters.
+
+\begin{center}\small\begin{tabular}{p{0.16\linewidth}p{0.72\linewidth}}\toprule
+Stage & Required output and failure mode\\\midrule
+Declare & Validated task card; missing target/cutoff/entity/loss is an error.\\
+Prepare & Cohort manifest, temporal and patient grouping audit, row and source hashes; overlap refuses.\\
+Represent & Named information sets with timing, source and transform provenance; post-cutoff data refuses.\\
+Cross-fit & Fold-local model artifacts and complete OOF predictions if achieved-risk analysis requires them; no training inside Pythia.\\
+Certify & Versioned guard, witness registry, dependence unit, concentration budget, claim tier and refusal diagnostics.\\
+Compare & Aligned ladder: achieved gain, floor movement, uncertainty, negative controls, no false information monotonicity claim.\\
+Report & Reader-facing certificate card and machine-readable JSON, with aggregate-only clinical results.\\
+\bottomrule\end{tabular}\normalsize\end{center}
+
+The current generic YAML preparation and grouped-temporal cross-fit engine demonstrate that this can be dataset-agnostic, but a full adapter registry and a single reliable \texttt{pythia run STUDY.yaml} orchestration command remain work. A new dataset should need a study YAML, zero or more representation adapters, zero or more external model adapters, and a loss guard only where mathematically required. The Mayo adapter is a test case. It must never become a hidden default in the mathematical core.
+
+\subsection{Information-set ladder and provenance}
+For Mayo, the intended ladder is: deployable tabular; tabular plus 11 extracted note concepts; tabular plus 22 RM value/applicability features; tabular plus frozen strictly pre-cutoff note bundles; and tabular plus rebuilt full note corpus. Soft concept-applicability probabilities must remain probabilities. The 3.7 GB corpus rebuild follows reproduction of existing bundles, with the frozen rule $t_{\rm note}<t_{\rm scheduled\ in\ room}-2$ days, same-patient isolation, and a per-case provenance audit that is not published at patient level. The note cutoff is an operational decision rule, not a universal truth for all hospitals or workflows.
+
+The original Arm-B-over-Arm-C comparison suggests eleven structured concepts outperformed an added text-SVD arm under one modelling protocol. It does not prove raw note text has no decision value. Each ladder step must be selected on development data, scored on the same eligible cases, and compared with paired patient-clustered uncertainty. A richer information set whose estimator performs worse may still have a lower true Bayes risk.
+
+\section{Metis: a proposed gated agent, not an autonomous theorem factory}
+Metis is the proposed process that turns a diagnostic gap into a sequence of safe research actions. Its objective is not to maximize the bound by any means. A bound can increase when a metric is tuned on evaluation outcomes, a feature leaks target information, or cases are excluded; none of these constitutes a discovery. The legitimate objective is to propose predeclared representations, metric audits, external guard evidence, valid experiments and operational hypotheses, then ask a separate gate to evaluate them.
+
+\subsection{Agent state and allowed actions}
+Each agent run should carry a frozen task ID, cohort and representation hashes, available action budget, evaluation seal, current claim tier, prior negative results, and approved next questions. Candidate actions include reading a refusal reason, requesting an independent smoothness audit, proposing an outcome-blind metric, registering a new information set, scheduling a Horos cross-fit, generating synthetic falsification tests, or drafting a report. Every action records its inputs, artifacts, seed, cost, and whether it touched evaluation outcomes.
+
+Metis must not modify the certified estimator after seeing the holdout, silently swap cohorts, choose an outcome-based metric and call it outcome-blind, infer clinical assumptions from a passing stress test, promote a \tier{calibrated} result to \tier{proved}, or spend resources without a budget. A human approval boundary is needed for new data access, external model calls that expose patient information, prospective protocol amendments, and clinically consequential deployment. A deterministic gate, not the generative agent's prose, decides whether an artifact is eligible for a claim tier.
+
+\subsection{A practical search loop}
+The loop should be: \emph{read the failure} $\rightarrow$ \emph{form a falsifiable hypothesis} $\rightarrow$ \emph{register an action and analysis} $\rightarrow$ \emph{execute in development or synthetic space} $\rightarrow$ \emph{run safety and validity checks} $\rightarrow$ \emph{update a versioned evidence graph} $\rightarrow$ \emph{release a result, downgrade, or refuse}. Repeated search consumes a selection budget. A final frozen test or future cohort is protected from the loop. The memory should store both successes and failures, especially zero-bound sparse geometries, the failed single-$\lambda$ dependence estimator, negative clinical augmentation results, and guard-domain refusals. In this design, the agent can improve the science without being allowed to certify itself.
+
+\section{Validation: what would make each statement believable?}
+The validation program has several independent tracks; passing one does not grant the others.
+
+\textbf{Mathematical audit.} State finite-design estimands, independence unit, outcome-blind sigma-field, Bayes-action selection and clipping/range premises. Proof-read the pair and group witness derivations for MAE, pinball and window miss, then verify simultaneous concentration and multiplicity. Where a condition is only assumed (especially clinical $L$), leave the result conditional. Preserve counterexamples and numerical optimization tolerances.
+
+\textbf{Known-risk synthetic audit.} Freeze at least ten numeric and text-like generators with analytic Bayes risks before evaluation. Vary dimensionality, smoothness, heteroskedasticity, mixtures, skew, heavy tails, clusters, common bias, SNR and metric misspecification independently. Report per-design coverage with Wilson intervals, median usable tightness, bounds and true gold values, point-estimation error, and refusal rates. Use a genuinely untouched seed and registry after method changes. A zero bound can be valid but unhelpful, and must be counted as such.
+
+\textbf{Fair baselines.} Compare concentration methods on exactly the same witness where possible (Hoeffding, empirical Bernstein, Bentkus). Separately compare accepted Bayes-risk estimators and constrained-action approaches on their own proper estimands and assumptions. Do not call a point estimator's mean a confidence lower bound. Compare all methods on common data, common budgets, predeclared hyperparameters and independent evaluation. Include literature on Bayes-error estimation, constrained possible-performance estimation, disagreement and conformal risk control with careful estimand labels \cite{anderson,bazinet,eaton,bentkus,crc}.
+
+\textbf{Clinical retrospective audit.} Reproduce the 28.8495996043 guard, 31.1186421201 estimate, 32.8700117033 OOF score and conservative 24.18 rung from frozen Arm-B artifacts. Do not adopt the supposed 31.2623 incumbent without exact cohort, cutoff, rows, prediction column and final-duration OOF replication. Audit note timing and patient grouping; run tabular, concepts, RM-22, pre-cutoff bundle, and full-corpus arms when available. Report placebo, no-notes, schedule ablation, text corruption and true-duration-injection controls, with honest labels and no patient-level contents. Restrict procedure-family and note-community slices to input-defined groups with at least 250 cases and multiplicity-controlled comparisons.
+
+\textbf{Prospective confirmation.} Freeze the eligible cohort, representations, model weights, code, guards, endpoint, primary analysis, slice rules and report template before future outcomes arrive. Accumulate 3,000 newly eligible cases; do not inspect the primary comparison early. Score incumbent and selected note arm on the same patients. Primary endpoint is paired patient-clustered MAE difference. Secondary endpoints are W30, procedure-family MAE, calibration by predicted duration, certificate consistency, and operational-hours translation. A retrospective Mayo bound remains retrospective even if its bootstrap interval looks narrow.
+
+\section{Milestones and dependencies}
+The system should grow by gates, not by a single monolithic release. The table is an engineering order, not a promise that every item has already passed.
+
+\begin{longtable}{p{0.13\linewidth}p{0.45\linewidth}p{0.31\linewidth}}
+\toprule
+Stage & Work package & Exit condition\\\midrule\endhead
+M0 & Contracts, loss router, immutable certificates, CLI, data hashes and regression tests. & Unsupported losses refuse; package and deterministic unit tests pass.\\
+M1 & Guarded MAE reproduction and train-free witness theory, calibrated/conditional tier separation. & Frozen Mayo anchors and known-risk simulations reproduce; hard invariants and refusal branches tested.\\
+M2 & Independent theorem and implementation audit; provenance, external guard and concentration contracts; aggregate report format. & Certified label only with audited premises; private clinical runner and public synthetic CI pass.\\
+M3 & Dataset-agnostic Horos adapters and one-command study flow; complete Mayo representation ladder. & New dataset runs without Mayo imports in Pythia; cohort/fold/note timing audits are machine-checkable.\\
+M4 & Metis gated action loop, evidence graph, cost limits, review/approval, immutable evaluation seal. & Adversarial tests show agent cannot promote, leak, retune, or bypass a refusal.\\
+M5 & Full literature head-to-head, richer geometry, dependence-profile proof audit, independent replication and publication. & Accurate scope of novelty; no cherry-picked benchmark; failures retained.\\
+M6 & Frozen 3,000-case prospective Mayo study and operational assessment. & Prespecified endpoint analysed once; clinical claims match evidence and external review.\\
+\bottomrule\end{longtable}
+
+The nearest development priorities are M2-quality external $L$ and support audits, a clean comparison against published floor methods, and a robust provenance separation between prediction-artifact hash and representation-source hash. Only then should the full Metis action loop be treated as a certification-adjacent feature. In parallel, Horos can improve deterministic data preparation and reporting without granting Metis authority over the claim gate.
+
+\section{Publication strategy and honest novelty boundary}
+The narrow Pythia paper should claim no more than it demonstrates: a loss-indexed, outcome-blind, train-free finite-design witness family; a group relaxation that strengthens a paired benchmark in a frozen registry; a selection-safe simultaneous certificate under explicit structural assumptions; and evidence that some common geometries are silent. The published literature contains earlier matching, possible-performance, Bayes-error and disagreement ideas. This work does not claim to invent the Bayes floor, information monotonicity, or concentration inequalities. It must explain how its estimand differs from target-model generalization bounds and why the group witness and multi-loss contract are useful despite negative point-estimation results.
+
+The broader Pythia--Metis paper, if written after M4/M5, may investigate a new systems contribution: a research agent whose search can improve representations and diagnostics but whose authority is cryptographically and statistically separated from certification. That is a proposed architecture today, not an empirical result. A second application paper could examine the value of clinical-note information at a fixed booking cutoff, with prospective confirmation. These are distinct claims and deserve distinct validation.
+
+\section{Risks, refusal rules, and responsible deployment}
+The dominant statistical risk is unjustified smoothness. If a representation maps clinically different cases close together, their outcome disagreement can make a falsely positive bound. A documented external $L$ audit, sensitivity curve and negative controls are mandatory. The dominant operational risk is leakage: eventual duration, late notes, schedule-derived labels, and patient overlap can manufacture performance. The dominant scientific risk is adaptive benchmarking: repeated tuning to Mayo or ten synthetic designs without a new untouched evaluation set invalidates ``wins'' even if the algebra remains correct.
+
+Privacy is a separate constraint. Patient-derived records and model outputs are ignored by Git, reports use aggregate counts and hashes, and the public artifact must not include note text, row-level outcomes or reconstructive examples. Seed registries, source hashes and guard versions should be sufficient to reproduce results on a private runner without exposing the underlying records. Clinical use requires local governance, privacy review, and human decision ownership; a certificate alone is not a deployment authorization.
+
+\section{The finish line}
+The most useful answer to ``what can we return to users?'' is a disciplined one. We want an automated system that can say, for a specified decision and information set, \emph{here is what current models achieve; here is what we can and cannot establish about the attainable floor; here is the estimated value of adding information; here are the assumptions and failure modes; and here is the next experiment worth paying for}. Pythia makes the floor question precise. Horos makes it reproducible on a new dataset. Metis should make the search efficient while being unable to turn curiosity into unwarranted certainty. Success is not always a positive bound: sometimes the scientifically correct product is a clear refusal, a zero witness in sparse geometry, or a recommendation to collect a different kind of evidence.
+
+\begin{thebibliography}{9}
+\bibitem{anderson} Anderson and Bjarnadottir. Estimating the possible prediction performance of models. \emph{PLOS ONE}, 2024. \url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0296904}.
+\bibitem{bazinet} Bazinet et al. Bound to Disagree. \emph{Proceedings of Machine Learning Research}, 2026. \url{https://proceedings.mlr.press/v337/bazinet26a.html}.
+\bibitem{eaton} Eaton et al. Model Agreement via Anchoring. \emph{Proceedings of Machine Learning Research}, 2026. \url{https://proceedings.mlr.press/v336/eaton26a.html}.
+\bibitem{bentkus} Bentkus. On Hoeffding's inequalities. \emph{The Annals of Probability}, 2004. \url{https://arxiv.org/abs/math/0410159}.
+\bibitem{crc} Angelopoulos, Bates, Fisch, Lei and Schuster. Conformal risk control. arXiv:2208.02814, revised 2025. \url{https://arxiv.org/abs/2208.02814}.
+\end{thebibliography}
+
+\appendix
+\section{Minimum machine-readable certificate}
+The certificate schema should expose: task and decision cutoff; eligible and excluded cohorts; loss and action; finite-design versus population estimand; entity and cluster units; representation and source hashes; metric and outcome-blindness attestation; selected witness and registry hash; smoothness/range guard and independent audit source; concentration method and allocated error budget; numerical bound and optional separately typed estimate; achieved OOF or held-out score and exact prediction-artifact hash; claim tier; assumptions; sampling interval; guard uncertainty; falsification results; and explicit refusal reasons. A human-readable report is a rendering of this immutable record, not another source of numerical truth.
+
+\section{Minimum negative-control registry}
+At least the following should be automated: duplicated tabular feature (same information, possibly changed geometry); shuffled note characters and tokens; note dropout and masking; pre-cutoff versus post-cutoff split; true-duration injection (must refuse as deployable); randomized outcome placebo; patient-overlap sabotage; group/pair selection after viewing outcomes (must refuse); incorrect $L$ and incorrect range; heavy-tail outside-domain guard; shared model-bias stress; sparse metric; and repeated selection without multiplicity budget. Store both the expected logical response and the measured numerical response. The correct expectation is \emph{validity/refusal behaviour}, not monotonic movement of every bound under every perturbation.
+
+\section{Study declaration and artifact lifecycle}
+A concrete Horos study declaration should specify names and policies, never a hidden import of a hospital-specific table. The proposal below is an interface sketch, not a claim that the complete parser has shipped.
+\begin{verbatim}
+study:
+  name: local-duration-v1
+  cohort: eligible-cases-v3
+  row_id: case_id
+  entity_id: patient_id
+  event_time: scheduled_in_room
+  decision_cutoff: booking-minus-two-days
+  target: duration_minutes
+  losses: [mae, pinball_0.1, pinball_0.9, miss_30]
+  split: grouped-temporal-v2
+  representations: [tabular-v1, concepts-v2, notes-recut-v1]
+  governance: private-clinical-runner
+\end{verbatim}
+An adapter resolves these role names to local columns. The interface should validate that target is numeric where the loss requires it, the unit is stated, the date columns have unambiguous time zones, all row IDs are unique, each entity belongs to exactly one fold, and no representation reads after the declared cutoff. The study compiler emits an immutable task card and a planned artifact graph before reading outcomes. Each artifact is content-addressed: cohort manifest, feature provenance, metric recipe, match design, OOF predictions, guard, witness registry, certificate, and report. Every downstream object records the hashes of the specific upstream versions it used. Rebuilding one source cannot quietly reuse a stale certificate.
+
+Patient-level inputs should be available only on the private runner. The public machine-readable release can include code version, synthetic seeds, aggregate statistics, guarded assumptions, safe hashes, and enough shape metadata to detect drift. A raw source hash is useful for reproducibility but is not a privacy guarantee by itself; access control and review still govern who can see or recompute the source. A report builder must not read raw clinical text, even if a convenient development notebook could.
+
+\subsection{Fold and evaluation seals}
+The prepare stage creates a fold manifest before model comparison. For repeated encounters, patient identity, not case row, is the sampling unit when dependence persists across cases. Temporal holdout should be the latest admissible period, with all earlier cases of holdout patients removed from development or otherwise allocated consistently. OOF predictions are not held-out predictions, and selecting a model by OOF score must be recorded. A final evaluation seal stores row IDs, target definition, cohort exclusions, split, selected model versions, chosen representation, metric, loss, witness family, guard, and planned analysis. No agent action that reads outcomes may revise an object behind that seal. If it must, the existing evaluation is reclassified as development and a new untouched cohort is required.
+
+\section{Certificate implementation requirements}
+The public certification call should behave like a typed decision procedure. It either returns a valid structured result at an explicitly permitted tier or refuses with a reason code. For example, \texttt{missing\_representation\_source\_hash}, \texttt{post\_cutoff\_feature}, \texttt{entity\_overlap}, \texttt{unverified\_pair\_design}, \texttt{guard\_out\_of\_domain}, \texttt{unsupported\_loss}, \texttt{range\_not\_audited}, \texttt{numerical\_infeasibility}, and \texttt{evaluation\_reused} are materially different failures. Treating them as one generic exception makes remediation and auditing impossible.
+
+Hard numeric invariants include finite values, nonnegative bounds, a bound no greater than a declared achieved-risk upper comparator when the contract justifies that comparison, monotone sensitivity curves when the theorem implies monotonicity, and fixed-seed determinism. A risk bound can exceed an observed predictor score because of sampling noise unless both share a simultaneous confidence construction; code must distinguish that from a genuine mathematical contradiction. Never implement a cosmetic clip that conceals an invalid derivation. A refused certificate should still record the task, inspected artifact hashes and precisely which premises failed, but omit a headline bound.
+
+\subsection{Selection accounting}
+Any search over matching radii, group sizes, metrics, clipping thresholds, concentration methods, losses, slices, or representation candidates can spend statistical error budget. The system needs a registry frozen before evaluation and a ledger of allocations. Some sensitivity curves can share one confidence event; some candidate families require a union bound or an independent validation split. The code should expose which strategy was used. ``We tried several and reported the highest'' is never an adequate certificate algorithm. An exploratory analyst may still inspect many variants, but the output tier then reflects exploration.
+
+\subsection{Numeric reproducibility}
+Version guard axes and calibration population, seed registry, source hash, supported domain, software environment, optimization tolerances and active constraints. For dependence profiles, infeasible observed moments within stated sampling tolerance require a refusal; a solver's near-feasible output cannot become a theorem. For bootstrap intervals, resample entities or independent clusters with replacement and retain repeated sampled groups as separate draws. Sampling uncertainty and guard/theory uncertainty appear in different fields. The JSON certificate should be deterministic for fixed inputs and stable schema version.
+
+\section{Metis threat model and control plane}
+The Metis gate should be deliberately boring. The agent may generate hypotheses and run development experiments, but a small deterministic control plane validates permissions and provenance. Model-generated natural language is not an attestation. A claimed pre-cutoff feature needs machine-checkable source timestamps; a claimed patient-isolated fold needs a manifest computation; a claimed independent guard needs an external audit artifact; and a claimed untouched test needs an evaluation seal. The gate should verify each claim against artifacts, not accept self-description.
+
+The main failure modes are reward hacking (maximizing the bound by changing the question), data leakage, repeated holdout inspection, silent budget exhaustion, calibration-domain extrapolation, and unreviewed external data exposure. Metis should be sandboxed to development artifacts by default. It should have per-action cost, compute and time budgets, a maximum number of proposals, a stable action log, and a kill switch. A proposed action whose permission or statistical consequence is unknown goes to human review. After a refusal it may generate a new auditable plan; it must not retry by paraphrasing the same false attestation.
+
+\subsection{Evidence graph and memory}
+A useful memory is not merely a vector database of successful prompts. It is a directed graph of study, representation, hypothesis, action, artifact, validation result and claim. Edges include \texttt{derived\_from}, \texttt{tested\_on}, \texttt{invalidated\_by}, \texttt{supersedes}, and \texttt{requires\_assumption}. Search can retrieve similar prior failures, but the retrieved text has no authority to override current contracts. The gate should identify a result as stale whenever its parent code, source or guard hash changes. Preserve rejected estimators and failed interaction designs as negative controls so later agents cannot rediscover the same attractive error and publish it as a new result.
+
+\subsection{Agent evaluation before release}
+Metis needs red-team fixtures, not just a happy-path demo. Feed it an apparent improvement that is actually the true duration in a note; a strong metric selected after observing evaluation outcomes; a patient appearing in both train and test; a guard extrapolated beyond its validation axes; and a synthetic benchmark whose seed was used for tuning. Success means it either refuses or demotes the claim, documents the reason and proposes a legitimate alternative. Additional tests should verify it can take a real but bounded improvement forward without unnecessary blocking. Audit logs should make the human intervention points reconstructable.
+
+\section{Research program after the current paper}
+Several scientific questions remain open. First, can an externally auditable smoothness condition be obtained for clinically meaningful metrics? A route through conditional CDF stability and density lower bounds can justify quantile-action Lipschitzness locally, but it demands independent data and a credible domain. Window-optimal centers need a separate condition; median smoothness cannot simply be reused. Second, can outcome-blind metric learning using a separate source cohort improve high-dimensional witness power without biasing the evaluation event? The metric can be learned outside Pythia and then frozen, but certification must account for whether the source and target cohorts are independent or only temporally separated.
+
+Third, can group witnesses be sharpened while preserving a simple range and tractable optimization for pinball, absolute error and window loss? Any proposed sharpening should be proved before benchmarking, then tested on a new seed. Fourth, what is the best honest point estimator of the floor for sparse tabular/text inputs? External local estimators currently beat the witness center; Metis/Horos could benchmark kNN, kernel, histogram, constrained-action and probabilistic methods without placing training into Pythia. A good point estimate and a valid lower bound are complementary products. Fifth, can dependence-aware risk profiles address shared predictor bias without relying on unidentifiable disagreement alone? A sensitivity curve indexed by a declared shared-error cap is honest even when a single estimate is not; population-level simulation and independent proof review are prerequisites for stronger claims.
+
+The project should treat failures as theory diagnostics. A zero bound in sparse high-dimensional space asks whether the representation, metric, group relaxation or sample size is wrong. A bound that changes under duplicated features asks whether metric normalization is stable, not whether information theory is false. A W30 bound that responds oddly to nonsense text asks whether the text geometry tracks the intended clinical concepts. A simulated coverage failure may reveal hidden selection, dependence, under-stated $L$, invalid clipping, or a mismatch between finite-design and population targets. Each failure should map to an explicit assumption or implementation hypothesis, then to a predeclared falsification experiment.
+
+\section{Release checklist and audience}
+The research paper, system paper and product report have different audiences. A theorem reviewer needs precise hypotheses, counterexamples, proof and reproducibility. A methods user needs an input contract, callable API, refusal examples and benchmarks on a non-Mayo dataset. A clinician needs the population, cutoff, outcome definition, comparator, uncertainty and what action the result could change. An operations leader needs minutes or hours, uncertainty, and a statement of which changes are within reach. The same certificate may be rendered differently, but its numeric and claim-tier fields must be identical across audiences.
+
+Before a public package release, run unit/property tests for all router paths, package installation tests, deterministic CLI tests, contract fuzzing, synthetic coverage suites and sample JSON round-trips. Before a clinical research release, rerun frozen Mayo hashes on the private runner, verify no patient-derived files entered version control or the publication folder, and commission independent theorem and methods review. Before an autonomous-agent release, pass the Metis red-team suite and human approval tests. Before a clinical confirmation claim, complete the 3,000-case prespecified protocol and document deviations.
+
+\end{document}

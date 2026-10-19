@@ -1,0 +1,127 @@
+| Family | Level | true NLI | n runs | NLI-proj-perm | NLI-proj-cf | NLI-proj-cert>0 | NLI-combo | NLI-cert>0 | Boot-dBrier | LocalPerm-dBrier | CODEC-perm | WGCM-normal |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| O1_grammar_severity | 0 | 0.0000 | 25 | 0.04 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.04 | 0.12 | 0.04 |
+| O1_grammar_severity | 1 | 0.0158 | 25 | 0.92 | 0.92 | 0.32 | 0.08 | 0.00 | 0.12 | 0.88 | 0.12 | 0.92 |
+| O1_grammar_severity | 2 | 0.0533 | 25 | 1.00 | 1.00 | 1.00 | 0.60 | 0.00 | 1.00 | 1.00 | 0.32 | 1.00 |
+| O2_long_range_negation | 0 | 0.0000 | 25 | 0.04 | 0.04 | 0.00 | 0.04 | 0.00 | 0.00 | 0.04 | 0.00 | 0.04 |
+| O2_long_range_negation | 1 | 0.0154 | 25 | 1.00 | 1.00 | 0.80 | 0.20 | 0.00 | 0.36 | 0.96 | 0.16 | 1.00 |
+| O2_long_range_negation | 2 | 0.0515 | 25 | 1.00 | 1.00 | 1.00 | 0.96 | 0.00 | 1.00 | 1.00 | 0.68 | 1.00 |
+| O3_numbers_in_words | 0 | 0.0000 | 25 | 0.00 | 0.00 | 0.00 | 0.12 | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| O3_numbers_in_words | 1 | 0.0175 | 25 | 1.00 | 1.00 | 0.88 | 0.24 | 0.00 | 0.16 | 1.00 | 0.24 | 1.00 |
+| O3_numbers_in_words | 2 | 0.0570 | 25 | 1.00 | 1.00 | 1.00 | 1.00 | 0.08 | 1.00 | 1.00 | 1.00 | 1.00 |
+| O4_copy_forward_template | 0 | 0.0000 | 25 | 0.08 | 0.08 | 0.00 | 0.00 | 0.00 | 0.00 | 0.08 | 0.00 | 0.08 |
+| O4_copy_forward_template | 1 | 0.0148 | 25 | 0.92 | 0.92 | 0.20 | 0.04 | 0.00 | 0.32 | 0.92 | 0.04 | 0.92 |
+| O4_copy_forward_template | 2 | 0.0502 | 25 | 1.00 | 1.00 | 1.00 | 0.48 | 0.00 | 1.00 | 1.00 | 0.12 | 1.00 |
+| O5_two_languages | 0 | 0.0000 | 25 | 0.08 | 0.00 | 0.00 | 0.04 | 0.00 | 0.00 | 0.04 | 0.00 | 0.00 |
+| O5_two_languages | 1 | 0.0156 | 25 | 0.68 | 0.60 | 0.08 | 0.04 | 0.00 | 0.00 | 0.68 | 0.20 | 0.60 |
+| O5_two_languages | 2 | 0.0527 | 25 | 1.00 | 1.00 | 1.00 | 0.28 | 0.00 | 1.00 | 1.00 | 0.80 | 1.00 |
+| O6_local_rare_token | 0 | 0.0000 | 25 | 0.04 | 0.04 | 0.00 | 0.04 | 0.00 | 0.00 | 0.04 | 0.04 | 0.04 |
+| O6_local_rare_token | 1 | 0.0164 | 25 | 0.28 | 0.24 | 0.00 | 0.16 | 0.00 | 0.00 | 0.32 | 0.08 | 0.24 |
+| O6_local_rare_token | 2 | 0.0219 | 25 | 0.32 | 0.20 | 0.00 | 0.08 | 0.00 | 0.00 | 0.24 | 0.16 | 0.36 |
+
+## Size (level 0, all families pooled)
+- NLI-proj-perm: 7/150 = 0.047  [0.023, 0.093]
+- NLI-proj-cf: 4/150 = 0.027  [0.010, 0.067]
+- NLI-proj-cert>0: 0/150 = 0.000  [0.000, 0.025]
+- NLI-combo: 6/150 = 0.040  [0.018, 0.085]
+- NLI-cert>0: 0/150 = 0.000  [0.000, 0.025]
+- Boot-dBrier: 0/150 = 0.000  [0.000, 0.025]
+- LocalPerm-dBrier: 6/150 = 0.040  [0.018, 0.085]
+- CODEC-perm: 4/150 = 0.027  [0.010, 0.067]
+- WGCM-normal: 5/150 = 0.033  [0.014, 0.076]
+
+## Power (levels 1-2 pooled) and paired exact McNemar of NLI-combo vs each baseline
+
+### level 1 (n = 150)
+- power NLI-proj-perm: 0.800 [0.729, 0.856]
+- power NLI-proj-cf: 0.780 [0.707, 0.839]
+- power NLI-proj-cert>0: 0.380 [0.306, 0.460]
+- power NLI-combo: 0.127 [0.083, 0.189]
+- power NLI-cert>0: 0.000 [0.000, 0.025]
+- power Boot-dBrier: 0.160 [0.110, 0.227]
+- power LocalPerm-dBrier: 0.793 [0.722, 0.850]
+- power CODEC-perm: 0.140 [0.093, 0.205]
+- power WGCM-normal: 0.780 [0.707, 0.839]
+- NLI-proj-perm vs Boot-dBrier: ours-only 96, base-only 0, exact McNemar p = 2.5e-29
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 5, base-only 4, exact McNemar p = 1
+- NLI-proj-perm vs CODEC-perm: ours-only 102, base-only 3, exact McNemar p = 9.5e-27
+- NLI-proj-perm vs WGCM-normal: ours-only 3, base-only 0, exact McNemar p = 0.25
+- NLI-proj-cf vs Boot-dBrier: ours-only 93, base-only 0, exact McNemar p = 2e-28
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 3, base-only 5, exact McNemar p = 0.73
+- NLI-proj-cf vs CODEC-perm: ours-only 98, base-only 2, exact McNemar p = 8e-27
+- NLI-proj-cf vs WGCM-normal: ours-only 3, base-only 3, exact McNemar p = 1
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 36, base-only 3, exact McNemar p = 3.6e-08
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 62, exact McNemar p = 4.3e-19
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 48, base-only 12, exact McNemar p = 3.2e-06
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 60, exact McNemar p = 1.7e-18
+- NLI-combo vs Boot-dBrier: ours-only 16, base-only 21, exact McNemar p = 0.51
+- NLI-combo vs LocalPerm-dBrier: ours-only 4, base-only 104, exact McNemar p = 3.4e-26
+- NLI-combo vs CODEC-perm: ours-only 14, base-only 16, exact McNemar p = 0.86
+- NLI-combo vs WGCM-normal: ours-only 4, base-only 102, exact McNemar p = 1.3e-25
+
+### level 2 (n = 150)
+- power NLI-proj-perm: 0.887 [0.826, 0.928]
+- power NLI-proj-cf: 0.867 [0.803, 0.912]
+- power NLI-proj-cert>0: 0.833 [0.766, 0.884]
+- power NLI-combo: 0.567 [0.487, 0.643]
+- power NLI-cert>0: 0.013 [0.004, 0.047]
+- power Boot-dBrier: 0.833 [0.766, 0.884]
+- power LocalPerm-dBrier: 0.873 [0.811, 0.917]
+- power CODEC-perm: 0.513 [0.434, 0.592]
+- power WGCM-normal: 0.893 [0.834, 0.933]
+- NLI-proj-perm vs Boot-dBrier: ours-only 8, base-only 0, exact McNemar p = 0.0078
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 3, base-only 1, exact McNemar p = 0.62
+- NLI-proj-perm vs CODEC-perm: ours-only 58, base-only 2, exact McNemar p = 3.2e-15
+- NLI-proj-perm vs WGCM-normal: ours-only 0, base-only 1, exact McNemar p = 1
+- NLI-proj-cf vs Boot-dBrier: ours-only 5, base-only 0, exact McNemar p = 0.062
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 0, base-only 1, exact McNemar p = 1
+- NLI-proj-cf vs CODEC-perm: ours-only 56, base-only 3, exact McNemar p = 1.2e-13
+- NLI-proj-cf vs WGCM-normal: ours-only 0, base-only 4, exact McNemar p = 0.12
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 0, base-only 0, exact McNemar p = 1
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 6, exact McNemar p = 0.031
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 52, base-only 4, exact McNemar p = 1.1e-11
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 9, exact McNemar p = 0.0039
+- NLI-combo vs Boot-dBrier: ours-only 2, base-only 42, exact McNemar p = 1.1e-10
+- NLI-combo vs LocalPerm-dBrier: ours-only 2, base-only 48, exact McNemar p = 2.3e-12
+- NLI-combo vs CODEC-perm: ours-only 27, base-only 19, exact McNemar p = 0.3
+- NLI-combo vs WGCM-normal: ours-only 2, base-only 51, exact McNemar p = 3.2e-13
+
+### levels 1+2 (n = 300)
+- power NLI-proj-perm: 0.843 [0.798, 0.880]
+- power NLI-proj-cf: 0.823 [0.776, 0.862]
+- power NLI-proj-cert>0: 0.607 [0.550, 0.660]
+- power NLI-combo: 0.347 [0.295, 0.402]
+- power NLI-cert>0: 0.007 [0.002, 0.024]
+- power Boot-dBrier: 0.497 [0.440, 0.553]
+- power LocalPerm-dBrier: 0.833 [0.787, 0.871]
+- power CODEC-perm: 0.327 [0.276, 0.382]
+- power WGCM-normal: 0.837 [0.791, 0.874]
+- NLI-proj-perm vs Boot-dBrier: ours-only 104, base-only 0, exact McNemar p = 9.9e-32
+- NLI-proj-perm vs LocalPerm-dBrier: ours-only 8, base-only 5, exact McNemar p = 0.58
+- NLI-proj-perm vs CODEC-perm: ours-only 160, base-only 5, exact McNemar p = 4.2e-41
+- NLI-proj-perm vs WGCM-normal: ours-only 3, base-only 1, exact McNemar p = 0.62
+- NLI-proj-cf vs Boot-dBrier: ours-only 98, base-only 0, exact McNemar p = 6.3e-30
+- NLI-proj-cf vs LocalPerm-dBrier: ours-only 3, base-only 6, exact McNemar p = 0.51
+- NLI-proj-cf vs CODEC-perm: ours-only 154, base-only 5, exact McNemar p = 2.2e-39
+- NLI-proj-cf vs WGCM-normal: ours-only 3, base-only 7, exact McNemar p = 0.34
+- NLI-proj-cert>0 vs Boot-dBrier: ours-only 36, base-only 3, exact McNemar p = 3.6e-08
+- NLI-proj-cert>0 vs LocalPerm-dBrier: ours-only 0, base-only 68, exact McNemar p = 6.8e-21
+- NLI-proj-cert>0 vs CODEC-perm: ours-only 100, base-only 16, exact McNemar p = 5e-16
+- NLI-proj-cert>0 vs WGCM-normal: ours-only 0, base-only 69, exact McNemar p = 3.4e-21
+- NLI-combo vs Boot-dBrier: ours-only 18, base-only 63, exact McNemar p = 5.2e-07
+- NLI-combo vs LocalPerm-dBrier: ours-only 6, base-only 152, exact McNemar p = 1.1e-37
+- NLI-combo vs CODEC-perm: ours-only 41, base-only 35, exact McNemar p = 0.57
+- NLI-combo vs WGCM-normal: ours-only 6, base-only 153, exact McNemar p = 5.8e-38
+
+## Per-family McNemar, NLI-proj-perm vs best VALID baseline (levels 1+2)
+- O1_grammar_severity: NLI-proj-perm 0.96 vs LocalPerm-dBrier 0.94; ours-only 1, base-only 0, p = 1
+- O2_long_range_negation: NLI-proj-perm 1.00 vs LocalPerm-dBrier 0.98; ours-only 1, base-only 0, p = 1
+- O3_numbers_in_words: NLI-proj-perm 1.00 vs LocalPerm-dBrier 1.00; ours-only 0, base-only 0, p = 1
+- O4_copy_forward_template: NLI-proj-perm 0.96 vs LocalPerm-dBrier 0.96; ours-only 1, base-only 1, p = 1
+- O5_two_languages: NLI-proj-perm 0.84 vs LocalPerm-dBrier 0.84; ours-only 1, base-only 1, p = 1
+- O6_local_rare_token: NLI-proj-perm 0.30 vs LocalPerm-dBrier 0.28; ours-only 4, base-only 3, p = 1
+
+## Certificate validity and estimation
+- pair certificate above truth: 0/450; projection certificate above truth: 0/450; bootstrap dBrier lower CI above truth: 0/450
+- level 1: mean true 0.0159, mean certified 0.0000, mean projection cert 0.0000 (ratio to truth 0.00), mean model dBrier -0.0018, mean boot lower -0.0064, share model dBrier < 0: 0.51
+- level 2: mean true 0.0478, mean certified 0.0001, mean projection cert 0.0044 (ratio to truth 0.08), mean model dBrier 0.0172, mean boot lower 0.0119, share model dBrier < 0: 0.17

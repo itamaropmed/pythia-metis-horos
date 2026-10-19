@@ -1,0 +1,652 @@
+{
+"BP 130/80 at intake": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"NPO after midnight": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"ablation history: none": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"ablation hx: none": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"access expected to be unremarkable": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"access to transport arranged": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"acess expected to be unremarkable": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"acess to transport arranged": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"allergic to penicillin": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"anatmy looks favorable": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"anatomy looks favorable": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"cmplx congenital anatmy": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"cmplx congenital anatomy": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"cmplx medication list reviewed": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"complex congenital anatmy": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"complex congenital anatomy": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"complex medication list reviewed": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"consent signed": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"creatinine 1.1 mg/dL": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"de novo case, no history of pior EP study": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"de novo case, no history of prior EP study": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"de novo case, no hx of pior EP study": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"de novo case, no hx of prior EP study": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"denies prev ablation": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"denies previous ablation": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"diabetic, A1c 7.2": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"difficult to reach by phone": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"dificult to reach by phone": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"extensive fibrosis on MRI, difficult case": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"extensive fibrosis on MRI, dificult case": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"family history of cmplx arrhythmias": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"family history of complex arrhythmias": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"family hx of cmplx arrhythmias": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"family hx of complex arrhythmias": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"femoral access expected to be difficult, plan alternative route": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"femoral access expected to be dificult, plan alternative route": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"femoral acess expected to be difficult, plan alternative route": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"femoral acess expected to be dificult, plan alternative route": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"first-time procedue": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"first-time procedure": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"former smoker, quit 2018": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"groin access straightforward per pior notes": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"groin access straightforward per prior notes": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"groin acess straightforward per pior notes": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"groin acess straightforward per prior notes": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"high cmplxity, prolonged mapping likely": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"high complexity, prolonged mapping likely": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"highly cmplx substrate": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"highly complex substrate": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"history of difficult vascular access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"history of difficult vascular acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"history of dificult vascular access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"history of dificult vascular acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"history of pior EP procedue at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"history of pior EP procedure at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"history of prior EP procedue at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"history of prior EP procedure at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"hx of difficult vascular access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"hx of difficult vascular acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"hx of dificult vascular access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"hx of pior EP procedure at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"hx of prior EP procedue at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"hx of prior EP procedure at outside hospital": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"intermediate cmplxity anticipated": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"intermediate complexity anticipated": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"interpreter needed": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"known IVC filter, access may be difficult": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"known IVC filter, access may be dificult": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"known IVC filter, acess may be difficult": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"known IVC filter, acess may be dificult": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"lives alone": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"mild anatomic variant noted on CT": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"moderate LA enlargement": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"moderately dilated left atrium": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"moderately tortuous coronary sinus anatmy": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"moderately tortuous coronary sinus anatomy": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"no access issues anticipated": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no acess issues anticipated": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no complications expected per patient": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"no history of difficult access": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no history of difficult acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no history of dificult access": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no history of dificult acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no hx of difficult access": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no hx of difficult acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no hx of dificult access": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"no pior procedues": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"no pior procedures": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"no prev interventions": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"no previous interventions": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"no prior procedues": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"no prior procedures": {
+"complexity": null,
+"prior": 0,
+"access_risk": null
+},
+"patient anxious, prefers early slot": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"pior colonoscopy uneventful": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"pior groin hematoma after access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"pior groin hematoma after acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"prev ablation 2018, now recurrent": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"prev surgeon on vacation": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"previous ablation 2018, now recurrent": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"previous surgeon on vacation": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"prior colonoscopy uneventful": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"prior groin hematoma after access": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"prior groin hematoma after acess": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"redo of labs requested by anesthesia": {
+"complexity": null,
+"prior": null,
+"access_risk": null
+},
+"redo procedue": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"redo procedure": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"repeat PVI after recurrence": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"routine case anticipated": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"s/p pior ablation in 2018": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"s/p prior ablation in 2018": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"second attempt after failed initial ablation": {
+"complexity": null,
+"prior": 1,
+"access_risk": null
+},
+"severely enlarged LA with extensive scar": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"simple case per EP fellow": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"somewhat cmplx substrate, not severe": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"somewhat complex substrate, not severe": {
+"complexity": 1,
+"prior": null,
+"access_risk": null
+},
+"standard approach expected": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"straightforward anatmy": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"straightforward anatomy": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"uncomplicated anatmy on pior imaging": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"uncomplicated anatmy on prior imaging": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"uncomplicated anatomy on pior imaging": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"uncomplicated anatomy on prior imaging": {
+"complexity": 0,
+"prior": null,
+"access_risk": null
+},
+"vascular access uncomplicated previously": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"vascular access uncomplicated prevly": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"vascular acess uncomplicated previously": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"vascular acess uncomplicated prevly": {
+"complexity": null,
+"prior": null,
+"access_risk": 0
+},
+"venous occlusion on pior study": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"venous occlusion on prior study": {
+"complexity": null,
+"prior": null,
+"access_risk": 1
+},
+"very challenging anatmy expected": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+},
+"very challenging anatomy expected": {
+"complexity": 2,
+"prior": null,
+"access_risk": null
+}
+}

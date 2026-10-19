@@ -1,0 +1,92 @@
+[
+ {
+  "scenario": "S1_dictionary_sufficient",
+  "seed": 0,
+  "gold": 0.5585191925620058,
+  "L_res": 0.0,
+  "peras": 0.3912520126992693,
+  "nn_pair": 0.36110741265659174,
+  "k": 32
+ },
+ {
+  "scenario": "S1_dictionary_sufficient",
+  "seed": 1,
+  "gold": 0.5585191925620058,
+  "L_res": 0.0,
+  "peras": 0.3812506617078635,
+  "nn_pair": 0.3541247369554758,
+  "k": 32
+ },
+ {
+  "scenario": "S1_dictionary_sufficient",
+  "seed": 2,
+  "gold": 0.5585191925620058,
+  "L_res": 0.0,
+  "peras": 0.36878563248132445,
+  "nn_pair": 0.36328311143513276,
+  "k": 16
+ },
+ {
+  "scenario": "S1_dictionary_sufficient",
+  "seed": 3,
+  "gold": 0.5585191925620058,
+  "L_res": 0.0,
+  "peras": 0.37325373875235845,
+  "nn_pair": 0.35880312677158555,
+  "k": 32
+ },
+ {
+  "scenario": "S1_dictionary_sufficient",
+  "seed": 4,
+  "gold": 0.5585191925620058,
+  "L_res": 0.0,
+  "peras": 0.380530083844254,
+  "nn_pair": 0.3516929394200123,
+  "k": 16
+ },
+ {
+  "scenario": "S2_out_of_dictionary",
+  "seed": 0,
+  "gold": 0.5585191925620058,
+  "L_res": 2.6797154366360956,
+  "peras": 0.0,
+  "nn_pair": 0,
+  "k": null
+ },
+ {
+  "scenario": "S2_out_of_dictionary",
+  "seed": 1,
+  "gold": 0.5585191925620058,
+  "L_res": 2.6797154366360956,
+  "peras": 0.0,
+  "nn_pair": 0,
+  "k": null
+ },
+ {
+  "scenario": "S2_out_of_dictionary",
+  "seed": 2,
+  "gold": 0.5585191925620058,
+  "L_res": 2.6797154366360956,
+  "peras": 0.0,
+  "nn_pair": 0,
+  "k": null
+ },
+ {
+  "scenario": "S2_out_of_dictionary",
+  "seed": 3,
+  "gold": 0.5585191925620058,
+  "L_res": 2.6797154366360956,
+  "peras": 0.0,
+  "nn_pair": 0,
+  "k": null
+ },
+ {
+  "scenario": "S2_out_of_dictionary",
+  "seed": 4,
+  "gold": 0.5585191925620058,
+  "L_res": 2.6797154366360956,
+  "peras": 0.0,
+  "nn_pair": 0,
+  "k": null
+ }
+]

@@ -1,0 +1,6 @@
+| min_entities | regions | node misses / cells | wrong certified directions (rows) | certified share | median width |
+|---|---|---|---|---|---|
+| 50 | 42 | 0/1034 | 0 | 0.007 | 0.396 |
+| 100 | 21 | 0/540 | 0 | 0.064 | 0.275 |
+| 200 | 11 | 0/282 | 0 | 0.169 | 0.206 |
+| 400 | 5 | 0/122 | 0 | 0.458 | 0.134 |

@@ -1,0 +1,30 @@
+{
+  "claim": "bounded-iid synthetic comparison; conditional on supplied valid correlation and error caps",
+  "known_bayes_risk": 0.1633333333333333,
+  "n_runs": 1800,
+  "repetitions_per_cell": 200,
+  "seed": 20260912,
+  "results": {
+    "legacy_bound": {
+      "coverage": 0.6566666666666666,
+      "wilson_lower_95": 0.6344186227997151,
+      "median_tightness_when_zeroed_if_invalid": 0.8552845863327496
+    },
+    "empirical_bernstein_bound": {
+      "coverage": 1.0,
+      "wilson_lower_95": 0.997870401081032,
+      "median_tightness": 0.5814826233254715,
+      "n10000_median_tightness": 0.8868932606247528
+    },
+    "hoeffding_bound": {
+      "coverage": 1.0,
+      "wilson_lower_95": 0.997870401081032,
+      "median_tightness": 0.0,
+      "n10000_median_tightness": 0.25550315988209826
+    },
+    "legacy_estimator_median_relative_error": 0.09541835741658719,
+    "sharp_plugin_estimator_median_relative_error": 0.01765961472654436,
+    "empirical_bernstein_tighter_than_hoeffding_count": 1200
+  },
+  "status": "exploratory_validation"
+}

@@ -1,0 +1,14 @@
+{
+  "claim": "exploratory known-risk simulation; not a theorem or finite-sample guarantee",
+  "dependence_empirical_valid": 15,
+  "dependence_population_valid": 15,
+  "information_chain": ["intact_note", "erased_note", "tabular"],
+  "median_dependence_tightness": 0.19660479582501914,
+  "n_designs": 5,
+  "n_per_design": 40000,
+  "n_representation_cases": 15,
+  "peras_trained_models": false,
+  "raw_orthogonality_population_valid": 6,
+  "seed": 20260911,
+  "status": "exploratory_validation"
+}

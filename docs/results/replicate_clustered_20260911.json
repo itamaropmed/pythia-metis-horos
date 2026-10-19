@@ -1,0 +1,23 @@
+{
+  "status": "exploratory_validation",
+  "peras_trained_models": false,
+  "seed": 20260917,
+  "repetitions": 500,
+  "n_blocks": 200,
+  "pairs_per_block": 20,
+  "true_mse_bayes_risk": 0.6033333333333333,
+  "independent_block_method": {
+    "valid": 500,
+    "total": 500,
+    "coverage": 1.0,
+    "wilson_lower_95": 0.9923756595384479,
+    "median_tightness": 0.2715090496788319
+  },
+  "pair_independence_negative_control": {
+    "valid": 467,
+    "total": 500,
+    "coverage": 0.934,
+    "wilson_lower_95": 0.9087605988391466,
+    "median_tightness": 0.8745822749502365
+  }
+}

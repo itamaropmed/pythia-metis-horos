@@ -1,0 +1,982 @@
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "model_guided_lr_tuned", "n": 2352, "GL": null, "GU": 0.3469227640132725, "RU": 0.3469227640132725, "IL": 0.3687682107128931, "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "model_guided_knn15", "n": 2352, "GL": null, "GU": 0.36133704482453904, "RU": 0.36133704482453904, "IL": 0.3543662708954718, "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "word_tfidf_svd", "n": 2352, "GL": 0.0, "GU": 0.2621257108236696, "RL": 0.0, "RU": 0.2621257108236696, "IL": 0.47462952646551165, "IU": 0.808676192876405, "BSS_L": 0.6441080733644104, "BSS_U": 1.0, "Q_all": 0.7743484463117446, "Q_levels": [0.2193877551020408, 0.28741496598639454, 0.33758503401360546, 0.375], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "char4_tfidf_svd", "n": 2352, "GL": 0.0, "GU": 0.27831510274011284, "RL": 0.0, "RU": 0.27831510274011284, "IL": 0.4584470177939308, "IU": 0.808676192876405, "BSS_L": 0.6221274982346496, "BSS_U": 1.0, "Q_all": 0.7743484463117446, "Q_levels": [0.23469387755102042, 0.2763605442176871, 0.32908163265306123, 0.3715986394557823], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "concept_dictionary_30", "n": 2352, "GL": 0.10834966517991554, "GU": 0.6006682258601348, "RL": 0.05589305081087883, "RU": 0.6006682258601348, "IL": 0.1362309495731946, "IU": 0.7003725947310048, "BSS_L": 0.18446392954581747, "BSS_U": 0.8660729732129595, "Q_all": 0.7743484463117446, "Q_levels": [0.5518707482993197, 0.5654761904761905, 0.6045918367346939, 0.6343537414965986], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "log_length_only", "n": 2352, "GL": 0.5851443611896697, "GU": 0.7855884764648442, "RL": 0.36641525851461926, "RU": 0.7855884764648442, "IL": 0.0, "IU": 0.22378061755458803, "BSS_L": 0.0, "BSS_U": 0.2767246266501502, "Q_all": 0.7743484463117446, "Q_levels": [0.7440476190476191, 0.7670068027210885, 0.7780612244897959, 0.7508503401360545], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "random_geometry_null", "n": 2352, "GL": 0.6041822484397097, "GU": 0.8117990779680562, "RL": 0.3826028356257162, "RU": 0.8117990779680562, "IL": 0.0, "IU": 0.20475082464436528, "BSS_L": 0.0, "BSS_U": 0.2531925960576147, "Q_all": 0.7743484463117446, "Q_levels": [0.79421768707483, 0.7780612244897959, 0.7763605442176871, 0.7721088435374149], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+{"data": "MTSamples", "label": "top10_plus_other", "K": 11, "geometry": "keywords_field_LEAK", "n": 2352, "GL": 0.0, "GU": 0.4123744733528169, "RL": 0.0, "RU": 0.4123744733528169, "IL": 0.32444464521294986, "IU": 0.808676192876405, "BSS_L": 0.44011312222784693, "BSS_U": 1.0, "Q_all": 0.7743484463117446, "Q_levels": [0.36394557823129253, 0.4302721088435374, 0.5008503401360545, 0.516156462585034], "model_brier_upper": 0.35914349403659845, "model_uppers": {"lr_tuned": 0.35914349403659845, "lr_C4": 0.4047225204440229, "knn15": 0.3882031872568705}}
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_split.py:813: UserWarning: The least populated class in y has only 1 members, which is less than n_splits=3.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_search.py:1137: UserWarning: One or more of the test scores are non-finite: [nan nan nan nan]
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_split.py:813: UserWarning: The least populated class in y has only 1 members, which is less than n_splits=3.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_search.py:1137: UserWarning: One or more of the test scores are non-finite: [nan nan nan nan]
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_split.py:813: UserWarning: The least populated class in y has only 1 members, which is less than n_splits=3.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 31 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 29 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 34. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29 30 32 33 36]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_search.py:1137: UserWarning: One or more of the test scores are non-finite: [nan nan nan nan]
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_split.py:813: UserWarning: The least populated class in y has only 1 members, which is less than n_splits=3.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 32 vs 39. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 30 32 33 34]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 33 vs 37. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8  9 10 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 29 30 32 33 34 37]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py:927: UserWarning: Scoring failed. The score on this train-test partition for these parameters will be set to nan. Details: 
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_validation.py", line 916, in _score
+    scores = scorer(estimator, X_test, y_test, **score_params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 317, in __call__
+    return self._score(partial(_cached_call, None), estimator, X, y_true, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_scorer.py", line 417, in _score
+    return self._sign * self._score_func(y_true, y_pred, **scoring_kwargs)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/utils/_param_validation.py", line 218, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 3378, in log_loss
+    transformed_labels, y_pred = _validate_multiclass_probabilistic_prediction(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/sklearn/metrics/_classification.py", line 318, in _validate_multiclass_probabilistic_prediction
+    raise ValueError(
+ValueError: y_true and y_prob contain different number of classes: 36 vs 35. Please provide the true labels explicitly through the labels argument. Classes found in y_true: [ 0  1  2  3  4  5  6  7  8 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+ 25 26 27 28 29 30 31 32 34 35 36 38]
+
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/model_selection/_search.py:1137: UserWarning: One or more of the test scores are non-finite: [nan nan nan nan]
+  warnings.warn(
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "model_guided_lr_tuned", "n": 2352, "GL": null, "GU": 0.4052326283840861, "RU": 0.4052326283840861, "IL": 0.3397268983758406, "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "model_guided_knn15", "n": 2352, "GL": null, "GU": 0.3865194153442003, "RU": 0.3865194153442003, "IL": 0.3584240898292195, "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "word_tfidf_svd", "n": 2352, "GL": 0.0, "GU": 0.29085416252590685, "RL": 0.0, "RU": 0.29085416252590685, "IL": 0.47374317627000434, "IU": 0.8333162901982588, "BSS_L": 0.6194868550020249, "BSS_U": 1.0, "Q_all": 0.8007252667123846, "Q_levels": [0.2465986394557823, 0.3129251700680272, 0.36904761904761907, 0.41156462585034015], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "char4_tfidf_svd", "n": 2352, "GL": 0.0, "GU": 0.2979996310621519, "RL": 0.0, "RU": 0.2979996310621519, "IL": 0.46660074577310295, "IU": 0.8333162901982588, "BSS_L": 0.610138717496967, "BSS_U": 1.0, "Q_all": 0.8007252667123846, "Q_levels": [0.2534013605442177, 0.3129251700680272, 0.35799319727891155, 0.4175170068027211], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "concept_dictionary_30", "n": 2352, "GL": 0.13476962674185036, "GU": 0.6315021793156258, "RL": 0.06989149809078854, "RU": 0.6315021793156258, "IL": 0.1332399928207572, "IU": 0.6986039634677783, "BSS_L": 0.17383035457482754, "BSS_U": 0.8383419017304578, "Q_all": 0.8007252667123846, "Q_levels": [0.5833333333333334, 0.6020408163265306, 0.6394557823129252, 0.6700680272108843], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "log_length_only", "n": 2352, "GL": 0.6155257679092517, "GU": 0.8078438731994563, "RL": 0.3830617944212599, "RU": 0.8078438731994563, "IL": 0.0, "IU": 0.21805222542162153, "BSS_L": 0.0, "BSS_U": 0.2616680220780798, "Q_all": 0.8007252667123846, "Q_levels": [0.7678571428571429, 0.7865646258503401, 0.8018707482993197, 0.7746598639455783], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "random_geometry_null", "n": 2352, "GL": 0.6373382367286781, "GU": 0.8369641814387979, "RL": 0.40131518872374006, "RU": 0.8369641814387979, "IL": 0.0, "IU": 0.19624903061104698, "BSS_L": 0.0, "BSS_U": 0.23550365319794275, "Q_all": 0.8007252667123846, "Q_levels": [0.8222789115646258, 0.7993197278911565, 0.8052721088435374, 0.8035714285714286], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "MTSamples", "label": "all_40", "K": 39, "geometry": "keywords_field_LEAK", "n": 2352, "GL": 0.0, "GU": 0.43835849223799966, "RL": 0.0, "RU": 0.43835849223799966, "IL": 0.3263015609838095, "IU": 0.8333162901982588, "BSS_L": 0.42651269945915105, "BSS_U": 1.0, "Q_all": 0.8007252667123846, "Q_levels": [0.38945578231292516, 0.4489795918367347, 0.5221088435374149, 0.5501700680272109], "model_brier_upper": 0.4220947210805807, "model_uppers": {"lr_tuned": 0.6084233875507683, "lr_C4": 0.4559142327562594, "knn15": 0.4220947210805807}}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 0, "n": 4096, "GL": 0.18681710646284305, "GU": 0.38392214792641405, "RL": 0.10428362837939281, "RU": 0.38392214792641405, "IL": 0.0, "IU": 0.23600978898092728, "BSS_L": 0.0, "BSS_U": 0.5582313998007329, "Q_all": 0.3906893887362637, "Q_levels": [0.34765625, 0.3603515625, 0.361328125, 0.35546875], "model_brier_upper": 0.3788304887726805}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 1, "n": 4096, "GL": 0.20306360897730807, "GU": 0.39387678726149805, "RL": 0.1146842911178601, "RU": 0.39387678726149805, "IL": 0.0, "IU": 0.22206577815733172, "BSS_L": 0.0, "BSS_U": 0.5224096096319009, "Q_all": 0.3929620726495726, "Q_levels": [0.3603515625, 0.357421875, 0.384765625, 0.3681640625], "model_brier_upper": 0.3849166171576274}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 2, "n": 4096, "GL": 0.2284505570270639, "GU": 0.38939922391575366, "RL": 0.13152378436801643, "RU": 0.38939922391575366, "IL": 0.0, "IU": 0.20628604462222466, "BSS_L": 0.0, "BSS_U": 0.4745689975955819, "Q_all": 0.40246286916208796, "Q_levels": [0.37353515625, 0.36083984375, 0.35302734375, 0.38525390625], "model_brier_upper": 0.39227584110049046}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 3, "n": 4096, "GL": 0.22415086743738918, "GU": 0.3794371888978833, "RL": 0.1286180318306967, "RU": 0.3794371888978833, "IL": 0.0, "IU": 0.20528247729913757, "BSS_L": 0.0, "BSS_U": 0.47809198582396284, "Q_all": 0.3972144717261905, "Q_levels": [0.35498046875, 0.35205078125, 0.36572265625, 0.34326171875], "model_brier_upper": 0.3810959930468599}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 4, "n": 4096, "GL": 0.16894962771801408, "GU": 0.3794371888978833, "RL": 0.09315213391122112, "RU": 0.3794371888978833, "IL": 0.0, "IU": 0.2582188724575724, "BSS_L": 0.0, "BSS_U": 0.6045478737788987, "Q_all": 0.3949870984050672, "Q_levels": [0.34521484375, 0.35205078125, 0.34326171875, 0.37451171875], "model_brier_upper": 0.37786746529538123}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 5, "n": 4096, "GL": 0.20740390137843204, "GU": 0.3859143873722938, "RL": 0.11751072000540458, "RU": 0.3859143873722938, "IL": 0.0, "IU": 0.2135713048998537, "BSS_L": 0.0, "BSS_U": 0.5073861680624352, "Q_all": 0.3888540712759463, "Q_levels": [0.3583984375, 0.349609375, 0.365234375, 0.3603515625], "model_brier_upper": 0.38544415511210095}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 6, "n": 4096, "GL": 0.20762703909811178, "GU": 0.3923846322579253, "RL": 0.11765659355633695, "RU": 0.3923846322579253, "IL": 0.0, "IU": 0.22224957013774269, "BSS_L": 0.0, "BSS_U": 0.5170687952781783, "Q_all": 0.39765708466880345, "Q_levels": [0.36181640625, 0.36181640625, 0.35595703125, 0.36474609375], "model_brier_upper": 0.38360159365033863}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 7, "n": 4096, "GL": 0.19626429162273573, "GU": 0.3854163893250166, "RL": 0.11029773648510566, "RU": 0.3854163893250166, "IL": 0.0, "IU": 0.22307050961270186, "BSS_L": 0.0, "BSS_U": 0.5320235798303943, "Q_all": 0.38723564846611724, "Q_levels": [0.35400390625, 0.34912109375, 0.37548828125, 0.36181640625], "model_brier_upper": 0.3846595952892768}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 8, "n": 4096, "GL": 0.1808681737217446, "GU": 0.38043413712248897, "RL": 0.10054297710626275, "RU": 0.38043413712248897, "IL": 0.0, "IU": 0.2365762911321858, "BSS_L": 0.0, "BSS_U": 0.5667851384705421, "Q_all": 0.3853717137896825, "Q_levels": [0.34423828125, 0.35009765625, 0.35791015625, 0.35498046875], "model_brier_upper": 0.37818394203580963}
+{"data": "pharynx", "label": "Status", "K": 2, "geometry": "covariates", "rep": 9, "n": 4096, "GL": 0.16115977468496928, "GU": 0.37993568382752263, "RL": 0.08839325484448707, "RU": 0.37993568382752263, "IL": 0.0, "IU": 0.2602698123954738, "BSS_L": 0.0, "BSS_U": 0.6176455617738171, "Q_all": 0.3893143315018315, "Q_levels": [0.34375, 0.3623046875, 0.3544921875, 0.3701171875], "model_brier_upper": 0.3837227561135349}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 0, "n": 4096, "GL": 0.45140933302311026, "GU": 0.6162885384846686, "RL": 0.2878462750617475, "RU": 0.6162885384846686, "IL": 0.0, "IU": 0.16967269275300056, "BSS_L": 0.0, "BSS_U": 0.2732373478475645, "Q_all": 0.5892283606150794, "Q_levels": [0.5908203125, 0.6044921875, 0.57958984375, 0.58740234375], "model_brier_upper": 0.6267879348423799}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 1, "n": 4096, "GL": 0.3861114260557179, "GU": 0.5970367370721109, "RL": 0.23418912149932983, "RU": 0.5970367370721109, "IL": 0.0, "IU": 0.21817707396075275, "BSS_L": 0.0, "BSS_U": 0.36110419711286423, "Q_all": 0.5722164987789988, "Q_levels": [0.56005859375, 0.58544921875, 0.57373046875, 0.5869140625], "model_brier_upper": 0.6091283444772471}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 2, "n": 4096, "GL": 0.40827543525602616, "GU": 0.5994464227473637, "RL": 0.25162351115096976, "RU": 0.5994464227473637, "IL": 0.0, "IU": 0.2035988962649968, "BSS_L": 0.0, "BSS_U": 0.33280047585154526, "Q_all": 0.5798978365384615, "Q_levels": [0.5712890625, 0.58935546875, 0.5625, 0.5869140625], "model_brier_upper": 0.6197347952473298}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 3, "n": 4096, "GL": 0.4354151132823814, "GU": 0.600891795715725, "RL": 0.27402471493940894, "RU": 0.600891795715725, "IL": 0.0, "IU": 0.18371540118963886, "BSS_L": 0.0, "BSS_U": 0.2967822544609169, "Q_all": 0.5872515071733821, "Q_levels": [0.5703125, 0.5771484375, 0.58349609375, 0.56396484375], "model_brier_upper": 0.6233099677860261}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 4, "n": 4096, "GL": 0.4163584291491938, "GU": 0.6158079623447734, "RL": 0.2581667788515267, "RU": 0.6158079623447734, "IL": 0.0, "IU": 0.20916354143011992, "BSS_L": 0.0, "BSS_U": 0.3344367532522067, "Q_all": 0.5937457074175825, "Q_levels": [0.5791015625, 0.60107421875, 0.595703125, 0.59521484375], "model_brier_upper": 0.6305506979782173}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 5, "n": 4096, "GL": 0.4032719677716249, "GU": 0.6033000187435267, "RL": 0.24762434669166958, "RU": 0.6033000187435267, "IL": 0.0, "IU": 0.20244810194380405, "BSS_L": 0.0, "BSS_U": 0.3342815002770607, "Q_all": 0.5736622643849206, "Q_levels": [0.5673828125, 0.56640625, 0.57275390625, 0.5869140625], "model_brier_upper": 0.6091374226317037}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 6, "n": 4096, "GL": 0.45102525888402384, "GU": 0.615327349130416, "RL": 0.2875084694431833, "RU": 0.615327349130416, "IL": 0.0, "IU": 0.17034584922156415, "BSS_L": 0.0, "BSS_U": 0.274193697536092, "Q_all": 0.5895219255570818, "Q_levels": [0.5849609375, 0.580078125, 0.59521484375, 0.57861328125], "model_brier_upper": 0.6247569591237817}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 7, "n": 4096, "GL": 0.4818750617147414, "GU": 0.5946261394204956, "RL": 0.31567606379917745, "RU": 0.5946261394204956, "IL": 0.0, "IU": 0.13330109331586731, "BSS_L": 0.0, "BSS_U": 0.21672912609508377, "Q_all": 0.5832279265873016, "Q_levels": [0.59228515625, 0.5576171875, 0.58349609375, 0.56689453125], "model_brier_upper": 0.6194641541372884}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 8, "n": 4096, "GL": 0.4524920086545112, "GU": 0.625892247542892, "RL": 0.2888001487778267, "RU": 0.625892247542892, "IL": 0.0, "IU": 0.16559916585039502, "BSS_L": 0.0, "BSS_U": 0.2679681826534267, "Q_all": 0.5861925509386448, "Q_levels": [0.5927734375, 0.59423828125, 0.58935546875, 0.59033203125], "model_brier_upper": 0.6216923548428744}
+{"data": "pharynx", "label": "Grade", "K": 3, "geometry": "covariates", "rep": 9, "n": 4096, "GL": 0.4399335736039458, "GU": 0.614366011548344, "RL": 0.27787958435149085, "RU": 0.614366011548344, "IL": 0.0, "IU": 0.1798682952610219, "BSS_L": 0.0, "BSS_U": 0.29025319079031053, "Q_all": 0.5879317622481686, "Q_levels": [0.58642578125, 0.57763671875, 0.58642578125, 0.58837890625], "model_brier_upper": 0.6228692012241849}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 0, "n": 4096, "GL": 0.24866512087214596, "GU": 0.3874081348160671, "RL": 0.1455039639658477, "RU": 0.3874081348160671, "IL": 0.001858315113903377, "IU": 0.2050847341281533, "BSS_L": 0.004150319907389788, "BSS_U": 0.4520380001435065, "Q_all": 0.42130921378968256, "Q_levels": [0.37060546875, 0.35107421875, 0.35107421875, 0.38720703125], "model_brier_upper": 0.38152035662590345}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 1, "n": 4096, "GL": 0.2285929060218621, "GU": 0.38790596852971226, "RL": 0.13162037652841202, "RU": 0.38790596852971226, "IL": 0.015750768627745687, "IU": 0.23981671345433012, "BSS_L": 0.03844765698396069, "BSS_U": 0.5120417684138083, "Q_all": 0.43588169642857144, "Q_levels": [0.3515625, 0.3818359375, 0.3720703125, 0.357421875], "model_brier_upper": 0.38589718788607497}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 2, "n": 4096, "GL": 0.2141501668010174, "GU": 0.3923846322579253, "RL": 0.12194588138800644, "RU": 0.3923846322579253, "IL": 0.00970660917346775, "IU": 0.2526622475387945, "BSS_L": 0.02355305000757213, "BSS_U": 0.5413106871000863, "Q_all": 0.4342966603708791, "Q_levels": [0.35595703125, 0.37451171875, 0.37841796875, 0.37841796875], "model_brier_upper": 0.39083544232841605}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 3, "n": 4096, "GL": 0.2566759393166854, "GU": 0.39984176935233545, "RL": 0.1511991537543848, "RU": 0.39984176935233545, "IL": 0.0010198715078226857, "IU": 0.20889366525214895, "BSS_L": 0.0019368099225351987, "BSS_U": 0.44874447082682145, "Q_all": 0.43305049984737487, "Q_levels": [0.3740234375, 0.37109375, 0.36328125, 0.375], "model_brier_upper": 0.3919649125315902}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 4, "n": 4096, "GL": 0.25082593736569503, "GU": 0.39188716602373097, "RL": 0.14703111848612987, "RU": 0.39188716602373097, "IL": 0.006475688824168489, "IU": 0.2121999611916292, "BSS_L": 0.01565625000095139, "BSS_U": 0.4583502343065886, "Q_all": 0.43052312271062276, "Q_levels": [0.3701171875, 0.3583984375, 0.35546875, 0.3740234375], "model_brier_upper": 0.3833231157846663}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 5, "n": 4096, "GL": 0.24728831137527196, "GU": 0.39785408661592714, "RL": 0.1445343275190078, "RU": 0.39785408661592714, "IL": 0.0061506627587743605, "IU": 0.2214773404948521, "BSS_L": 0.01463229268693611, "BSS_U": 0.47253007494778754, "Q_all": 0.43623130341880345, "Q_levels": [0.3662109375, 0.361328125, 0.3671875, 0.37109375], "model_brier_upper": 0.3855632352624462}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 6, "n": 4096, "GL": 0.20767406206876196, "GU": 0.3834239849069655, "RL": 0.11768734134792369, "RU": 0.3834239849069655, "IL": 0.010365528785149238, "IU": 0.2506823487706753, "BSS_L": 0.025724597254505266, "BSS_U": 0.5469762731690114, "Q_all": 0.4258936918116606, "Q_levels": [0.34716796875, 0.35205078125, 0.36865234375, 0.36962890625], "model_brier_upper": 0.38712434804966706}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 7, "n": 4096, "GL": 0.2070128019185799, "GU": 0.3779414538769962, "RL": 0.1172551776434983, "RU": 0.3779414538769962, "IL": 0.019696290723326956, "IU": 0.25526723930086037, "BSS_L": 0.0489606967737406, "BSS_U": 0.5522521577638697, "Q_all": 0.4297924297924298, "Q_levels": [0.341796875, 0.3525390625, 0.3759765625, 0.3681640625], "model_brier_upper": 0.3789669894726829}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 8, "n": 4096, "GL": 0.19362669938885158, "GU": 0.3769440882422489, "RL": 0.10860933799389871, "RU": 0.3769440882422489, "IL": 0.02249074352186144, "IU": 0.2704806444799961, "BSS_L": 0.05574211320704736, "BSS_U": 0.5828569639148442, "Q_all": 0.43161200778388276, "Q_levels": [0.3408203125, 0.359375, 0.3681640625, 0.376953125], "model_brier_upper": 0.38797827107004534}
+{"data": "lowbwt", "label": "LOW", "K": 2, "geometry": "covariates", "rep": 9, "n": 4096, "GL": 0.17766832392936482, "GU": 0.37744279198371056, "RL": 0.09854534747331972, "RU": 0.37744279198371056, "IL": 0.02109638510043063, "IU": 0.2855228930672634, "BSS_L": 0.05236587965176154, "BSS_U": 0.6164832647976165, "Q_all": 0.43070519974816845, "Q_levels": [0.34130859375, 0.35009765625, 0.35986328125, 0.38330078125], "model_brier_upper": 0.3896065227176339}

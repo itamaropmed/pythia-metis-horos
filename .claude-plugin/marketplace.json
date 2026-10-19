@@ -1,0 +1,13 @@
+{
+  "name": "pythia-metis-horos",
+  "owner": { "name": "Itamar Zernitsky" },
+  "metadata": { "description": "Private team marketplace for the Pythia / Metis / Horos project." },
+  "plugins": [
+    {
+      "name": "pythia",
+      "source": "./plugins/pythia",
+      "version": "0.1.0",
+      "description": "Pythia certificates: local model-risk intervals, NLI and table floors with claim tiers, refusals and privacy rules."
+    }
+  ]
+}

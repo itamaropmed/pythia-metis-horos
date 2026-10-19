@@ -1,0 +1,12 @@
+{
+  "version": "mayo-2d-v1",
+  "kind": "measured_envelope_2d",
+  "claim_tier": "calibrated",
+  "bound_quantile": 0.95,
+  "estimator_quantile": 0.5,
+  "rho_domain": [0.2, 1.0],
+  "tau_domain": [0.0, 1.0],
+  "calibration_population": "5952 frozen shape/scale combinations",
+  "artifacts": ["env2.npy", "med2.npy", "env2_axes.npy", "lib2.json"],
+  "warning": "This guard is simulation-calibrated and is not a theorem-backed uniform majorant."
+}

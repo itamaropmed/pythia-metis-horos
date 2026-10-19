@@ -1,0 +1,41 @@
+[
+ {
+  "design": "mse_uniform",
+  "rep": 0,
+  "gold": 0.08333333333333331,
+  "y_range": 3.0,
+  "range_violated": false,
+  "kl_g1.0": 0.031664090272610065,
+  "bernstein_g1.0": 0.0448249078699028,
+  "best_g1.0": 0.04188961779891469,
+  "kl_g0.5": 0.0,
+  "bernstein_g0.5": 0.02247589818104715,
+  "best_g0.5": 0.017776685712894712
+ },
+ {
+  "design": "mse_gauss",
+  "rep": 0,
+  "gold": 0.09,
+  "y_range": 5.0,
+  "range_violated": false,
+  "kl_g1.0": 0.01906298975662632,
+  "bernstein_g1.0": 0.017929165686252944,
+  "best_g1.0": 0.018305274854233777,
+  "kl_g0.5": 0.0,
+  "bernstein_g0.5": 0.0,
+  "best_g0.5": 0.0
+ },
+ {
+  "design": "mse_hetero",
+  "rep": 0,
+  "gold": 0.10307972855002207,
+  "y_range": 5.0,
+  "range_violated": false,
+  "kl_g1.0": 0.014630866256248572,
+  "bernstein_g1.0": 0.017603618944028447,
+  "best_g1.0": 0.014924191805017252,
+  "kl_g0.5": 0.0,
+  "bernstein_g0.5": 0.0,
+  "best_g0.5": 0.0
+ }
+]

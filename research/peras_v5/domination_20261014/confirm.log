@@ -1,0 +1,10 @@
+gaussian
+laplace
+logistic
+student_t3
+student_t5
+gaussian_scale_mixture
+gaussian_location_mixture
+signed_lognormal
+signed_exponential
+contaminated_gaussian

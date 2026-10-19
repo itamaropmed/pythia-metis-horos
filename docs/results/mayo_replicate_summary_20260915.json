@@ -1,0 +1,31 @@
+{
+  "status": "exploratory",
+  "claim_tier": "exploratory",
+  "n_patients": 10532,
+  "n_used_patients": 10528,
+  "n_independent_blocks_if_sampling_contract_holds": 1316,
+  "best_oof_mae_on_selected_rows": 32.82879640266163,
+  "metric_specification_hash": "6f8ff438c5218241a11bb615463da813476c85e2612ca8a291563d56e8901b62",
+  "reason_not_certified": "retrospective historical cohort; iid population sampling, conditional entity independence, and the Lipschitz cap have not been externally audited",
+  "peras_trained_models": false,
+  "tabular": {
+    "n_features": 115,
+    "mean_pair_distance_range": [0.05101352612953908, 0.05147067188670103],
+    "selected_design_hash": "08e69d8e7990508585767715b1ece711cab315e4d074b54eb861e89bfecb07ba",
+    "simultaneous_confidence": 0.95,
+    "curve": [[0, 39.39864126411129], [100, 36.121353066656624], [200, 32.842613939989775], [300, 29.562408204703853], [400, 26.28072269388162], [500, 22.997546872575903], [600, 19.71287293513693]],
+    "global_mean_pair_distance": 0.009413983414827541,
+    "global_fixed_design_empirical_bernstein_curve": [[0, 26.60827569245158], [100, 26.137576521710205], [200, 25.66687735096883], [300, 25.19617818022745], [400, 24.725479009486076], [500, 24.254779838744692], [600, 23.78408066800332]],
+    "weekly_cluster": {"n_blocks": 170, "n_used_patients": 10444, "n_dropped_patients": 84, "curve": [[0, 12.503829039676532], [100, 10.917750454898908], [200, 9.331671870121284], [300, 7.745593285343666], [400, 6.159514700566039], [500, 4.573436115788418], [600, 2.987357531010801]]}
+  },
+  "tabular_plus_note_values_and_applicability": {
+    "n_features": 137,
+    "mean_pair_distance_range": [0.07643042402154454, 0.07747006094908525],
+    "selected_design_hash": "8540cd84d62c9f8fa9bea59ac9e70be7c39182514abb47daefabbe7cbf1994fb",
+    "simultaneous_confidence": 0.95,
+    "curve": [[0, 38.528143705046624], [100, 33.96370472486528], [200, 29.397127798379145], [300, 24.828377506990513], [400, 20.257423892991667], [500, 15.684242871594233], [600, 11.108816571448543]],
+    "global_mean_pair_distance": 0.019695972613562693,
+    "global_fixed_design_empirical_bernstein_curve": [[0, 28.413378295824668], [100, 27.428579665146533], [200, 26.443781034468405], [300, 25.458982403790262], [400, 24.47418377311213], [500, 23.489385142433996], [600, 22.504586511755864]],
+    "weekly_cluster": {"n_blocks": 170, "n_used_patients": 10444, "n_dropped_patients": 84, "curve": [[0, 12.92482829715616], [100, 10.501497339312095], [200, 8.07816638146803], [300, 5.654835423623965], [400, 3.2315044657798957], [500, 0.8081735079358339], [600, 0.0]]}
+  }
+}

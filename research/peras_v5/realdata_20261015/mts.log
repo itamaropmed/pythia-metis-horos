@@ -1,0 +1,18 @@
+{
+ "n_rows": 4966,
+ "floor_text": 0.5249697946033025,
+ "floor_text_plus_description": 0.5247684252919855,
+ "floor_text_plus_keywords": 0.12404349577124446,
+ "floor_text_plus_samplename": 0.5247684252919855,
+ "majority_error": 0.7809101892871526,
+ "label_string_in_keywords": 0.7686266612968183,
+ "label_string_in_description": 0.07269432138542087,
+ "label_string_in_transcription": 0.30789367700362463
+}
+n_unique 2357 declared L (max over all realized pairs) 9.24
+{'seed': 0, 'noise': 'gauss', 'gold': np.float64(0.5585191925620058), 'peras': 0.0, 'peras_oracle_pen': np.float64(0.200343026110186), 'nn_pair': 0, 'k': None}
+{'seed': 0, 'noise': 'laplace', 'gold': 0.5, 'peras': 0.0, 'peras_oracle_pen': np.float64(0.1598831813885062), 'nn_pair': 0, 'k': None}
+{'seed': 1, 'noise': 'gauss', 'gold': np.float64(0.5585191925620058), 'peras': 0.0, 'peras_oracle_pen': np.float64(0.18669047683238854), 'nn_pair': 0, 'k': None}
+{'seed': 1, 'noise': 'laplace', 'gold': 0.5, 'peras': 0.0, 'peras_oracle_pen': np.float64(0.14410953061372245), 'nn_pair': 0, 'k': None}
+{'seed': 2, 'noise': 'gauss', 'gold': np.float64(0.5585191925620058), 'peras': 0.0, 'peras_oracle_pen': np.float64(0.21489310037159254), 'nn_pair': 0, 'k': None}
+{'seed': 2, 'noise': 'laplace', 'gold': 0.5, 'peras': 0.0, 'peras_oracle_pen': np.float64(0.16477880445274712), 'nn_pair': 0, 'k': None}

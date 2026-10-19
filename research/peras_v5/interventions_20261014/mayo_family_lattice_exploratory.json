@@ -1,0 +1,152 @@
+{
+  "conditional_signal_tests": {
+    "hashed_bag_beyond_procedure_and_metadata": {
+      "bonferroni_p_two_tests": 0.744,
+      "claim_tier": "exploratory",
+      "coarse_saa_score": 44.69161290322581,
+      "interpretation": "exploratory Monte Carlo tail area; exchangeability not attested",
+      "null_mean": 0.5933176029478344,
+      "null_quantiles": {
+        "q50": 0.5876344086021561,
+        "q90": 0.6790537634408608,
+        "q95": 0.70391397849463,
+        "q99": 0.7388193548387127
+      },
+      "observed_gain": 0.6056989247311861,
+      "p_value": 0.372,
+      "permutations": 499,
+      "refined_saa_score": 44.085913978494624
+    },
+    "note_metadata_beyond_procedure": {
+      "bonferroni_p_two_tests": 0.004,
+      "claim_tier": "exploratory",
+      "coarse_saa_score": 45.66311827956989,
+      "interpretation": "exploratory Monte Carlo tail area; exchangeability not attested",
+      "null_mean": 0.702454802077274,
+      "null_quantiles": {
+        "q50": 0.6982795698924775,
+        "q90": 0.7996774193548362,
+        "q95": 0.8246881720430138,
+        "q99": 0.8882408602150559
+      },
+      "observed_gain": 0.9715053763440835,
+      "p_value": 0.002,
+      "permutations": 499,
+      "refined_saa_score": 44.69161290322581
+    }
+  },
+  "family_alpha": 0.05,
+  "lattice_claim_tier": "exploratory",
+  "limitations": [
+    "retrospective Mayo development data; no known Bayes-risk gold",
+    "one earliest row per patient does not prove iid sampling or temporal stability",
+    "[0,900] is a working clinical cap, not an independently audited population support",
+    "fixed hashed bag profiles are diagnostics, not trained or clinically validated NLP",
+    "permutation branches test behavior and do not establish a Blackwell relation to intact notes",
+    "no positive value-of-notes claim follows from lower endpoints alone"
+  ],
+  "metamorphic_checks": {
+    "raw_target_coded_x_reason": "missing required attestation: outcome-blind labels",
+    "raw_target_coded_x_status": "refused",
+    "target_coded_x_removed_by_canonical_parser_exact_invariance": true,
+    "token_shuffle_bag_profile_exact_invariance": true
+  },
+  "model_training_performed": false,
+  "n_unique_patients": 9300,
+  "n_with_pre_cutoff_notes": 8210,
+  "nodes": {
+    "family": {
+      "closed_lower": 44.46263794198752,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 1162.5,
+      "n_cells": 8,
+      "ordered_floor_estimate": 59.50075268817204,
+      "raw_lower": 44.46263794198752,
+      "saa_floor_estimate": 59.50075268817204,
+      "singleton_fraction": 0.0
+    },
+    "global": {
+      "closed_lower": 68.09167020005204,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 9300.0,
+      "n_cells": 1,
+      "ordered_floor_estimate": 83.12978494623655,
+      "raw_lower": 68.09167020005204,
+      "saa_floor_estimate": 83.12978494623655,
+      "singleton_fraction": 0.0
+    },
+    "global_bag": {
+      "closed_lower": 28.963713210804723,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 18.562874251497007,
+      "n_cells": 501,
+      "ordered_floor_estimate": 44.001827956989246,
+      "raw_lower": 28.963713210804723,
+      "saa_floor_estimate": 44.001827956989246,
+      "singleton_fraction": 0.02064516129032258
+    },
+    "global_meta": {
+      "closed_lower": 29.721992780697196,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 30.693069306930692,
+      "n_cells": 303,
+      "ordered_floor_estimate": 44.76010752688172,
+      "raw_lower": 29.721992780697196,
+      "saa_floor_estimate": 44.76010752688172,
+      "singleton_fraction": 0.00935483870967742
+    },
+    "intact_bag": {
+      "closed_lower": 29.0477992323101,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 20.086393088552917,
+      "n_cells": 463,
+      "ordered_floor_estimate": 44.085913978494624,
+      "raw_lower": 29.0477992323101,
+      "saa_floor_estimate": 44.085913978494624,
+      "singleton_fraction": 0.016774193548387096
+    },
+    "intact_meta": {
+      "closed_lower": 29.653498157041287,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 30.293159609120522,
+      "n_cells": 307,
+      "ordered_floor_estimate": 44.69161290322581,
+      "raw_lower": 29.653498157041287,
+      "saa_floor_estimate": 44.69161290322581,
+      "singleton_fraction": 0.008602150537634409
+    },
+    "procedure": {
+      "closed_lower": 30.62500353338537,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 66.90647482014388,
+      "n_cells": 139,
+      "ordered_floor_estimate": 45.66311827956989,
+      "raw_lower": 30.62500353338537,
+      "saa_floor_estimate": 45.66311827956989,
+      "singleton_fraction": 0.0032258064516129032
+    },
+    "within_bag": {
+      "closed_lower": 29.38532611403053,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 20.086393088552917,
+      "n_cells": 463,
+      "ordered_floor_estimate": 44.42344086021505,
+      "raw_lower": 29.38532611403053,
+      "saa_floor_estimate": 44.42344086021505,
+      "singleton_fraction": 0.016774193548387096
+    },
+    "within_meta": {
+      "closed_lower": 29.98489600650365,
+      "concentration_width": 15.038114746184522,
+      "effective_cell_size": 30.293159609120522,
+      "n_cells": 307,
+      "ordered_floor_estimate": 45.02301075268817,
+      "raw_lower": 29.98489600650365,
+      "saa_floor_estimate": 45.02301075268817,
+      "singleton_fraction": 0.008602150537634409
+    }
+  },
+  "spent_alpha": 0.05,
+  "status": "complete",
+  "study_tier": "exploratory"
+}

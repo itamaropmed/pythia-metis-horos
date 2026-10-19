@@ -1,0 +1,13 @@
+replicates: 19
+| Variant | Node-family coverage (reps) | Node misses / cells | Routed-population misses / cells | Wrong certified directions (rows, routed truth) | Certified share of later cases | Median width | Charged tests |
+|---|---|---|---|---|---|---|---|
+| oof_all_overlap | 19/19 [0.824, 1.000] | 0/2046 | 160/2046 | 468 / 8362 certified | 0.102 | 0.269 | nan |
+| oof_eligible_contrast | 19/19 [0.824, 1.000] | 0/2046 | 160/2046 | 753 / 12650 certified | 0.154 | 0.270 | nan |
+| split_all_overlap | 19/19 [0.824, 1.000] | 0/912 | 65/912 | 0 / 2167 certified | 0.026 | 0.269 | 114 |
+| split_eligible_overlap | 19/19 [0.824, 1.000] | 0/912 | 78/912 | 0 / 4819 certified | 0.059 | 0.247 | 26 |
+| split_eligible_contrast | 19/19 [0.824, 1.000] | 0/912 | 70/912 | 367 / 10526 certified | 0.128 | 0.257 | 51 |
+| split_partition_overlap | 19/19 [0.824, 1.000] | 0/828 | 8/828 | 0 / 2709 certified | 0.033 | 0.259 | 22 |
+| split_partition_contrast | 19/19 [0.824, 1.000] | 0/828 | 7/828 | 0 / 6025 certified | 0.073 | 0.270 | 43 |
+
+Rows with a wrong certified direction (routed truth), per replicate: {'oof_all_overlap': 19, 'oof_eligible_contrast': 19, 'split_all_overlap': 0, 'split_eligible_overlap': 0, 'split_eligible_contrast': 5, 'split_partition_overlap': 0, 'split_partition_contrast': 0}
+Later MAE  OOF-final A/B: 23.01 / 22.32   split A/B: 23.23 / 22.55

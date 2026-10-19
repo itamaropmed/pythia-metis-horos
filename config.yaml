@@ -1,0 +1,26 @@
+# Paths are relative to the project root.
+paths:
+  raw_mayo: data/raw/mayo
+  derived_mayo: data/derived/mayo
+  outputs: outputs
+
+mayo:
+  target: case_actual_duration_time
+  group: patient_durable_id
+  time: scheduled_in_room
+  procedure: primary_procedure_name
+  arms:
+    A: XA.parquet   # tabular only                     (296 cols)
+    B: XB.parquet   # tabular + 11 LLM note features   (307 cols)  <- operating arm
+    C: XC.parquet   # tabular + notes (features+text)  (409 cols)
+  holdout_fraction: 0.207
+
+pythia:
+  loss: mae
+  claim_tier: calibrated
+  guard: envelope_2d          # envelope_2d | qcap | sqrt2
+  partition: pred_quintiles
+  bootstrap:
+    reps: 800
+    seed: 0
+    cluster_on: group

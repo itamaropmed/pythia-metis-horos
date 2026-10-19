@@ -1,0 +1,43 @@
+{
+  "event": "package rename peras->pythia, poros->metis (2026-10-18)",
+  "rule": "new file bytes == old file bytes with the identifier substitution peras->pythia, Peras->Pythia, PERAS->PYTHIA, poros->metis, Poros->Metis, POROS->METIS (word-boundary, protected tokens: peras-poros-horos, peras_v5, peras_v4, peras_mayo5, PERAS_REPO, PERAS_DATA, PERAS_MODELS)",
+  "anchor": "docs/results/mayo_frozen_ci_anchor.json",
+  "verified": true,
+  "files": [
+    {
+      "old_path": "peras/core/guarded.py",
+      "old_sha256": "3b8b4aa304a4b3a8c8993cccfc2f543f8edbdf9b84ac4060b518c5260d9555c2",
+      "new_path": "pythia/core/guarded.py",
+      "new_sha256": "b6663d1453206994a831a7bf535a05146a47867c0959671f43780dc9c31a3c2b",
+      "new_equals_rename_of_old": true
+    },
+    {
+      "registry": "research/peras_v5/continuous_20261015/FROZEN_CODE_SHA256.txt",
+      "old_path": "peras/core/smooth_dominated_saa.py",
+      "old_sha256": "a72223c60cf5352748f4293fbe8ab19d0d9feb16584fdcdd089b4dfcef96d2ce",
+      "old_hash_matches_registry": false,
+      "new_path": "pythia/core/smooth_dominated_saa.py",
+      "new_sha256": "e723a74b7a1b0e1084c7f5c76a3214fdaf11182130ffd2ee575a2b4b1c1a2dc3",
+      "new_equals_rename_of_old": true
+    },
+    {
+      "registry": "research/peras_v5/continuous_20261015/FROZEN_CODE_SHA256.txt",
+      "old_path": "peras/core/dominated_saa.py",
+      "old_sha256": "98a4816fcad58235bedd89fcac6e14ba2e29ad5de8f011fe843806f8ab02f4fe",
+      "old_hash_matches_registry": false,
+      "new_path": "pythia/core/dominated_saa.py",
+      "new_sha256": "05b153601ef611fbf1d396e308619675dcd2b20460ea167fa7864e805da32ec8",
+      "new_equals_rename_of_old": true
+    },
+    {
+      "registry": "research/peras_v5/continuous_20261015/FROZEN_GEOMETRY_SHA256.txt",
+      "old_path": "peras/core/smooth_dominated_saa.py",
+      "old_sha256": "39276cc8c1a05af043c736f568d62354237548f74a027ff228f99260a2db56ba",
+      "old_hash_matches_registry": false,
+      "new_path": "pythia/core/smooth_dominated_saa.py",
+      "new_sha256": "e723a74b7a1b0e1084c7f5c76a3214fdaf11182130ffd2ee575a2b4b1c1a2dc3",
+      "new_equals_rename_of_old": true
+    }
+  ],
+  "note": "Frozen registries are left byte-identical. To verify a frozen registration after the rename, check old_sha256 against the registry and new_equals_rename_of_old (re-derivable from git history: commit 9e57508 and the backup tarball)."
+}

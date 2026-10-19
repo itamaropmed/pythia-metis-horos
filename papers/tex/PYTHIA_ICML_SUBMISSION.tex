@@ -1,0 +1,427 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage{natbib}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\risk}{R^{\star}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\clip}[1]{\left[#1\right]_+}
+\DeclareMathOperator{\MAD}{MAD}
+
+\title{\bfseries Certified Floors on Decision Risk\\[2pt]
+\large Train-Free Lower Bounds on Bayes Risk from Outcome-Blind Near-Replicates}
+
+\author{Itamar Zernitsky\\
+Department of Mathematics, Bar-Ilan University\\
+Opmed.ai\\
+\texttt{itamar.zernitsky@opmed.ai}}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Model error confounds two quantities: information absent from an input and information present but unused. Only the second is reducible by better modelling. We introduce \textbf{Pythia}, a train-free procedure for finite-design \emph{lower} confidence bounds on Bayes risk under absolute error, pinball loss and within-window miss loss. Validity is conditional on an externally justified Lipschitz selection of Bayes actions, outcome-blind geometry and independent entity outcomes; it is not assumption-free. If nearby cases have different outcomes, a smooth Bayes action cannot explain both without error. An outcome-blind \emph{group} witness uses a virtual common action to retain signal that pairs lose. On ten out-of-distribution MAE generators with analytic Bayes risk, grouped and paired bounds lie below truth in $200/200$ draws; the group is strictly larger in $180/200$, ties at zero in $20/200$, and raises median usable tightness from $0.563$ to $0.641$. On a disjoint five-loss benchmark a frozen route improves W15 and W30 bounds but ties paired Bentkus on quantiles. We derive a universal $\tau(1-\tau)R$ cap for grouped pinball scores and a sharper fixed-group cap. Sparse high-dimensional inputs yield zero bounds, and external local methods beat the witness centre as a point estimator. A retrospective operating-room calculation illustrates the method but is \emph{not} a clinical certificate: its action-smoothness and outcome-support assumptions remain unaudited.
+\end{abstract}
+
+\section{Introduction}
+
+A predictive model on a benchmark reports one number: the error of that model. The number that governs whether further work is worthwhile is different and counterfactual --- \emph{how well could any decision rule have performed, given only the information available at decision time?} The gap between these two quantities is the reducible part of the error. The remainder is forced by the information set and cannot be engineered away.
+
+The distinction is not academic. In operating-room scheduling, a minute of overrun attributable to an unread clinical note calls for a better model; a minute attributable to genuine outcome variability given the whole preoperative record calls for a different intervention entirely --- wider blocks, different staffing, or no action at all. Practitioners routinely spend years pursuing headroom that does not exist, because nothing in standard evaluation tells them where the floor is.
+
+Formally, for a declared pre-decision representation $Z$, outcome $Y$, and loss $\ell$, the object of interest is the Bayes risk
+\begin{equation}
+\risk_\ell(Z) \;=\; \E\Big[\inf_a \E\{\ell(Y,a)\mid Z\}\Big].
+\label{eq:bayes}
+\end{equation}
+This is a property of the joint law under a specified decision problem, not of any fitted model. Estimating it is hard: the infimum is over all measurable rules, and the conditional law of $Y\mid Z$ is unknown.
+
+\paragraph{Our approach.} We do not estimate $\risk_\ell$; we \emph{lower bound} it, with finite-sample confidence, without fitting any predictor. The mechanism is geometric. If two cases are close under a declared metric, a selected \emph{Bayes action} is assumed to assign them nearly the same action; arbitrary decision rules need not. If their outcomes nonetheless differ by $D$, at least one Bayes action incurs loss. Formalising this costs one Lipschitz assumption and one triangle inequality, and it yields pointwise \emph{witnesses} whose expectations lie below average conditional Bayes risk. Standard one-sided concentration converts witnesses into conditional certificates.
+
+\paragraph{Relation to matching estimators.} Matching, nearest-neighbour and constrained-action methods already address irreducible error \citep{devroye,rice,anderson}. Our claim is narrower than a new matching principle: under explicit structural and sampling premises, a predeclared registry of pair and group witnesses gives a one-sided finite-design confidence statement across several decision losses. We have not implemented all published floor methods on identical data. The price is that this is a bound, not an accurate point estimator; external local methods locate the floor far more accurately than our witness centre (\S\ref{sec:pointest}).
+
+\paragraph{Contributions.}
+\begin{enumerate}\itemsep1pt
+\item \textbf{A loss-indexed witness family} (\S\ref{sec:pair}) giving finite-sample lower bounds on Bayes risk for MAE, pinball at any $\tau$, and within-window miss rate, conditional on a selected Lipschitz Bayes action. This combination is the object we study; a first-of-its-kind priority claim would require a broader literature audit.
+\item \textbf{The group witness} (\S\ref{sec:group}, Theorem~\ref{thm:group}), our main methodological contribution: an outcome-blind partition and a \emph{virtual common action}, justified by a one-dimensional interval-intersection argument. It is strictly larger than the paired construction in $180/200$ MAE benchmark draws and ties at zero in $20/200$ (\S\ref{sec:maeexp}); this is not universal dominance.
+\item \textbf{A universal concentration range} for grouped pinball scores, $\tau(1-\tau)R$, with a sharper finite-group refinement (Proposition~\ref{prop:pincap}); and a \textbf{cost-free monotone closure} across window widths (Proposition~\ref{prop:wclose}).
+\item \textbf{A multiplicity-controlled certificate} (Theorem~\ref{thm:cert}) over a predeclared registry of witnesses, clipping levels and concentration methods, with an explicit refusal contract.
+\item \textbf{A non-identifiability counterexample} for disagreement alone (Proposition~\ref{prop:shared}), explaining why a separate outcome-based witness is needed.
+\item \textbf{Honest empirics}, including three negative results that delimit the method: adaptive family selection is dominated under multiplicity, the witness centre is a poor point estimator, and sparse high-dimensional geometry silences the bound while preserving validity.
+\end{enumerate}
+
+\section{Related Work}
+
+\paragraph{Bayes error estimation.} A mature literature studies classification Bayes error, including $k$-NN bounds \citep{devroye} and direct estimators \citep{ishida}; the present witness family does not cover $0$--$1$ loss. Regression difference estimators \citep{rice} target residual variance under smoothness. More directly related, \citet{anderson} estimate possible prediction performance using globally constrained actions. We do not implement their exact protocol here, so our experimental paired baseline is not a comprehensive comparison with published Bayes-floor methods. The distinction sought is a one-sided confidence statement for a fixed feature design and multiple decision losses, rather than an unqualified claim that matching is new.
+
+\paragraph{Minimax and information-theoretic lower bounds.} Bayes-risk lower bounds via van Trees and Le Cam \citep{vantrees,chen} are minimax statements over a class, with sharp constants for weighted quadratic loss. They bound risk for a \emph{family} of distributions; ours is read off a specific finite design. Information-theoretic limits on log-loss forecasting reduce to mutual information, whose lower estimation is known to require sample sizes exponential in its magnitude \citep{mcallester}, which is precisely the route our construction avoids.
+
+\paragraph{Conformal prediction and risk control.} Conformal risk control \citep{crc} provides distribution-free guarantees on the risk of a \emph{specified} procedure. Our estimand is the minimum risk over all measurable rules given a declared input. Comparing the numerical outputs as if they were the same object is a category error; the two are complementary, and we use conformal machinery nowhere in the bound.
+
+\paragraph{Disagreement-based estimates.} Generalisation--disagreement equality \citep{jiang} relates ensemble disagreement to test error under a calibration condition later shown to be essential \citep{kirsch}. Recent work bounds a target predictor's risk through a certifiable surrogate \citep{bazinet} or controls model agreement through anchoring \citep{eaton}; neither directly certifies the Bayes floor of a declared information set. An earlier version of Pythia pursued disagreement-based floors. Proposition~\ref{prop:shared} gives the elementary obstruction: agreement does not distinguish correctness from a shared blind spot. These papers and Pythia answer different questions, not a head-to-head benchmark on the same estimand.
+
+\section{Setup}
+
+\subsection{Estimand}
+
+Let $(Z_i,Y_i)_{i=1}^n$ be sampling entities with covariates $z_i$ and outcomes $Y_i\in\mathbb{R}$. Write $r_\ell(z)=\inf_a \E\{\ell(Y,a)\mid Z=z\}$ for the pointwise Bayes risk. We target the \emph{finite-design} risk, averaged over the audited covariates:
+\begin{equation}
+\risk_{\ell,n} \;=\; \frac1n\sum_{i=1}^n r_\ell(z_i).
+\label{eq:finite}
+\end{equation}
+All statements are conditional on $z_{1:n}$. This is deliberately narrower than \eqref{eq:bayes}: transfer to a future population requires a separate sampling argument, which we do not claim.
+
+\begin{assumption}[Conditional independence]\label{as:indep}
+Distinct sampling entities have conditionally independent outcomes given $z_{1:n}$.
+\end{assumption}
+
+\begin{assumption}[Outcome-blind design]\label{as:blind}
+The metric $d$, the pair and group partitions, the loss set, the clipping levels, the concentration methods and the entire candidate registry are fixed without reference to $Y_{1:n}$.
+\end{assumption}
+
+\begin{assumption}[Lipschitz Bayes action]\label{as:lip}
+There exists a selection $a^\star(\cdot)$ of Bayes actions and a constant $L$ with $|a^\star(z)-a^\star(z')|\le L\,d(z,z')$ for all audited $z,z'$.
+\end{assumption}
+
+Assumption~\ref{as:lip} is a scientific claim about the problem, not a statistical one. It must be defended externally; estimating $L$ from the same outcomes and then invoking the theorem voids the guarantee. We treat $L$ as declared, and in \S\ref{sec:mayo} we report explicitly that our clinical $L$ is illustrative rather than audited.
+
+\begin{proposition}[An external route to a quantile cap]\label{prop:quantlip}
+Suppose each conditional cdf $F_z$ is continuous with a unique $\tau$-quantile $q_\tau(z)$; for audited $z,z'$ and all $t$, $|F_z(t)-F_{z'}(t)|\le Kd(z,z')$; and each conditional density is at least $m>0$ between the two quantiles. Then $|q_\tau(z)-q_\tau(z')|\le(K/m)d(z,z')$.
+\end{proposition}
+Indeed, if $q_\tau(z)<q_\tau(z')$, the density lower bound gives $F_z(q_\tau(z'))-F_z(q_\tau(z))\ge m(q_\tau(z')-q_\tau(z))$, while the cdf discrepancy at $q_\tau(z')$ is at most $Kd(z,z')$; reverse the labels for the other ordering. Thus a \emph{separate} scientific or independent-data audit of $K$ and $m$ could supply $L=K/m$ for median or pinball decisions. We have no such audit for Mayo. A window-maximising centre need not be continuous when two modes exchange rank, so this proposition does not justify its $L$.
+
+\subsection{The three decision losses}
+
+\begin{itemize}\itemsep1pt
+\item \textbf{Absolute error:} $\ell_{\rm MAE}(y,a)=|y-a|$; Bayes act: conditional median.
+\item \textbf{Pinball at level $\tau$:} $\ell_\tau(y,a)=\tau(y-a)_+ +(1-\tau)(a-y)_+$; Bayes act: conditional $\tau$-quantile.
+\item \textbf{Window miss at half-width $w$:} $\ell_w(y,a)=\ind\{|y-a|>w\}$; Bayes act: max-mass centre.
+\end{itemize}
+The window Bayes act is generally \emph{not} the median. The witness inequality does not need an analytic formula for it, but Assumption~\ref{as:lip} still demands that a selected max-mass centre vary smoothly. This can fail near a mode switch. The window risk inverts into an operational ceiling: a valid lower bound $B_w$ on miss risk implies attainable within-window accuracy no greater than $100(1-B_w)\%$ for the audited finite design.
+
+\begin{proposition}[Decision value is loss-indexed]\label{prop:info}
+For nested representations,
+\[
+I_\ell(Z_1;Y\mid Z_0)=\risk_\ell(Z_0)-\risk_\ell(Z_0,Z_1)\ge 0.
+\]
+The ordering of $I_\ell$ across channels may differ across losses.
+\end{proposition}
+The inequality is the classical comparison-of-experiments statement \citep{blackwell} specialised to a loss; we record it because it disciplines interpretation. A representation's \emph{measured} floor may rise when a channel is added, since the witness depends on geometry; the true $\risk_\ell$ cannot. When a certificate moves the wrong way, the certificate moved.
+
+\section{Pair Witnesses}\label{sec:pair}
+
+\begin{theorem}[Paired lower witnesses]\label{thm:pair}
+Let $(i,j)$ be a disjoint pair, $D=|Y_i-Y_j|$, $d_{ij}=d(z_i,z_j)$. Under Assumptions~\ref{as:indep}--\ref{as:lip},
+\begin{align}
+h^{\rm MAE}_{ij}&=\tfrac12\clip{D-L d_{ij}}, &
+\E\big[h^{\rm MAE}_{ij}\big] &\le \tfrac12\big(r_{\rm MAE}(z_i)+r_{\rm MAE}(z_j)\big),\label{eq:wmae}\\
+h^{\tau}_{ij}&=\tfrac12\min(\tau,1-\tau)\clip{D-L d_{ij}}, &
+\E\big[h^{\tau}_{ij}\big] &\le \tfrac12\big(r_{\tau}(z_i)+r_{\tau}(z_j)\big),\label{eq:wpin}\\
+h^{w}_{ij}&=\tfrac12\ind\{D>2w+L d_{ij}\}, &
+\E\big[h^{w}_{ij}\big] &\le \tfrac12\big(r_{w}(z_i)+r_{w}(z_j)\big).\label{eq:wwin}
+\end{align}
+\end{theorem}
+
+\begin{proof}[Proof sketch; full proof in Appendix~\ref{app:pair}]
+Write $a_i=a^\star(z_i)$. The triangle inequality gives $D\le|Y_i-a_i|+|a_i-a_j|+|a_j-Y_j|$, so $|Y_i-a_i|+|Y_j-a_j|\ge D-|a_i-a_j|\ge D-Ld_{ij}$; the left side is nonnegative, so the clipped form holds pointwise, and taking conditional expectations gives \eqref{eq:wmae}. For \eqref{eq:wpin}, $\ell_\tau(y,a)\ge\min(\tau,1-\tau)|y-a|$ pointwise. For \eqref{eq:wwin}, if both outcomes were captured then $D\le 2w+Ld_{ij}$; the contrapositive forces at least one miss.
+\end{proof}
+
+\begin{remark}
+Clipping before the deterministic penalty preserves the inequality and bounds the score, which is what one-sided Hoeffding and empirical Bernstein require. Clipping levels are part of the registry and consume confidence budget.
+\end{remark}
+
+\section{The Group Witness}\label{sec:group}
+
+Pairs are a luxury of low dimension. As dimension grows, nearest-neighbour distances inflate, $Ld_{ij}$ absorbs $D$, and every paired witness clips to zero. The floor is unchanged; the instrument has gone deaf. Our remedy replaces pairwise comparison with a \emph{virtual common action} over a group.
+
+Let $\mathcal{G}$ be a partition of the audited indices formed from $z_{1:n}$ alone, with each group $G$ assigned a feature-measurable centre $c_G$ (coordinate mean or coordinate median; both are outcome-blind). Define per-case radii $\rho_i=L\,d(z_i,c_G)$ and the \emph{relaxed group score}
+\begin{equation}
+S_G \;=\; \min_{a\in\mathbb{R}}\ \frac{1}{|G|}\sum_{i\in G}\tilde\ell\big(Y_i,a;\rho_i\big),
+\label{eq:groupscore}
+\end{equation}
+where the relaxation is $\tilde\ell_{\rm MAE}(y,a;\rho)=\clip{|y-a|-\rho}$,
+$\tilde\ell_\tau(y,a;\rho)=\tau\clip{y-a-\rho}+(1-\tau)\clip{a-y-\rho}$, and
+$\tilde\ell_w(y,a;\rho)=\ind\{|y-a|>w+\rho\}$. The asymmetric pinball expression matches the implemented witness; replacing it with $\min(\tau,1-\tau)\clip{|y-a|-\rho}$ is valid but strictly weaker in general. For the window loss the minimisation in \eqref{eq:groupscore} is a maximum-overlap computation over expanded intervals and is solved exactly in $O(|G|\log|G|)$.
+
+\begin{theorem}[Group witness]\label{thm:group}
+Under Assumptions~\ref{as:indep}--\ref{as:lip}, for every group $G$,
+\[
+\E\big[S_G\big]\;\le\;\frac{1}{|G|}\sum_{i\in G} r_\ell(z_i).
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch; full proof in Appendix~\ref{app:group}]
+Consider the intervals $I_i=[a^\star(z_i)-\rho_i,\ a^\star(z_i)+\rho_i]$ for $i\in G$. For any $i,j\in G$, Assumption~\ref{as:lip} and the metric triangle inequality give
+$|a^\star(z_i)-a^\star(z_j)|\le L\,d(z_i,z_j)\le L\,d(z_i,c_G)+L\,d(c_G,z_j)=\rho_i+\rho_j$,
+so $I_i\cap I_j\ne\emptyset$. Pairwise intersecting intervals on the line have a common point (Helly's theorem in dimension one); let $a^\dagger$ be one. Since $a^\dagger$ depends only on $z_{1:n}$, it is a fixed feasible action conditional on the design. For each $i$, $|a^\dagger-a^\star(z_i)|\le\rho_i$, hence $\tilde\ell(Y_i,a^\dagger;\rho_i)\le\ell(Y_i,a^\star(z_i))$ pointwise for each of the three relaxations. Therefore
+$S_G\le |G|^{-1}\sum_{i\in G}\tilde\ell(Y_i,a^\dagger;\rho_i)\le |G|^{-1}\sum_{i\in G}\ell(Y_i,a^\star(z_i))$,
+and taking conditional expectations gives the claim.
+\end{proof}
+
+Two properties matter. First, the bound holds for \emph{any} feature-measurable centre; changing the centre changes witness strength, never the target or the confidence allocation. Second, disjoint groups have conditionally independent scores under Assumption~\ref{as:indep}, so group scores concentrate exactly as pair scores do.
+
+\subsection{Universal and finite-group ranges for pinball scores}
+
+\begin{proposition}[Universal and finite-group pinball ranges]\label{prop:pincap}
+If outcomes lie in a declared interval of length $R$, then $0\le S_G\le\tau(1-\tau)R$ for every group. For a fixed group size $k$, the sharper bound is
+\begin{equation}\label{eq:finitecap}
+S_G\ \le\ R\max_{m=0,\ldots,k}\min\!\left\{\frac{\tau(k-m)}{k},\frac{(1-\tau)m}{k}\right\}.
+\end{equation}
+The finite-group constant is attainable when group features coincide ($L=0$) and outcomes occupy the two support endpoints in the maximising proportions. The universal constant is sharp over group sizes, but need not be attained for a fixed $k$.
+\end{proposition}
+The universal cap improves the looser $\min(\tau,1-\tau)R$ bound, by a factor of $2$ at $\tau=1/2$. The finite refinement is opt-in in the implementation so the historical default is unchanged. Both affect concentration, not the witness inequality; proof and examples are in the supplement.
+
+\subsection{Free monotone closure across windows}
+
+\begin{proposition}[Window closure]\label{prop:wclose}
+$\risk_{w}$ is nonincreasing in $w$. Hence for a predeclared grid, replacing $B_w$ by $\max_{v\ge w}B_v$ preserves validity and can only tighten the bound at smaller widths, at no additional confidence cost.
+\end{proposition}
+The closure is deterministic post-processing of already-valid bounds and spends no $\alpha$. It cannot repair an unaudited $L$ or a grid chosen after reading outcomes.
+
+\section{Certification}\label{sec:cert}
+
+\begin{theorem}[Simultaneous certificate]\label{thm:cert}
+Let $\mathcal H$ be a registry --- fixed under Assumption~\ref{as:blind} --- of candidate witnesses (pair or group), clipping levels, group sizes and one-sided concentration methods, with budgets $\alpha_h>0$, $\sum_{h}\alpha_h\le\alpha$. If $\underline\mu_h$ is a valid conditional $(1-\alpha_h)$ lower confidence bound on $\E[h]$, then
+\[
+B_\ell=\max\Big\{0,\ \max_{h\in\mathcal H}\underline\mu_h\Big\}
+\quad\text{satisfies}\quad
+\Prob\big\{B_\ell\le \risk_{\ell,n}\,\big|\,z_{1:n}\big\}\ \ge\ 1-\alpha .
+\]
+\end{theorem}
+\begin{proof}
+Each event $\{\underline\mu_h>\E[h]\}$ has probability at most $\alpha_h$. Off their union, every $\underline\mu_h\le\E[h]\le\risk_{\ell,n}$ by Theorem~\ref{thm:pair} or \ref{thm:group}; the maximum of quantities below $\risk_{\ell,n}$ is below $\risk_{\ell,n}$, and $\risk_{\ell,n}\ge0$. A union bound gives the level.
+\end{proof}
+We implement Hoeffding, Maurer--Pontil empirical Bernstein \citep{maurer}, and Bentkus binomial-tail inversion \citep{bentkus} as interchangeable radii. Multiple losses, representations, slices or periods require an \emph{outer} allocation of $\alpha$; reusing an outcome to select any registry element voids the level. The procedure is summarised in Algorithm~\ref{alg:pythia}.
+
+\begin{algorithm}[t]
+\caption{Pythia certificate for loss $\ell$}\label{alg:pythia}
+\begin{algorithmic}[1]
+\Require covariates $z_{1:n}$, outcomes $Y_{1:n}$, metric $d$, Lipschitz cap $L$, level $\alpha$
+\State \textbf{Declare} (outcome-blind): pair partition $\mathcal P$; group registry $\{\mathcal G_k\}$ with centres; clip grid $\mathcal C$; methods $\mathcal M$
+\State $\mathcal H\gets \mathcal P\times\mathcal C\times\mathcal M\ \cup\ \{\mathcal G_k\}\times\mathcal C\times\mathcal M$; assign $\alpha_h=\alpha/|\mathcal H|$
+\For{$h\in\mathcal H$}
+  \State compute conditionally independent scores, which need not be identically distributed
+  \State $\underline\mu_h\gets$ one-sided $(1-\alpha_h)$ lower confidence bound via method $m(h)$
+\EndFor
+\State $B_\ell\gets\max\{0,\max_h\underline\mu_h\}$; apply window closure (Prop.~\ref{prop:wclose}) if $\ell=\ell_w$
+\State \Return $B_\ell$ with registry, budgets, $L$, metric, and provenance hashes; \textbf{refuse} if any field is absent
+\end{algorithmic}
+\end{algorithm}
+
+\section{A Sensitivity Bridge to Disagreement Bounds}
+
+Ensemble disagreement is an appealing route to the same floor, but it cannot identify irreducible risk by itself.
+
+\begin{proposition}[Disagreement alone does not identify Bayes MAE]\label{prop:shared}
+No function only of pairwise predictor disagreement can provide a universally positive lower bound on Bayes MAE. In particular, two identical constant-zero predictors have zero disagreement both when $Y=0$ almost surely, with Bayes MAE $0$, and when $Y$ is equally likely to be $-M$ or $M$ for any $M>0$, with Bayes MAE $M$.
+\end{proposition}
+The two worlds have the same predictors, inputs and disagreement, but different floors. An additive shared-error sensitivity calculation could only become a Bayes-risk bound with an \emph{independently valid} bridge from its error quantity to Bayes risk; subadditivity of MAD alone supplies no such bridge. The previous draft asserted that final implication without a premise, so we remove it rather than relabel it as proved. Pythia therefore uses outcomes and a declared action structure in its primary construction.
+
+\section{Experiments}
+
+All generators are frozen before evaluation with analytic Bayes risks, verified by independent Monte Carlo and by exhaustive enumeration of two-point conditional laws. Development and evaluation use disjoint seeds. Pythia fits no predictor; all point estimators are external comparators.
+
+\subsection{Main result: the group witness wins on this MAE benchmark}\label{sec:maeexp}
+
+Ten out-of-distribution MAE generators --- beta-Gaussian covariates, separated support with Laplace noise, oscillatory centre, V-shaped centre, radial 2D centre, 3D max centre, sparse 20D, heteroskedastic Gaussian, heteroskedastic Laplace, shifted exponential skew --- supply analytic conditional medians, MAE floors and Lipschitz caps, evaluated at the \emph{sampled} covariates. Seed \texttt{20260928}, $20$ draws per family, $n=1600$ entities per draw. Unbounded outcomes are handled by clipping on the frozen grid $(0.05,0.1,0.2,0.4,0.8,1.6)$ with Bonferroni across the grid, methods, and group sizes.
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Method & Valid & Median usable tightness & Paired wins \\
+\midrule
+Clipped paired, 95\% & $200/200$ & $0.5634$ & $0$ \\
+\textbf{Clipped grouped, 95\%} & $\mathbf{200/200}$ & $\mathbf{0.6405}$ & $\mathbf{180}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The group witness wins \emph{every} draw in nine of ten families and never loses; the twenty remaining draws are ties at zero on sparse 20D. The $200/200$ coverage has Wilson lower limit $0.981$. An independent earlier seed (\texttt{20260925}, $10$ draws per family) reproduces the pattern exactly: $90$ grouped wins, $0$ paired wins, $10$ ties. Usable tightness is $B/\risk$ when valid and $0$ when invalid, so a larger invalid bound scores zero and cannot be traded for tightness.
+
+This is a within-benchmark result against the implemented paired baseline. It is not a claim of superiority over all published bounds, nor evidence that $L$ is knowable on real data.
+Supplementary Table~S1 gives the analytic gold risk and both median bounds for every design, including the sparse failure.
+
+\subsection{Five losses, disjoint benchmark}
+
+A second, non-overlapping suite of ten designs --- five numeric, five with deterministic pre-outcome templated note text stressing extraction, negation, scale, community structure and rare cues --- was evaluated on untouched seed \texttt{20261006}: $20$ draws per design, $n=512$, five losses (q10, q90, W15, W30, W60) sharing each draw. That is $200$ independent draws and $1{,}000$ loss results, each loss receiving $\alpha=0.01$ for joint $95\%$ coverage.
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Route & Valid $/\,1{,}000$ & Median usable tightness \\
+\midrule
+Adaptive pair/group envelope & $1{,}000$ & $0.1581$ \\
+\textbf{Frozen loss-only route} & $\mathbf{1{,}000}$ & $\mathbf{0.1843}$ \\
+Paired Hoeffding & $1{,}000$ & $0.0000$ \\
+Paired empirical Bernstein & $1{,}000$ & $0.0717$ \\
+Paired Bentkus & $1{,}000$ & $0.1818$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The frozen route is paired Bentkus for pinball and \emph{grouped} Bentkus for windows. It improves W15 median tightness to $0.2678$ from $0.2175$, winning $177/200$ draws, and W30 to $0.0747$ from $0.0580$, winning $127/200$; on q10/q90 it ties the paired baseline at $0.1862$ by construction. All $200$ five-loss joint draws are valid (pooled Wilson lower limit $0.981$); no single design's $20$ draws support more than $0.839$. A later outcome-blind geometry route yields additional synthetic wins (Supplementary Table~S2), but its window threshold was adjusted after seeing retrospective Mayo results, so those Mayo outputs are development diagnostics only.
+
+\paragraph{Negative result: adaptivity loses under multiplicity.} The adaptive envelope, which selects across witness families, beats paired Bentkus in only $237$ of $800$ positive-floor cells and loses in $543$; the frozen route beats the adaptive envelope in $304$ cells, loses in $76$ and ties in $420$. Adaptive selection purchases coverage insurance that the frozen route does not need and pays for it in $\alpha$. We report the frozen route as the recommended configuration.
+
+\subsection{Where the witness goes deaf}
+
+On the sparse four-dimensional design, median tightness is $0.0234$ (adaptive) and $0.0311$ (routed). On sparse 20D in the MAE suite, both methods return zero. The floor in those worlds is not smaller; the geometry is worse. When near-replicates are distant under the declared metric, $L\,d$ consumes the observed spread and the witness clips to nothing. In fixed dimension, nearest-neighbour distances can shrink with sample size; the problem is the sample size required under a poor high-dimensional metric. A valid zero is honest and uninformative. Characterising this transition in (sample size, dimension, metric, $L$) is an important open problem.
+
+An outcome-blind centre pilot (seed \texttt{20261007}) confirms that the limitation is not the centre rule: a coordinate-median centre improved the numeric bound in $180/200$ results and worsened none, but median tightness moved only from $0.18814$ to $0.18866$.
+
+\subsection{Negative control: the witness centre is not an estimator}\label{sec:pointest}
+
+Cross-fitted local plug-ins, trained \emph{outside} Pythia, locate the floor far more accurately than our witness centre (median absolute error to known floor):
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Loss & Witness centre & kNN & Histogram & Kernel \\
+\midrule
+q10 pinball & $1.9729$ & $0.1905$ & $0.2726$ & $\mathbf{0.1389}$ \\
+q90 pinball & $1.9643$ & $0.1963$ & $0.2419$ & $\mathbf{0.1723}$ \\
+W15 miss & $0.2857$ & $\mathbf{0.0156}$ & $0.0192$ & $0.0176$ \\
+W30 miss & $0.1242$ & $0.0192$ & $0.0191$ & $\mathbf{0.0173}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In the MAE suite the same holds: leave-one-out kNN achieves median absolute error $0.0050$ against the known floor and wins $142/200$ draws over a local jackknife at $0.0079$. This is a demarcation, not a defect. An interval-side certificate and a point estimate are different objects, and the certificate should never be advertised as the latter.
+
+\subsection{Retrospective clinical audit}\label{sec:mayo}
+
+We applied the \emph{legacy radial/adaptive diagnostic}, not the later geometry route, to $10{,}528$ earliest-per-patient operating-room cases across four chronological panels and two representations, using frozen out-of-fold predictions as achieved-risk comparators; no model was trained inside Pythia. With an illustrative $L=300$ and a $[0,900]$-minute outcome cap:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Representation & $B_{W30}$ & Attainable ceiling & Achieved \\
+\midrule
+Tabular & $0.2019$ & $\le 79.81\%$ & $62.60\%$ \\
+Tabular $+$ note values & $0.1882$ & $\le 81.18\%$ & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\emph{If} the declared smoothness, support and sampling assumptions held, the first row would imply a within-30-minute ceiling of $79.81\%$ for the tabular information set, compared with $62.60\%$ achieved by the frozen MAE-selected OOF comparator. It does not establish that one fifth of future cases is intrinsically unschedulable, and the comparator is not shown to be deployed. The window grid would also imply strict fixed-design percentile floors ($p_{75}>15$ and $p_{90}>30$ minutes) under those same conditions. Grouped pinball diagnostics are $2.3704$ (q10) and $4.5177$ (q90) loss-minutes.
+
+By Proposition~\ref{prop:info} the lower numerical bound for the richer representation is \emph{not} evidence that notes reduce information. All clinical numbers are \textbf{exploratory}: $L$ and the outcome cap are illustrative, and patient independence, feature timing and retrospective reuse are not independently audited. No patient-level text or outcome appears in this paper.
+
+\section{Limitations}
+
+\textbf{The Lipschitz cap is assumed, not estimated.} It is the load-bearing assumption and the one most likely to fail silently on real data. We provide a refusal contract rather than an estimator, and we regard estimating $L$ from the same outcomes as inadmissible.
+
+\textbf{Baselines are concentration methods on a shared witness}, plus external point estimators --- not a head-to-head against every published Bayes-error method. For $0$--$1$ loss our family does not apply, and the mature classification literature \citep{devroye,ishida} is the correct tool.
+
+\textbf{Tightness is not established.} We prove validity, not optimality, and exhibit regimes with near-zero tightness. No minimax statement is claimed.
+
+\textbf{Coverage is demonstrated, not proved uniformly.} $1{,}000/1{,}000$ non-violations under known truth do not establish uniform coverage over unseen distributions, and the templated text is an integration test rather than evidence of NLP generality.
+
+\textbf{Clinical claims are retrospective.} A frozen prospective study of $3{,}000$ new eligible cases with patient-clustered inference is required before any confirmatory statement.
+
+\section{Conclusion}
+
+We give a train-free, finite-sample, multiplicity-controlled lower certificate on Bayes risk for absolute-error, quantile and within-window decisions, conditional on an externally justified Lipschitz Bayes action, outcome-blind design, independent entities and appropriate boundedness or clipping. The group witness --- a virtual common action over an outcome-blind partition, justified by a one-dimensional interval argument --- exceeds the paired baseline in $180$ of $200$ known-risk MAE draws and ties at zero in the remaining $20$. We also delimit the method sharply: adaptive family selection loses under multiplicity on a separate benchmark, the witness centre is not a competitive estimator, and sparse geometry silences the bound while preserving its conditional validity.
+
+The open problem we consider most important is the deaf regime. A witness that survives sparse high-dimensional geometry --- through a predeclared neighbourhood or graph design with a finite-sample correction for overlapping pairs --- would convert a valid-but-silent bound into an informative one, and would do so exactly where modern representations live.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{99}
+\bibitem[Angelopoulos et al.(2024)]{crc} Angelopoulos, A.\ N., Bates, S., Fisch, A., Lei, L., Schuster, T. Conformal risk control. \emph{ICLR}, 2024.
+\bibitem[Anderson \& Bjarnadottir(2024)]{anderson} Anderson, D., Bjarnadottir, M. As good as it gets? A new approach to estimating possible prediction performance. \emph{PLOS ONE}, 19(10):e0296904, 2024.
+\bibitem[Bazinet et al.(2026)]{bazinet} Bazinet, M., Zantedeschi, V., Germain, P. Bound to Disagree: Generalization Bounds via Certifiable Surrogates. \emph{UAI / PMLR}, 337:491--520, 2026.
+\bibitem[Bentkus(2004)]{bentkus} Bentkus, V. On Hoeffding's inequalities. \emph{Annals of Probability}, 32(2):1650--1673, 2004.
+\bibitem[Blackwell(1953)]{blackwell} Blackwell, D. Equivalent comparisons of experiments. \emph{Annals of Mathematical Statistics}, 24(2):265--272, 1953.
+\bibitem[Chen et al.(2016)]{chen} Chen, X., Guntuboyina, A., Zhang, Y. On Bayes risk lower bounds. \emph{JMLR}, 17(218):1--58, 2016.
+\bibitem[Devroye et al.(1996)]{devroye} Devroye, L., Gy\"orfi, L., Lugosi, G. \emph{A Probabilistic Theory of Pattern Recognition}. Springer, 1996.
+\bibitem[Eaton et al.(2026)]{eaton} Eaton, E., Goel, S., Hussing, M., Kearns, M., Roth, A., Sengupta, S.\ B., Sorrell, J. Model Agreement via Anchoring. \emph{COLT / PMLR}, 336:5625--5661, 2026.
+\bibitem[Ishida et al.(2023)]{ishida} Ishida, T., Yamane, I., Charoenphakdee, N., Niu, G., Sugiyama, M. Is the performance of my deep network too good to be true? A direct approach to estimating the Bayes error in binary classification. \emph{ICLR}, 2023.
+\bibitem[Jiang et al.(2022)]{jiang} Jiang, Y., Nagarajan, V., Baek, C., Kolter, J.\ Z. Assessing generalization of SGD via disagreement. \emph{ICLR}, 2022.
+\bibitem[Kirsch \& Gal(2022)]{kirsch} Kirsch, A., Gal, Y. A note on ``Assessing generalization of SGD via disagreement''. \emph{TMLR}, 2022.
+\bibitem[Maurer \& Pontil(2009)]{maurer} Maurer, A., Pontil, M. Empirical Bernstein bounds and sample variance penalization. \emph{COLT}, 2009.
+\bibitem[McAllester \& Stratos(2020)]{mcallester} McAllester, D., Stratos, K. Formal limitations on the measurement of mutual information. \emph{AISTATS}, 2020.
+\bibitem[Rice(1984)]{rice} Rice, J. Bandwidth choice for nonparametric regression. \emph{Annals of Statistics}, 12(4):1215--1230, 1984.
+\bibitem[Van Trees(1968)]{vantrees} Van Trees, H.\ L. \emph{Detection, Estimation, and Modulation Theory}. Wiley, 1968.
+\end{thebibliography}
+
+\appendix
+\section{Proof of Theorem~\ref{thm:pair}}\label{app:pair}
+
+Fix a disjoint pair $(i,j)$ and condition throughout on $z_{1:n}$. Write $a_i=a^\star(z_i)$, $a_j=a^\star(z_j)$, $D=|Y_i-Y_j|$, $d_{ij}=d(z_i,z_j)$.
+
+\textbf{Absolute error.} By the triangle inequality,
+$D=|Y_i-Y_j|\le |Y_i-a_i|+|a_i-a_j|+|a_j-Y_j|$, hence
+$|Y_i-a_i|+|Y_j-a_j|\ \ge\ D-|a_i-a_j|\ \ge\ D-L d_{ij}$
+using Assumption~\ref{as:lip}. The left-hand side is nonnegative, so
+$|Y_i-a_i|+|Y_j-a_j|\ge\clip{D-Ld_{ij}}$ pointwise. Dividing by $2$ and taking conditional expectations, and using $\E[|Y_i-a_i|\mid z_i]=r_{\rm MAE}(z_i)$ by definition of the Bayes action, gives \eqref{eq:wmae}.
+
+\textbf{Pinball.} For any $y,a$ and $\tau\in(0,1)$,
+$\ell_\tau(y,a)=\tau(y-a)_++(1-\tau)(a-y)_+\ \ge\ \min(\tau,1-\tau)\,|y-a|$,
+since exactly one of the two terms is active and each coefficient is at least $\min(\tau,1-\tau)$. Applying this at $(Y_i,a_i)$ and $(Y_j,a_j)$ and invoking the absolute-error step yields \eqref{eq:wpin}.
+
+\textbf{Window.} Suppose both outcomes are captured: $|Y_i-a_i|\le w$ and $|Y_j-a_j|\le w$. Then
+$D\le|Y_i-a_i|+|a_i-a_j|+|a_j-Y_j|\le 2w+Ld_{ij}$.
+Contrapositively, $D>2w+Ld_{ij}$ implies $\ind\{|Y_i-a_i|>w\}+\ind\{|Y_j-a_j|>w\}\ge 1$. Halving and taking expectations gives \eqref{eq:wwin}. \hfill$\square$
+
+\section{Proof of Theorem~\ref{thm:group}}\label{app:group}
+
+Condition on $z_{1:n}$ and fix a group $G$ with feature-measurable centre $c_G$ and radii $\rho_i=L\,d(z_i,c_G)$.
+
+\textbf{Step 1: a common feasible action exists.} For $i,j\in G$, Assumption~\ref{as:lip} and the triangle inequality for $d$ give
+\[
+|a^\star(z_i)-a^\star(z_j)|\ \le\ L\,d(z_i,z_j)\ \le\ L\,d(z_i,c_G)+L\,d(c_G,z_j)\ =\ \rho_i+\rho_j ,
+\]
+so the closed intervals $I_i=[a^\star(z_i)-\rho_i,\,a^\star(z_i)+\rho_i]$ intersect pairwise. Helly's theorem in dimension one states that a finite family of pairwise intersecting intervals has a common point; let $a^\dagger\in\bigcap_{i\in G}I_i$. Because $a^\star(\cdot)$, $c_G$ and $d$ are functions of covariates alone, $a^\dagger$ is measurable with respect to $z_{1:n}$ and is therefore a fixed scalar under the conditioning.
+
+\textbf{Step 2: the relaxation is dominated pointwise.} By construction $|a^\dagger-a^\star(z_i)|\le\rho_i$ for every $i\in G$. For absolute error,
+$|Y_i-a^\dagger|\le|Y_i-a^\star(z_i)|+\rho_i$, so
+$\clip{|Y_i-a^\dagger|-\rho_i}\le|Y_i-a^\star(z_i)|$.
+For pinball, if $Y_i-a^\dagger-\rho_i>0$ then $Y_i-a^\star(z_i)\ge Y_i-a^\dagger-\rho_i>0$; likewise, if $a^\dagger-Y_i-\rho_i>0$ then $a^\star(z_i)-Y_i\ge a^\dagger-Y_i-\rho_i>0$. Multiplying the two positive parts by $\tau$ and $1-\tau$, respectively, shows $\tilde\ell_\tau(Y_i,a^\dagger;\rho_i)\le\ell_\tau(Y_i,a^\star(z_i))$. For the window loss, if $|Y_i-a^\dagger|>w+\rho_i$ then $|Y_i-a^\star(z_i)|\ge|Y_i-a^\dagger|-\rho_i>w$, so
+$\ind\{|Y_i-a^\dagger|>w+\rho_i\}\le\ind\{|Y_i-a^\star(z_i)|>w\}$.
+
+\textbf{Step 3: minimisation and expectation.} Since $a^\dagger$ is feasible in \eqref{eq:groupscore},
+\[
+S_G\ \le\ \frac1{|G|}\sum_{i\in G}\tilde\ell(Y_i,a^\dagger;\rho_i)\ \le\ \frac1{|G|}\sum_{i\in G}\ell\big(Y_i,a^\star(z_i)\big).
+\]
+Taking conditional expectations and using $\E[\ell(Y_i,a^\star(z_i))\mid z_i]=r_\ell(z_i)$ gives
+\[
+\E[S_G]\le |G|^{-1}\sum_{i\in G}r_\ell(z_i).
+\]
+Averaging over disjoint groups yields a lower witness for $\risk_{\ell,n}$; disjointness and Assumption~\ref{as:indep} make the $S_G$ conditionally independent. \hfill$\square$
+
+\section{Proof of Proposition~\ref{prop:pincap}}\label{app:pincap}
+
+Let outcomes lie in $[y_{\min},y_{\min}+R]$ and set $a=y_{\min}+\tau R$. If $y\ge a$ then
+$\ell_\tau(y,a)=\tau(y-a)\le\tau\big(y_{\min}+R-y_{\min}-\tau R\big)=\tau(1-\tau)R$.
+If $y<a$ then
+$\ell_\tau(y,a)=(1-\tau)(a-y)\le(1-\tau)\big(y_{\min}+\tau R-y_{\min}\big)=\tau(1-\tau)R$.
+Hence every admissible observation has pinball loss at most $\tau(1-\tau)R$ at this constant action, and since $S_G$ minimises a relaxed score over all actions --- and relaxation only decreases the score --- $S_G\le\tau(1-\tau)R$.
+
+For fixed $k=|G|$, relaxation gives $S_G\le\min_a k^{-1}\sum_{i=1}^k\ell_\tau(y_i,a)$. The right side is convex in the vector $y_{1:k}$: the pinball objective is jointly convex in $(y,a)$ and partial minimisation preserves convexity. Its maximum over the outcome-support cube is attained at a vertex. At a vertex with $m$ lower and $k-m$ upper endpoints, choosing either endpoint action yields the smaller of $\tau(k-m)R/k$ and $(1-\tau)mR/k$; no interior action lowers this piecewise-linear objective further. Maximising over $m$ proves \eqref{eq:finitecap}. If all group features coincide and $L=0$, the relaxation vanishes, so the maximising endpoint vector attains the finite cap. As $k$ increases, proportions $m/k$ can approach $\tau$, making the finite constant approach $\tau(1-\tau)R$. A two-atom population law with lower-atom mass $\tau$ attains this limiting Bayes pinball risk, but need not attain the empirical score cap for every finite $k$. \hfill$\square$
+
+\section{Proof of Proposition~\ref{prop:wclose}}\label{app:wclose}
+
+For $w_1<w_2$ and any action $a$, $\ind\{|y-a|>w_2\}\le\ind\{|y-a|>w_1\}$ pointwise, so $r_{w_2}(z)\le r_{w_1}(z)$ for every $z$ and hence $\risk_{w_2,n}\le\risk_{w_1,n}$. If the grid bounds are simultaneously valid --- which Theorem~\ref{thm:cert} provides under a single outer allocation --- then on the good event $B_v\le\risk_{v,n}\le\risk_{w,n}$ for every $v\ge w$, so $\max_{v\ge w}B_v\le\risk_{w,n}$. The closure is a deterministic function of already-certified quantities and therefore consumes no additional budget. \hfill$\square$
+
+\end{document}

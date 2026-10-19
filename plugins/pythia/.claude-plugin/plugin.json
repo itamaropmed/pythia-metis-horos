@@ -1,0 +1,9 @@
+{
+  "name": "pythia",
+  "version": "0.1.0",
+  "description": "Pythia certificates: local model-risk intervals, NLI (text information beyond the table) and table floors, with claim tiers, refusals and aggregate-only privacy rules.",
+  "author": { "name": "Itamar Zernitsky" },
+  "repository": "https://github.com/itamaropmed/pythia-metis-horos",
+  "license": "UNLICENSED",
+  "keywords": ["certificates", "uncertainty", "clinical-ml", "model-risk", "nli"]
+}

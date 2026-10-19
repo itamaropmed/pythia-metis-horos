@@ -1,0 +1,20 @@
+{
+  "claim": "finite-variance iid-patient simulation with oracle variance and correlation caps",
+  "known_bayes_risk": 0.15,
+  "lambda_cap": 0.49923017660270613,
+  "n_runs": 900,
+  "peras_trained_models": false,
+  "repetitions_per_sample_size": 300,
+  "seed": 20260913,
+  "summary": {
+    "catoni": {"coverage": 1.0, "valid": 900, "wilson_lower_95": 0.9957498532699458, "median_usable_tightness": 0.6234370892374412},
+    "legacy": {"coverage": 0.9822222222222222, "valid": 884, "wilson_lower_95": 0.9713174588373977, "median_usable_tightness": 0.774233042713766},
+    "median_of_means": {"coverage": 1.0, "valid": 900, "wilson_lower_95": 0.9957498532699458, "median_usable_tightness": 0.0}
+  },
+  "n10000": {
+    "catoni_tightness": 0.8208715639754083,
+    "legacy_tightness": 0.7806775394679399,
+    "median_of_means_tightness": 0.37531582478563164
+  },
+  "status": "exploratory_validation"
+}

@@ -1,0 +1,296 @@
+% Where prediction ends --- Nature-style rewrite of PYTHIA_METIS_PAPER.tex
+% Itamar Zernitsky. Bar-Ilan University / Opmed.ai.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,booktabs,array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,urlcolor=blue!55!black,citecolor=blue!55!black,linkcolor=blue!55!black]{hyperref}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\definecolor{ink}{HTML}{15303F}
+\definecolor{accent}{HTML}{007C87}
+\definecolor{soft}{HTML}{F2F7F8}
+\titleformat{\section}{\large\bfseries\color{ink}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.5em}
+\titleformat{\subsection}{\normalsize\bfseries\color{accent}}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{1.1em}{0.35em}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+\emergencystretch=2em
+\newcommand{\risk}{R^{\star}}
+\newcommand{\tier}[1]{\textsf{\small#1}}
+\newtcolorbox{keybox}[1]{breakable,colback=soft,colframe=accent!55,boxrule=0.6pt,
+  arc=1.5pt,left=8pt,right=8pt,top=7pt,bottom=7pt,
+  title={\bfseries#1},coltitle=white,colbacktitle=accent}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+{\small\bfseries\color{accent} WORKING PAPER\quad$\cdot$\quad SEPTEMBER 2026}\par
+\vspace{1.1em}
+{\Huge\bfseries\color{ink} Where prediction ends}\par
+\vspace{0.7em}
+{\large\color{ink} Reading the floor of irreducible risk from outcome-blind near-replicates}\par
+\vspace{1.3em}
+{\normalsize\bfseries Itamar Zernitsky} \;and collaborators\par
+\vspace{0.3em}
+{\small Department of Mathematics, Bar-Ilan University, Ramat-Gan, Israel \quad$\cdot$\quad Opmed.ai}\par
+\vspace{0.9em}
+{\small\itshape Research prototype. Clinical findings are retrospective and are not a certification.}\par
+\end{center}
+
+\vspace{0.8em}
+
+\begin{keybox}{Abstract}
+Every prediction error is a mixture of two substances that look identical on a leaderboard: information the input never contained, and information the model failed to use. Only the second can be engineered away. We show that the first --- the floor of irreducible risk --- leaves a visible trace in data, and that the trace can be read without training a single model. The idea is geometric. Two cases that a declared representation cannot tell apart must be assigned nearly the same action; if their outcomes nonetheless differ, that difference is a debt no decision rule can avoid paying. Turning this observation into a statement requires only a triangle inequality, and it yields lower bounds on Bayes risk for absolute error, quantile loss and within-window miss rate alike --- three clinically distinct questions with three distinct floors. Across 1{,}000 known-truth synthetic evaluations the certificate never broke. It also never became tight: a classical concentration inequality outperformed our adaptive envelope on most trials, and ordinary local estimators located the floor more accurately than our bound's center. On 10{,}528 retrospective operating-room cases the ceiling on within-30-minute scheduling accuracy is 79.8\%, against 62.6\% achieved --- seventeen points of headroom that are informational, not algorithmic. One boundary does not move: predictors can agree because they are right or because they are blind in the same place, and no amount of disagreement distinguishes these. We give the floor, its assumptions, and the exact conditions under which it goes deaf.
+\end{keybox}
+
+\section{The question the leaderboard cannot ask}
+
+An operating room runs forty minutes late. Somewhere in that overrun are two kinds of minute, and they demand opposite responses. One kind was written in the record before the case began --- a redo with abandoned leads, a note describing venous occlusion --- and a better model would have caught it. The other kind was never written anywhere. It belongs to the part of the world that the preoperative record simply does not resolve. Spend engineering effort on the first and the schedule improves; spend it on the second and nothing happens, no matter how large the model.
+
+A leaderboard cannot separate them. It reports the error of one predictor and says nothing about what was available to be predicted. The question underneath is counterfactual and sharper: \emph{how well could any decision rule have done, given only what was knowable at the booking cutoff?}
+
+Write $Z$ for a declared, pre-outcome representation of a case and $Y$ for its realised duration. For a loss $\ell$ and an action $a$ --- a booking estimate, a quantile, a window centre --- the quantity we are after is
+\begin{equation}
+\risk_\ell(Z)=\mathbb E\Big[\inf_a\mathbb E\{\ell(Y,a)\mid Z\}\Big].\label{eq:bayes}
+\end{equation}
+This is not the error of a fitted model, and it does not improve when the model does. It is a property of the joint law of $(Z,Y)$ under a specified decision. It is also not a property of ``the data'' in any loose sense: change the information set, the cutoff, the population or the loss, and you have changed the question.
+
+Our claim is that $\risk_\ell$ is not a purely theoretical object. It leaves a trace, the trace is geometric, and it can be read off outcomes without fitting anything.
+
+\section{Information is a property of the decision}
+
+Before the geometry, one reframing that governs everything after it.
+
+For nested representations $Z_0$ and $(Z_0,Z_1)$, define the \emph{decision value} of the added channel as
+\begin{equation}
+I_\ell(Z_1;Y\mid Z_0)=\risk_\ell(Z_0)-\risk_\ell(Z_0,Z_1)\ \geq\ 0.\label{eq:info}
+\end{equation}
+The inequality is elementary --- a rule with more information may always ignore it --- and the statement is the classical comparison-of-experiments view\cite{blackwell} written in the language of a specific loss. What is easy to miss is how strongly the \emph{loss index} matters.
+
+The same clinical note can be nearly worthless for the median booking estimate and decisive for the 90th-percentile reserve. There is no single number called ``the value of the notes.'' There is a value per decision, and the values can point in different directions. Our own Mayo measurements do exactly this: adding an extracted-note channel moves the within-30-minute floor and the quantile diagnostics differently, and neither movement licenses a statement about the other.
+
+This has a second consequence that repeatedly traps practitioners. A richer representation's \emph{measured} floor can rise, because the estimate depends on geometry and the geometry got worse. The true $\risk_\ell$ cannot rise. When a certificate moves the wrong way, the certificate moved --- not the information.
+
+And a boundary: feature engineering that is a deterministic function of already-deployable inputs adds no information and cannot lower the ideal floor, though it will certainly move the measured witness. A feature drawn from a note written after the cutoff, or from the duration itself, does something categorically different --- it changes the permitted information set. In a deliberate duration-injection stress test the correct floor collapses to zero, and the system's designed response is refusal rather than a smaller number.
+
+\section{The geometry of near-replicates}
+
+Here is the picture the whole method rests on.
+
+Take two cases that the representation cannot distinguish --- not identical, but close under a declared metric $d$. Any decision rule, however sophisticated, must hand them almost the same action, because it sees almost the same input. Now suppose their outcomes differ by $D=|Y_i-Y_j|$. One of the two actions must be wrong by at least $D/2$. That error is not a modelling failure. It is forced.
+
+This is the trace. \emph{Irreducible risk is audible in the spread of outcomes among lookalikes.}
+
+Making it quantitative costs one assumption and one triangle inequality. Suppose Bayes actions can be selected to vary smoothly with the input,
+\[
+|a^\star(z)-a^\star(z')|\ \leq\ L\,d(z,z'),
+\]
+so that the actions of near-replicates cannot be pulled arbitrarily far apart. The cap $L$ is a scientific claim about the problem, defensible from domain knowledge --- and emphatically not something to estimate on the same outcomes and then call a theorem. Given it, a disjoint pair $(i,j)$ yields pointwise witnesses (Box~1) that sit below the average conditional Bayes risk in expectation.
+
+\begin{keybox}{Box 1 \;|\; Three witnesses, one inequality}
+With $D=|Y_i-Y_j|$ and $d_{ij}=d(z_i,z_j)$, and writing $[x]_+=\max(x,0)$:
+\begin{align*}
+\text{absolute error}\qquad h_{\rm MAE}&=\tfrac12\big[D-L\,d_{ij}\big]_+,\\[2pt]
+\text{quantile, level }\tau\qquad h_{\tau}&=\tfrac12\min(\tau,1-\tau)\big[D-L\,d_{ij}\big]_+,\\[2pt]
+\text{window of half-width }w\qquad h_w&=\tfrac12\mathbf 1\big\{D>2w+L\,d_{ij}\big\}.
+\end{align*}
+Each line is the same argument in a different currency. The first follows from $|Y_i-a_i|+|Y_j-a_j|\geq[D-|a_i-a_j|]_+$. The second holds because pinball loss $\ell_\tau(y,a)=\tau(y-a)_++(1-\tau)(a-y)_+$ dominates $\min(\tau,1-\tau)|y-a|$. The third is pure geometry: two intervals of radius $w$ cannot both capture their outcomes when their centres are closer together than the outcomes are far apart.
+
+Note what the window case is \emph{not}: its Bayes action is the centre capturing the most conditional mass, which is generally not the median. The witness does not care --- it never names the action.
+\end{keybox}
+
+\subsection{When nobody has a twin}
+
+Pairs are a luxury of low dimension. Add enough covariates and every case becomes unique; the nearest neighbour is far, $L\,d_{ij}$ swallows $D$, and every witness clips to zero. The floor is still there. We have simply gone deaf to it.
+
+So we widen the aperture. Partition the audited cases into disjoint groups using $Z$ alone, and imagine each group answered by a single \emph{virtual} action. Relax each case's Bayes action by its metric distance to the group centre; because the smoothness cap makes the relaxed intervals pairwise intersect, a common feasible point exists. The minimum over actions of the observed mean relaxed loss can only sit below the value at that feasible point, whose expectation is in turn no larger than the group's average Bayes risk. For the window loss the same minimum is computed by maximum overlap of expanded outcome intervals.
+
+The result is a second witness family that survives where pairs die --- and, crucially, neither construction fits a predictive model. Pythia never trains. It looks at outcomes through a geometry fixed in advance, and reports what the geometry forces.
+
+\subsection{From witness to certificate}
+
+A witness is an inequality in expectation; a certificate is a statement with a confidence level. The step between them is bookkeeping, and the bookkeeping is where this kind of work usually fails.
+
+Fix, \emph{before seeing any outcome}, a finite registry $\mathcal H$ of pair and group witnesses, clipping levels and one-sided concentration methods. Give each candidate an error budget $\alpha_h$ with $\sum_h\alpha_h\leq\alpha$. If $\underline\mu_h$ is a valid conditional lower confidence bound on candidate $h$'s expected witness, then
+\begin{equation}
+B_\ell=\max\Big\{0,\ \max_{h\in\mathcal H}\underline\mu_h\Big\}
+\qquad\text{satisfies}\qquad
+\Pr\big\{B_\ell\leq\risk_{\ell,n}\,\big|\,z_{1:n}\big\}\geq 1-\alpha,\label{eq:cert}
+\end{equation}
+where $\risk_{\ell,n}=n^{-1}\sum_i\inf_a\mathbb E\{\ell(Y,a)\mid Z=z_i\}$ is the risk averaged over the \emph{audited} covariates. The proof is a union bound over the registry, applied to the witness inequality. Hoeffding, Maurer--Pontil empirical Bernstein, and Bentkus's binomial-tail inversion serve as interchangeable radii\cite{hoeffding,maurer,bentkus}.
+
+Two honesties belong here. The estimand in (\ref{eq:cert}) is deliberately narrower than the population risk in (\ref{eq:bayes}); reaching future patients requires a separate sampling argument. And reusing a single outcome to choose $L$, the metric, or a member of the registry voids the level entirely. The engineering contribution is the registry and the refusal contract --- not the concentration inequalities, which are decades old.
+
+\subsection{Two sharpenings that cost nothing}
+
+Some improvements are free in the sense that matters: they change the arithmetic without touching the assumptions.
+
+For grouped pinball scores over a declared support of span $R$, the constant action $a=y_{\min}+\tau R$ bounds \emph{every} observation's loss by $\tau(1-\tau)R$. The minimised relaxed group score can be no larger. This replaces the previous range $\min(\tau,1-\tau)R$ and is materially sharper near the median; a two-atom law with upper mass $1-\tau$ attains it, so it cannot be improved over bounded distributions.
+
+For a predeclared grid of windows, Bayes miss risk is nonincreasing in width. The closure $B(w)\leftarrow\max_{v\geq w}B(v)$ therefore only tightens the smaller-window bounds, and spends no additional confidence budget. It also cannot rescue an unaudited smoothness cap or a window chosen after reading outcomes --- a free sharpening is not a free assumption.
+
+\section{Three decisions, three floors}
+
+Scheduling is not one question, and treating it as one is how headroom gets misattributed.
+
+\emph{Absolute error} asks for a median-like booking estimate. \emph{Pinball loss} at $\tau=0.1$ and $0.9$ asks about asymmetric under- and over-allocation; its risk is measured in loss-weighted minutes and is not a patient-level duration quantile. \emph{Window miss risk} $\risk_w=\Pr\{|Y-a(Z)|>w\}$ asks the most operational question of the three: what fraction of cases can no centre place within $w$ minutes?
+
+That last one inverts into a statement a scheduler can act on. A lower bound $B_w$ on miss risk is an \emph{upper bound} $100(1-B_w)$ on attainable within-window accuracy --- a ceiling on success, not a promise of it. And a grid of simultaneous window bounds constrains error quantiles directly: whenever $B_w>1-p$, every decision rule's error $p$-quantile strictly exceeds $w$. On Mayo this yields strict exploratory statements that the 75th percentile of absolute error exceeds 15 minutes and the 90th exceeds 30 --- coarse, but the kind of coarse that survives scrutiny.
+
+\section{What the synthetic worlds said, including what we did not want to hear}
+
+A bound that has never been tested against a known answer is a hypothesis. We built ten generators with analytic Bayes risks --- five numeric, five carrying deterministic, pre-outcome templated note text that stresses extraction, negation, scale, community structure and rare cues. The text is an integration test, not clinical language, and we say so rather than implying NLP generality. One design deliberately buries signal among irrelevant dimensions.
+
+Development on seed \texttt{20261004} selected a loss-only route; a seven-design pilot on seed \texttt{20261005} exposed a loose pinball range, which we sharpened mathematically rather than by tuning. Evaluation then ran on untouched seed \texttt{20261006}: ten designs, 20 draws each, $n=512$ independent entities per draw. That is 200 independent draws and 1{,}000 loss results --- and because the five losses share each draw, 1{,}000 is not a count of independent experiments. Each loss received $\alpha=0.01$, for joint 95\% coverage per draw.
+
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Route} & \textbf{Valid / 1{,}000} & \textbf{Median usable tightness} \\
+\midrule
+Pythia adaptive pair/group envelope & 1{,}000 & 0.158 \\
+Frozen loss-only Bentkus route & 1{,}000 & \textbf{0.184} \\
+Paired conditional Hoeffding & 1{,}000 & 0.000 \\
+Paired empirical Bernstein & 1{,}000 & 0.072 \\
+Paired conditional Bentkus & 1{,}000 & 0.182 \\
+\bottomrule
+\end{tabular}
+\normalsize\par
+\vspace{0.3em}
+{\footnotesize Usable tightness is bound/known floor when valid, zero when invalid, over the 800 positive-floor cells. W60 has true risk zero in every design, so its ratio is undefined --- not zero, and not perfect.}
+\end{center}
+
+\textbf{Nothing broke.} All 200 five-loss joint draws were valid; the pooled Wilson lower limit is 0.981, against only 0.839 for any single design's 20/20. That is the result we hoped for.
+
+\textbf{And our adaptive envelope lost.} It beat paired Bentkus in 237 of 800 positive-floor cells and lost in 543. The frozen loss-only route beat the adaptive envelope in 304 cells, lost in 76 and tied in 420 --- winning 177 of 200 W15 draws and 127 of 200 on W30. A classical 2004 inequality, applied to the same witness, is simply better most of the time. Adaptivity bought coverage insurance we did not need and paid for it in tightness.
+
+\textbf{And our bound's centre is a poor estimator.} Cross-fitted $k$-nearest-neighbour, histogram and kernel plug-ins --- trained outside Pythia, in the Horos benchmarking layer --- located the q10 floor to within median absolute deviations of 0.191, 0.273 and 0.139 loss-minutes, against 1.973 for the Pythia witness centre. On W30 the gap is 0.019, 0.019 and 0.017 miss fraction against 0.124. This is not a failure of the certificate, which was never an estimator; it is a demarcation. The interval side and the point estimate are different scientific objects and should stop being conflated.
+
+\subsection{Where the witness goes deaf}
+
+The most interesting number in the study is the smallest. On the sparse four-dimensional design, adaptive median tightness was \textbf{0.023}. An earlier ten-design MAE suite reproduced the phenomenon at twelve dimensions with a zero bound throughout.
+
+The floor in those worlds is not smaller. The geometry is worse. When near-replicates are far apart under the declared metric, the penalty $L\,d$ consumes the observed spread and the witness clips to nothing. Sample size does not fix this; the metric does. A valid zero is honest and useless, and the system reports that condition as such rather than dressing it as success.
+
+This is the closest thing the method has to a phase diagram. On one side, representations dense enough that outcome spread among lookalikes is audible and the bound carries information. On the other, representations so sparse that the floor is inaudible at any $n$. The boundary is set by the interaction of dimension, metric and smoothness cap --- and knowing which side you are on is itself a deliverable.
+
+\section{A retrospective theatre test}
+
+We took one earliest case per patient from the Mayo cardiac electrophysiology cohort, four chronological panels, two existing representations, and only frozen out-of-fold predictions: \textbf{10{,}528 audited cases}. No model was trained inside Pythia.
+
+With an illustrative smoothness cap $L=300$ and a 0--900 minute outcome cap --- both of which still require external defence --- the weighted tabular within-30-minute miss floor is $B_{30}=0.2019$. Inverted: \textbf{no decision rule on this information set can place more than 79.81\% of cases within half an hour}. The frozen predictor achieves 62.60\%.
+
+Seventeen points. That is the headroom, and its character matters more than its size: it is informational, not algorithmic. It says that roughly a fifth of these cases are unschedulable to within thirty minutes from the preoperative record, no matter what is fitted to it --- and that the current predictor is leaving real ground uncovered above that floor.
+
+For the tabular-plus-note-value representation the corresponding exploratory floor is 0.1882 and the ceiling 81.18\%. We stress what this does \emph{not} mean. The numerical decrease is not evidence that notes reduce information; equation (\ref{eq:info}) forbids that reading. It is a movement of the witness, and the witness depends on geometry. Under the sharpened grouped pinball cap the q10 and q90 lower diagnostics are 2.3704 and 4.5177 loss-minutes on tabular input.
+
+These are \tier{exploratory}. Retrospective reuse, an unaudited smoothness cap and an externally imposed outcome cap each independently prevent a clinical certificate. No patient-level text or outcome enters this report.
+
+\subsection{What the historical record supports, and what it does not}
+
+An earlier Arm-B study on tabular inputs plus 11 extracted note concepts recorded a stored out-of-fold MAE of 32.8700 minutes, a simulation-calibrated two-dimensional guarded floor of 28.8496, and a central-envelope floor estimate of 31.1186. These stand as \tier{calibrated} historical findings: they rest on a residual-shape guard and fold assumptions never proved for this cohort.
+
+One correction belongs in the open literature of this project rather than in a footnote. The frequently quoted ``31.2623-minute incumbent'' cannot presently be reproduced as a held-out duration MAE; the matching artifact is an out-of-fold residual-corrector \emph{selection} metric. We therefore do not use it as a clinical comparator. A number that cannot be reproduced should not anchor a decision, however often it has been repeated.
+
+\section{The boundary that does not move}
+
+Every method has an obstruction it cannot argue its way past. Ours is shared blindness.
+
+An earlier line of this work inferred the floor from disagreement between cross-fitted predictors: if two models trained on disjoint data agree, the reasoning went, little estimation error remains. The failure is structural. \emph{Predictors may agree because they are both right, or because they share a blind spot} --- and disagreement, by construction, cannot tell these apart. Two identical models disagree not at all and may both be arbitrarily wrong.
+
+We have measured this rather than asserted it. In controlled designs where the truth contains a pure interaction term, every learner in a heterogeneous pool --- boosting, forests, ridge, nearest neighbours --- under-fits it in the same direction. The disagreement statistic under-states the excess risk, the bound lifts above the true floor, and the certificate is invalid. No repair exists inside the identity itself.
+
+What can be done is to make the exposure explicit. Let a base rung lower-bound $\mathrm{MAD}(\varepsilon-b)$, where $b$ is the error component common to the whole pool. Subadditivity gives $\mathrm{MAD}(\varepsilon-b)\leq\mathrm{MAD}(\varepsilon)+\mathrm{MAD}(b)$, so an external audit supplying $\mathrm{MAD}(b)\leq C$ yields
+\[
+\risk_{\rm MAE}\ \geq\ \max\{\text{base bound}-C,\ 0\}.
+\]
+This is a conditional sensitivity curve, not a recovery of invisible bias. It is why this paper's primary object is an outcome-based near-replicate witness, and why the 28.85-minute disagreement result keeps its lower claim tier no matter how often it has been cited internally.
+
+\section{Claim tiers are part of the mathematics}
+
+A theorem about a witness is not a theorem that a hospital's patients satisfy its metric and independence assumptions. To keep that distinction from eroding under quotation, every number this system emits carries a tier.
+
+\begin{center}
+\small
+\begin{tabular}{p{0.15\linewidth}p{0.76\linewidth}}
+\toprule
+\tier{proved} & A theorem whose assumptions are part of the supplied mathematical object. \\
+\tier{conditional} & A finite-sample certificate \emph{if} independently audited assumptions hold. Quote them beside the number. \\
+\tier{calibrated} & A simulation-supported guard or envelope without per-cohort coverage proof. \\
+\tier{exploratory} & An informative diagnostic missing an assumption, a provenance, or an untouched evaluation set. \\
+\tier{refused} & The input, loss, domain, independence or leakage contract fails. No number is issued. \\
+\bottomrule
+\end{tabular}
+\normalsize
+\end{center}
+
+Nothing here is decoration. A thousand simulated non-violations do not promote a \tier{calibrated} guard to \tier{proved}, and a valid zero lower bound is reported as the deaf condition it is rather than as a success.
+
+\section{Metis: search without erasure}
+
+Pythia evaluates; it does not optimise. The automation around it --- Metis --- is designed around a single asymmetry: an agent should be free to propose anything and unable to promote anything unvalidated.
+
+A proposal may alter representation, neighbourhood geometry, group size, loss, guard, or an external predictor. It enters staging with a source hash, an information cutoff, a patient split, a metric contract and a multiplicity budget. Only then does Pythia compute a candidate certificate. An agent may suggest a note parser; it may not silently redefine the outcome or reach past the cutoff. It may suggest a new guard; it may not promote the synthetic suite used to \emph{tune} that guard into independent evidence that the guard covers.
+
+The loop: declare decision and population; generate outcome-blind candidates; train any predictive model only in Horos, on development folds; compute Pythia witnesses on an untouched audit set; reject violations and unsupported claims; freeze a versioned certificate; monitor drift and prospective outcomes. Every adaptive attempt debits a declared testing budget or demands fresh data. A candidate can improve an achieved score while weakening the floor witness, and the system must show both rather than the flattering one.
+
+Metis autonomy and its interface remain unimplemented, deferred behind certification infrastructure. The historical sequence of Mayo experiments motivates the loop; it is not evidence that the agent has run.
+
+\section{What would change our mind}
+
+Four things, stated so that failure is recognisable.
+
+An \textbf{independent proof audit} of the pair and group witnesses, the Bentkus inversion, the sharp pinball cap and the dependence-capped result, against adversarial counterexamples --- correlated patients, unsupported tails, misspecified action smoothness, text-timing violations --- with a clean refusal in each failure mode.
+
+A \textbf{genuinely independent shape-library evaluation} of the guarded MAE result, including heavy tails and anti-monotone dependence between noise and model error. The top rung's unobservable condition must stop being described as assumption-free.
+
+A \textbf{robust floor estimator}. Local plug-ins won the present comparison and carry their own smoothness and tuning requirements; the certificate's centre is not a substitute.
+
+A \textbf{frozen prospective study} of 3{,}000 new eligible Mayo cases, comparing the same-case incumbent against the chosen note arm with patient-clustered inference. Primary endpoint: paired MAE gain. Secondary: W30, quantile risk, slice calibration, certificate consistency. Only this converts a retrospective effect into a confirmatory one.
+
+\section{Outlook}
+
+The ambition is larger than one duration model. A floor that is indexed by the decision can tell a surgeon why an information channel helps the 90th-percentile reserve but not the median booking; when additional text merely rearranges metric geometry; and when remaining headroom is too uncertain to justify deployment at all. The same ambition is the safety burden, which is why a certificate must carry its loss, estimand, unit, cohort and information-set hashes, cutoff, assumptions, guard version, confidence allocation, falsification checks --- and a plain-language refusal when any of those is missing.
+
+The defensible contribution is a discipline, not a universal bound: estimate a loss-specific information floor from outcome-blind geometric witnesses; expose precisely which assumptions purchase which tightness; and let an agent search only while the claim ledger stays testable. The decision-value definition is classical. Neither an always-tight bound nor a best floor estimator has been demonstrated here, and we do not claim them.
+
+What we do claim is that the question is answerable at all --- that ``where does prediction end'' has an empirical handle, that the handle is a triangle inequality between lookalikes, and that the honest version of the answer arrives with the conditions under which it goes silent. The strongest present evidence is mathematical under explicit assumptions and synthetic under known truth. The most important evidence is negative and equally clear: a 2004 inequality can beat our adaptive bound, local methods can estimate the floor better, a poor metric can silence the witness entirely, and the clinical guard remains unproved.
+
+The immediate task is not to declare the floor found. It is to make every future claim falsifiable at the moment it is made.
+
+\vspace{1.2em}
+\begin{keybox}{Box 2 \;|\; What a certificate must contain}
+\small
+\textbf{Estimand.} Loss $\ell$; finite-design or population; unit; the exact averaging set.\\
+\textbf{Information.} Representation hash; cohort hash; cutoff timestamp; patient split rule.\\
+\textbf{Assumptions.} Smoothness cap $L$ and its external justification; metric $d$; conditional independence claim; score cap or clipping level.\\
+\textbf{Budget.} Registry $\mathcal H$; per-candidate $\alpha_h$; the outer allocation across losses, slices and periods; count of adaptive attempts consumed.\\
+\textbf{Provenance.} Guard version; concentration method; seed; whether the evaluation set was untouched.\\
+\textbf{Falsification.} The checks that would void it, and what the system does when one fails.\\
+\textbf{Tier.} \tier{proved} / \tier{conditional} / \tier{calibrated} / \tier{exploratory} / \tier{refused}.\\[0.3em]
+A missing field is not a smaller certificate. It is a refusal.
+\end{keybox}
+
+\vspace{0.8em}
+{\footnotesize\textbf{Data and code.} Synthetic generators, witness implementations and the audit harness are versioned in the project repository. Clinical data are held under institutional agreement and do not travel with the code; no patient-level text or outcome appears in this report. \quad\textbf{Correspondence.} \href{mailto:itamar.zernitsky@opmed.ai}{itamar.zernitsky@opmed.ai}.}
+
+\begingroup\small
+\begin{thebibliography}{9}
+\bibitem{perasv2} Zernitsky, I. and collaborators. \emph{Pythia and Metis: A Certified Floor on Irreducible Risk from Cross-Fitted Model Disagreement}. Working draft, 9 September 2026. Historical claims re-audited here.
+\bibitem{blackwell} Blackwell, D. Equivalent comparisons of experiments. \emph{Ann.\ Math.\ Statist.} \textbf{24}, 265--272 (1953). \url{https://doi.org/10.1214/aoms/1177729032}
+\bibitem{hoeffding} Hoeffding, W. Probability inequalities for sums of bounded random variables. \emph{J.\ Amer.\ Statist.\ Assoc.} \textbf{58}, 13--30 (1963). \url{https://doi.org/10.1080/01621459.1963.10500830}
+\bibitem{maurer} Maurer, A. \& Pontil, M. Empirical Bernstein bounds and sample variance penalization. \emph{COLT} (2009). \url{https://arxiv.org/abs/0907.3740}
+\bibitem{bentkus} Bentkus, V. On Hoeffding's inequalities. \emph{Ann.\ Probab.} \textbf{32}, 1650--1673 (2004). \url{https://arxiv.org/abs/math/0410159}
+\bibitem{quantile} Koenker, R. \& Bassett, G. Regression quantiles. \emph{Econometrica} \textbf{46}, 33--50 (1978). \url{https://doi.org/10.2307/1913643}
+\bibitem{crc} Angelopoulos, A. N. et al. Conformal risk control. \emph{ICLR} (2024). \url{https://openreview.net/forum?id=33XGfHLtZg}
+\end{thebibliography}
+\endgroup
+\end{document}

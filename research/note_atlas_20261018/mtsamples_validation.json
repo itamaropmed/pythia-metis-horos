@@ -1,0 +1,777 @@
+{
+ "n_cases": 2357,
+ "n_patients": 2357,
+ "A_structure": {
+  "empty_share": 0.0,
+  "chars_median": 2613.0,
+  "chars_p90": 5503.8,
+  "tokens_median": 389.0,
+  "sections_per_case_median": 7.0,
+  "top_sections": {
+   "ANESTHESIA": 613,
+   "PROCEDURE": 569,
+   "PREOPERATIVE DIAGNOSIS": 545,
+   "POSTOPERATIVE DIAGNOSIS": 508,
+   "HISTORY OF PRESENT ILLNESS": 435,
+   "PHYSICAL EXAMINATION": 397,
+   "ALLERGIES": 394,
+   "IMPRESSION": 394,
+   "PAST MEDICAL HISTORY": 367,
+   "COMPLICATIONS": 360,
+   "HEENT": 350,
+   "REVIEW OF SYSTEMS": 340
+  },
+  "boilerplate_line_share": 0.00939866415113859,
+  "copy_forward_line_share_within_patient": 0.0,
+  "numbers_per_1k_tokens": 41.74750826929759,
+  "negation_cues_per_1k_tokens": 14.613241291563776,
+  "reportable_vocabulary": 2281
+ },
+ "B_global": {
+  "I": 33.30820761954044,
+  "R2": 0.06498148594142314,
+  "dMAE": 0.5724700084594794,
+  "I_ci95": [
+   22.379507630330874,
+   43.28343293406614
+  ],
+  "residual_var": 512.5799623844515,
+  "residual_mae": 17.975741460700156,
+  "permutation_null_I": [
+   -1.2046496609249289,
+   -0.5837063940319922
+  ]
+ },
+ "C_per_case": {
+  "movement_minutes_quantiles": {
+   "0.1": 0.5613348835884937,
+   "0.25": 1.490783138217355,
+   "0.5": 3.195860759325251,
+   "0.75": 5.602145205918318,
+   "0.9": 8.657589057162822,
+   "0.99": 15.276370641720975
+  },
+  "share_cases_positive_gain": 0.5294866355536699,
+  "gini_positive_gain": 0.7927404312444417,
+  "top10pct_share_of_positive_gain": 0.6107621456685374,
+  "by_length_decile": [
+   {
+    "decile": 0,
+    "I": -5.61437739126626,
+    "R2": -0.012574034457862844,
+    "dMAE": -0.3413220005249151
+   },
+   {
+    "decile": 1,
+    "I": 16.544655326004147,
+    "R2": 0.032791000416092175,
+    "dMAE": 0.36021555565940844
+   },
+   {
+    "decile": 2,
+    "I": 10.312865826844245,
+    "R2": 0.02117684935208275,
+    "dMAE": 0.11105017470694989
+   },
+   {
+    "decile": 3,
+    "I": 33.42919627555909,
+    "R2": 0.06489488220616504,
+    "dMAE": 0.7335425486370646
+   },
+   {
+    "decile": 4,
+    "I": 3.8025470500931533,
+    "R2": 0.008710754556129206,
+    "dMAE": 0.1571069408165684
+   },
+   {
+    "decile": 5,
+    "I": 9.19390935771031,
+    "R2": 0.021663534944326907,
+    "dMAE": 0.28608302887991854
+   },
+   {
+    "decile": 6,
+    "I": 30.113412174065957,
+    "R2": 0.06475499254783952,
+    "dMAE": 0.4376278998366985
+   },
+   {
+    "decile": 7,
+    "I": 46.309426601403345,
+    "R2": 0.09473629821970965,
+    "dMAE": 1.028234652104743
+   },
+   {
+    "decile": 8,
+    "I": 72.4486101439976,
+    "R2": 0.11036773425443454,
+    "dMAE": 1.0380975898818825
+   },
+   {
+    "decile": 9,
+    "I": 116.27650831476922,
+    "R2": 0.16592954353005387,
+    "dMAE": 1.9096420393775269
+   }
+  ],
+  "empty_notes": null,
+  "by_stratum": {
+   "0": {
+    "n": 1367,
+    "I": 64.24362448356555,
+    "R2": 0.11050567915140311,
+    "dMAE": 1.0818936311691587
+   },
+   "1": {
+    "n": 218,
+    "I": -16.018612544652456,
+    "R2": -0.03676638678444694,
+    "dMAE": -0.22408038798372587
+   },
+   "2": {
+    "n": 282,
+    "I": -2.5673336518837573,
+    "R2": -0.00598759378337183,
+    "dMAE": 0.006126040908551289
+   },
+   "3": {
+    "n": 235,
+    "I": -6.304888866663362,
+    "R2": -0.016347126788964796,
+    "dMAE": -0.12322792216707867
+   },
+   "4": {
+    "n": 255,
+    "I": -14.179979613905687,
+    "R2": -0.033824911741950306,
+    "dMAE": -0.21002447496363885
+   }
+  },
+  "spearman_movement_vs_true_effect": 0.3568997620616455
+ },
+ "D_sections": {
+  "ANESTHESIA": {
+   "patients": 613,
+   "reliance_drop_I": 3.9105488511484623,
+   "keep_only_I": 56.537183753207444,
+   "unique_I_retrain": 3.563525809703549
+  },
+  "PROCEDURE": {
+   "patients": 569,
+   "reliance_drop_I": 3.0841082237658384,
+   "keep_only_I": 8.397330617090688,
+   "unique_I_retrain": 2.188740335394016
+  },
+  "PREOPERATIVE DIAGNOSIS": {
+   "patients": 545,
+   "reliance_drop_I": -0.2413168045892462,
+   "keep_only_I": -6.666701659198338
+  },
+  "POSTOPERATIVE DIAGNOSIS": {
+   "patients": 508,
+   "reliance_drop_I": -0.055106338109965236,
+   "keep_only_I": -4.049153788435433
+  },
+  "HISTORY OF PRESENT ILLNESS": {
+   "patients": 435,
+   "reliance_drop_I": -0.026858383106798556,
+   "keep_only_I": -2.5922918781761837
+  },
+  "PHYSICAL EXAMINATION": {
+   "patients": 397,
+   "reliance_drop_I": 0.10735818697276045,
+   "keep_only_I": -3.8507110096375072
+  },
+  "ALLERGIES": {
+   "patients": 394,
+   "reliance_drop_I": -0.0960137851431,
+   "keep_only_I": -4.000941373392948
+  },
+  "IMPRESSION": {
+   "patients": 394,
+   "reliance_drop_I": 0.1679338328629001,
+   "keep_only_I": -3.029897653488547,
+   "unique_I_retrain": 0.3064666493480672
+  },
+  "PAST MEDICAL HISTORY": {
+   "patients": 367,
+   "reliance_drop_I": -0.06225441924959796,
+   "keep_only_I": -4.149052563078726
+  },
+  "COMPLICATIONS": {
+   "patients": 360,
+   "reliance_drop_I": 0.4226935453127112,
+   "keep_only_I": 9.96944549370022,
+   "unique_I_retrain": 0.3728156861555476
+  },
+  "HEENT": {
+   "patients": 350,
+   "reliance_drop_I": -0.1303970215104755,
+   "keep_only_I": -4.166901209205889
+  },
+  "REVIEW OF SYSTEMS": {
+   "patients": 340,
+   "reliance_drop_I": 0.24807802430899528,
+   "keep_only_I": -2.639306207486243,
+   "unique_I_retrain": 0.48560021772806294
+  }
+ },
+ "E_token_classes": {
+  "numbers": 0.8284062620290342,
+  "dates_times": -0.4298604841815745,
+  "negation_scope": 0.5615613716267376,
+  "negation_cues_only": 0.14284160361012255,
+  "medication_like": 0.07590585868524613,
+  "units": 0.11464027420936418
+ },
+ "F_melting": {
+  "p": [
+   0,
+   0.1,
+   0.25,
+   0.5,
+   0.75,
+   0.9,
+   0.97
+  ],
+  "retained_fraction": [
+   1.0,
+   0.9683020477630753,
+   0.9339973796369312,
+   0.762109688997904,
+   0.6242677490327495,
+   0.32266741841224994,
+   0.05284013109041355
+  ],
+  "heat_capacity": [
+   0.3169795223692473,
+   0.2286977875076272,
+   0.6875507625561088,
+   0.5513677598606179,
+   2.0106688708033302,
+   3.8546755331690936
+  ],
+  "half_melting_p": 0.9
+ },
+ "G_beam": [
+  {
+   "size": 1,
+   "best_sections": [
+    "ANESTHESIA"
+   ],
+   "retained": 1.6973949603952752
+  },
+  {
+   "size": 2,
+   "best_sections": [
+    "ANESTHESIA",
+    "REVIEW OF SYSTEMS"
+   ],
+   "retained": 1.699598957849473
+  },
+  {
+   "size": 3,
+   "best_sections": [
+    "ANESTHESIA",
+    "PHYSICAL EXAMINATION",
+    "REVIEW OF SYSTEMS"
+   ],
+   "retained": 1.6935346482044134
+  },
+  {
+   "size": 4,
+   "best_sections": [
+    "ANESTHESIA",
+    "HEENT",
+    "PHYSICAL EXAMINATION",
+    "REVIEW OF SYSTEMS"
+   ],
+   "retained": 1.6798810232165682
+  },
+  {
+   "size": 5,
+   "best_sections": [
+    "ALLERGIES",
+    "ANESTHESIA",
+    "HEENT",
+    "PHYSICAL EXAMINATION",
+    "REVIEW OF SYSTEMS"
+   ],
+   "retained": 1.6706352321638165
+  }
+ ],
+ "G_annealing": {
+  "cases": 196,
+  "median_sections_needed": 1.0,
+  "median_sections_available": 7.0,
+  "share_single_section": 0.8010204081632653
+ },
+ "H_diffusion": {
+  "curve": [
+   {
+    "t": 1,
+    "I": 24.663350341138766,
+    "shrink": 0.6097361389912145
+   },
+   {
+    "t": 2,
+    "I": 26.997401048114284,
+    "shrink": 0.8017167864648089
+   },
+   {
+    "t": 3,
+    "I": 27.321479373890384,
+    "shrink": 0.8727241526129378
+   },
+   {
+    "t": 4,
+    "I": 26.63030815782031,
+    "shrink": 0.9182946740886428
+   },
+   {
+    "t": 5,
+    "I": 26.128531271302222,
+    "shrink": 0.9582227713133803
+   },
+   {
+    "t": 6,
+    "I": 25.599336594314025,
+    "shrink": 0.9936510169062522
+   },
+   {
+    "t": 7,
+    "I": 25.134556494539595,
+    "shrink": 1.0274247529865714
+   },
+   {
+    "t": 8,
+    "I": 24.70792816392384,
+    "shrink": 1.0600550171081282
+   }
+  ],
+  "best_t": 3
+ },
+ "H_communities": {
+  "n_communities": 26,
+  "n_large": 17,
+  "community_info": {
+   "I": 16.430164777711923,
+   "R2": 0.03205385692659747,
+   "dMAE": 0.25228858786772435
+  },
+  "large": [
+   {
+    "id": 1,
+    "size": 140,
+    "mean_residual": 0.6235144137562395,
+    "top_terms": [
+     "spine",
+     "sleep",
+     "mri",
+     "motor",
+     "gait",
+     "strength",
+     "examination",
+     "sensory"
+    ]
+   },
+   {
+    "id": 2,
+    "size": 111,
+    "mean_residual": 7.367508868811229,
+    "top_terms": [
+     "port",
+     "gallbladder",
+     "fascia",
+     "diagnosis",
+     "cystic",
+     "duct",
+     "tube",
+     "cavity"
+    ]
+   },
+   {
+    "id": 3,
+    "size": 175,
+    "mean_residual": -4.027444151913824,
+    "top_terms": [
+     "him",
+     "chief",
+     "complaint",
+     "male",
+     "illness",
+     "systems",
+     "clear",
+     "nontender"
+    ]
+   },
+   {
+    "id": 4,
+    "size": 107,
+    "mean_residual": 11.170706935979602,
+    "top_terms": [
+     "uterus",
+     "cervix",
+     "uterine",
+     "fetal",
+     "placenta",
+     "delivery",
+     "pregnancy",
+     "vaginal"
+    ]
+   },
+   {
+    "id": 5,
+    "size": 61,
+    "mean_residual": 15.367780887741477,
+    "top_terms": [
+     "disc",
+     "cervical",
+     "fusion",
+     "disk",
+     "screws",
+     "plate",
+     "decompression",
+     "space"
+    ]
+   },
+   {
+    "id": 6,
+    "size": 115,
+    "mean_residual": -0.7733234993683793,
+    "top_terms": [
+     "artery",
+     "coronary",
+     "stenosis",
+     "circumflex",
+     "femoral",
+     "descending",
+     "vessel",
+     "aortic"
+    ]
+   },
+   {
+    "id": 8,
+    "size": 128,
+    "mean_residual": 5.5388087034555955,
+    "top_terms": [
+     "fracture",
+     "tear",
+     "knee",
+     "joint",
+     "medial",
+     "tendon",
+     "reduction",
+     "rotator"
+    ]
+   },
+   {
+    "id": 9,
+    "size": 89,
+    "mean_residual": -1.1989233505434762,
+    "top_terms": [
+     "contrast",
+     "are",
+     "images",
+     "impression",
+     "exam",
+     "axial",
+     "technique",
+     "evidence"
+    ]
+   },
+   {
+    "id": 10,
+    "size": 81,
+    "mean_residual": -6.149677866296069,
+    "top_terms": [
+     "scope",
+     "esophagus",
+     "stomach",
+     "biopsies",
+     "duodenum",
+     "endoscopy",
+     "bronchoscopy",
+     "esophageal"
+    ]
+   },
+   {
+    "id": 13,
+    "size": 57,
+    "mean_residual": -5.824632922905471,
+    "top_terms": [
+     "needle",
+     "injected",
+     "gauge",
+     "injection",
+     "epidural",
+     "aspiration",
+     "prone",
+     "fluoroscopy"
+    ]
+   },
+   {
+    "id": 14,
+    "size": 50,
+    "mean_residual": -1.2300454086050103,
+    "top_terms": [
+     "eye",
+     "chamber",
+     "lens",
+     "speculum",
+     "lid",
+     "intraocular",
+     "cataract",
+     "capsular"
+    ]
+   },
+   {
+    "id": 17,
+    "size": 105,
+    "mean_residual": 2.677332153812103,
+    "top_terms": [
+     "bladder",
+     "scrotal",
+     "urethra",
+     "inguinal",
+     "hernia",
+     "scrotum",
+     "cystoscopy",
+     "sac"
+    ]
+   },
+   {
+    "id": 19,
+    "size": 331,
+    "mean_residual": -2.9157657952151146,
+    "top_terms": [
+     "hypertension",
+     "today",
+     "rate",
+     "systems",
+     "weight",
+     "heart",
+     "are",
+     "heent"
+    ]
+   },
+   {
+    "id": 20,
+    "size": 191,
+    "mean_residual": 1.5003779191554265,
+    "top_terms": [
+     "breast",
+     "excised",
+     "excision",
+     "wound",
+     "skin",
+     "flap",
+     "diagnosis",
+     "epinephrine"
+    ]
+   },
+   {
+    "id": 22,
+    "size": 55,
+    "mean_residual": -3.3941297119193927,
+    "top_terms": [
+     "nose",
+     "ears",
+     "masses",
+     "tenderness",
+     "throat",
+     "musculoskeletal",
+     "negative",
+     "psychiatric"
+    ]
+   },
+   {
+    "id": 24,
+    "size": 127,
+    "mean_residual": -3.5148395788417144,
+    "top_terms": [
+     "admission",
+     "hospital",
+     "course",
+     "diet",
+     "home",
+     "days",
+     "day",
+     "discharged"
+    ]
+   },
+   {
+    "id": 25,
+    "size": 83,
+    "mean_residual": -2.2529429901127487,
+    "top_terms": [
+     "revealed",
+     "fhx",
+     "shx",
+     "pmh",
+     "exam",
+     "sensory",
+     "hct",
+     "gait"
+    ]
+   }
+  ]
+ },
+ "I_term_network": {
+  "terms": 1500,
+  "edges": 88314,
+  "communities": [
+   {
+    "size": 586,
+    "diffused_minutes": 3.4662947054430333,
+    "top_terms": [
+     "general",
+     "fascia",
+     "endotracheal",
+     "operating",
+     "loss",
+     "fashion",
+     "postoperative",
+     "supine",
+     "anterior",
+     "taken"
+    ]
+   },
+   {
+    "size": 87,
+    "diffused_minutes": -1.1875860602700008,
+    "top_terms": [
+     "cardiac",
+     "colonoscopy",
+     "descending",
+     "wave",
+     "endoscopy",
+     "withdrawn",
+     "pigtail",
+     "function",
+     "advanced",
+     "rectum"
+    ]
+   },
+   {
+    "size": 682,
+    "diffused_minutes": -0.8125962603508636,
+    "top_terms": [
+     "these",
+     "pulse",
+     "disease",
+     "rate",
+     "edema",
+     "vital",
+     "follow",
+     "pulses",
+     "are",
+     "signs"
+    ]
+   },
+   {
+    "size": 142,
+    "diffused_minutes": -0.1484095207340818,
+    "top_terms": [
+     "vertebral",
+     "discharged",
+     "normal",
+     "disk",
+     "levels",
+     "lower",
+     "revealed",
+     "bilateral",
+     "spine",
+     "injury"
+    ]
+   }
+  ],
+  "top_positive_terms": [
+   "peritoneum",
+   "retractor",
+   "trocar",
+   "screws",
+   "clamps",
+   "bluntly",
+   "peritoneal",
+   "transected",
+   "insufflated",
+   "knife",
+   "rectus",
+   "instrumentation",
+   "roll",
+   "plate",
+   "scalpel"
+  ],
+  "top_negative_terms": [
+   "colonoscopy",
+   "wave",
+   "fentanyl",
+   "pigtail",
+   "according",
+   "gastroesophageal",
+   "stool",
+   "endoscopy",
+   "tender",
+   "mcg",
+   "appointment",
+   "descending",
+   "relief",
+   "abnormality",
+   "dyspnea"
+  ]
+ },
+ "J_topology": {
+  "mst_edges": 2356,
+  "h0_death_quantiles": {
+   "0.5": 0.525013265228186,
+   "0.9": 0.6886981493647453,
+   "0.99": 0.8438392673359214
+  },
+  "dirichlet_energy": 890.8079164197316,
+  "null_mean": 1025.3680005354574,
+  "smoothness_ratio": 0.8687689843593156,
+  "permutation_p": 0.004975124378109453
+ },
+ "reportable_terms_count": 2281,
+ "sections_analysed": [
+  "ANESTHESIA",
+  "PROCEDURE",
+  "PREOPERATIVE DIAGNOSIS",
+  "POSTOPERATIVE DIAGNOSIS",
+  "HISTORY OF PRESENT ILLNESS",
+  "PHYSICAL EXAMINATION",
+  "ALLERGIES",
+  "IMPRESSION",
+  "PAST MEDICAL HISTORY",
+  "COMPLICATIONS",
+  "HEENT",
+  "REVIEW OF SYSTEMS"
+ ],
+ "validation": {
+  "true_I_beyond_table": 111.00021100029308,
+  "planted": [
+   "ANESTHESIA:general (+25)",
+   "BLOOD LOSS number (+0.08/ml)",
+   "COMPLICATIONS present & not negated (+30)"
+  ],
+  "sec": 198.81780791282654
+ },
+ "negative_control": {
+  "I": -0.12328643628450209,
+  "R2": -0.00024052137292099858,
+  "dMAE": 0.0010001278292151028,
+  "I_ci95": [
+   -3.0722935834681837,
+   2.5033346811472117
+  ],
+  "residual_var": 512.5799623844515,
+  "residual_mae": 17.975741460700156,
+  "permutation_null_I": [
+   -0.6855042973328409,
+   -1.305791261838408
+  ]
+ }
+}

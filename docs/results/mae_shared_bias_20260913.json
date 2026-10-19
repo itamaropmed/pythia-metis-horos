@@ -1,0 +1,18 @@
+{
+  "claim": "known shared-bias MAD simulation; validates sensitivity algebra, not cap estimation",
+  "levels": [0.0, 3.0, 4.0, 5.0, 7.0, 10.0],
+  "n_designs_per_level": 500,
+  "evaluated_per_rung": 2989,
+  "results": {
+    "calibrated_2d": {"raw_valid": 982, "adjusted_valid": 2989, "adjusted_wilson_lower_95": 0.9987164509468509},
+    "qcap_guard_conditional": {"raw_valid": 1489, "adjusted_valid": 2989, "adjusted_wilson_lower_95": 0.9987164509468509},
+    "sqrt2_guard_conditional": {"raw_valid": 1514, "adjusted_valid": 2989, "adjusted_wilson_lower_95": 0.9987164509468509}
+  },
+  "cap_factor_validity": {
+    "0.0": {"valid": 3985, "total": 8967, "validity_rate": 0.44440727110516337},
+    "0.5": {"valid": 7472, "total": 8967, "validity_rate": 0.8332775733244118},
+    "1.0": {"valid": 8967, "total": 8967, "validity_rate": 1.0},
+    "1.5": {"valid": 8967, "total": 8967, "validity_rate": 1.0}
+  },
+  "status": "exploratory_validation"
+}

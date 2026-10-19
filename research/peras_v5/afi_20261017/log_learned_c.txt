@@ -1,0 +1,10 @@
+{"dataset": "D08_outcome_leak", "rep": 0, "true_dI": 0.12295858979597962, "svd_dI_L": 0.0, "learned_dI_L": 0.039429494227276846, "portfolio_dI_L": 0.039429494227276846}
+{"dataset": "D08_outcome_leak", "rep": 1, "true_dI": 0.12449831964742297, "svd_dI_L": 0.0, "learned_dI_L": 0.033745655343742464, "portfolio_dI_L": 0.033745655343742464}
+{"dataset": "D08_outcome_leak", "rep": 2, "true_dI": 0.12423757334426161, "svd_dI_L": 0.0, "learned_dI_L": 0.050817786741914214, "portfolio_dI_L": 0.050817786741914214}
+{"dataset": "D08_outcome_leak", "rep": 3, "true_dI": 0.127267105696256, "svd_dI_L": 0.0, "learned_dI_L": 0.04241553776263967, "portfolio_dI_L": 0.04241553776263967}
+{"dataset": "D08_outcome_leak", "rep": 4, "true_dI": 0.13036000470701753, "svd_dI_L": 0.0, "learned_dI_L": 0.034371286902874006, "portfolio_dI_L": 0.034371286902874006}
+{"dataset": "D02_novel_findings", "rep": 0, "true_dI": 0.08119181597649766, "svd_dI_L": 0.01658496183376132, "learned_dI_L": 0.0002903656774548717, "portfolio_dI_L": 0.01658496183376132}
+{"dataset": "D02_novel_findings", "rep": 1, "true_dI": 0.07687034481961352, "svd_dI_L": 0.007986920600343072, "learned_dI_L": 0.0, "portfolio_dI_L": 0.007986920600343072}
+{"dataset": "D02_novel_findings", "rep": 2, "true_dI": 0.07907237160530217, "svd_dI_L": 0.012539658151196746, "learned_dI_L": 0.0, "portfolio_dI_L": 0.012539658151196746}
+{"dataset": "D02_novel_findings", "rep": 3, "true_dI": 0.07637738284240025, "svd_dI_L": 0.015253391254104217, "learned_dI_L": 0.0013406762937419568, "portfolio_dI_L": 0.015253391254104217}
+{"dataset": "D02_novel_findings", "rep": 4, "true_dI": 0.07889830946735493, "svd_dI_L": 0.0157028555574975, "learned_dI_L": 0.0, "portfolio_dI_L": 0.0157028555574975}

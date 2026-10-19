@@ -1,0 +1,127 @@
+{
+ "1201_BNG_breastTumor": {
+  "categorical": [
+   "menopause",
+   "inv-nodes",
+   "node-caps",
+   "deg-malig",
+   "breast",
+   "breast-quad",
+   "irradiation",
+   "recurrence"
+  ],
+  "continuous": [
+   "age"
+  ],
+  "nodes": {
+   "1_categorical": {
+    "cells": 3,
+    "lower": 7.655
+   },
+   "2_categorical": {
+    "cells": 54,
+    "lower": 7.25
+   },
+   "4_categorical": {
+    "cells": 293,
+    "lower": 6.767
+   },
+   "8_categorical": {
+    "cells": 3059,
+    "lower": 4.834
+   }
+  },
+  "model_all_features_heldout_mae": 7.234,
+  "model_upper": 7.436,
+  "certified_value_of_all_info_beyond": {
+   "1_categorical": 0.219,
+   "2_categorical": 0.0,
+   "4_categorical": 0.0,
+   "8_categorical": 0.0
+  }
+ },
+ "1196_BNG_pharynx": {
+  "categorical": [
+   "Inst",
+   "sex",
+   "Treatment",
+   "Grade",
+   "Condition",
+   "Site",
+   "T",
+   "N",
+   "Status"
+  ],
+  "continuous": [
+   "Age"
+  ],
+  "nodes": {
+   "1_categorical": {
+    "cells": 6,
+    "lower": 293.352
+   },
+   "2_categorical": {
+    "cells": 12,
+    "lower": 291.299
+   },
+   "4_categorical": {
+    "cells": 72,
+    "lower": 283.403
+   },
+   "9_categorical": {
+    "cells": 5016,
+    "lower": 99.293
+   }
+  },
+  "model_all_features_heldout_mae": 216.891,
+  "model_upper": 223.587,
+  "certified_value_of_all_info_beyond": {
+   "1_categorical": 69.765,
+   "2_categorical": 67.712,
+   "4_categorical": 59.816,
+   "9_categorical": 0.0
+  }
+ },
+ "1193_BNG_lowbwt": {
+  "categorical": [
+   "LOW",
+   "RACE",
+   "SMOKE",
+   "PTL",
+   "HT",
+   "UI",
+   "FTV"
+  ],
+  "continuous": [
+   "AGE",
+   "LWT"
+  ],
+  "nodes": {
+   "1_categorical": {
+    "cells": 2,
+    "lower": 379.574
+   },
+   "2_categorical": {
+    "cells": 6,
+    "lower": 371.784
+   },
+   "4_categorical": {
+    "cells": 48,
+    "lower": 350.208
+   },
+   "7_categorical": {
+    "cells": 544,
+    "lower": 322.874
+   }
+  },
+  "model_all_features_heldout_mae": 357.786,
+  "model_upper": 367.081,
+  "certified_value_of_all_info_beyond": {
+   "1_categorical": 12.493,
+   "2_categorical": 4.703,
+   "4_categorical": 0.0,
+   "7_categorical": 0.0
+  }
+ },
+ "leak_scan_lowbwt": "LOW determines 1{target<2500}"
+}

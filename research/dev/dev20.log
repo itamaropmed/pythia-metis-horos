@@ -1,0 +1,10 @@
+gaussian 39.1
+laplace 78.4
+logistic 119.6
+student_t3 160.4
+student_t5 201.2
+gaussian_scale_mixture 242.0
+gaussian_location_mixture 282.8
+signed_lognormal 327.8
+signed_exponential 366.2
+contaminated_gaussian 403.5
