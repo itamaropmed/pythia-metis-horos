@@ -1,0 +1,49 @@
+{
+ "n": 1475,
+ "classes": [
+  "Cardiovascular / Pulmonary",
+  "Orthopedic",
+  "Gastroenterology",
+  "Neurology",
+  "Urology",
+  "Obstetrics / Gynecology"
+ ],
+ "table": "note-length decile",
+ "alpha": 0.05,
+ "J": 8,
+ "readers": {
+  "tfidf_svd200": {
+   "certified_info_beyond_length": 0.42536102653396435,
+   "n_features": 200
+  },
+  "medspacy_context_rules": {
+   "certified_info_beyond_length": 0.02151071250512796,
+   "n_features": 36
+  },
+  "openmed_ner_anatomy": {
+   "certified_info_beyond_length": 0.42021599624676176,
+   "n_features": 523
+  },
+  "openmed_ner_disease": {
+   "certified_info_beyond_length": 0.22759149316459362,
+   "n_features": 273
+  },
+  "openmed_ner_oncology": {
+   "certified_info_beyond_length": 0.07745289969215666,
+   "n_features": 119
+  },
+  "openmed_ner_pathology": {
+   "certified_info_beyond_length": 0.1813394013854911,
+   "n_features": 219
+  },
+  "openmed_ner_pharma": {
+   "certified_info_beyond_length": 0.07089606321928141,
+   "n_features": 105
+  },
+  "openmed_ner_all": {
+   "certified_info_beyond_length": 0.4553380202504859,
+   "n_features": 1239
+  }
+ },
+ "units": "Brier/Gini; max possible = within-cell Gini of the specialty labels"
+}

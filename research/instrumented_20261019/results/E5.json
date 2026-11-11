@@ -1,0 +1,32 @@
+{
+  "q0.0": {
+    "read_share": 0.0,
+    "mean_bound": 0.007848425232426456,
+    "nli_truth": 0.04499092196327853,
+    "certified_share_of_truth": 0.17444464105075064
+  },
+  "q0.1": {
+    "read_share": 0.10088,
+    "mean_bound": 0.009175642751003582,
+    "nli_truth": 0.04504885278851978,
+    "certified_share_of_truth": 0.2036820514404286
+  },
+  "q0.25": {
+    "read_share": 0.25190749999999995,
+    "mean_bound": 0.012651886584229742,
+    "nli_truth": 0.045084781668803774,
+    "certified_share_of_truth": 0.2806243285632713
+  },
+  "q0.5": {
+    "read_share": 0.5036200000000001,
+    "mean_bound": 0.017367737590839847,
+    "nli_truth": 0.045107632462853084,
+    "certified_share_of_truth": 0.3850287998409688
+  },
+  "q1.0": {
+    "read_share": 1.0,
+    "mean_bound": 0.024503959112132306,
+    "nli_truth": 0.045125695202284426,
+    "certified_share_of_truth": 0.5430156588677182
+  }
+}

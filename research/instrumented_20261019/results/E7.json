@@ -1,0 +1,10 @@
+{
+  "crossfit": {
+    "reps": 100,
+    "false_certificate_rate": 0.0
+  },
+  "double_dip": {
+    "reps": 100,
+    "false_certificate_rate": 1.0
+  }
+}

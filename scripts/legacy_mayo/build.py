@@ -4,7 +4,8 @@ D='/mnt/user-data/uploads/Clinical_notes/'
 TARGET='case_actual_duration_time'; CASE='case_durable_id'; PAT='patient_durable_id'
 SURG='surgeon_durable_id'; PROC='primary_procedure_name'
 SCHED_IN='scheduled_in_room'; ACTUAL_IN='case_actual_patient_in_room'
-POSTHOC=[TARGET,'case_actual_prep_time','case_actual_procedure_time','case_actual_wrapup_time',ACTUAL_IN]
+ACTUAL_OUT='case_actual_patient_out_of_room'
+POSTHOC=[TARGET,'case_actual_prep_time','case_actual_procedure_time','case_actual_wrapup_time',ACTUAL_IN,ACTUAL_OUT]
 NONFEAT=[CASE,PAT,'patient_birth_date','scheduled_in_room','scheduled_setup_start','scheduled_out_of_room','scheduled_cleanup_complete','all_procs_not_performed']
 SHIPPED=['lag_sp_mean','lag_sp_std','lag_sp_count','lag_proc_mean','lag_proc_std','lag_proc_count','prior_same_proc_duration','redo_time_gap_days']
 
@@ -24,19 +25,67 @@ def exclusions(df):
     return df[keep].reset_index(drop=True), log
 
 def history(df,window=50):
-    out=df.sort_values([ACTUAL_IN,CASE]).copy(); y=out[TARGET].astype(float)
-    for name,keys in {'sp':[SURG,PROC],'proc':[PROC],'surgeon':[SURG]}.items():
-        g=y.groupby([out[k] for k in keys],observed=True); sh=g.transform(lambda s:s.shift(1))
-        r=sh.groupby([out[k] for k in keys],observed=True)
-        out[f'hist_{name}_mean']=r.transform(lambda s:s.rolling(window,min_periods=1).mean())
-        out[f'hist_{name}_median']=r.transform(lambda s:s.rolling(window,min_periods=1).median())
-        out[f'hist_{name}_std']=r.transform(lambda s:s.rolling(window,min_periods=2).std())
-        out[f'hist_{name}_count']=r.transform(lambda s:s.rolling(window,min_periods=1).count()).fillna(0.)
-    gp=y.groupby(out[PAT],observed=True)
-    out['hist_patient_prior_mean']=gp.transform(lambda s:s.shift(1).expanding().mean())
-    out['hist_patient_prior_count']=gp.transform(lambda s:s.shift(1).expanding().count()).fillna(0.)
+    """Build strictly as-of aggregates from cases completed before scheduling.
+
+    Ordering by actual start and shifting the target leaks outcomes from cases
+    that are still in progress. Require a trusted actual-out timestamp and
+    admit a historical target only when its completion precedes this case's
+    scheduled start. The completion timestamp itself is dropped from X below.
+    """
+    if ACTUAL_OUT not in df:
+        raise ValueError(f"history features require completion timestamp {ACTUAL_OUT!r}")
+    if SCHED_IN not in df or TARGET not in df or CASE not in df:
+        raise ValueError("history features require case ID, scheduled time, and duration target")
+    if df[CASE].isna().any() or df[CASE].duplicated().any():
+        raise ValueError("history features require complete unique case IDs")
+    if window < 1:
+        raise ValueError("history window must be positive")
+    out=df.copy()
+    scheduled=pd.to_datetime(out[SCHED_IN],errors='coerce',utc=True)
+    completed=pd.to_datetime(out[ACTUAL_OUT],errors='coerce',utc=True)
+    y=pd.to_numeric(out[TARGET],errors='coerce').to_numpy(float)
+    if scheduled.isna().any() or completed.isna().any():
+        raise ValueError("history feature timestamps must be complete and parseable")
+    sched_ns=scheduled.astype('int64').to_numpy()
+    end_ns=completed.astype('int64').to_numpy()
+    case_ids=out[CASE].astype(str).to_numpy()
+
+    specifications={
+        'sp':([SURG,PROC],True), 'proc':([PROC],True), 'surgeon':([SURG],True),
+        'patient_prior':([PAT],False),
+    }
+    for name,(keys,limited) in specifications.items():
+        if any(key not in out for key in keys):
+            raise ValueError(f"history feature {name!r} lacks grouping columns {keys}")
+        mean=np.full(len(out),np.nan); median=np.full(len(out),np.nan)
+        std=np.full(len(out),np.nan); count=np.zeros(len(out),float)
+        grouped=out.groupby(keys,observed=True,dropna=False,sort=False).indices
+        for indices in grouped.values():
+            rows=np.asarray(indices,dtype=int)
+            # Stable ties are allowed, but a case is only visible strictly
+            # before the current scheduled instant (never at the same time).
+            order=rows[np.argsort(end_ns[rows],kind='stable')]
+            ordered_end=end_ns[order]
+            for row in rows:
+                stop=np.searchsorted(ordered_end,sched_ns[row],side='left')
+                prior=order[:stop]
+                prior=prior[case_ids[prior]!=case_ids[row]]
+                prior=prior[np.isfinite(y[prior])]
+                if limited:
+                    prior=prior[-window:]
+                values=y[prior]
+                count[row]=len(values)
+                if len(values):
+                    mean[row]=float(np.mean(values)); median[row]=float(np.median(values))
+                if len(values)>1:
+                    std[row]=float(np.std(values,ddof=1))
+        out[f'hist_{name}_mean']=mean
+        if limited:
+            out[f'hist_{name}_median']=median
+            out[f'hist_{name}_std']=std
+        out[f'hist_{name}_count']=count
     out['hist_sp_is_first']=(out['hist_sp_count']==0).astype(int)
-    return out.sort_index()
+    return out
 
 def schedule(df):
     o=df.copy(); s=o[SCHED_IN]

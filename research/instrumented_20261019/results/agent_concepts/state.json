@@ -1,0 +1,316 @@
+{
+ "accepted": {
+  "r1": {
+   "obesity": {
+    "pattern": "\\b(obes(?:e|ity)|morbid obesity|BMI\\s*(?:>|>=|=)?\\s*30(?:\\.\\d+)?)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "anticoagulant_or_antiplatelet": {
+    "pattern": "\\b(?:coumadin|warfarin|plavix|clopidogrel|aspirin|heparin|lovenox|enoxaparin|xarelto|rivaroxaban|eliquis|apixaban|pradaxa|dabigatran)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "malignancy_or_carcinoma": {
+    "pattern": "\\b(?:cancer|carcinoma|malignan(?:t|cy)|sarcoma|adenocarcinoma|metastatic)\\b",
+    "kind": "binary",
+    "expect": "+"
+   }
+  },
+  "r2": {
+   "general_anesthesia": {
+    "pattern": "(?i)\\b(general\\s+anesthesia|anesthesia\\s+general|general\\s+anesthetic|endotracheal\\s+anesthesia|endotracheal\\s+tube|intubated|intubation|ETT)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "heparinization": {
+    "pattern": "(?i)\\b(heparin(?:ized|ization)?|systemic\\s+heparin(?:ization)?|heparin\\s+was\\s+given)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "extensive_or_complex": {
+    "pattern": "(?i)\\b(extensive|complex|complicated|difficult|challenging|prolonged|tedious|more\\s+than\\s+usual|greater\\s+than\\s+expected)\\b",
+    "kind": "binary",
+    "expect": "+"
+   }
+  },
+  "r3": {
+   "diabetes_mellitus": {
+    "pattern": "(?i)\\b(diabet(?:es|ic)|dm\\s*(?:ii|2|type\\s*2)?|type\\s*2\\s*diabetes)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "hypertension": {
+    "pattern": "(?i)\\bhypertens(?:ion|ive)\\b",
+    "kind": "binary",
+    "expect": "+"
+   }
+  }
+ },
+ "rejected": {
+  "r4": {
+   "bilateral_procedure": {
+    "pattern": "(?i)\\b(bilateral|bilaterally|both\\s+sides?|right\\s+and\\s+left|left\\s+and\\s+right)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "multiple_procedures_or_additional_proced": {
+    "pattern": "(?i)\\b(additional|multiple|combined|concomitant|concurrent|plus\\s+[^\\n]{0,40}\\bprocedure\\b|\\bprocedure\\s+and\\s+procedure\\b)\\b",
+    "kind": "binary",
+    "expect": "+"
+   },
+   "conversion_to_open": {
+    "pattern": "(?i)\\b(convert(?:ed|ion)?\\s+to\\s+open|open\\s+conversion|laparotomy\\b|thoracotomy\\b)\\b",
+    "kind": "binary",
+    "expect": "+"
+   }
+  }
+ },
+ "proposed_sets": 4,
+ "rounds": [
+  {
+   "round": 1,
+   "kept": 3,
+   "fit_cv_gain_mean": 0.08677501542208348,
+   "fit_cv_gain_by_seed": [
+    0.0866,
+    0.0901,
+    0.08,
+    0.0924,
+    0.0848
+   ],
+   "accept": true,
+   "concepts": {
+    "obesity": {
+     "pattern": "\\b(obes(?:e|ity)|morbid obesity|BMI\\s*(?:>|>=|=)?\\s*30(?:\\.\\d+)?)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Higher technical difficulty and longer operative/anesthesia time.",
+     "fit_rate": 0.033809166040571
+    },
+    "anticoagulant_or_antiplatelet": {
+     "pattern": "\\b(?:coumadin|warfarin|plavix|clopidogrel|aspirin|heparin|lovenox|enoxaparin|xarelto|rivaroxaban|eliquis|apixaban|pradaxa|dabigatran)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Perioperative anticoagulation/antiplatelet use often adds hemostasis and management time.",
+     "fit_rate": 0.10142749812171299
+    },
+    "malignancy_or_carcinoma": {
+     "pattern": "\\b(?:cancer|carcinoma|malignan(?:t|cy)|sarcoma|adenocarcinoma|metastatic)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Oncologic cases are often more extensive and prolonged.",
+     "fit_rate": 0.1149511645379414
+    }
+   },
+   "diagnostic_corr_with_planted": {
+    "obesity": {
+     "anes_general": -0.03,
+     "ebl": 0.0,
+     "diabetes": 0.22,
+     "hypertension": 0.18,
+     "obesity": 1.0,
+     "malignancy": 0.02,
+     "anticoag": 0.08
+    },
+    "anticoagulant_or_antiplatelet": {
+     "anes_general": -0.12,
+     "ebl": -0.04,
+     "diabetes": 0.17,
+     "hypertension": 0.25,
+     "obesity": 0.09,
+     "malignancy": 0.12,
+     "anticoag": 0.75
+    },
+    "malignancy_or_carcinoma": {
+     "anes_general": -0.02,
+     "ebl": -0.01,
+     "diabetes": 0.08,
+     "hypertension": 0.18,
+     "obesity": 0.03,
+     "malignancy": 0.97,
+     "anticoag": 0.04
+    }
+   }
+  },
+  {
+   "round": 2,
+   "kept": 3,
+   "fit_cv_gain_mean": 0.003458202672116273,
+   "fit_cv_gain_by_seed": [
+    -0.0011,
+    0.0059,
+    0.0021,
+    0.005,
+    0.0053
+   ],
+   "accept": true,
+   "concepts": {
+    "general_anesthesia": {
+     "pattern": "(?i)\\b(general\\s+anesthesia|anesthesia\\s+general|general\\s+anesthetic|endotracheal\\s+anesthesia|endotracheal\\s+tube|intubated|intubation|ETT)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "General anesthesia/intubation is associated with longer cases and is strongly correlated with positive residuals.",
+     "fit_rate": 0.23516153268219384
+    },
+    "heparinization": {
+     "pattern": "(?i)\\b(heparin(?:ized|ization)?|systemic\\s+heparin(?:ization)?|heparin\\s+was\\s+given)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Intraoperative heparin use often reflects vascular/cardiac complexity and longer duration.",
+     "fit_rate": 0.04132231404958678
+    },
+    "extensive_or_complex": {
+     "pattern": "(?i)\\b(extensive|complex|complicated|difficult|challenging|prolonged|tedious|more\\s+than\\s+usual|greater\\s+than\\s+expected)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Narrative descriptors of complexity often capture extra time not encoded by specialty alone.",
+     "fit_rate": 0.1585274229902329
+    }
+   },
+   "diagnostic_corr_with_planted": {
+    "general_anesthesia": {
+     "anes_general": 0.59,
+     "ebl": 0.17,
+     "diabetes": -0.11,
+     "hypertension": -0.14,
+     "obesity": -0.02,
+     "malignancy": -0.0,
+     "anticoag": -0.02
+    },
+    "heparinization": {
+     "anes_general": -0.0,
+     "ebl": 0.01,
+     "diabetes": 0.01,
+     "hypertension": 0.03,
+     "obesity": 0.02,
+     "malignancy": 0.0,
+     "anticoag": 0.69
+    },
+    "extensive_or_complex": {
+     "anes_general": 0.03,
+     "ebl": 0.09,
+     "diabetes": 0.03,
+     "hypertension": 0.03,
+     "obesity": -0.0,
+     "malignancy": 0.08,
+     "anticoag": 0.07
+    }
+   }
+  },
+  {
+   "round": 3,
+   "kept": 2,
+   "fit_cv_gain_mean": 0.016892825065250517,
+   "fit_cv_gain_by_seed": [
+    0.0223,
+    0.012,
+    0.0202,
+    0.0175,
+    0.0125
+   ],
+   "accept": true,
+   "concepts": {
+    "diabetes_mellitus": {
+     "pattern": "(?i)\\b(diabet(?:es|ic)|dm\\s*(?:ii|2|type\\s*2)?|type\\s*2\\s*diabetes)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Common comorbidity associated with longer operative time and positive residual correlation.",
+     "fit_rate": 0.07588279489105935
+    },
+    "hypertension": {
+     "pattern": "(?i)\\bhypertens(?:ion|ive)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Marker of medical complexity; positively correlated with longer-than-predicted duration.",
+     "fit_rate": 0.09842223891810668
+    }
+   },
+   "diagnostic_corr_with_planted": {
+    "diabetes_mellitus": {
+     "anes_general": -0.09,
+     "ebl": -0.06,
+     "diabetes": 0.97,
+     "hypertension": 0.41,
+     "obesity": 0.21,
+     "malignancy": 0.07,
+     "anticoag": 0.08
+    },
+    "hypertension": {
+     "anes_general": -0.13,
+     "ebl": -0.03,
+     "diabetes": 0.42,
+     "hypertension": 0.92,
+     "obesity": 0.18,
+     "malignancy": 0.17,
+     "anticoag": 0.08
+    }
+   }
+  },
+  {
+   "round": 4,
+   "kept": 3,
+   "fit_cv_gain_mean": 0.00017922627371262933,
+   "fit_cv_gain_by_seed": [
+    0.0003,
+    0.0001,
+    0.0005,
+    0.0001,
+    -0.0
+   ],
+   "accept": false,
+   "concepts": {
+    "bilateral_procedure": {
+     "pattern": "(?i)\\b(bilateral|bilaterally|both\\s+sides?|right\\s+and\\s+left|left\\s+and\\s+right)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Bilateral operations usually take longer than unilateral procedures.",
+     "fit_rate": 0.35086401202103684
+    },
+    "multiple_procedures_or_additional_proced": {
+     "pattern": "(?i)\\b(additional|multiple|combined|concomitant|concurrent|plus\\s+[^\\n]{0,40}\\bprocedure\\b|\\bprocedure\\s+and\\s+procedure\\b)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Extra procedures or combined operations increase duration beyond the primary specialty baseline.",
+     "fit_rate": 0.2434259954921112
+    },
+    "conversion_to_open": {
+     "pattern": "(?i)\\b(convert(?:ed|ion)?\\s+to\\s+open|open\\s+conversion|laparotomy\\b|thoracotomy\\b)\\b",
+     "kind": "binary",
+     "expect": "+",
+     "why": "Conversion from minimally invasive to open surgery is a strong marker of longer duration.",
+     "fit_rate": 0.02779864763335838
+    }
+   },
+   "diagnostic_corr_with_planted": {
+    "bilateral_procedure": {
+     "anes_general": 0.03,
+     "ebl": 0.09,
+     "diabetes": 0.04,
+     "hypertension": 0.14,
+     "obesity": 0.05,
+     "malignancy": 0.1,
+     "anticoag": 0.11
+    },
+    "multiple_procedures_or_additional_proced": {
+     "anes_general": 0.12,
+     "ebl": 0.08,
+     "diabetes": 0.05,
+     "hypertension": 0.0,
+     "obesity": 0.05,
+     "malignancy": 0.06,
+     "anticoag": 0.04
+    },
+    "conversion_to_open": {
+     "anes_general": 0.15,
+     "ebl": 0.21,
+     "diabetes": -0.01,
+     "hypertension": -0.02,
+     "obesity": 0.01,
+     "malignancy": 0.11,
+     "anticoag": -0.0
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "round": "2",
+ "kept": 8,
+ "fit_cv_gain": [
+  0.0038,
+  0.0019,
+  0.0057
+ ],
+ "accept": true,
+ "concepts": [
+  "congenital_heart_disease_other",
+  "ventricular_septal_defect",
+  "left_atrial_appendage_occlusion_or_ligation",
+  "prior_cardiac_surgery",
+  "multiple_or_abandoned_leads",
+  "leadless_pacemaker_or_subcutaneous_icd",
+  "left_atrial_enlargement_or_dilation",
+  "frailty_or_wheelchair_bound"
+ ],
+ "fit_rates": {
+  "congenital_heart_disease_other": 0.014416146083613647,
+  "ventricular_septal_defect": 0.03011372737465962,
+  "left_atrial_appendage_occlusion_or_ligation": 0.014416146083613647,
+  "prior_cardiac_surgery": 0.05702386673073843,
+  "multiple_or_abandoned_leads": 0.03027390677558866,
+  "leadless_pacemaker_or_subcutaneous_icd": 0.010411661060387635,
+  "left_atrial_enlargement_or_dilation": 0.025308345346788403,
+  "frailty_or_wheelchair_bound": 0.00608681723530354
+ }
+}

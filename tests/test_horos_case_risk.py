@@ -1,5 +1,8 @@
 import numpy as np
+import pandas as pd
+from sklearn.linear_model import Ridge
 
+from horos.models import case_risk
 from horos.models.case_risk import fit_model_risk_forecaster
 
 
@@ -28,3 +31,22 @@ def test_forecaster_rejects_misaligned_inputs():
         assert "align" in str(exc)
     else:
         raise AssertionError("misaligned risk targets must be rejected")
+
+
+def test_forecaster_accepts_forward_temporal_crossfit(monkeypatch):
+    rng = np.random.default_rng(47)
+    n = 240
+    x = rng.normal(size=(n, 3))
+    error = np.abs(12 + 5 * x[:, 0] + rng.normal(size=n))
+    times = pd.date_range("2020-01-01", periods=n, freq="D", tz="UTC")
+    monkeypatch.setattr(case_risk, "_candidates", lambda seed: {"ridge": Ridge()})
+
+    model = fit_model_risk_forecaster(
+        x, error, np.arange(n), model_name="temporal", folds=4, times=times,
+    )
+    risk, probability = model.predict(x[-10:])
+
+    assert risk.shape == (10,)
+    assert probability.shape == (10,)
+    assert np.isfinite(risk).all()
+    assert np.isfinite(probability).all()

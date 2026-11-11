@@ -1,0 +1,23 @@
+{
+  "leak0.0": {
+    "miss_rate": 0.0,
+    "mean_bound": 0.018889416442393045,
+    "mean_truth": 0.04468370870058139,
+    "mean_bound_masked": 0.018757369813334365,
+    "unmasked_minus_masked": 0.00013204662905868224
+  },
+  "leak0.05": {
+    "miss_rate": 0.0,
+    "mean_bound": 0.023884149352589642,
+    "mean_truth": 0.044863490987429824,
+    "mean_bound_masked": 0.018669718282038464,
+    "unmasked_minus_masked": 0.005214431070551172
+  },
+  "leak0.2": {
+    "miss_rate": 0.39,
+    "mean_bound": 0.04371153343551103,
+    "mean_truth": 0.04474331820908808,
+    "mean_bound_masked": 0.018457849998045193,
+    "unmasked_minus_masked": 0.025253683437465826
+  }
+}

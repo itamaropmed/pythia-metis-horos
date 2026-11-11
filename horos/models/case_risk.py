@@ -15,6 +15,7 @@ from sklearn.base import clone
 from sklearn.ensemble import ExtraTreesRegressor, HistGradientBoostingRegressor
 from sklearn.isotonic import IsotonicRegression
 from sklearn.model_selection import GroupKFold
+from .temporal_splits import forward_group_splits
 
 
 def _candidates(seed: int) -> dict[str, object]:
@@ -68,13 +69,19 @@ class FrozenModelRiskForecaster:
 
 
 def _crossfit(estimator: object, x: np.ndarray, target: np.ndarray,
-              groups: np.ndarray, folds: int) -> np.ndarray:
-    out = np.empty(len(target), float)
-    for fit, val in GroupKFold(folds).split(x, target, groups):
+              groups: np.ndarray, folds: int, times=None) -> tuple[np.ndarray, np.ndarray]:
+    out = np.full(len(target), np.nan, float)
+    valid = np.zeros(len(target), dtype=bool)
+    if times is None:
+        split_spec = GroupKFold(folds).split(x, target, groups)
+    else:
+        split_spec = forward_group_splits(times, groups, n_splits=folds, min_train_fraction=.5)
+    for fit, val in split_spec:
         model = clone(estimator)
         model.fit(x[fit], target[fit])
         out[val] = model.predict(x[val])
-    return out
+        valid[val] = True
+    return out, valid
 
 
 def fit_model_risk_forecaster(
@@ -86,6 +93,7 @@ def fit_model_risk_forecaster(
     tolerance: float = 30.,
     folds: int = 5,
     seed: int = 0,
+    times=None,
 ) -> FrozenModelRiskForecaster:
     """Select and freeze error/probability forecasters using development only."""
     x = np.asarray(features, float)
@@ -104,38 +112,42 @@ def fit_model_risk_forecaster(
     candidate_oof: dict[str, np.ndarray] = {}
     results = []
     for name, estimator in _candidates(seed).items():
-        oof = np.maximum(_crossfit(estimator, x, error, entity, folds), 0.)
+        raw_oof, valid = _crossfit(estimator, x, error, entity, folds, times=times)
+        oof = np.maximum(raw_oof, 0.)
         candidate_oof[name] = oof
-        rho = float(spearmanr(oof, error).statistic)
+        rho = float(spearmanr(oof[valid], error[valid]).statistic)
         if not np.isfinite(rho):
             rho = 0.
         results.append(CandidateRiskResult(
             name=name, spearman=rho,
-            mean_absolute_calibration_error=float(np.mean(np.abs(oof - error))),
-            mean_bias=float(np.mean(oof - error)), brier=float("nan"),
+            mean_absolute_calibration_error=float(np.mean(np.abs(oof[valid] - error[valid]))),
+            mean_bias=float(np.mean(oof[valid] - error[valid])), brier=float("nan"),
         ))
     selected_error = max(results, key=lambda value: (value.spearman, -abs(value.mean_bias))).name
 
     probability_oof: dict[str, np.ndarray] = {}
     probability_results = []
     for name, estimator in _candidates(seed + 1000).items():
-        oof = np.clip(_crossfit(estimator, x, miss, entity, folds), 0., 1.)
+        raw_oof, probability_valid = _crossfit(estimator, x, miss, entity, folds, times=times)
+        if not np.array_equal(valid, probability_valid):
+            raise RuntimeError("error and probability risk-model folds are inconsistent")
+        oof = np.clip(raw_oof, 0., 1.)
         probability_oof[name] = oof
         probability_results.append(CandidateRiskResult(
             name=f"probability:{name}", spearman=0.,
-            mean_absolute_calibration_error=float(np.mean(np.abs(oof - miss))),
-            mean_bias=float(np.mean(oof - miss)),
-            brier=float(np.mean((oof - miss) ** 2)),
+            mean_absolute_calibration_error=float(np.mean(np.abs(oof[valid] - miss[valid]))),
+            mean_bias=float(np.mean(oof[valid] - miss[valid])),
+            brier=float(np.mean((oof[valid] - miss[valid]) ** 2)),
         ))
     selected_probability_result = min(probability_results, key=lambda value: value.brier)
     selected_probability = selected_probability_result.name.split(":", 1)[1]
 
     error_raw = candidate_oof[selected_error]
     error_calibrator = IsotonicRegression(out_of_bounds="clip", y_min=0.)
-    error_calibrator.fit(error_raw, error)
+    error_calibrator.fit(error_raw[valid], error[valid])
     probability_raw = probability_oof[selected_probability]
     probability_calibrator = IsotonicRegression(out_of_bounds="clip", y_min=0., y_max=1.)
-    probability_calibrator.fit(probability_raw, miss)
+    probability_calibrator.fit(probability_raw[valid], miss[valid])
 
     candidates = _candidates(seed)
     error_estimator = clone(candidates[selected_error]).fit(x, error)
@@ -160,11 +172,13 @@ def fit_risk_forecasters(
     tolerance: float = 30.,
     folds: int = 5,
     seed: int = 0,
+    times=None,
 ) -> dict[str, FrozenModelRiskForecaster]:
     return {
         name: fit_model_risk_forecaster(
             features, error, groups, model_name=name, tolerance=tolerance,
             folds=folds, seed=seed + position * 17,
+            times=times,
         )
         for position, (name, error) in enumerate(absolute_errors.items())
     }

@@ -1,0 +1,46 @@
+{
+ "model": "gpt-5.4-mini",
+ "usage": {
+  "completion_tokens": 514,
+  "prompt_tokens": 503,
+  "total_tokens": 1017,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "latency_checkpoint": {
+   "engine_tbt_ms": 6,
+   "engine_ttft_ms": 37,
+   "engine_ttlt_ms": 2949,
+   "pre_inference_ms": 158,
+   "service_tbt_ms": 6,
+   "service_ttft_ms": 417,
+   "service_ttlt_ms": 3300,
+   "user_visible_ttft_ms": 259
+  }
+ },
+ "questions": {
+  "adhesion_or_scar_tissue_present": {
+   "type": "noul",
+   "instructions": "Was there clinically meaningful scar tissue, adhesions, or other tissue planes that had to be dissected to complete the operation?",
+   "criteria": {
+    "true": "The note describes adhesions, scar tissue, dense tissue planes, or difficult dissection that required extra operative work.",
+    "false": "The note does not mention adhesions/scar tissue or indicates routine tissue planes without difficult dissection."
+   }
+  },
+  "organ_or_structure_displacement": {
+   "type": "noul",
+   "instructions": "Did the operative note describe an anatomic structure being displaced, distorted, or in an unusual position that affected the operation?",
+   "criteria": {
+    "true": "The note states that an organ, vessel, ureter, bowel, wall, or other structure was displaced, distorted, adherent, or otherwise not in its usual location and this mattered intraoperatively.",
+    "false": "No abnormal displacement or distortion of anatomy is described, or it is mentioned without affecting the operation."
+   }
+  }
+ }
+}

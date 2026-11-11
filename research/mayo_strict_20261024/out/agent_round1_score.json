@@ -1,0 +1,28 @@
+{
+ "round": "1",
+ "kept": 7,
+ "fit_cv_gain": [
+  0.0047,
+  0.0041,
+  0.003
+ ],
+ "accept": true,
+ "concepts": [
+  "atrial_flutter",
+  "septal_defect_or_shunt",
+  "valve_repair_or_prosthesis",
+  "prior_ligation_or_maze",
+  "device_lead_revision_or_extraction_history",
+  "left_atrial_appendage_thrombus_or_spontaneous_echo_contrast",
+  "frailty_or_deconditioning"
+ ],
+ "fit_rates": {
+  "atrial_flutter": 0.08281275028031396,
+  "septal_defect_or_shunt": 0.10924235143360564,
+  "valve_repair_or_prosthesis": 0.034438571199743716,
+  "prior_ligation_or_maze": 0.013455069678039404,
+  "device_lead_revision_or_extraction_history": 0.05317956110844146,
+  "left_atrial_appendage_thrombus_or_spontaneous_echo_contrast": 0.03411821239788563,
+  "frailty_or_deconditioning": 0.010091302258529554
+ }
+}

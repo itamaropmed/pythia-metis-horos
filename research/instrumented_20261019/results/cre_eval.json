@@ -1,0 +1,106 @@
+{
+ "variance": {
+  "true_explainable_share_of_within_cell_residual_variance": 0.3655903904306794,
+  "emb_note(pca64)": 0.0331385602944918,
+  "emb_joint(pca64)": 0.05765154534067307,
+  "cre_note(table-conditioned)": -0.30163545251804447,
+  "llm_extract": 0.1181917952009629,
+  "openmed_disease": 0.05396441028617405,
+  "openmed_pharma": 0.04200911273598473,
+  "tfidf_svd200": -0.012839990304499116,
+  "oracle(reference)": 0.39344255795500294,
+  "STACK(all real readers)": 0.1686534549981611
+ },
+ "gate": {
+  "emb_note(pca64)": 0.0,
+  "emb_joint(pca64)": 0.0,
+  "cre_note(table-conditioned)": 0.0,
+  "llm_extract": 0.0012049951424530543,
+  "openmed_disease": 0.0,
+  "openmed_pharma": 0.0,
+  "tfidf_svd200": 0.0,
+  "oracle(reference)": 0.008641901254284726,
+  "STACK(all real readers)": 0.0007567070117018604,
+  "_truth_CAL": 0.03511553393911385
+ },
+ "forecast": {
+  "bins_table": {
+   "MAE_vs_true_risk": 0.0849322294829357,
+   "brier": 0.19014882663325763
+  },
+  "emb_note(pca64)": {
+   "MAE_vs_true_risk": 0.08491706172583369,
+   "brier": 0.1900735589733695
+  },
+  "emb_joint(pca64)": {
+   "MAE_vs_true_risk": 0.0847613772610306,
+   "brier": 0.18994371924853617
+  },
+  "cre_note(table-conditioned)": {
+   "MAE_vs_true_risk": 0.08492254091047674,
+   "brier": 0.1901388742754851
+  },
+  "llm_extract": {
+   "MAE_vs_true_risk": 0.08142357319511456,
+   "brier": 0.1876748841866012
+  },
+  "openmed_disease": {
+   "MAE_vs_true_risk": 0.08558630575807286,
+   "brier": 0.19097972972516597
+  },
+  "openmed_pharma": {
+   "MAE_vs_true_risk": 0.0848836355967667,
+   "brier": 0.19046734119284783
+  },
+  "tfidf_svd200": {
+   "MAE_vs_true_risk": 0.08509164972669811,
+   "brier": 0.19025225282348648
+  },
+  "oracle(reference)": {
+   "MAE_vs_true_risk": 0.07358659996216266,
+   "brier": 0.18500060932331777
+  },
+  "STACK(all real readers)": {
+   "MAE_vs_true_risk": 0.08386112866373455,
+   "brier": 0.1891149667968063
+  }
+ },
+ "certified": {
+  "STACK(all real readers)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 0
+  },
+  "emb_note(pca64)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 0
+  },
+  "emb_joint(pca64)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 0
+  },
+  "cre_note(table-conditioned)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 0
+  },
+  "llm_extract": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 0
+  },
+  "oracle(reference)": {
+   "regions": 3,
+   "certified_share": 0.3313782991202346,
+   "wrong_on_test_truth": 0,
+   "certified_rows": 339
+  }
+ }
+}

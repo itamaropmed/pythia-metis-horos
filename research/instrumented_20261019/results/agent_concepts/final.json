@@ -1,0 +1,96 @@
+{
+ "J": 10,
+ "alpha_each": 0.005,
+ "truth_CAL_min2": 251.5651500270202,
+ "table_only": {
+  "TEST_MAE_min": 20.81650318296773,
+  "risk": {
+   "MAE_vs_true": 0.07957032511821556,
+   "pearson": -0.10824082679637377,
+   "spearman": -0.0952768278396516,
+   "brier": 0.18746808183608013,
+   "calib_slope": 0.5034849018472767
+  },
+  "labeler": {
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "test_global_true_risk": 0.2422194287620215
+  }
+ },
+ "STACK_old": {
+  "TEST_R2": 0.16817311505425658,
+  "TEST_MAE_min": 18.976011744034484,
+  "corr_true_direction_TEST": 0.6339902480985653,
+  "cert_betting_min2": 30.75072484534448,
+  "cert_mp_min2": 19.63056950762485,
+  "risk": {
+   "MAE_vs_true": 0.07724300358638711,
+   "pearson": 0.4030120564870466,
+   "spearman": 0.2615234309435547,
+   "brier": 0.18267498433166188,
+   "calib_slope": 0.83002069496728
+  },
+  "labeler": {
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0,
+   "test_global_true_risk": 0.2422194287620215
+  }
+ },
+ "STACK_new(+symbolic)": {
+  "TEST_R2": 0.16911365078413443,
+  "TEST_MAE_min": 18.976174063837053,
+  "corr_true_direction_TEST": 0.6448225072271314,
+  "cert_betting_min2": 35.71791692735762,
+  "cert_mp_min2": 22.24819724438232,
+  "risk": {
+   "MAE_vs_true": 0.07704114251852268,
+   "pearson": 0.4250701427310499,
+   "spearman": 0.27046887642913453,
+   "brier": 0.18229276295710511,
+   "calib_slope": 0.7964266247910887
+  },
+  "labeler": {
+   "certified_share": 0.7067448680351907,
+   "wrong_on_test_truth": 0,
+   "test_global_true_risk": 0.2422194287620215
+  }
+ },
+ "AGENT(+concepts)": {
+  "TEST_R2": 0.2924634692642525,
+  "TEST_MAE_min": 17.557557336456785,
+  "corr_true_direction_TEST": 0.8221439952353047,
+  "cert_betting_min2": 65.30867347791208,
+  "cert_mp_min2": 46.82502015757436,
+  "risk": {
+   "MAE_vs_true": 0.06317976001931677,
+   "pearson": 0.664609157492668,
+   "spearman": 0.46901027922436933,
+   "brier": 0.17907478054555914,
+   "calib_slope": 0.811874957113632
+  },
+  "labeler": {
+   "certified_share": 0.6950146627565983,
+   "wrong_on_test_truth": 0,
+   "test_global_true_risk": 0.2422194287620215
+  }
+ },
+ "oracle": {
+  "TEST_R2": 0.39344255795500294,
+  "TEST_MAE_min": 16.24334950460766,
+  "corr_true_direction_TEST": 0.9975313249819691,
+  "cert_betting_min2": 114.28210444229524,
+  "cert_mp_min2": 93.40653069739247,
+  "risk": {
+   "MAE_vs_true": 0.027815710081623906,
+   "pearson": 0.9254685683514904,
+   "spearman": 0.8927749851076676,
+   "brier": 0.17522211372100047,
+   "calib_slope": 0.9989500084182054
+  },
+  "labeler": {
+   "certified_share": 0.6832844574780058,
+   "wrong_on_test_truth": 0,
+   "test_global_true_risk": 0.2422194287620215
+  }
+ }
+}

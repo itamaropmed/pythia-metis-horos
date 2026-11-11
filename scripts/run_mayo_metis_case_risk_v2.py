@@ -1,8 +1,9 @@
 """Leakage-controlled comparison of Metis cell-map v1 and learned-risk v2.
 
-All v2 candidate selection, isotonic calibration, and fitting use development
-OOF errors only.  Held-out outcomes are touched only after both v1 and v2 cards
-have been created for every later patient-disjoint case.
+All v2 candidate selection, isotonic calibration, and fitting use forward-time,
+patient-disjoint development OOF errors only. Warm-up rows without earlier
+history are excluded. Held-out outcomes are touched only after both v1 and v2
+cards have been created for every later patient-disjoint case.
 """
 from __future__ import annotations
 
@@ -15,9 +16,12 @@ import pandas as pd
 from scipy.stats import spearmanr
 from sklearn.base import clone
 from sklearn.ensemble import ExtraTreesRegressor, HistGradientBoostingRegressor
-from sklearn.model_selection import GroupKFold
 
 from horos.models.case_risk import fit_risk_forecasters
+from horos.models.mayo_lineage import (
+    add_lineage_arguments, load_verified_mayo_inputs, verify_split_cutoff,
+)
+from horos.models.temporal_splits import forward_group_splits
 from metis.case_risk import fit_case_risk_map
 from run_mayo_metis_case_risk import (
     category_summary, crossfit_and_holdout, procedure_family, split_indices,
@@ -70,8 +74,9 @@ def risk_features(
 
 
 def auxiliary_predictions(features: np.ndarray, y: np.ndarray, groups: np.ndarray,
-                          train: np.ndarray, heldout: np.ndarray,
-                          seed: int) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray]]:
+                          scheduled_times: np.ndarray, train: np.ndarray,
+                          heldout: np.ndarray, seed: int
+                          ) -> tuple[dict[str, np.ndarray], dict[str, np.ndarray], np.ndarray]:
     """Diverse honest predictions used only as arrival-time uncertainty evidence."""
     designs = {
         "hgb_absolute": HistGradientBoostingRegressor(
@@ -85,16 +90,19 @@ def auxiliary_predictions(features: np.ndarray, y: np.ndarray, groups: np.ndarra
         ),
     }
     oof, test = {}, {}
-    fold_spec = list(GroupKFold(3).split(features[train], y[train], groups[train]))
+    fold_spec = forward_group_splits(scheduled_times[train], groups[train], n_splits=5,
+                                     min_train_fraction=.5)
+    valid = np.zeros(len(train), dtype=bool)
     for name, estimator in designs.items():
-        pred = np.empty(len(train), float)
+        pred = np.full(len(train), np.nan, float)
         for fit, val in fold_spec:
             model = clone(estimator).fit(features[train][fit], y[train][fit])
             pred[val] = model.predict(features[train][val])
+            valid[val] = True
         final = clone(estimator).fit(features[train], y[train])
         oof[name] = pred
         test[name] = final.predict(features[heldout])
-    return oof, test
+    return oof, test, valid
 
 
 def detailed_metrics(cards: list[dict], actual: np.ndarray,
@@ -184,11 +192,10 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--auxiliary-evidence", action="store_true",
                         help="add diverse Horos predictions as risk-only evidence")
+    add_lineage_arguments(parser)
     args = parser.parse_args()
 
-    frame = pd.read_parquet(args.derived / "df.parquet")
-    xa_frame = pd.read_parquet(args.derived / "XA.parquet")
-    xb_frame = pd.read_parquet(args.derived / "XB.parquet")
+    lineage, frame, xa_frame, xb_frame = load_verified_mayo_inputs(args)
     xa = xa_frame.to_numpy(np.float32)
     xb = xb_frame.to_numpy(np.float32)
     llm_columns = [column for column in xb_frame if column.startswith("llm_")]
@@ -197,34 +204,49 @@ def main() -> None:
     llm = xb_frame[llm_columns]
     y = frame.case_actual_duration_time.to_numpy(float)
     groups = frame.patient_durable_id.astype(str).to_numpy()
+    scheduled_times = pd.to_datetime(frame["scheduled_in_room"], utc=True).to_numpy()
     train, heldout, cutoff = split_indices(frame)
+    verify_split_cutoff(lineage, cutoff)
 
-    oof_a, test_a = crossfit_and_holdout(xa, y, groups, train, heldout, args.seed)
-    oof_b, test_b = crossfit_and_holdout(xb, y, groups, train, heldout, args.seed)
+    oof_a, test_a, valid_oof = crossfit_and_holdout(
+        xa, y, groups, scheduled_times, train, heldout, args.seed,
+    )
+    oof_b, test_b, valid_oof_b = crossfit_and_holdout(
+        xb, y, groups, scheduled_times, train, heldout, args.seed,
+    )
+    if not np.array_equal(valid_oof, valid_oof_b):
+        raise RuntimeError("model arms produced inconsistent temporal OOF support")
+    oof_rows = train[valid_oof]
     names = ("basic_xgboost", "xgboost_plus_11_llm")
     train_pred = {names[0]: oof_a, names[1]: oof_b}
     test_pred = {names[0]: test_a, names[1]: test_b}
-    train_strata = frame.iloc[train].primary_procedure_name.map(procedure_family).to_numpy()
+    train_strata = frame.iloc[oof_rows].primary_procedure_name.map(procedure_family).to_numpy()
     test_strata = frame.iloc[heldout].primary_procedure_name.map(procedure_family).to_numpy()
     risk_map = fit_case_risk_map(
-        y[train], train_pred, strata=train_strata, entity_ids=groups[train],
+        y[oof_rows], {name: pred[valid_oof] for name, pred in train_pred.items()},
+        strata=train_strata, entity_ids=groups[oof_rows],
         min_entities=100, version="metis-case-risk-v2-support-map",
-        provenance={"selection": "development-only", "heldout_outcomes": "not read"},
+        provenance={"selection": "forward-time development OOF only",
+                    "warmup_rows": str(int(len(train) - len(oof_rows))),
+                    "heldout_outcomes": "not read"},
     )
 
     aux_train: dict[str, np.ndarray] = {}
     aux_test: dict[str, np.ndarray] = {}
     if args.auxiliary_evidence:
         for arm_name, values in (("tabular", xa), ("plus11", xb)):
-            arm_oof, arm_test = auxiliary_predictions(
-                values, y, groups, train, heldout, args.seed + len(aux_train) * 31,
+            arm_oof, arm_test, arm_valid = auxiliary_predictions(
+                values, y, groups, scheduled_times, train, heldout,
+                args.seed + len(aux_train) * 31,
             )
+            if not np.array_equal(arm_valid, valid_oof):
+                raise RuntimeError("auxiliary predictors produced inconsistent temporal OOF support")
             for method in arm_oof:
-                aux_train[f"{arm_name}_{method}"] = arm_oof[method]
+                aux_train[f"{arm_name}_{method}"] = arm_oof[method][valid_oof]
                 aux_test[f"{arm_name}_{method}"] = arm_test[method]
-        a_stack = np.column_stack([oof_a, aux_train["tabular_hgb_absolute"],
+        a_stack = np.column_stack([oof_a[valid_oof], aux_train["tabular_hgb_absolute"],
                                    aux_train["tabular_extra_trees"]])
-        b_stack = np.column_stack([oof_b, aux_train["plus11_hgb_absolute"],
+        b_stack = np.column_stack([oof_b[valid_oof], aux_train["plus11_hgb_absolute"],
                                    aux_train["plus11_extra_trees"]])
         at_stack = np.column_stack([test_a, aux_test["tabular_hgb_absolute"],
                                     aux_test["tabular_extra_trees"]])
@@ -237,25 +259,23 @@ def main() -> None:
                          "plus11_spread": bt_stack.std(axis=1),
                          "all_spread": np.column_stack([at_stack, bt_stack]).std(axis=1)})
     x_train, medians = risk_features(
-        frame, train, oof_a, oof_b, llm, auxiliary=aux_train,
+        frame, oof_rows, oof_a[valid_oof], oof_b[valid_oof], llm, auxiliary=aux_train,
     )
     x_test, _ = risk_features(
         frame, heldout, test_a, test_b, llm, medians=medians, auxiliary=aux_test,
     )
-    errors = {name: np.abs(y[train] - train_pred[name]) for name in names}
+    errors = {name: np.abs(y[oof_rows] - train_pred[name][valid_oof]) for name in names}
     forecasters = fit_risk_forecasters(
-        x_train, errors, groups[train], tolerance=30., folds=5, seed=args.seed,
+        x_train, errors, groups[oof_rows], tolerance=30., folds=5, seed=args.seed,
+        times=scheduled_times[oof_rows],
     )
     v2_test = {name: forecasters[name].predict(x_test) for name in names}
-    floors = {names[0]: (29.29, "calibrated"), names[1]: (28.84959960434628, "calibrated")}
-
     # Freeze every risk card before the reveal block below.
     case_ids = frame.iloc[heldout].case_durable_id.to_numpy()
     v1_cards, v2_cards = [], []
     for i, case_id in enumerate(case_ids):
         predictions = {name: test_pred[name][i] for name in names}
-        common = dict(stratum=test_strata[i], id_salt=args.id_salt,
-                      information_set_floors=floors)
+        common = dict(id_salt=args.id_salt)
         v1_cards.append(risk_map.score(case_id, predictions, **common).to_dict())
         v2_cards.append(risk_map.score(
             case_id, predictions,
@@ -306,6 +326,9 @@ def main() -> None:
     output = {
         "status": "retrospective_replay; v2 selected_without_heldout_outcomes",
         "split": {"cutoff": cutoff, "development_rows": len(train),
+                  "forward_oof_rows": int(len(oof_rows)),
+                  "forward_oof_warmup_rows": int(len(train) - len(oof_rows)),
+                  "forward_oof_patients": int(pd.Series(groups[oof_rows]).nunique()),
                   "heldout_rows": len(heldout), "patient_overlap": 0},
         "risk_features": {
             "count": int(x_train.shape[1]), "llm_features": len(llm_columns),

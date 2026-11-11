@@ -28,6 +28,9 @@ from xgboost import XGBRegressor
 
 from pythia.core.local_model_risk import build_local_model_risk_registry, build_support_partition
 from pythia.core.local_transport import BettingRiskMonitor, contrast_tipping_lambda, odds_transport
+from horos.models.mayo_lineage import (
+    add_lineage_arguments, load_verified_mayo_inputs, verify_split_cutoff,
+)
 from run_mayo_metis_case_risk import MODEL_KWARGS, procedure_family, split_indices
 
 LAMBDAS = (1.0, 1.25, 1.5)
@@ -73,15 +76,16 @@ def main() -> None:
     ap.add_argument("--sensitivity-min-entities", type=str, default="200,400")
     ap.add_argument("--alpha", type=float, default=.05)
     ap.add_argument("--compare-v1", action="store_true")
+    add_lineage_arguments(ap)
     args = ap.parse_args()
 
-    frame = pd.read_parquet(args.derived / "df.parquet")
-    X = {NAMES[0]: pd.read_parquet(args.derived / "XA.parquet").to_numpy(np.float32),
-         NAMES[1]: pd.read_parquet(args.derived / "XB.parquet").to_numpy(np.float32)}
+    lineage, frame, xa_frame, xb_frame = load_verified_mayo_inputs(args)
+    X = {NAMES[0]: xa_frame.to_numpy(np.float32), NAMES[1]: xb_frame.to_numpy(np.float32)}
     y = frame.case_actual_duration_time.to_numpy(float)
     pid = frame.patient_durable_id.astype(str).to_numpy()
     fam_all = frame.primary_procedure_name.map(procedure_family).to_numpy()
     dev, later, cutoff = split_indices(frame)
+    verify_split_cutoff(lineage, cutoff)
     fit, cal = inner_split(frame, dev, args.fit_share)
 
     models = {n: XGBRegressor(random_state=args.seed, **MODEL_KWARGS).fit(X[n][fit], y[fit]) for n in NAMES}
@@ -172,13 +176,23 @@ def main() -> None:
         from run_mayo_metis_case_risk import crossfit_and_holdout
         from run_mayo_pythia_local_w30 import _labels as v1_labels  # original hierarchy builder
         oof = {}; test = {}
+        scheduled_times = pd.to_datetime(frame["scheduled_in_room"], utc=True).to_numpy()
+        valid_oof = None
         for n in NAMES:
-            oof[n], test[n] = crossfit_and_holdout(X[n], y, pid, dev, later, args.seed)
-        pe1 = _edges((oof[NAMES[0]] + oof[NAMES[1]]) / 2, 5); de1 = _edges(np.abs(oof[NAMES[0]] - oof[NAMES[1]]), 3)
-        hd = v1_labels(frame, dev, oof[NAMES[0]], oof[NAMES[1]], pe1, de1)
+            oof[n], test[n], current_valid = crossfit_and_holdout(
+                X[n], y, pid, scheduled_times, dev, later, args.seed,
+            )
+            if valid_oof is not None and not np.array_equal(valid_oof, current_valid):
+                raise RuntimeError("v1 model arms produced inconsistent temporal OOF support")
+            valid_oof = current_valid
+        oof_rows = dev[valid_oof]
+        pe1 = _edges((oof[NAMES[0]][valid_oof] + oof[NAMES[1]][valid_oof]) / 2, 5)
+        de1 = _edges(np.abs(oof[NAMES[0]][valid_oof] - oof[NAMES[1]][valid_oof]), 3)
+        hd = v1_labels(frame, oof_rows, oof[NAMES[0]][valid_oof], oof[NAMES[1]][valid_oof], pe1, de1)
         hl1 = v1_labels(frame, later, test[NAMES[0]], test[NAMES[1]], pe1, de1)
         reg1 = build_local_model_risk_registry(
-            {n: (np.abs(y[dev] - oof[n]) > 30).astype(float) for n in NAMES}, hd, pid[dev], loss_cap=1.,
+            {n: (np.abs(y[oof_rows] - oof[n][valid_oof]) > 30).astype(float) for n in NAMES},
+            hd, pid[oof_rows], loss_cap=1.,
             alpha=args.alpha, min_entities=100, outcome_blind_hierarchy=True, independent_entities=True,
             loss_cap_attested=True)
         result["v1_original_route"] = {n: dict(pd.Series([reg1.route(n, {k: v[i] for k, v in hl1.items()}).local_relation

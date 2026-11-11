@@ -1,0 +1,49 @@
+{
+ "round": 3,
+ "kept": 2,
+ "fit_cv_gain_mean": 0.016892825065250517,
+ "fit_cv_gain_by_seed": [
+  0.0223,
+  0.012,
+  0.0202,
+  0.0175,
+  0.0125
+ ],
+ "accept": true,
+ "concepts": {
+  "diabetes_mellitus": {
+   "pattern": "(?i)\\b(diabet(?:es|ic)|dm\\s*(?:ii|2|type\\s*2)?|type\\s*2\\s*diabetes)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Common comorbidity associated with longer operative time and positive residual correlation.",
+   "fit_rate": 0.07588279489105935
+  },
+  "hypertension": {
+   "pattern": "(?i)\\bhypertens(?:ion|ive)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Marker of medical complexity; positively correlated with longer-than-predicted duration.",
+   "fit_rate": 0.09842223891810668
+  }
+ },
+ "diagnostic_corr_with_planted": {
+  "diabetes_mellitus": {
+   "anes_general": -0.09,
+   "ebl": -0.06,
+   "diabetes": 0.97,
+   "hypertension": 0.41,
+   "obesity": 0.21,
+   "malignancy": 0.07,
+   "anticoag": 0.08
+  },
+  "hypertension": {
+   "anes_general": -0.13,
+   "ebl": -0.03,
+   "diabetes": 0.42,
+   "hypertension": 0.92,
+   "obesity": 0.18,
+   "malignancy": 0.17,
+   "anticoag": 0.08
+  }
+ }
+}

@@ -1,0 +1,576 @@
+[
+ {
+  "n": 1500,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": 0.00018181356060768025,
+   "miss_rate": 0.0,
+   "claim_rate": 0.05,
+   "mean_bound": 0.025514215802031514,
+   "mean_truth": 137.78928476475943
+  },
+  "split_betting": {
+   "share_of_truth": 0.014908026227304956,
+   "miss_rate": 0.0,
+   "claim_rate": 0.6916666666666667,
+   "mean_bound": 2.0756230428192164,
+   "mean_truth": 137.78928476475943
+  },
+  "split_clt": {
+   "share_of_truth": 0.13637016197811422,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 18.90796929008605,
+   "mean_truth": 137.78928476475943
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.009018507099404176,
+   "miss_rate": 0.0,
+   "claim_rate": 0.7,
+   "mean_bound": 1.2503819424871503,
+   "mean_truth": 137.8969384773448
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.2704794913963898,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 37.433396545095576,
+   "mean_truth": 137.78928476475943
+  }
+ },
+ {
+  "n": 1500,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": 0.00012344293708563904,
+   "miss_rate": 0.0,
+   "claim_rate": 0.041666666666666664,
+   "mean_bound": 0.01705706213855562,
+   "mean_truth": 134.28549892484375
+  },
+  "split_betting": {
+   "share_of_truth": 0.020114591429742104,
+   "miss_rate": 0.0,
+   "claim_rate": 0.8583333333333333,
+   "mean_bound": 2.7338918171688515,
+   "mean_truth": 134.28549892484375
+  },
+  "split_clt": {
+   "share_of_truth": 0.14577327461483977,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 19.65850720980326,
+   "mean_truth": 134.28549892484375
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.015056437074933149,
+   "miss_rate": 0.0,
+   "claim_rate": 0.85,
+   "mean_bound": 2.0457022015509265,
+   "mean_truth": 135.6825052736054
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.274660651309312,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 36.984775011199794,
+   "mean_truth": 134.28549892484375
+  }
+ },
+ {
+  "n": 1500,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.8977904703189213e-31
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.8977904703189213e-31
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.025,
+   "claim_rate": 0.025,
+   "mean_bound": 0.004286013112370277,
+   "mean_truth": 2.8977904703189213e-31
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.9594259922362517e-31
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.475,
+   "claim_rate": 0.475,
+   "mean_bound": 0.3346110071036035,
+   "mean_truth": 2.8977904703189213e-31
+  }
+ },
+ {
+  "n": 1500,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.867857039412718e-31
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.867857039412718e-31
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.03333333333333333,
+   "claim_rate": 0.03333333333333333,
+   "mean_bound": 0.006890643498439627,
+   "mean_truth": 2.867857039412718e-31
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.840915012395962e-31
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.5416666666666666,
+   "claim_rate": 0.5416666666666666,
+   "mean_bound": 0.2811728082271837,
+   "mean_truth": 2.867857039412718e-31
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": 0.06965684118841445,
+   "miss_rate": 0.0,
+   "claim_rate": 0.9916666666666667,
+   "mean_bound": 9.754650398902994,
+   "mean_truth": 139.22111936030396
+  },
+  "split_betting": {
+   "share_of_truth": 0.12180438334940262,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 17.01870151318008,
+   "mean_truth": 139.22111936030396
+  },
+  "split_clt": {
+   "share_of_truth": 0.21755375630633936,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 30.361521091055504,
+   "mean_truth": 139.22111936030396
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.10835434758491672,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 15.140301533314009,
+   "mean_truth": 139.3604562088183
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.3323293111100967,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 46.34561489550577,
+   "mean_truth": 139.22111936030396
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": 0.08188989161770005,
+   "miss_rate": 0.0,
+   "claim_rate": 0.9833333333333333,
+   "mean_bound": 11.24092390658033,
+   "mean_truth": 136.58349836444455
+  },
+  "split_betting": {
+   "share_of_truth": 0.13010068708673234,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 17.83370114136823,
+   "mean_truth": 136.58349836444455
+  },
+  "split_clt": {
+   "share_of_truth": 0.2341792258132888,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 32.06406846465615,
+   "mean_truth": 136.58349836444455
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.11639022172229121,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 16.038948633802196,
+   "mean_truth": 137.56813700555625
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.3427139740735092,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 46.89941574885623,
+   "mean_truth": 136.58349836444455
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.1051257809154172e-31
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.1051257809154172e-31
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.05,
+   "claim_rate": 0.05,
+   "mean_bound": 0.015445220339982703,
+   "mean_truth": 2.1051257809154172e-31
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.3035047061000423e-31
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.5666666666666667,
+   "claim_rate": 0.5666666666666667,
+   "mean_bound": 0.24429574064850795,
+   "mean_truth": 2.1051257809154172e-31
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.0106867993188478e-31
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.0106867993188478e-31
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.041666666666666664,
+   "claim_rate": 0.041666666666666664,
+   "mean_bound": 0.00516810274114036,
+   "mean_truth": 2.0106867993188478e-31
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 2.377883471270984e-31
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.5333333333333333,
+   "claim_rate": 0.5333333333333333,
+   "mean_bound": 0.13042757514004558,
+   "mean_truth": 2.0106867993188478e-31
+  }
+ },
+ {
+  "n": 8000,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": 0.1854480205719035,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 26.054128352049847,
+   "mean_truth": 140.3653536169289
+  },
+  "split_betting": {
+   "share_of_truth": 0.23134815914563076,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 32.497785910717006,
+   "mean_truth": 140.3653536169289
+  },
+  "split_clt": {
+   "share_of_truth": 0.2845770016300749,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 39.97005746661914,
+   "mean_truth": 140.3653536169289
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.22082222791642234,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 31.05059523237642,
+   "mean_truth": 140.51131138894317
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.37009750847213163,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 51.969117405674076,
+   "mean_truth": 140.3653536169289
+  }
+ },
+ {
+  "n": 8000,
+  "signal_sd": 12.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": 0.1903531819074861,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 26.375107558993864,
+   "mean_truth": 138.33185190916137
+  },
+  "split_betting": {
+   "share_of_truth": 0.23475766760145458,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 32.518919613858095,
+   "mean_truth": 138.33185190916137
+  },
+  "split_clt": {
+   "share_of_truth": 0.28614808047828244,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 39.63387402927583,
+   "mean_truth": 138.33185190916137
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.22766056702772974,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 31.507782349522152,
+   "mean_truth": 138.32580160608353
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.36483741248666773,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 50.52025416849594,
+   "mean_truth": 138.33185190916137
+  }
+ },
+ {
+  "n": 8000,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 7.499342060619366e-32
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 7.499342060619366e-32
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.1,
+   "claim_rate": 0.1,
+   "mean_bound": 0.00388235558315631,
+   "mean_truth": 7.499342060619366e-32
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 8.05198637780274e-32
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.5666666666666667,
+   "claim_rate": 0.5666666666666667,
+   "mean_bound": 0.11289682066033012,
+   "mean_truth": 7.499342060619366e-32
+  }
+ },
+ {
+  "n": 8000,
+  "signal_sd": 0.0,
+  "reader_noise": 0.5,
+  "heavy_tail": true,
+  "split_mp": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 6.587652570629425e-32
+  },
+  "split_betting": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 6.587652570629425e-32
+  },
+  "split_clt": {
+   "share_of_truth": null,
+   "miss_rate": 0.058333333333333334,
+   "claim_rate": 0.058333333333333334,
+   "mean_bound": 0.004850221137390474,
+   "mean_truth": 6.587652570629425e-32
+  },
+  "xfit_bet": {
+   "share_of_truth": null,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 7.324802437787652e-32
+  },
+  "_plugin_split": {
+   "share_of_truth": null,
+   "miss_rate": 0.525,
+   "claim_rate": 0.525,
+   "mean_bound": 0.07815607708917197,
+   "mean_truth": 6.587652570629425e-32
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 12.0,
+  "reader_noise": 1.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": 0.0,
+   "miss_rate": 0.0,
+   "claim_rate": 0.0,
+   "mean_bound": 0.0,
+   "mean_truth": 139.22111936030396
+  },
+  "split_betting": {
+   "share_of_truth": 0.00013181686610163145,
+   "miss_rate": 0.0,
+   "claim_rate": 0.058333333333333334,
+   "mean_bound": 0.01836887666537054,
+   "mean_truth": 139.22111936030396
+  },
+  "split_clt": {
+   "share_of_truth": 0.008258732490766705,
+   "miss_rate": 0.0,
+   "claim_rate": 0.8666666666666667,
+   "mean_bound": 1.1490366117883242,
+   "mean_truth": 139.22111936030396
+  },
+  "xfit_bet": {
+   "share_of_truth": 4.04415862734462e-05,
+   "miss_rate": 0.0,
+   "claim_rate": 0.025,
+   "mean_bound": 0.005729317030402524,
+   "mean_truth": 139.3604562088183
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.0322662893818454,
+   "miss_rate": 0.0,
+   "claim_rate": 0.9833333333333333,
+   "mean_bound": 4.491709816158228,
+   "mean_truth": 139.22111936030396
+  }
+ },
+ {
+  "n": 3400,
+  "signal_sd": 6.0,
+  "reader_noise": 0.5,
+  "heavy_tail": false,
+  "split_mp": {
+   "share_of_truth": 9.23580913224253e-05,
+   "miss_rate": 0.0,
+   "claim_rate": 0.025,
+   "mean_bound": 0.003334844276110663,
+   "mean_truth": 35.22845793865346
+  },
+  "split_betting": {
+   "share_of_truth": 0.008613771196669753,
+   "miss_rate": 0.0,
+   "claim_rate": 0.4666666666666667,
+   "mean_bound": 0.3066503569944264,
+   "mean_truth": 35.22845793865346
+  },
+  "split_clt": {
+   "share_of_truth": 0.09784996479129576,
+   "miss_rate": 0.0,
+   "claim_rate": 0.9916666666666667,
+   "mean_bound": 3.4604037219801635,
+   "mean_truth": 35.22845793865346
+  },
+  "xfit_bet": {
+   "share_of_truth": 0.003748148091468106,
+   "miss_rate": 0.0,
+   "claim_rate": 0.39166666666666666,
+   "mean_bound": 0.13364587115076548,
+   "mean_truth": 35.318087328113805
+  },
+  "_plugin_split": {
+   "share_of_truth": 0.23541238203181156,
+   "miss_rate": 0.0,
+   "claim_rate": 1.0,
+   "mean_bound": 8.310427817961466,
+   "mean_truth": 35.22845793865346
+  }
+ }
+]

@@ -1,0 +1,47 @@
+{
+  "K1": {
+    "reps": 20,
+    "false_claim_naive": 0.0,
+    "false_claim_portfolio": 0.0
+  },
+  "K10": {
+    "reps": 20,
+    "false_claim_naive": 0.1,
+    "false_claim_portfolio": 0.05
+  },
+  "K50": {
+    "reps": 20,
+    "false_claim_naive": 0.0,
+    "false_claim_portfolio": 0.0
+  },
+  "K200": {
+    "reps": 20,
+    "false_claim_naive": 0.45,
+    "false_claim_portfolio": 0.0
+  },
+  "power_K1": {
+    "mean_bound": 0.020401374076708865,
+    "mean_truth": 0.044702024024871535,
+    "ratio": 0.4563859136525417
+  },
+  "power_K10": {
+    "mean_bound": 0.018798341903801835,
+    "mean_truth": 0.0451100871424167,
+    "ratio": 0.4167214717287896
+  },
+  "power_K100": {
+    "mean_bound": 0.01568382954966009,
+    "mean_truth": 0.04566488506639305,
+    "ratio": 0.34345492224182916
+  },
+  "power_K1000": {
+    "mean_bound": 0.01278982544722928,
+    "mean_truth": 0.044788141310792104,
+    "ratio": 0.28556276444871037
+  },
+  "power_K10000": {
+    "mean_bound": 0.011983271132659377,
+    "mean_truth": 0.04517016818874177,
+    "ratio": 0.26529170939961416
+  }
+}

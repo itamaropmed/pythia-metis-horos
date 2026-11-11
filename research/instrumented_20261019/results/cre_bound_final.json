@@ -1,0 +1,65 @@
+{
+ "emb_note(pca64)": {
+  "certified_min2": 0.0,
+  "truth_min2": 253.2671857825815,
+  "share": 0.0,
+  "tamed_q": 0.02,
+  "cap_min": 60.0
+ },
+ "emb_joint(pca64)": {
+  "certified_min2": 3.1559209522306992,
+  "truth_min2": 253.2671857825815,
+  "share": 0.012460836339611385,
+  "tamed_q": 0.1,
+  "cap_min": 60.0
+ },
+ "cre_note(table-conditioned)": {
+  "certified_min2": 0.0,
+  "truth_min2": 253.2671857825815,
+  "share": 0.0,
+  "tamed_q": 0.02,
+  "cap_min": 60.0
+ },
+ "llm_extract": {
+  "certified_min2": 3.943783090752066,
+  "truth_min2": 253.2671857825815,
+  "share": 0.015571630720995284,
+  "tamed_q": 0.1,
+  "cap_min": 60.0
+ },
+ "openmed_disease": {
+  "certified_min2": 0.0,
+  "truth_min2": 253.2671857825815,
+  "share": 0.0,
+  "tamed_q": 0.02,
+  "cap_min": 60.0
+ },
+ "openmed_pharma": {
+  "certified_min2": 0.10419497051663706,
+  "truth_min2": 253.2671857825815,
+  "share": 0.000411403357267466,
+  "tamed_q": 0.1,
+  "cap_min": 60.0
+ },
+ "tfidf_svd200": {
+  "certified_min2": 6.987824413801226,
+  "truth_min2": 253.2671857825815,
+  "share": 0.027590721601810506,
+  "tamed_q": 0.1,
+  "cap_min": 60.0
+ },
+ "oracle(reference)": {
+  "certified_min2": 92.52052012181792,
+  "truth_min2": 253.2671857825815,
+  "share": 0.3653079645352977,
+  "tamed_q": 0.1,
+  "cap_min": 60.0
+ },
+ "STACK(all real readers)": {
+  "certified_min2": 13.680970339631072,
+  "truth_min2": 253.2671857825815,
+  "share": 0.0540179348436223,
+  "tamed_q": 0.05,
+  "cap_min": 60.0
+ }
+}

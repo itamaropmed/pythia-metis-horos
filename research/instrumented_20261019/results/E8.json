@@ -1,0 +1,24 @@
+{
+  "ensemble_M1": {
+    "tightness": 0.10627304213533677
+  },
+  "ensemble_M3": {
+    "tightness": 0.2704339757693637
+  },
+  "ensemble_M9": {
+    "tightness": 0.43390080199666525
+  },
+  "folds_2": {
+    "tightness": 0.4492134753279375
+  },
+  "folds_5": {
+    "tightness": 0.261611406877728
+  },
+  "folds_10": {
+    "tightness": 0.12201820253182168
+  },
+  "pooled_2fold_INVALID?": {
+    "tightness": 0.4334983501794052,
+    "miss_rate": 0.0
+  }
+}

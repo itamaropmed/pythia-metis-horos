@@ -1,0 +1,397 @@
+{
+ "round": 1,
+ "table": {
+  "General Medicine": {
+   "expected_min": 138.0,
+   "spread_sd_min": 26.0
+  },
+  "Hematology - Oncology": {
+   "expected_min": 137.0,
+   "spread_sd_min": 24.0
+  },
+  "Nephrology": {
+   "expected_min": 133.0,
+   "spread_sd_min": 38.0
+  },
+  "Neurology": {
+   "expected_min": 76.0,
+   "spread_sd_min": 25.0
+  },
+  "Neurosurgery": {
+   "expected_min": 110.0,
+   "spread_sd_min": 25.0
+  },
+  "Obstetrics / Gynecology": {
+   "expected_min": 97.0,
+   "spread_sd_min": 27.0
+  },
+  "Ophthalmology": {
+   "expected_min": 115.0,
+   "spread_sd_min": 21.0
+  },
+  "Orthopedic": {
+   "expected_min": 109.0,
+   "spread_sd_min": 24.0
+  },
+  "Radiology": {
+   "expected_min": 82.0,
+   "spread_sd_min": 24.0
+  },
+  "SOAP / Chart / Progress Notes": {
+   "expected_min": 105.0,
+   "spread_sd_min": 26.0
+  },
+  "Surgery": {
+   "expected_min": 105.0,
+   "spread_sd_min": 27.0
+  },
+  "Urology": {
+   "expected_min": 110.0,
+   "spread_sd_min": 29.0
+  },
+  "other": {
+   "expected_min": 113.0,
+   "spread_sd_min": 24.0
+  }
+ },
+ "current_model": {
+  "readers": [
+   "emb_note(pca64)",
+   "emb_joint(pca64)",
+   "cre_note(table-conditioned)",
+   "llm_extract",
+   "openmed_disease",
+   "openmed_pharma",
+   "tfidf_svd200",
+   "rr_shift",
+   "rr_typed"
+  ],
+  "fit_cv_within_cell_R2": 0.1354
+ },
+ "residual_atoms(type:token, corr, n_notes)": [
+  [
+   "comorbidity:diabetes",
+   0.124,
+   44
+  ],
+  [
+   "procedure_scope:without",
+   -0.084,
+   16
+  ],
+  [
+   "medication:coumadin",
+   0.084,
+   22
+  ],
+  [
+   "procedure_scope:laparoscopic",
+   0.075,
+   20
+  ],
+  [
+   "procedure_scope:repair",
+   -0.068,
+   54
+  ],
+  [
+   "comorbidity:failure",
+   0.068,
+   25
+  ],
+  [
+   "anesthesia:general",
+   0.068,
+   308
+  ],
+  [
+   "procedure_scope:injection",
+   -0.066,
+   17
+  ],
+  [
+   "procedure_scope:performed",
+   -0.064,
+   17
+  ],
+  [
+   "procedure_scope:reconstruction",
+   -0.06,
+   16
+  ],
+  [
+   "medication:aspirin",
+   0.058,
+   19
+  ],
+  [
+   "procedure_scope:radical",
+   0.058,
+   15
+  ],
+  [
+   "procedure_scope:removal",
+   -0.056,
+   52
+  ],
+  [
+   "comorbidity:disease",
+   0.053,
+   36
+  ],
+  [
+   "comorbidity:renal",
+   0.052,
+   21
+  ],
+  [
+   "procedure_scope:bone",
+   -0.052,
+   26
+  ],
+  [
+   "comorbidity:coronary",
+   0.051,
+   20
+  ],
+  [
+   "comorbidity:artery",
+   0.049,
+   17
+  ],
+  [
+   "anesthesia:spinal",
+   -0.049,
+   27
+  ],
+  [
+   "anatomy:mass",
+   0.046,
+   16
+  ],
+  [
+   "procedure_scope:extensive",
+   -0.046,
+   26
+  ],
+  [
+   "patient:age",
+   0.044,
+   37
+  ],
+  [
+   "blood_loss:blood",
+   -0.042,
+   113
+  ],
+  [
+   "procedure_scope:reduction",
+   0.042,
+   15
+  ],
+  [
+   "procedure_scope:placement",
+   -0.04,
+   52
+  ],
+  [
+   "anesthesia:block",
+   -0.04,
+   49
+  ],
+  [
+   "blood_loss:loss",
+   -0.038,
+   107
+  ],
+  [
+   "complication:complications",
+   -0.037,
+   53
+  ],
+  [
+   "patient:year-old",
+   0.037,
+   19
+  ],
+  [
+   "procedure_scope:graft",
+   0.036,
+   17
+  ],
+  [
+   "procedure_scope:insertion",
+   0.036,
+   23
+  ],
+  [
+   "procedure_scope:biopsy",
+   0.035,
+   29
+  ],
+  [
+   "procedure_scope:left",
+   0.035,
+   62
+  ],
+  [
+   "procedure_scope:coronary",
+   0.035,
+   19
+  ],
+  [
+   "procedure_scope:angiography",
+   0.034,
+   18
+  ],
+  [
+   "comorbidity:prior",
+   0.034,
+   16
+  ],
+  [
+   "comorbidity:hypertension",
+   0.033,
+   22
+  ],
+  [
+   "comorbidity:history",
+   0.033,
+   17
+  ],
+  [
+   "procedure_scope:additional",
+   0.032,
+   17
+  ],
+  [
+   "anatomy:prior",
+   0.03,
+   19
+  ]
+ ],
+ "residual_note_terms(term, corr)": [
+  [
+   "anesthesia general",
+   0.187
+  ],
+  [
+   "diabetes",
+   0.156
+  ],
+  [
+   "obese",
+   0.151
+  ],
+  [
+   "diabetic",
+   0.15
+  ],
+  [
+   "hypertension",
+   0.149
+  ],
+  [
+   "obesity",
+   0.145
+  ],
+  [
+   "cancer",
+   0.129
+  ],
+  [
+   "heparin",
+   0.12
+  ],
+  [
+   "showed",
+   0.118
+  ],
+  [
+   "fact",
+   -0.117
+  ],
+  [
+   "year",
+   0.117
+  ],
+  [
+   "carcinoma",
+   0.108
+  ],
+  [
+   "general",
+   0.108
+  ],
+  [
+   "assess",
+   0.107
+  ],
+  [
+   "plavix",
+   0.106
+  ],
+  [
+   "year old",
+   0.103
+  ],
+  [
+   "years",
+   0.102
+  ],
+  [
+   "old",
+   0.1
+  ],
+  [
+   "62",
+   0.098
+  ],
+  [
+   "additional",
+   0.098
+  ],
+  [
+   "artery",
+   0.098
+  ],
+  [
+   "cardiac",
+   0.097
+  ],
+  [
+   "failure",
+   0.093
+  ],
+  [
+   "co2",
+   0.093
+  ],
+  [
+   "family history",
+   0.092
+  ],
+  [
+   "cholesterol",
+   0.091
+  ],
+  [
+   "aspirin",
+   0.091
+  ],
+  [
+   "insulin",
+   0.091
+  ],
+  [
+   "cell",
+   0.09
+  ],
+  [
+   "somewhat",
+   0.089
+  ]
+ ],
+ "accepted_concepts": {},
+ "rejected_concepts": {}
+}

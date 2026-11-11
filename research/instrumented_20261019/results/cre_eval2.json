@@ -1,0 +1,83 @@
+{
+ "duration_bound_min2": {
+  "_truth_CAL": 270.87037166430173,
+  "emb_note(pca64)": 0.0,
+  "emb_joint(pca64)": 0.0,
+  "cre_note(table-conditioned)": 0.0,
+  "llm_extract": 0.0,
+  "openmed_disease": 0.0,
+  "openmed_pharma": 0.0,
+  "tfidf_svd200": 0.0,
+  "oracle(reference)": 14.914929347780854,
+  "STACK(all real readers)": 0.0
+ },
+ "risk": {
+  "none": {
+   "MAE_vs_true_risk": 0.07957032511821556,
+   "brier": 0.18746808183608013
+  },
+  "emb_note(pca64)": {
+   "MAE_vs_true_risk": 0.08224765150920602,
+   "brier": 0.18948324902703376
+  },
+  "emb_joint(pca64)": {
+   "MAE_vs_true_risk": 0.08496663546508833,
+   "brier": 0.18936089336080109
+  },
+  "cre_note(table-conditioned)": {
+   "MAE_vs_true_risk": 0.10662023939806087,
+   "brier": 0.21043091753881185
+  },
+  "llm_extract": {
+   "MAE_vs_true_risk": 0.07519003510326283,
+   "brier": 0.18342388300214518
+  },
+  "openmed_disease": {
+   "MAE_vs_true_risk": 0.08517107490331115,
+   "brier": 0.18969709851135327
+  },
+  "openmed_pharma": {
+   "MAE_vs_true_risk": 0.07930167306396524,
+   "brier": 0.187837656099605
+  },
+  "tfidf_svd200": {
+   "MAE_vs_true_risk": 0.10046396204129877,
+   "brier": 0.19727730734874077
+  },
+  "oracle(reference)": {
+   "MAE_vs_true_risk": 0.02669431461662938,
+   "brier": 0.17540186826312487
+  },
+  "STACK(all real readers)": {
+   "MAE_vs_true_risk": 0.07189940549528194,
+   "brier": 0.18338334159375275
+  }
+ },
+ "certified": {
+  "none": {
+   "regions": 2,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  },
+  "emb_joint(pca64)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  },
+  "llm_extract": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  },
+  "oracle(reference)": {
+   "regions": 3,
+   "certified_share": 0.6832844574780058,
+   "wrong_on_test_truth": 0
+  },
+  "STACK(all real readers)": {
+   "regions": 3,
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  }
+ }
+}

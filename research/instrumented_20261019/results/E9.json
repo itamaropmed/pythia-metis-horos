@@ -1,0 +1,14 @@
+{
+  "q0.1": {
+    "read_share": 0.10583374999999999,
+    "certified_share_of_truth": 0.2354532884986272
+  },
+  "q0.25": {
+    "read_share": 0.26262500000000005,
+    "certified_share_of_truth": 0.3129183412753971
+  },
+  "q0.5": {
+    "read_share": 0.54653375,
+    "certified_share_of_truth": 0.41874145151852044
+  }
+}

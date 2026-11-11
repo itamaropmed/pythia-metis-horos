@@ -1,0 +1,65 @@
+{
+ "round": 2,
+ "kept": 3,
+ "fit_cv_gain_mean": 0.003458202672116273,
+ "fit_cv_gain_by_seed": [
+  -0.0011,
+  0.0059,
+  0.0021,
+  0.005,
+  0.0053
+ ],
+ "accept": true,
+ "concepts": {
+  "general_anesthesia": {
+   "pattern": "(?i)\\b(general\\s+anesthesia|anesthesia\\s+general|general\\s+anesthetic|endotracheal\\s+anesthesia|endotracheal\\s+tube|intubated|intubation|ETT)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "General anesthesia/intubation is associated with longer cases and is strongly correlated with positive residuals.",
+   "fit_rate": 0.23516153268219384
+  },
+  "heparinization": {
+   "pattern": "(?i)\\b(heparin(?:ized|ization)?|systemic\\s+heparin(?:ization)?|heparin\\s+was\\s+given)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Intraoperative heparin use often reflects vascular/cardiac complexity and longer duration.",
+   "fit_rate": 0.04132231404958678
+  },
+  "extensive_or_complex": {
+   "pattern": "(?i)\\b(extensive|complex|complicated|difficult|challenging|prolonged|tedious|more\\s+than\\s+usual|greater\\s+than\\s+expected)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Narrative descriptors of complexity often capture extra time not encoded by specialty alone.",
+   "fit_rate": 0.1585274229902329
+  }
+ },
+ "diagnostic_corr_with_planted": {
+  "general_anesthesia": {
+   "anes_general": 0.59,
+   "ebl": 0.17,
+   "diabetes": -0.11,
+   "hypertension": -0.14,
+   "obesity": -0.02,
+   "malignancy": -0.0,
+   "anticoag": -0.02
+  },
+  "heparinization": {
+   "anes_general": -0.0,
+   "ebl": 0.01,
+   "diabetes": 0.01,
+   "hypertension": 0.03,
+   "obesity": 0.02,
+   "malignancy": 0.0,
+   "anticoag": 0.69
+  },
+  "extensive_or_complex": {
+   "anes_general": 0.03,
+   "ebl": 0.09,
+   "diabetes": 0.03,
+   "hypertension": 0.03,
+   "obesity": -0.0,
+   "malignancy": 0.08,
+   "anticoag": 0.07
+  }
+ }
+}

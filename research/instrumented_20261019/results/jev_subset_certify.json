@@ -1,0 +1,17 @@
+{
+ "n_answered": 3423,
+ "true_nli_subset": 0.020212942796136318,
+ "alpha": 0.05,
+ "J": 5,
+ "readers": {
+  "jev_surgical_questions": 0.0008009919424711172,
+  "tfidf_svd200": 0.00019443460170188564,
+  "oracle_concepts": 0.005251821111061068,
+  "openmed_ner_all": 0.0,
+  "jev_plus_openmed": 0.0
+ },
+ "jev_general_anesthesia_vs_planted": {
+  "auc_like_mean_p_if_true": 0.9951159196290572,
+  "mean_p_if_false": 0.12163184438040345
+ }
+}

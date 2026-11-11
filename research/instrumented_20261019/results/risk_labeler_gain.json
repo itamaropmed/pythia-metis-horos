@@ -1,0 +1,60 @@
+{
+ "n_rows": 3423,
+ "cal_rows": 1712,
+ "true_risk_information": 0.020179623546552738,
+ "gate": [
+  {
+   "reader": "oracle_concepts (reference ceiling)",
+   "certified_gain": 0.0029810415646354263,
+   "accepted": true
+  },
+  {
+   "reader": "llm:gpt-6-luna|extract_v2",
+   "certified_gain": 0.0012412213319427413,
+   "accepted": true
+  },
+  {
+   "reader": "tfidf_svd200",
+   "certified_gain": 5.861954543969064e-05,
+   "accepted": true
+  }
+ ],
+ "labelers": {
+  "baseline (table cells only)": {
+   "regions": 7,
+   "certified_share": 0.0,
+   "relation_counts": {
+    "local_shift_unresolved": 1712
+   },
+   "certified_rows": 0,
+   "certified_rows_wrong_vs_truth": 0
+  },
+  "+ oracle_concepts (reference ceiling)": {
+   "regions": 8,
+   "certified_share": 0.0,
+   "relation_counts": {
+    "local_shift_unresolved": 1712
+   },
+   "certified_rows": 0,
+   "certified_rows_wrong_vs_truth": 0
+  },
+  "+ llm:gpt-6-luna|extract_v2": {
+   "regions": 9,
+   "certified_share": 0.0,
+   "relation_counts": {
+    "local_shift_unresolved": 1712
+   },
+   "certified_rows": 0,
+   "certified_rows_wrong_vs_truth": 0
+  },
+  "+ tfidf_svd200": {
+   "regions": 9,
+   "certified_share": 0.0,
+   "relation_counts": {
+    "local_shift_unresolved": 1712
+   },
+   "certified_rows": 0,
+   "certified_rows_wrong_vs_truth": 0
+  }
+ }
+}

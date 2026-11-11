@@ -101,14 +101,82 @@ def _feature_frame(frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series, list[s
     return features, target, numeric, categorical
 
 
-def _encode(fit: pd.Series, y: pd.Series, apply: pd.Series, smoothing: float) -> tuple[np.ndarray, np.ndarray]:
-    mean = float(y.mean())
-    stats = pd.DataFrame({"key": fit.to_numpy(), "y": y.to_numpy()}).groupby("key")["y"].agg(["mean", "count"])
-    values = (stats["count"] * stats["mean"] + smoothing * mean) / (stats["count"] + smoothing)
-    return (
-        fit.map(values).fillna(mean).to_numpy(float),
-        apply.map(values).fillna(mean).to_numpy(float),
+def _target_encoding_map(fit: pd.Series, y: pd.Series, smoothing: float):
+    prior = float(y.mean())
+    stats = pd.DataFrame({"key": fit.to_numpy(), "y": y.to_numpy()}).groupby(
+        "key", dropna=False
+    )["y"].agg(["mean", "count"])
+    mapping = (stats["count"] * stats["mean"] + smoothing * prior) / (
+        stats["count"] + smoothing
     )
+    return prior, mapping
+
+
+def _encode(
+    fit: pd.Series,
+    y: pd.Series,
+    apply: pd.Series,
+    smoothing: float,
+    *,
+    groups: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Leave-one-patient-out training encoding plus full-fit validation map.
+
+    The old implementation encoded each training row with category statistics
+    containing that same row's target. That makes the training representation
+    target-leaking and creates train/validation mismatch. Here every training
+    row is encoded from all *other* patient groups only; evaluation rows use
+    all outer-fit labels, as they would at deployment. Excluding the entire
+    patient rather than just the current row prevents repeated-case target
+    leakage and reduces the data mismatch of K-fold target encoding.
+    """
+    keys = fit.reset_index(drop=True)
+    targets = pd.Series(y.to_numpy(dtype=float))
+    raw_entities = np.asarray(groups).reshape(-1)
+    if pd.Series(raw_entities).isna().any():
+        raise ValueError("target-encoding patient groups must be present")
+    entities = pd.Series(raw_entities).astype(str).str.strip().to_numpy()
+    if len(keys) != len(targets) or len(entities) != len(targets):
+        raise ValueError("target-encoding keys, targets, and patient groups must align")
+    if np.any(entities == ""):
+        raise ValueError("target-encoding patient groups must be nonempty")
+    unique_entities = np.unique(entities)
+    if len(unique_entities) < 2:
+        raise ValueError("honest target encoding requires at least two patient groups")
+    if (not np.isfinite(float(smoothing)) or smoothing < 0
+            or not np.isfinite(targets.to_numpy()).all()):
+        raise ValueError("target-encoding targets must be finite and smoothing nonnegative")
+    key_codes, _ = pd.factorize(keys, sort=False, use_na_sentinel=False)
+    group_codes, _ = pd.factorize(entities, sort=False, use_na_sentinel=False)
+    code_frame = pd.DataFrame({"key": key_codes, "group": group_codes,
+                               "y": targets.to_numpy(float)})
+    key_stats = code_frame.groupby("key")["y"].agg(["sum", "count"])
+    key_group_stats = code_frame.groupby(["key", "group"])["y"].agg(["sum", "count"])
+    group_stats = code_frame.groupby("group")["y"].agg(["sum", "count"])
+    key_total_sum = key_stats["sum"].reindex(key_codes).to_numpy(float)
+    key_total_count = key_stats["count"].reindex(key_codes).to_numpy(float)
+    index = pd.MultiIndex.from_arrays([key_codes, group_codes])
+    own_key_sum = key_group_stats["sum"].reindex(index).to_numpy(float)
+    own_key_count = key_group_stats["count"].reindex(index).to_numpy(float)
+    own_group_sum = group_stats["sum"].reindex(group_codes).to_numpy(float)
+    own_group_count = group_stats["count"].reindex(group_codes).to_numpy(float)
+    prior_count = len(targets) - own_group_count
+    if np.any(prior_count <= 0):
+        raise ValueError("target encoding needs other-patient outcomes for every row")
+    prior = (float(targets.sum()) - own_group_sum) / prior_count
+    category_sum = key_total_sum - own_key_sum
+    category_count = key_total_count - own_key_count
+    denominator = category_count + smoothing
+    encoded_fit = np.where(
+        denominator > 0,
+        (category_sum + smoothing * prior) / np.maximum(denominator, 1.),
+        prior,
+    )
+    prior, mapping = _target_encoding_map(keys, targets, smoothing)
+    encoded_apply = apply.reset_index(drop=True).map(mapping).fillna(prior).to_numpy(float)
+    if not np.isfinite(encoded_fit).all() or not np.isfinite(encoded_apply).all():
+        raise RuntimeError("leave-one-patient-out target encoding produced nonfinite values")
+    return encoded_fit, encoded_apply
 
 
 def _pipeline(numeric: list[str], categorical: list[str], seed: int):
@@ -167,11 +235,14 @@ def reproduce_tuned_structured_oof(
         x_fit.columns = x_all.columns
         x_val.columns = x_all.columns
         y_fit = fit_frame["case_actual_duration_time"].astype(float)
+        patient_fit = fit_frame["patient_durable_id"].astype(str).to_numpy()
         x_fit["proc_target_enc"], x_val["proc_target_enc"] = _encode(
-            x_fit["primary_procedure_name"], y_fit, x_val["primary_procedure_name"], 20.0
+            x_fit["primary_procedure_name"], y_fit, x_val["primary_procedure_name"], 20.0,
+            groups=patient_fit,
         )
         x_fit["surgeon_target_enc"], x_val["surgeon_target_enc"] = _encode(
-            x_fit["surgeon_durable_id"], y_fit, x_val["surgeon_durable_id"], 15.0
+            x_fit["surgeon_durable_id"], y_fit, x_val["surgeon_durable_id"], 15.0,
+            groups=patient_fit,
         )
         # Historical implementation numbered fold seeds from one.
         model = _pipeline(numeric, categorical, fold_seed + 1)
@@ -180,7 +251,9 @@ def reproduce_tuned_structured_oof(
 
     crossfit = run_crossfit(
         model_frame, predict_fold, target_column="case_actual_duration_time",
-        group_column="patient_durable_id", fold_column="fold_id", seed=seed,
+        group_column="patient_durable_id",
+        feature_columns=[f"_feature_{column}" for column in x_all],
+        fold_column="fold_id", seed=seed,
     )
     predictions = crossfit.predictions
     low, high = np.quantile(y_all.to_numpy(float), [0.001, 0.999])

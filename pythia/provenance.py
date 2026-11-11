@@ -20,6 +20,7 @@ class NoteProvenanceAudit:
     n_notes_declared: int
     n_note_dates_parsed: int
     n_cutoff_violations: int
+    n_ambiguous_date_precision_violations: int
     n_count_mismatches: int
     n_unmatched_bundle_cases: int
     cutoff_days: int
@@ -61,6 +62,26 @@ def _read(path: Path, columns: list[str] | None = None) -> pd.DataFrame:
     if path.suffix.lower() == ".csv":
         return pd.read_csv(path, usecols=columns)
     return pd.read_parquet(path, columns=columns)
+
+
+def _date_precision_ambiguous(note_time: pd.Series, cutoff: pd.Series) -> pd.Series:
+    """Flag midnight-normalized note dates on an intraday cutoff boundary.
+
+    Source systems sometimes export date-only values as midnight timestamps.
+    Without trusted precision metadata, midnight on the cutoff calendar date
+    cannot establish that the note existed before an intraday cutoff. Treating
+    it as ambiguous is conservative even when the source actually recorded
+    an exact midnight timestamp.
+    """
+    note_time = pd.to_datetime(note_time, errors="coerce", utc=True)
+    cutoff = pd.to_datetime(cutoff, errors="coerce", utc=True)
+    midnight = (
+        note_time.dt.hour.eq(0) & note_time.dt.minute.eq(0)
+        & note_time.dt.second.eq(0) & note_time.dt.microsecond.eq(0)
+    )
+    same_day = note_time.dt.normalize().eq(cutoff.dt.normalize())
+    intraday_cutoff = cutoff.ne(cutoff.dt.normalize())
+    return midnight & same_day & intraday_cutoff
 
 
 def audit_note_provenance(
@@ -126,11 +147,23 @@ def audit_note_provenance(
         reasons.append(f"{n_unmatched} bundle cases are absent from the case table")
     valid = joined["_note_time"].notna() & joined["_scheduled"].notna()
     threshold = joined["_scheduled"] - pd.Timedelta(days=cutoff_days)
-    # The frozen rule is strict: note_date < scheduled_in_room - 2 days.
-    n_cutoff_violations = int((valid & joined["_note_time"].ge(threshold)).sum())
+    # The frozen rule is strict. Midnight-normalized note dates on an intraday
+    # cutoff day are also refused: their true within-day availability is unknown.
+    ambiguous_precision = _date_precision_ambiguous(joined["_note_time"], threshold)
+    exact_violations = joined["_note_time"].ge(threshold)
+    cutoff_violations = valid & (exact_violations | ambiguous_precision)
+    n_cutoff_violations = int(cutoff_violations.sum())
+    n_ambiguous_date_precision_violations = int(
+        (valid & ambiguous_precision & ~exact_violations).sum()
+    )
     cutoff_passed = not (n_unparsed or n_bad_scheduled or n_unmatched or n_count_mismatches or n_cutoff_violations)
     if n_cutoff_violations:
         reasons.append(f"{n_cutoff_violations} notes violate the strict pre-cutoff rule")
+    if n_ambiguous_date_precision_violations:
+        reasons.append(
+            f"{n_ambiguous_date_precision_violations} midnight-normalized notes have "
+            "ambiguous precision on an intraday cutoff day"
+        )
 
     cluster_isolation: bool | None
     if fold_column not in cases:
@@ -156,6 +189,7 @@ def audit_note_provenance(
         n_notes_declared=int(declared.fillna(0).sum()),
         n_note_dates_parsed=int(notes["_note_time"].notna().sum()),
         n_cutoff_violations=n_cutoff_violations,
+        n_ambiguous_date_precision_violations=n_ambiguous_date_precision_violations,
         n_count_mismatches=n_count_mismatches,
         n_unmatched_bundle_cases=n_unmatched,
         cutoff_days=int(cutoff_days),
@@ -212,7 +246,10 @@ def recut_note_bundles(
         if timestamps.isna().any():
             raise ValueError(f"unparseable note timestamp at joined row {pos}")
         cutoff = scheduled.iloc[pos] - pd.Timedelta(days=cutoff_days)
-        keep = timestamps.lt(cutoff)
+        ambiguous_precision = _date_precision_ambiguous(
+            timestamps, pd.Series([cutoff] * len(timestamps), index=timestamps.index),
+        )
+        keep = timestamps.lt(cutoff) & ~ambiguous_precision
         if history_floor_days is not None:
             keep &= timestamps.ge(scheduled.iloc[pos] - pd.Timedelta(days=history_floor_days))
         selected = [idx for idx, flag in enumerate(keep.tolist()) if flag]

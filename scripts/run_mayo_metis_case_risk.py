@@ -17,10 +17,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
-from sklearn.model_selection import GroupKFold
 from xgboost import XGBRegressor
 
 from metis.case_risk import fit_case_risk_map
+from horos.models.temporal_splits import forward_group_splits
+from horos.models.mayo_lineage import (
+    add_lineage_arguments, load_verified_mayo_inputs, verify_split_cutoff,
+)
 
 
 MODEL_KWARGS = dict(
@@ -60,20 +63,29 @@ def crossfit_and_holdout(
     features: np.ndarray,
     y: np.ndarray,
     groups: np.ndarray,
+    scheduled_times: np.ndarray,
     train: np.ndarray,
     heldout: np.ndarray,
     seed: int,
-) -> tuple[np.ndarray, np.ndarray]:
-    oof = np.empty(len(train), dtype=float)
-    for fold, (fit_local, val_local) in enumerate(
-        GroupKFold(5).split(features[train], y[train], groups[train])
-    ):
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Forward-time development OOF, full-development refit, and OOF mask.
+
+    Warm-up development rows intentionally have NaN predictions and False mask;
+    they are not valid calibration examples because no earlier training history
+    exists for them.
+    """
+    oof = np.full(len(train), np.nan, dtype=float)
+    valid = np.zeros(len(train), dtype=bool)
+    fold_spec = forward_group_splits(scheduled_times[train], groups[train], n_splits=5,
+                                    min_train_fraction=.5)
+    for fold, (fit_local, val_local) in enumerate(fold_spec):
         model = XGBRegressor(random_state=seed + fold, **MODEL_KWARGS)
         model.fit(features[train][fit_local], y[train][fit_local])
         oof[val_local] = model.predict(features[train][val_local])
+        valid[val_local] = True
     final = XGBRegressor(random_state=seed, **MODEL_KWARGS)
     final.fit(features[train], y[train])
-    return oof, final.predict(features[heldout])
+    return oof, final.predict(features[heldout]), valid
 
 
 def category_summary(cards: list[dict], actual: np.ndarray, predictions: dict[str, np.ndarray]) -> dict:
@@ -121,43 +133,47 @@ def main() -> None:
     parser.add_argument("--id-salt", required=True, help="private salt; never commit this value")
     parser.add_argument("--seed", type=int, default=0,
                         help="historical A/B XGBoost seed")
+    add_lineage_arguments(parser)
     args = parser.parse_args()
 
-    frame = pd.read_parquet(args.derived / "df.parquet")
-    xa = pd.read_parquet(args.derived / "XA.parquet").to_numpy(np.float32)
-    xb = pd.read_parquet(args.derived / "XB.parquet").to_numpy(np.float32)
+    lineage, frame, xa_frame, xb_frame = load_verified_mayo_inputs(args)
+    xa, xb = xa_frame.to_numpy(np.float32), xb_frame.to_numpy(np.float32)
     y = frame["case_actual_duration_time"].to_numpy(float)
     groups = frame["patient_durable_id"].astype(str).to_numpy()
+    scheduled_times = pd.to_datetime(frame["scheduled_in_room"], utc=True).to_numpy()
     train, heldout, cutoff = split_indices(frame)
-    oof_a, test_a = crossfit_and_holdout(xa, y, groups, train, heldout, args.seed)
-    oof_b, test_b = crossfit_and_holdout(xb, y, groups, train, heldout, args.seed)
+    verify_split_cutoff(lineage, cutoff)
+    oof_a, test_a, valid_oof = crossfit_and_holdout(
+        xa, y, groups, scheduled_times, train, heldout, args.seed,
+    )
+    oof_b, test_b, valid_oof_b = crossfit_and_holdout(
+        xb, y, groups, scheduled_times, train, heldout, args.seed,
+    )
+    if not np.array_equal(valid_oof, valid_oof_b):
+        raise RuntimeError("model arms produced inconsistent temporal OOF support")
+    oof_rows = train[valid_oof]
     names = ("basic_xgboost", "xgboost_plus_11_llm")
     train_pred = {names[0]: oof_a, names[1]: oof_b}
     test_pred = {names[0]: test_a, names[1]: test_b}
-    train_strata = frame.iloc[train].primary_procedure_name.map(procedure_family).to_numpy()
+    train_strata = frame.iloc[oof_rows].primary_procedure_name.map(procedure_family).to_numpy()
     test_strata = frame.iloc[heldout].primary_procedure_name.map(procedure_family).to_numpy()
 
     risk_map = fit_case_risk_map(
-        y[train], train_pred, strata=train_strata, entity_ids=groups[train],
+        y[oof_rows], {name: pred[valid_oof] for name, pred in train_pred.items()},
+        strata=train_strata, entity_ids=groups[oof_rows],
         min_entities=100, provenance={
-            "calibration": "patient-grouped development OOF only",
+            "calibration": "forward-time, patient-disjoint development OOF only; warm-up rows excluded",
             "outer_split": "patient-disjoint temporal 80th percentile",
             "features": "frozen XA/XB; XB adds 11 pre-existing LLM concepts",
         },
     )
-    information_set_floors = {
-        names[0]: (29.29, "calibrated"),
-        names[1]: (28.84959960434628, "calibrated"),
-    }
-
     # Arrival phase: no held-out outcome is passed into score().
     cards = []
     case_ids = frame.iloc[heldout].case_durable_id.to_numpy()
     for i, case_id in enumerate(case_ids):
         result = risk_map.score(
             case_id, {name: test_pred[name][i] for name in names},
-            stratum=test_strata[i], id_salt=args.id_salt,
-            information_set_floors=information_set_floors,
+            id_salt=args.id_salt,
         )
         cards.append(result.to_dict())
 
@@ -167,8 +183,11 @@ def main() -> None:
     summary = {
         "status": "retrospective_poc_not_clinical_certification",
         "split": {"cutoff": cutoff, "development_rows": int(len(train)),
+                  "forward_oof_rows": int(len(oof_rows)),
+                  "forward_oof_warmup_rows": int(len(train) - len(oof_rows)),
                   "heldout_rows": int(len(heldout)),
                   "development_patients": int(pd.Series(groups[train]).nunique()),
+                  "forward_oof_patients": int(pd.Series(groups[oof_rows]).nunique()),
                   "heldout_patients": int(pd.Series(groups[heldout]).nunique()),
                   "patient_overlap": 0},
         "pythia_reference_floors": {

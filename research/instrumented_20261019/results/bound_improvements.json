@@ -1,0 +1,30 @@
+{
+ "complementary|n2000": {
+  "A_logistic_portfolio": 0.12753932450051175,
+  "C_variational_portfolio": 0.11760185851781105,
+  "D_variational_concat": 0.1808509525478447,
+  "E_variational_stack": 0.20394331670477273,
+  "misses(bound>truth)": 0
+ },
+ "complementary|n8000": {
+  "A_logistic_portfolio": 0.23934888768199583,
+  "C_variational_portfolio": 0.21882178825623974,
+  "D_variational_concat": 0.34135248025251014,
+  "E_variational_stack": 0.35166062978665624,
+  "misses(bound>truth)": 0
+ },
+ "five_noisy_reads|n2000": {
+  "A_logistic_portfolio": 0.0875316596810684,
+  "C_variational_portfolio": 0.08081373973175549,
+  "D_variational_concat": 0.18146052414446215,
+  "E_variational_stack": 0.22363615704171913,
+  "misses(bound>truth)": 0
+ },
+ "five_noisy_reads|n8000": {
+  "A_logistic_portfolio": 0.18623603003750608,
+  "C_variational_portfolio": 0.17105316724808184,
+  "D_variational_concat": 0.3941149262060474,
+  "E_variational_stack": 0.42250826984386386,
+  "misses(bound>truth)": 0
+ }
+}

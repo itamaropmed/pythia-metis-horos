@@ -1,0 +1,252 @@
+{
+ "a": {
+  "_true_explainable_share": 0.3655903904306794,
+  "_table_only_MAE": 20.81650318296773,
+  "_true_mean_MAE": 16.12795543875587,
+  "rr_shift": {
+   "R2_within_cell": 0.05501955291737426,
+   "MAE_min": 20.245310405289153,
+   "corr_with_true_residual_mean": 0.34914484986657107
+  },
+  "rr_typed": {
+   "R2_within_cell": 0.09450175911818515,
+   "MAE_min": 19.867231972622406,
+   "corr_with_true_residual_mean": 0.5034046478769187
+  },
+  "rr_atoms": {
+   "R2_within_cell": -0.250432180926623,
+   "MAE_min": 22.474317123431828,
+   "corr_with_true_residual_mean": 0.3944165730974006
+  },
+  "llm_extract": {
+   "R2_within_cell": 0.1181917952009629,
+   "MAE_min": 19.43907020013865,
+   "corr_with_true_residual_mean": 0.5264885012816525
+  },
+  "emb_joint(pca64)": {
+   "R2_within_cell": 0.05765154534067307,
+   "MAE_min": 20.198394723527663,
+   "corr_with_true_residual_mean": 0.4338219176982337
+  },
+  "openmed_disease": {
+   "R2_within_cell": 0.05396441028617405,
+   "MAE_min": 20.356283753254186,
+   "corr_with_true_residual_mean": 0.4745191056947829
+  },
+  "STACK_old(real readers)": {
+   "R2_within_cell": 0.16817311505425658,
+   "MAE_min": 18.976011744034484,
+   "corr_with_true_residual_mean": 0.6339902480985653
+  },
+  "STACK_new(+symbolic)": {
+   "R2_within_cell": 0.1702534796348999,
+   "MAE_min": 18.959221998621224,
+   "corr_with_true_residual_mean": 0.6472248337024527
+  },
+  "oracle(reference)": {
+   "R2_within_cell": 0.39344255795500294,
+   "MAE_min": 16.24334950460766,
+   "corr_with_true_residual_mean": 0.9975313249819691
+  },
+  "rr_shift(zero-shot, untrained)": {
+   "R2_within_cell": -0.7860688112370555,
+   "MAE_min": 26.945646975508915,
+   "corr_with_true_residual_mean": 0.349144849866571
+  }
+ },
+ "b": {
+  "_truth_CAL": 251.5651500270202,
+  "_truth_FITuCAL": 245.15242533905166,
+  "rr_shift": {
+   "CAL_mp": 0.0,
+   "CAL_betting": 0.7408286004683253,
+   "plug_in_CAL": 30.0640808029228
+  },
+  "rr_typed": {
+   "CAL_mp": 7.478509757675267,
+   "CAL_betting": 14.540845584935909,
+   "plug_in_CAL": 62.8262608665836
+  },
+  "rr_atoms": {
+   "CAL_mp": 0.0,
+   "CAL_betting": 1.3668555337954684,
+   "plug_in_CAL": 46.57486421995822
+  },
+  "llm_extract": {
+   "CAL_mp": 0.05130894691016386,
+   "CAL_betting": 10.18379952846433,
+   "plug_in_CAL": 81.8214862259168
+  },
+  "emb_joint(pca64)": {
+   "CAL_mp": 4.019161717342781,
+   "CAL_betting": 11.95702539694152,
+   "plug_in_CAL": 52.5453308234606
+  },
+  "openmed_disease": {
+   "CAL_mp": 0.0,
+   "CAL_betting": 3.014836956110738,
+   "plug_in_CAL": 54.466852279893274
+  },
+  "STACK_old(real readers)": {
+   "CAL_mp": 19.63056950762485,
+   "CAL_betting": 30.75072484534448,
+   "plug_in_CAL": 97.9060518648199
+  },
+  "STACK_new(+symbolic)": {
+   "CAL_mp": 22.99078563306198,
+   "CAL_betting": 36.232060332970725,
+   "plug_in_CAL": 105.53216946028579
+  },
+  "oracle(reference)": {
+   "CAL_mp": 93.40653069739247,
+   "CAL_betting": 114.28210444229524,
+   "plug_in_CAL": 220.2915887041061
+  },
+  "rr_shift(zero-shot, untrained)": {
+   "CAL_mp": 0.0,
+   "FITuCAL_mp": 3.0188892374066514,
+   "CAL_betting": 0.7906811113736648,
+   "FITuCAL_betting": 10.723549361194749
+  }
+ },
+ "c": {
+  "metis_bins": {
+   "MAE_vs_true": 0.0849322294829357,
+   "pearson": 0.048488128364483914,
+   "spearman": 0.06485251371737251,
+   "brier": 0.19014882663325763,
+   "calib_slope(true~pred)": 0.15988504960161398
+  },
+  "gauss[none]": {
+   "MAE_vs_true": 0.07957032511821556,
+   "pearson": -0.10824082679637377,
+   "spearman": -0.0952768278396516,
+   "brier": 0.18746808183608013,
+   "calib_slope(true~pred)": 0.5034849018472767
+  },
+  "gauss_hetero[none]": {
+   "MAE_vs_true": 0.08577587722571811,
+   "pearson": 0.19710009502719505,
+   "spearman": 0.22710231518693774,
+   "brier": 0.19103477041089642,
+   "calib_slope(true~pred)": 0.34282956200287873
+  },
+  "gauss[rr_typed]": {
+   "MAE_vs_true": 0.07947316538700074,
+   "pearson": 0.37867750313333726,
+   "spearman": 0.2513349291994978,
+   "brier": 0.1845713522986763,
+   "calib_slope(true~pred)": 0.8766602652505082
+  },
+  "gauss_hetero[rr_typed]": {
+   "MAE_vs_true": 0.07946400711144537,
+   "pearson": 0.3830215432992527,
+   "spearman": 0.29760123572086267,
+   "brier": 0.1858667941120256,
+   "calib_slope(true~pred)": 0.6461601960278537
+  },
+  "gauss[rr_atoms]": {
+   "MAE_vs_true": 0.43297896634197097,
+   "pearson": 0.2672570779063317,
+   "spearman": 0.23138754555317909,
+   "brier": 0.36315747290879746,
+   "calib_slope(true~pred)": 1.2721332365974687
+  },
+  "gauss_hetero[rr_atoms]": {
+   "MAE_vs_true": 0.38956537069761815,
+   "pearson": 0.21723685043039306,
+   "spearman": 0.23833418620863406,
+   "brier": 0.33224631687051687,
+   "calib_slope(true~pred)": 0.2647290099546652
+  },
+  "gauss[llm_extract]": {
+   "MAE_vs_true": 0.07689758498818297,
+   "pearson": 0.3876416414932336,
+   "spearman": 0.24854365247058297,
+   "brier": 0.18335339608216467,
+   "calib_slope(true~pred)": 0.8294560141076801
+  },
+  "gauss_hetero[llm_extract]": {
+   "MAE_vs_true": 0.08405826298262217,
+   "pearson": 0.36438017775519266,
+   "spearman": 0.24936415887027888,
+   "brier": 0.1862180133205038,
+   "calib_slope(true~pred)": 0.5205346904636703
+  },
+  "gauss[STACK_old(real readers)]": {
+   "MAE_vs_true": 0.07724300358638711,
+   "pearson": 0.4030120564870466,
+   "spearman": 0.2615234309435547,
+   "brier": 0.18267498433166188,
+   "calib_slope(true~pred)": 0.83002069496728
+  },
+  "gauss_hetero[STACK_old(real readers)]": {
+   "MAE_vs_true": 0.08612415974130522,
+   "pearson": 0.3483625169121331,
+   "spearman": 0.25796632011256293,
+   "brier": 0.18660446523082716,
+   "calib_slope(true~pred)": 0.5041136452556071
+  },
+  "gauss[STACK_new(+symbolic)]": {
+   "MAE_vs_true": 0.07686281077015795,
+   "pearson": 0.42902223123095207,
+   "spearman": 0.27401197304042807,
+   "brier": 0.18222618058295847,
+   "calib_slope(true~pred)": 0.8002194769887229
+  },
+  "gauss_hetero[STACK_new(+symbolic)]": {
+   "MAE_vs_true": 0.08358054139218515,
+   "pearson": 0.40010761544761936,
+   "spearman": 0.31400227239560174,
+   "brier": 0.1855900247822855,
+   "calib_slope(true~pred)": 0.5564934507546294
+  },
+  "gauss[oracle(reference)]": {
+   "MAE_vs_true": 0.027815710081623906,
+   "pearson": 0.9254685683514904,
+   "spearman": 0.8927749851076676,
+   "brier": 0.17522211372100047,
+   "calib_slope(true~pred)": 0.9989500084182054
+  },
+  "gauss_hetero[oracle(reference)]": {
+   "MAE_vs_true": 0.03998061096901715,
+   "pearson": 0.8766720462465222,
+   "spearman": 0.7465916193941123,
+   "brier": 0.1766660175482303,
+   "calib_slope(true~pred)": 0.8979361169669521
+  },
+  "llm_tail_prob(recalibrated)": {
+   "MAE_vs_true": 0.08469459505877122,
+   "pearson": 0.0793266684086175,
+   "spearman": 0.09175671992577274,
+   "brier": 0.18956606378517807,
+   "calib_slope(true~pred)": 0.2566359662679923
+  },
+  "llm_tail_prob(raw)": {
+   "MAE_vs_true": 0.22500703770487915,
+   "pearson": 0.1466020191285069,
+   "spearman": 0.16736042640402024,
+   "brier": 0.26787972778297475,
+   "calib_slope(true~pred)": 0.0709793155779075
+  },
+  "_true_risk_brier": 0.17173587081384076
+ },
+ "d": {
+  "gauss[STACK_old(real readers)]": {
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  },
+  "gauss_hetero[STACK_new(+symbolic)]": {
+   "certified_share": 0.0,
+   "wrong_on_test_truth": 0
+  },
+  "gauss[STACK_new(+symbolic)]": {
+   "certified_share": 0.7194525904203324,
+   "wrong_on_test_truth": 0
+  },
+  "gauss[oracle(reference)]": {
+   "certified_share": 0.6832844574780058,
+   "wrong_on_test_truth": 0
+  }
+ }
+}

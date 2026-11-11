@@ -1,0 +1,40 @@
+{
+ "truth_continuous_V_cal": 0.002689489850085087,
+ "truth_binary_V_cal": 0.03511553393911385,
+ "tfidf_svd200": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.0,
+  "binary_tamed": 0.0
+ },
+ "llm_extract": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.025074109277207837,
+  "binary_tamed": 0.030592685234688385
+ },
+ "openmed_disease": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.0,
+  "binary_tamed": 0.0
+ },
+ "openmed_pharma": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.0,
+  "binary_tamed": 0.0
+ },
+ "openmed_anatomy": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.0,
+  "binary_tamed": 0.0
+ },
+ "oracle(reference)": {
+  "continuous": 0.0,
+  "continuous_tamed": 0.0,
+  "binary": 0.24919526736892178,
+  "binary_tamed": 0.2359898252096184
+ }
+}

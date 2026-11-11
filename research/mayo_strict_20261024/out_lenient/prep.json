@@ -1,0 +1,20 @@
+{
+ "cases": 12993,
+ "split_rows": {
+  "fit": 6243,
+  "cal": 3723,
+  "test": 2599,
+  "drop": 428
+ },
+ "strict_notes_share_all": 0.8252905410605711,
+ "strict_notes_share_by_split": {
+  "fit": 0.7988146724331251,
+  "cal": 0.905989793177545,
+  "test": 0.9018853405155829
+ },
+ "bundles_blanked_by_strict_rule": 0,
+ "llm11_columns": 11,
+ "patient_overlap_fit_cal": 0,
+ "patient_overlap_dev_test": 0,
+ "sec": 5.5806286334991455
+}

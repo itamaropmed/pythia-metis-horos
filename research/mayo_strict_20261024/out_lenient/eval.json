@@ -1,0 +1,210 @@
+{
+ "J": 5,
+ "alpha_each": 0.01,
+ "cap_min": 120.0,
+ "metis_bins_risk": {
+  "brier": 0.22631980867643,
+  "auc": 0.6277383388681075,
+  "decile_spearman(pred vs observed)": 0.8285714285714287,
+  "calib_slope(obs~pred, deciles)": 0.8585105000264287,
+  "observed_miss_rate_top_vs_bottom_decile": [
+   0.6336996336996337,
+   0.27176220806794055
+  ]
+ },
+ "table_only": {
+  "TEST_MAE_min": 33.04915384569274,
+  "TEST_R2_within_group": -0.0020152127247872187,
+  "risk_gauss": {
+   "brier": 0.2710171214896354,
+   "auc": 0.5437372094243585,
+   "decile_spearman(pred vs observed)": 0.3714285714285715,
+   "calib_slope(obs~pred, deciles)": 17.46249460298927,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6336996336996337,
+    0.30970149253731344
+   ]
+  },
+  "risk": {
+   "brier": 0.22631980867643,
+   "auc": 0.6277383388681075,
+   "decile_spearman(pred vs observed)": 0.8285714285714287,
+   "calib_slope(obs~pred, deciles)": 0.8585105000264287,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6336996336996337,
+    0.27176220806794055
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.9820037604082729,
+   "certified_regions": 6,
+   "regions_direction_holds_on_TEST": 6
+  }
+ },
+ "tfidf": {
+  "TEST_MAE_min": 32.92423317231963,
+  "TEST_R2_within_group": 0.006775535923195464,
+  "cert_mp_min2": 0.0,
+  "plug_in_min2": 3.802192361680104,
+  "cert_betting_min2": 0.0,
+  "cert_betting_share_of_residual_variance": 0.0,
+  "risk_gauss": {
+   "brier": 0.27070231275844703,
+   "auc": 0.5712883279984609,
+   "decile_spearman(pred vs observed)": 0.6848484848484848,
+   "calib_slope(obs~pred, deciles)": 9.574026193170353,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.5769230769230769,
+    0.36153846153846153
+   ]
+  },
+  "risk": {
+   "brier": 0.22696221551453513,
+   "auc": 0.626409930609175,
+   "decile_spearman(pred vs observed)": 0.9030303030303028,
+   "calib_slope(obs~pred, deciles)": 0.8242245080995166,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6245059288537549,
+    0.2737642585551331
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.852269674993285,
+   "certified_regions": 5,
+   "regions_direction_holds_on_TEST": 5
+  }
+ },
+ "concepts": {
+  "TEST_MAE_min": 32.94978041915663,
+  "TEST_R2_within_group": 0.009892966003692605,
+  "cert_mp_min2": 0.0,
+  "plug_in_min2": 7.195278068069226,
+  "cert_betting_min2": 0.0,
+  "cert_betting_share_of_residual_variance": 0.0,
+  "risk_gauss": {
+   "brier": 0.27097866419757843,
+   "auc": 0.5739026654372721,
+   "decile_spearman(pred vs observed)": 0.6848484848484848,
+   "calib_slope(obs~pred, deciles)": 9.8057931975632,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.5884615384615385,
+    0.3574144486692015
+   ]
+  },
+  "risk": {
+   "brier": 0.22626324686140842,
+   "auc": 0.6262968612958117,
+   "decile_spearman(pred vs observed)": 0.8545454545454544,
+   "calib_slope(obs~pred, deciles)": 0.8423128223866498,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6374501992031872,
+    0.273224043715847
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.7630942788074134,
+   "certified_regions": 4,
+   "regions_direction_holds_on_TEST": 4
+  }
+ },
+ "MAIN(text, local)": {
+  "TEST_MAE_min": 32.88227210724707,
+  "TEST_R2_within_group": 0.01070506175226571,
+  "cert_mp_min2": 0.0,
+  "plug_in_min2": 6.706261653186692,
+  "cert_betting_min2": 0.0,
+  "cert_betting_share_of_residual_variance": 0.0,
+  "risk_gauss": {
+   "brier": 0.2705315122741616,
+   "auc": 0.5784604207427841,
+   "decile_spearman(pred vs observed)": 0.7659609850368815,
+   "calib_slope(obs~pred, deciles)": 10.282343416994278,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.5923076923076923,
+    0.35
+   ]
+  },
+  "risk": {
+   "brier": 0.226702655946795,
+   "auc": 0.6265017603830113,
+   "decile_spearman(pred vs observed)": 0.8909090909090909,
+   "calib_slope(obs~pred, deciles)": 0.8496081854037927,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.637065637065637,
+    0.31716417910447764
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.7647058823529411,
+   "certified_regions": 4,
+   "regions_direction_holds_on_TEST": 4
+  }
+ },
+ "llm11(lineage unverified)": {
+  "TEST_MAE_min": 32.89892157669857,
+  "TEST_R2_within_group": 0.01617762385511512,
+  "cert_mp_min2": 0.0,
+  "plug_in_min2": 22.563240683233712,
+  "cert_betting_min2": 0.07599337065687978,
+  "cert_betting_share_of_residual_variance": 4.175035846425597e-05,
+  "risk_gauss": {
+   "brier": 0.27047739859258946,
+   "auc": 0.5654071619727284,
+   "decile_spearman(pred vs observed)": 0.6848484848484848,
+   "calib_slope(obs~pred, deciles)": 5.590981786008919,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6,
+    0.36742424242424243
+   ]
+  },
+  "risk": {
+   "brier": 0.22622811288235328,
+   "auc": 0.6317635439546023,
+   "decile_spearman(pred vs observed)": 0.9515151515151514,
+   "calib_slope(obs~pred, deciles)": 0.8404793641452044,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6342412451361867,
+    0.24367088607594936
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.7308622078968574,
+   "certified_regions": 4,
+   "regions_direction_holds_on_TEST": 4
+  }
+ },
+ "MAIN+llm11": {
+  "TEST_MAE_min": 32.787133837846746,
+  "TEST_R2_within_group": 0.021668460716327775,
+  "cert_mp_min2": 0.0,
+  "plug_in_min2": 19.48671515417217,
+  "cert_betting_min2": 0.22695767319232063,
+  "cert_betting_share_of_residual_variance": 0.0001246893529012719,
+  "risk_gauss": {
+   "brier": 0.26994831936315417,
+   "auc": 0.5813368166178157,
+   "decile_spearman(pred vs observed)": 0.6606060606060605,
+   "calib_slope(obs~pred, deciles)": 6.643818855780931,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6,
+    0.29615384615384616
+   ]
+  },
+  "risk": {
+   "brier": 0.2263799624328448,
+   "auc": 0.6309633130683139,
+   "decile_spearman(pred vs observed)": 0.9393939393939393,
+   "calib_slope(obs~pred, deciles)": 0.8476644624435594,
+   "observed_miss_rate_top_vs_bottom_decile": [
+    0.6245059288537549,
+    0.26013513513513514
+   ]
+  },
+  "labeler": {
+   "certified_share_CAL": 0.7531560569433253,
+   "certified_regions": 4,
+   "regions_direction_holds_on_TEST": 4
+  }
+ },
+ "residual_variance_CAL_capped_min2": 1820.184866722534
+}

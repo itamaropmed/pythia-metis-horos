@@ -1,0 +1,38 @@
+{
+  "n2000|lost_concept0": {
+    "detect_rate": 1.0,
+    "mean_bound": 0.0034554363217120703,
+    "mean_truth_inside_new_bins": 0.020243469483514104,
+    "miss_rate": 0.0
+  },
+  "n2000|superset_null": {
+    "detect_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth_inside_new_bins": 1.7725103650173484e-33,
+    "miss_rate": 0.0
+  },
+  "n8000|lost_concept0": {
+    "detect_rate": 1.0,
+    "mean_bound": 0.00824236559098923,
+    "mean_truth_inside_new_bins": 0.022256816099255883,
+    "miss_rate": 0.0
+  },
+  "n8000|superset_null": {
+    "detect_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth_inside_new_bins": 1.5015939886380253e-32,
+    "miss_rate": 0.0
+  },
+  "n32000|lost_concept0": {
+    "detect_rate": 1.0,
+    "mean_bound": 0.011056911035608828,
+    "mean_truth_inside_new_bins": 0.022809605662563192,
+    "miss_rate": 0.0
+  },
+  "n32000|superset_null": {
+    "detect_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth_inside_new_bins": 2.259823262168225e-31,
+    "miss_rate": 0.0
+  }
+}

@@ -1,0 +1,76 @@
+{
+ "model": "gpt-5.4-mini",
+ "usage": {
+  "completion_tokens": 440,
+  "prompt_tokens": 570,
+  "total_tokens": 1010,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 0,
+   "rejected_prediction_tokens": 0
+  },
+  "prompt_tokens_details": {
+   "audio_tokens": 0,
+   "cached_tokens": 0
+  },
+  "latency_checkpoint": {
+   "engine_tbt_ms": 5,
+   "engine_ttft_ms": 53,
+   "engine_ttlt_ms": 2436,
+   "pre_inference_ms": 95,
+   "service_tbt_ms": 5,
+   "service_ttft_ms": 329,
+   "service_ttlt_ms": 2708,
+   "user_visible_ttft_ms": 234
+  }
+ },
+ "questions": {
+  "obesity_severity": {
+   "type": "score",
+   "instructions": "How severe is the patient's obesity or body habitus limitation documented in the note?",
+   "criteria": [
+    "No obesity or no body-habitus limitation mentioned",
+    "Mild obesity or mild body-habitus limitation",
+    "Moderate obesity or clearly noted body-habitus limitation",
+    "Severe obesity or marked body-habitus limitation that likely affects exposure/positioning"
+   ]
+  },
+  "preop_anticoagulation_or_bleeding_risk": {
+   "type": "choice",
+   "instructions": "Is there evidence of preoperative anticoagulation/antiplatelet use or another bleeding-risk issue that could prolong hemostasis or require reversal?",
+   "criteria": {
+    "none": "No anticoagulation/antiplatelet use or bleeding-risk issue mentioned",
+    "anticoagulation": "Patient was taking anticoagulants or antiplatelet agents preoperatively",
+    "coagulopathy": "A coagulopathy, thrombocytopenia, or similar bleeding-risk problem is documented",
+    "both": "Both anticoagulation/antiplatelet use and a bleeding-risk problem are documented"
+   }
+  },
+  "prior_abdominal_or_pelvic_surgery": {
+   "type": "noul",
+   "instructions": "Does the note document prior abdominal or pelvic surgery that could make the operation more difficult?",
+   "criteria": {
+    "true": "Prior abdominal or pelvic surgery is documented",
+    "false": "No prior abdominal or pelvic surgery is documented"
+   }
+  },
+  "intraoperative_organ_injury_or_unexpecte": {
+   "type": "noul",
+   "instructions": "Does the note document an intraoperative injury to an organ/structure or an unexpected anatomic problem that required additional repair or management?",
+   "criteria": {
+    "true": "An intraoperative injury, leak, perforation, or unexpected anatomic problem is documented",
+    "false": "No such injury or unexpected anatomic problem is documented"
+   }
+  },
+  "case_urgency_or_unplanned_add_on": {
+   "type": "choice",
+   "instructions": "What best describes the case urgency or scheduling status?",
+   "criteria": {
+    "elective": "Planned elective case",
+    "urgent": "Urgent but not immediately life-threatening",
+    "emergent": "Emergent or immediate case",
+    "add_on_unplanned": "Unplanned add-on case or case converted from a different plan"
+   }
+  }
+ }
+}

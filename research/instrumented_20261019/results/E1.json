@@ -1,0 +1,212 @@
+{
+  "n1000|strong|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.008254613434999971,
+    "mean_truth": 0.04407297588235519,
+    "tightness": 0.18729421532673818
+  },
+  "n1000|strong|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.008009338999479348,
+    "mean_truth": 0.04319819294063445,
+    "tightness": 0.1854091214066816
+  },
+  "n1000|cheap|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0026910094366512692,
+    "mean_truth": 0.043797030580311605,
+    "tightness": 0.061442737121565914
+  },
+  "n1000|cheap|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0025218494318873146,
+    "mean_truth": 0.04367858480449178,
+    "tightness": 0.057736518780891796
+  },
+  "n1000|paraphrase_weak|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.04339309518328141,
+    "tightness": 0.0
+  },
+  "n1000|paraphrase_weak|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.043705264824454006,
+    "tightness": 0.0
+  },
+  "n1000|hallucinating|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.04331536953175027,
+    "tightness": 0.0
+  },
+  "n1000|hallucinating|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.043650143651540727,
+    "tightness": 0.0
+  },
+  "n1000|double_dip_strong|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.012184734397981628,
+    "mean_truth": 0.04333657728269239,
+    "tightness": 0.28116513028932544
+  },
+  "n1000|double_dip_strong|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.014416433169210834,
+    "mean_truth": 0.04361264169193195,
+    "tightness": 0.33055629308228257
+  },
+  "n4000|strong|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.01974788024063526,
+    "mean_truth": 0.04502156489791947,
+    "tightness": 0.43863158211872477
+  },
+  "n4000|strong|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.01974564040804464,
+    "mean_truth": 0.04475878102916594,
+    "tightness": 0.44115679547166153
+  },
+  "n4000|cheap|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.008327182687249742,
+    "mean_truth": 0.045106677701961556,
+    "tightness": 0.18461086277005095
+  },
+  "n4000|cheap|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.008156226848214354,
+    "mean_truth": 0.04494714644202492,
+    "tightness": 0.1814626176265642
+  },
+  "n4000|paraphrase_weak|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.04500012506222202,
+    "tightness": 0.0
+  },
+  "n4000|paraphrase_weak|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 9.487858671184927e-07,
+    "mean_truth": 0.04477019339127101,
+    "tightness": 2.1192355789633032e-05
+  },
+  "n4000|hallucinating|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.044906100837898796,
+    "tightness": 0.0
+  },
+  "n4000|hallucinating|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.044892579071105436,
+    "tightness": 0.0
+  },
+  "n4000|double_dip_strong|hoeffding": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.02088904484465388,
+    "mean_truth": 0.044848048485173146,
+    "tightness": 0.46577377500739725
+  },
+  "n4000|double_dip_strong|chernoff": {
+    "reps": 60,
+    "miss_rate": 0.0,
+    "mean_bound": 0.021682439017163792,
+    "mean_truth": 0.044969077951257035,
+    "tightness": 0.4821632998716554
+  },
+  "n16000|strong|hoeffding": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.027389218158953448,
+    "mean_truth": 0.04544935366364512,
+    "tightness": 0.6026316317202558
+  },
+  "n16000|strong|chernoff": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.026886979964975254,
+    "mean_truth": 0.0451915764992545,
+    "tightness": 0.5949555657882126
+  },
+  "n16000|cheap|hoeffding": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.013330358461215077,
+    "mean_truth": 0.04537380304387764,
+    "tightness": 0.2937897545930694
+  },
+  "n16000|cheap|chernoff": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.012858423369966088,
+    "mean_truth": 0.04535699637949169,
+    "tightness": 0.28349371423060243
+  },
+  "n16000|paraphrase_weak|hoeffding": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 1.085087082996583e-05,
+    "mean_truth": 0.04498618050880122,
+    "tightness": 0.00024120453675419138
+  },
+  "n16000|paraphrase_weak|chernoff": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 1.1713385695773758e-05,
+    "mean_truth": 0.045215563828162025,
+    "tightness": 0.000259056499666564
+  },
+  "n16000|hallucinating|hoeffding": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.045177124440455727,
+    "tightness": 0.0
+  },
+  "n16000|hallucinating|chernoff": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.0,
+    "mean_truth": 0.04531607402447299,
+    "tightness": 0.0
+  },
+  "n16000|double_dip_strong|hoeffding": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.026718264445319974,
+    "mean_truth": 0.04520207600740066,
+    "tightness": 0.5910848970951148
+  },
+  "n16000|double_dip_strong|chernoff": {
+    "reps": 15,
+    "miss_rate": 0.0,
+    "mean_bound": 0.02773071988591301,
+    "mean_truth": 0.04528113597294605,
+    "tightness": 0.6124121952788724
+  }
+}

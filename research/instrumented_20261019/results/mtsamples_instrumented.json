@@ -1,0 +1,23 @@
+{
+ "n": 4999,
+ "true_nli": 0.017889746782060196,
+ "alpha": 0.05,
+ "J": 13,
+ "single_reader_bounds_alpha_over_J": {
+  "tfidf_svd200": 0.0007036905129893207,
+  "oracle_concepts": 0.004614461428752879,
+  "medspacy_context_rules": 3.024122797639883e-06,
+  "openmed_ner_anatomy": 0.0,
+  "openmed_ner_disease": 0.0,
+  "openmed_ner_oncology": 0.0,
+  "openmed_ner_pathology": 0.0,
+  "openmed_ner_pharma": 0.0,
+  "openmed_ner_all": 0.0
+ },
+ "portfolio_best": "oracle_concepts",
+ "openmed_ner_probability_ensemble": 0.0,
+ "ledger_rules_then_openmed": {
+  "between": 0.0,
+  "beyond": 0.0
+ }
+}

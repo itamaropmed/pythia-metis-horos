@@ -1,0 +1,65 @@
+{
+ "round": 1,
+ "kept": 3,
+ "fit_cv_gain_mean": 0.08677501542208348,
+ "fit_cv_gain_by_seed": [
+  0.0866,
+  0.0901,
+  0.08,
+  0.0924,
+  0.0848
+ ],
+ "accept": true,
+ "concepts": {
+  "obesity": {
+   "pattern": "\\b(obes(?:e|ity)|morbid obesity|BMI\\s*(?:>|>=|=)?\\s*30(?:\\.\\d+)?)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Higher technical difficulty and longer operative/anesthesia time.",
+   "fit_rate": 0.033809166040571
+  },
+  "anticoagulant_or_antiplatelet": {
+   "pattern": "\\b(?:coumadin|warfarin|plavix|clopidogrel|aspirin|heparin|lovenox|enoxaparin|xarelto|rivaroxaban|eliquis|apixaban|pradaxa|dabigatran)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Perioperative anticoagulation/antiplatelet use often adds hemostasis and management time.",
+   "fit_rate": 0.10142749812171299
+  },
+  "malignancy_or_carcinoma": {
+   "pattern": "\\b(?:cancer|carcinoma|malignan(?:t|cy)|sarcoma|adenocarcinoma|metastatic)\\b",
+   "kind": "binary",
+   "expect": "+",
+   "why": "Oncologic cases are often more extensive and prolonged.",
+   "fit_rate": 0.1149511645379414
+  }
+ },
+ "diagnostic_corr_with_planted": {
+  "obesity": {
+   "anes_general": -0.03,
+   "ebl": 0.0,
+   "diabetes": 0.22,
+   "hypertension": 0.18,
+   "obesity": 1.0,
+   "malignancy": 0.02,
+   "anticoag": 0.08
+  },
+  "anticoagulant_or_antiplatelet": {
+   "anes_general": -0.12,
+   "ebl": -0.04,
+   "diabetes": 0.17,
+   "hypertension": 0.25,
+   "obesity": 0.09,
+   "malignancy": 0.12,
+   "anticoag": 0.75
+  },
+  "malignancy_or_carcinoma": {
+   "anes_general": -0.02,
+   "ebl": -0.01,
+   "diabetes": 0.08,
+   "hypertension": 0.18,
+   "obesity": 0.03,
+   "malignancy": 0.97,
+   "anticoag": 0.04
+  }
+ }
+}

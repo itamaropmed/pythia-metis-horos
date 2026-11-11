@@ -112,9 +112,10 @@ def random_dropout(text: str, p: float, rng) -> str:
 
 
 # ---------------------------------------------------------------- reportability filter (privacy)
-def reportable_terms(texts, patient, min_patients=50):
+def reportable_terms(texts, patient, min_patients=50, exclude=None):
     """Lower-case terms seen for >= min_patients distinct patients, mostly NOT capitalised mid-sentence
-    (proper-noun heuristic) and never directly after a title (dr, mr, ...)."""
+    (proper-noun heuristic) and never directly after a title (dr, mr, ...).  ``exclude``: optional set of
+    lower-case tokens to drop, e.g. horos.represent.openmed_readers.phi_vocabulary (OpenMed PII model)."""
     pats = defaultdict(set); cap = Counter(); tot = Counter(); titled = Counter()
     for t, p in zip(texts, patient):
         prev = ""
@@ -128,8 +129,9 @@ def reportable_terms(texts, patient, min_patients=50):
             if prev in TITLES:
                 titled[lw] += 1
             pats[lw].add(p); prev = lw
+    exclude = exclude or set()
     return {w for w, s in pats.items() if len(s) >= min_patients and cap[w] / max(tot[w], 1) < .5 and titled[w] == 0
-            and len(w) > 2}
+            and len(w) > 2 and w not in exclude}
 
 
 # ---------------------------------------------------------------- models

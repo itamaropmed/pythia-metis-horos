@@ -32,3 +32,8 @@ papers/pdf/*.aux
 papers/pdf/*.log
 /tmp/pdfs/
 *.npy
+research/instrumented_20261019/results/reader_cache/
+research/instrumented_20261019/results/log_*.txt
+
+# Mayo agent prompts contain aggregate n-grams from Mayo notes: keep local
+research/mayo_strict_20261024/out*/agent_round*_prompt.txt

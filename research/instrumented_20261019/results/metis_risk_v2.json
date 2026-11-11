@@ -1,0 +1,113 @@
+{
+ "n": 3423,
+ "rows": {
+  "fit": 1331,
+  "cal": 1023,
+  "test": 1069
+ },
+ "forecast": {
+  "bins_table (Metis baseline)": {
+   "test_MAE_vs_true_risk": 0.0849322294829357,
+   "test_brier": 0.19014882663325763
+  },
+  "gbm[table]": {
+   "test_MAE_vs_true_risk": 0.08567970732891349,
+   "test_brier": 0.18911477575889032
+  },
+  "residual_ridge[tfidf_svd200]": {
+   "test_MAE_vs_true_risk": 0.08509164972669811,
+   "test_brier": 0.19025225282348648
+  },
+  "residual_ridge[llm_extract(gpt-6-luna)]": {
+   "test_MAE_vs_true_risk": 0.08142357319511456,
+   "test_brier": 0.1876748841866012
+  },
+  "residual_ridge[openmed_disease]": {
+   "test_MAE_vs_true_risk": 0.08558630575807286,
+   "test_brier": 0.19097972972516597
+  },
+  "residual_ridge[openmed_pharma]": {
+   "test_MAE_vs_true_risk": 0.0848836355967667,
+   "test_brier": 0.19046734119284783
+  },
+  "residual_ridge[openmed_anatomy]": {
+   "test_MAE_vs_true_risk": 0.08454861653593183,
+   "test_brier": 0.19036449377465656
+  },
+  "residual_ridge[oracle_concepts(reference)]": {
+   "test_MAE_vs_true_risk": 0.07358659996216266,
+   "test_brier": 0.18500060932331777
+  },
+  "residual_ridge[STACK all real readers]": {
+   "test_MAE_vs_true_risk": 0.08397715414578863,
+   "test_brier": 0.1890176313859537
+  }
+ },
+ "gate": {
+  "tfidf_svd200": 0.0,
+  "llm_extract(gpt-6-luna)": 0.001105615614456573,
+  "openmed_disease": 0.0,
+  "openmed_pharma": 0.0,
+  "openmed_anatomy": 0.00013976769767175105,
+  "oracle_concepts(reference)": 0.009701317834179731,
+  "STACK(all real readers)": 0.000915132822124812,
+  "_truth_on_CAL": 0.03511553393911385,
+  "_stack_weights": {
+   "tfidf_svd200": 0.04954259045713702,
+   "llm_extract(gpt-6-luna)": 0.7078684153972932,
+   "openmed_disease": 0.10230124851179771,
+   "openmed_pharma": 0.11511460073003747,
+   "openmed_anatomy": 0.025173144902732904
+  }
+ },
+ "certified": {
+  "bins_table (no reader)": {
+   "regions": 1,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "all_real": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "tfidf_svd200": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "llm_extract(gpt-6-luna)": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "openmed_disease": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "openmed_pharma": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "openmed_anatomy": {
+   "regions": 3,
+   "certified_share_cal": 0.0,
+   "certified_rows": 0,
+   "wrong_direction_on_test_truth": 0
+  },
+  "oracle_concepts(reference)": {
+   "regions": 3,
+   "certified_share_cal": 0.3313782991202346,
+   "certified_rows": 339,
+   "wrong_direction_on_test_truth": 0
+  }
+ }
+}

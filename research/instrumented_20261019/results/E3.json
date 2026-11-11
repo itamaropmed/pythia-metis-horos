@@ -1,0 +1,27 @@
+{
+  "between": {
+    "mean_bound": 0.010000012988625026,
+    "mean_truth": 0.0193149529249164,
+    "miss_rate": 0.0
+  },
+  "beyond": {
+    "mean_bound": 0.008996665671566968,
+    "mean_truth": 0.02580905859798178,
+    "miss_rate": 0.0
+  },
+  "single_b": {
+    "mean_bound": 0.022453574102498836,
+    "mean_truth": 0.04512401152289816,
+    "miss_rate": 0.0
+  },
+  "single_a": {
+    "mean_bound": 0.010000028203731536,
+    "mean_truth": 0.04512401152289816,
+    "miss_rate": 0.0
+  },
+  "ledger_total": {
+    "mean_bound": 0.018996678660191994,
+    "mean_truth": 0.04512401152289816,
+    "miss_rate": 0.0
+  }
+}

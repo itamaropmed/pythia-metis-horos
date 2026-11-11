@@ -1,0 +1,13 @@
+{
+ "table_only": 20.81650318296773,
+ "emb_note(pca64)": 20.357467186491828,
+ "emb_joint(pca64)": 20.198394723527663,
+ "cre_note(table-conditioned)": 23.187601271528983,
+ "llm_extract": 19.43907020013865,
+ "openmed_disease": 20.356283753254182,
+ "openmed_pharma": 20.365469385091032,
+ "tfidf_svd200": 20.98691114763576,
+ "oracle(reference)": 16.243349504607657,
+ "STACK(all real readers)": 18.97601174403448,
+ "true_mean_floor": 16.12795543875587
+}
